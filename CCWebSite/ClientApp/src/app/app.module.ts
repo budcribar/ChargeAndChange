@@ -8,8 +8,11 @@ import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { HomeComponent } from './home/home.component';
 import { MissionComponent } from './mission/mission.component';
+import { LegalComponent } from './legal/legal.component';
+import { NewslettersComponent } from './newsletters/newsletters.component';
+import { FlyersComponent } from './flyers/flyers.component';
 import { AboutComponent } from './about/about.component';
-import { FetchDataComponent } from './fetch-data/fetch-data.component';
+import { NewsComponent } from './news/news.component';
 
 
 
@@ -20,8 +23,10 @@ import { FetchDataComponent } from './fetch-data/fetch-data.component';
     HomeComponent,
     MissionComponent,
     AboutComponent,
-    FetchDataComponent,
-
+    LegalComponent,
+    NewslettersComponent,
+    FlyersComponent,
+    NewsComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -31,7 +36,10 @@ import { FetchDataComponent } from './fetch-data/fetch-data.component';
       { path: '', component: HomeComponent, pathMatch: 'full' },
       { path: 'mission', component: MissionComponent },
       { path: 'about', component: AboutComponent },
-      { path: 'fetch-data', component: FetchDataComponent },
+      { path: 'legal', component: LegalComponent },
+      { path: 'newsletters', component: NewslettersComponent },
+      { path: 'flyers', component: FlyersComponent },
+
     ])
   ],
   providers: [],
