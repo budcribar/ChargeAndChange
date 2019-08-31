@@ -9,36 +9,20 @@ namespace CCWebSite.Controllers
     [Route("api/[controller]")]
     public class SampleDataController : Controller
     {
-        private static string[] Summaries = new[]
+        private static List<EVSpecs> Specs = new List<EVSpecs>
         {
-            "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
+            new EVSpecs {DateUpdated=new DateTime(2019,30,8), ModelYear=2019, Manufacturer="Audi", Model = "E-Tron", BodyStyle=null, Price=74800,FederalTaxCredit=null, Drive=null, CombinedRange=204, CityRange=null, HiwayRange=null, MotorPowerKw=265, Torque=414, BatteryCapacity=95, ChargingConnector=null, Weight=null, ZeroTo60=5.5, ZeroTo62=null, MaxChargePower=150, MinutesTo80PercentCharge=30, Notes="" },
+            new EVSpecs {DateUpdated=new DateTime(2019,31,8), ModelYear=2019, Manufacturer="BMW", Model = "i3", BodyStyle=null, Price=44450,FederalTaxCredit=null, Drive=null, CombinedRange=153, CityRange=null, HiwayRange=null, MotorPowerKw=(int)Math.Round(170*.7457), Torque=null, BatteryCapacity=null, ChargingConnector=ChargingConnector.CCS, Weight=null, ZeroTo60=7.2, ZeroTo62=null, MaxChargePower=50, MinutesTo80PercentCharge=40, Notes="" },
+              new EVSpecs {DateUpdated=new DateTime(2019,31,8), ModelYear=2019, Manufacturer="BMW", Model = "MINI Cooper", BodyStyle=null, Price=null,FederalTaxCredit=null, Drive=null, CombinedRange=null, CityRange=null, HiwayRange=null, MotorPowerKw=null, Torque=null, BatteryCapacity=null, ChargingConnector=null, Weight=null, ZeroTo60=null, ZeroTo62=null, MaxChargePower=null, MinutesTo80PercentCharge=null, Notes="" },
+
         };
 
         [HttpGet("[action]")]
-        public IEnumerable<WeatherForecast> WeatherForecasts()
+        public IEnumerable<EVSpecs> EVSpecs()
         {
-            var rng = new Random();
-            return Enumerable.Range(1, 5).Select(index => new WeatherForecast
-            {
-                DateFormatted = DateTime.Now.AddDays(index).ToString("d"),
-                TemperatureC = rng.Next(-20, 55),
-                Summary = Summaries[rng.Next(Summaries.Length)]
-            });
+            return Specs;
         }
 
-        public class WeatherForecast
-        {
-            public string DateFormatted { get; set; }
-            public int TemperatureC { get; set; }
-            public string Summary { get; set; }
-
-            public int TemperatureF
-            {
-                get
-                {
-                    return 32 + (int)(TemperatureC / 0.5556);
-                }
-            }
-        }
+        
     }
 }
