@@ -13,8 +13,10 @@ import { NewslettersComponent } from './newsletters/newsletters.component';
 import { FlyersComponent } from './flyers/flyers.component';
 import { AboutComponent } from './about/about.component';
 import { NewsComponent } from './news/news.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+import { BEVComponent } from './bev/bev.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatSortModule } from '@angular/material/sort';
 
 @NgModule({
   declarations: [
@@ -23,6 +25,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     HomeComponent,
     MissionComponent,
     AboutComponent,
+    BEVComponent,
     LegalComponent,
     NewslettersComponent,
     FlyersComponent,
@@ -33,6 +36,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     //HttpClientModule,
     FormsModule,
     BrowserAnimationsModule,
+    MatSortModule,
+
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
       { path: 'mission', component: MissionComponent },
@@ -48,3 +53,4 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
   exports:[RouterModule]
 })
 export class AppModule { }
+

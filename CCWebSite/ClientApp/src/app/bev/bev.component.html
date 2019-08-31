@@ -1,0 +1,44 @@
+
+
+<table matSort (matSortChange)="sortData($event)">
+  <tr>
+    <th mat-sort-header="ModelYear">ModelYear</th>
+    <th mat-sort-header="Manufacturer">Manufacturer</th>
+    <th mat-sort-header="Model">Model</th>
+    <th mat-sort-header="BodyStyle">BodyStyle</th>
+    <th mat-sort-header="Price">Price</th>
+  </tr>
+
+  <tr *ngFor="let bev of sortedData">
+    <td>{{bev.ModelYear}}</td>
+    <td>{{bev.Manufacturer}}</td>
+    <td>{{bev.Model}}</td>
+    <td>{{bev.BodyStyle}}</td>
+    <td>{{bev.Price}}</td>
+  </tr>
+</table>
+
+<!--
+  DateUpdated: Date;
+  ModelYear: number;
+  Manufacturer: string;
+  Model: string;
+  BodyStyle: string;
+  Price: number;
+  FederalTaxCredit: number;
+  Drive: string;
+  CombinedRange: number;
+  CityRange: number;
+  HiwayRange: number;
+  MotorPowerKw: number;
+  //PricePerMileOfRange: number;
+  Torque: number;
+  BatteryCapacity: number;
+  ChargingConnector: string;
+  Weight: number;
+  ZeroTo60: number;
+  ZeroTo62: number;
+  MaxChargePower: number;
+  MinutesTo80PercentCharge: number;
+  Notes: string;
+-->
