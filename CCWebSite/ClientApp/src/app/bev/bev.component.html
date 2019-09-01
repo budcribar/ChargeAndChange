@@ -7,6 +7,21 @@
     <th mat-sort-header="Model">Model</th>
     <th mat-sort-header="BodyStyle">BodyStyle</th>
     <th mat-sort-header="Price">Price</th>
+    <th mat-sort-header="FederalTaxCredit">FederalTaxCredit</th>
+    <th mat-sort-header="Drive">Drive</th>
+    <th mat-sort-header="CombinedRange">CombinedRange</th>
+    <th mat-sort-header="CityRange">CityRange</th>
+    <th mat-sort-header="HiwayRange">HiwayRange</th>
+    <th mat-sort-header="MotorPowerKw">MotorPowerKw</th>
+    <th mat-sort-header="Torque">Torque</th>
+    <th mat-sort-header="BatteryCapacity">BatteryCapacity</th>
+    <th mat-sort-header="ChargingConnector">ChargingConnector</th>
+    <th mat-sort-header="Weight">Weight</th>
+    <th mat-sort-header="ZeroTo60">ZeroTo60</th>
+    <th mat-sort-header="ZeroTo62">ZeroTo62</th>
+    <th mat-sort-header="MaxChargePower">MaxChargePower</th>
+    <th mat-sort-header="MinutesTo80PercentCharge">MinutesTo80PercentCharge</th>
+    <th >Notes</th>
   </tr>
 
   <tr *ngFor="let bev of sortedData">
@@ -15,30 +30,25 @@
     <td>{{bev.Model}}</td>
     <td>{{bev.BodyStyle}}</td>
     <td>{{bev.Price}}</td>
+    <td>{{bev.FederalTaxCredit}}</td>
+    <td>{{bev.Drive}}</td>
+    <td>{{bev.CombinedRange}}</td>
+
+    <td>{{bev.CityRange}}</td>
+    <td>{{bev.HiwayRange}}</td>
+    <td>{{bev.MotorPowerKw}}</td>
+
+    <td>{{bev.Torque}}</td>
+    <td>{{bev.BatteryCapacity}}</td>
+    <td>{{bev.ChargingConnector}}</td>
+    <td>{{bev.Weight}}</td>
+    <td>{{bev.ZeroTo60}}</td>
+    <td>{{bev.ZeroTo62}}</td>
+
+    <td>{{bev.MaxChargePower}}</td>
+    <td>{{bev.MinutesTo80PercentCharge}}</td>
+    <td>{{bev.Notes}}</td>
+    
   </tr>
 </table>
 
-<!--
-  DateUpdated: Date;
-  ModelYear: number;
-  Manufacturer: string;
-  Model: string;
-  BodyStyle: string;
-  Price: number;
-  FederalTaxCredit: number;
-  Drive: string;
-  CombinedRange: number;
-  CityRange: number;
-  HiwayRange: number;
-  MotorPowerKw: number;
-  //PricePerMileOfRange: number;
-  Torque: number;
-  BatteryCapacity: number;
-  ChargingConnector: string;
-  Weight: number;
-  ZeroTo60: number;
-  ZeroTo62: number;
-  MaxChargePower: number;
-  MinutesTo80PercentCharge: number;
-  Notes: string;
--->

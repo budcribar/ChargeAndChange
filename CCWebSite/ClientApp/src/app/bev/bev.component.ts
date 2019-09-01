@@ -37,7 +37,8 @@ export class BEVComponent {
     { DateUpdated:new Date(2019, 31, 8), ModelYear:2019, Manufacturer:"BMW", Model : "i3", BodyStyle:null, Price:44450, FederalTaxCredit:null, Drive:null, CombinedRange:153, CityRange:null, HiwayRange:null, MotorPowerKw:170 * .7457, Torque:null, BatteryCapacity:null, ChargingConnector:"CCS", Weight:null, ZeroTo60:7.2, ZeroTo62:null, MaxChargePower:50, MinutesTo80PercentCharge:40, Notes:"" },
     { DateUpdated:new Date(2019, 31, 8), ModelYear:2019, Manufacturer:"BMW", Model : "MINI Cooper", BodyStyle:null, Price:null, FederalTaxCredit:null, Drive:null, CombinedRange:null, CityRange:null, HiwayRange:null, MotorPowerKw:null, Torque:null, BatteryCapacity:null, ChargingConnector:null, Weight:null, ZeroTo60:null, ZeroTo62:null, MaxChargePower:null, MinutesTo80PercentCharge:null, Notes:"" },
 
-   
+    { DateUpdated: new Date(2019, 31, 8), ModelYear: 2020, Manufacturer: "BMW", Model: "iX3", BodyStyle: "SUV", Price: null, FederalTaxCredit: null, Drive: "RWD", CombinedRange: 250, CityRange: null, HiwayRange: null, MotorPowerKw: 300*.7457, Torque: null, BatteryCapacity: 75, ChargingConnector: null, Weight: null, ZeroTo60: null, ZeroTo62: null, MaxChargePower: 150, MinutesTo80PercentCharge: 30, Notes: "" },
+
   ];
 
   sortedData: EVSpecs[];

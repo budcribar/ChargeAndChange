@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
+
 
 namespace CCWebSite.Controllers
 {
@@ -10,8 +12,11 @@ namespace CCWebSite.Controllers
     public enum ChargingConnector {  Chademo, CCS, Tesla }
     public class EVSpecs
     {
+        [JsonProperty(PropertyName = "id")]
+        public string Id { get; set; }
         public DateTime DateUpdated { get; set; }
         public int ModelYear { get; set; }
+        [JsonProperty(PropertyName = "manufacturer")]
         public string Manufacturer { get; set; }
         public string Model { get; set; }
         public BodyStyle? BodyStyle { get; set; }
@@ -33,6 +38,11 @@ namespace CCWebSite.Controllers
         public int? MaxChargePower { get; set;  }
         public int? MinutesTo80PercentCharge { get; set;  }
         public string Notes { get; set;  }
+
+        public override string ToString()
+        {
+            return JsonConvert.SerializeObject(this);
+        }
     }
     
 
