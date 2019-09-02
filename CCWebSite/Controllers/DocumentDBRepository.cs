@@ -76,7 +76,7 @@ namespace CCWebSite.Controllers
 
         public async Task DeleteItemAsync(string id)
         {
-            await client.DeleteDocumentAsync(UriFactory.CreateDocumentUri(DatabaseId, CollectionId, id));
+            await client.DeleteDocumentAsync(UriFactory.CreateDocumentUri(DatabaseId, CollectionId, id),new RequestOptions { PartitionKey = new PartitionKey(id) });
         }
 
         private async Task CreateDatabaseIfNotExistsAsync()

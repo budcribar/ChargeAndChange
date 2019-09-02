@@ -1,54 +1,48 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Sort } from '@angular/material/sort';
-
-export interface EVSpecs {
-  DateUpdated: Date;
-  ModelYear: number;
-  Manufacturer: string;
-  Model: string;
-  BodyStyle: string;
-  Price: number;
-  FederalTaxCredit: number;
-  Drive: string;
-  CombinedRange: number;
-  CityRange: number;
-  HiwayRange: number;
-  MotorPowerKw: number;
-  //PricePerMileOfRange: number;
-  Torque: number;
-  BatteryCapacity: number;
-  ChargingConnector: string;
-  Weight: number;
-  ZeroTo60: number;
-  ZeroTo62: number;
-  MaxChargePower: number;
-  MinutesTo80PercentCharge: number;
-  Notes: string;
-}
+import { ApiService, EVSpecs } from '../api.service';
 
 @Component({
-  selector: 'app-bevs-component',
+  selector: 'app-bev-component',
   templateUrl: './bev.component.html'
 })
-export class BEVComponent {
-  BEVS: EVSpecs[] = [
-
-    { DateUpdated:new Date('8/30/2019'), ModelYear:2019, Manufacturer:"Audi", Model:"E-Tron", BodyStyle:null, Price:74800, FederalTaxCredit:null, Drive:null, CombinedRange:204, CityRange:null, HiwayRange:null, MotorPowerKw:265, Torque:414, BatteryCapacity:95, ChargingConnector:null, Weight:null, ZeroTo60:5.5, ZeroTo62:null, MaxChargePower:150, MinutesTo80PercentCharge:30, Notes:"" },
-    { DateUpdated:new Date(2019, 31, 8), ModelYear:2019, Manufacturer:"BMW", Model : "i3", BodyStyle:null, Price:44450, FederalTaxCredit:null, Drive:null, CombinedRange:153, CityRange:null, HiwayRange:null, MotorPowerKw:170 * .7457, Torque:null, BatteryCapacity:null, ChargingConnector:"CCS", Weight:null, ZeroTo60:7.2, ZeroTo62:null, MaxChargePower:50, MinutesTo80PercentCharge:40, Notes:"" },
-    { DateUpdated:new Date(2019, 31, 8), ModelYear:2019, Manufacturer:"BMW", Model : "MINI Cooper", BodyStyle:null, Price:null, FederalTaxCredit:null, Drive:null, CombinedRange:null, CityRange:null, HiwayRange:null, MotorPowerKw:null, Torque:null, BatteryCapacity:null, ChargingConnector:null, Weight:null, ZeroTo60:null, ZeroTo62:null, MaxChargePower:null, MinutesTo80PercentCharge:null, Notes:"" },
-
-    { DateUpdated: new Date(2019, 31, 8), ModelYear: 2020, Manufacturer: "BMW", Model: "iX3", BodyStyle: "SUV", Price: null, FederalTaxCredit: null, Drive: "RWD", CombinedRange: 250, CityRange: null, HiwayRange: null, MotorPowerKw: 300*.7457, Torque: null, BatteryCapacity: 75, ChargingConnector: null, Weight: null, ZeroTo60: null, ZeroTo62: null, MaxChargePower: 150, MinutesTo80PercentCharge: 30, Notes: "" },
-
-  ];
+export class BEVComponent implements OnInit {
 
   sortedData: EVSpecs[];
+  unsortedData: EVSpecs[];
+  bev: EVSpecs;
+  selectedBev: EVSpecs;
+  error: any;
 
-  constructor() {
-    this.sortedData = this.BEVS.slice();
+  constructor(private apiService: ApiService) {
+  }
+
+  ngOnInit() {
+    this.apiService.getBevs().subscribe((data) => {
+      console.log(data);
+      this.sortedData = data.slice();
+      this.unsortedData = data.slice();
+    
+    })
+  }
+
+  addVehicle() {
+
+  }
+
+  deleteVehicle(bev: EVSpecs, event: any): void {
+    event.stopPropagation();
+    this.apiService
+      .delete(bev, null).subscribe(x => {
+        this.sortedData = this.sortedData.filter(h => h !== bev);
+        if (this.selectedBev === bev) { this.selectedBev = null; }
+      }, error => this.error = error
+      );
+
   }
 
   sortData(sort: Sort) {
-    const data = this.BEVS.slice();
+    const data = this.unsortedData.slice();
     if (!sort.active || sort.direction === '') {
       this.sortedData = data;
       return;

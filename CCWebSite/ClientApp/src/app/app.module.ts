@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-//import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 import { Routes,RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
@@ -17,6 +17,8 @@ import { NewsComponent } from './news/news.component';
 import { BEVComponent } from './bev/bev.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSortModule } from '@angular/material/sort';
+import { MatToolbarModule, MatButtonModule, MatFormFieldModule, MatInputModule, MatIconModule, MatTableModule, MatDialogModule, MatDatepickerModule } from '@angular/material';
+import { BEVEditorComponent } from './bevEditor/bevEditor.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +28,7 @@ import { MatSortModule } from '@angular/material/sort';
     MissionComponent,
     AboutComponent,
     BEVComponent,
+    BEVEditorComponent,
     LegalComponent,
     NewslettersComponent,
     FlyersComponent,
@@ -33,10 +36,18 @@ import { MatSortModule } from '@angular/material/sort';
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
-    //HttpClientModule,
+    HttpClientModule,
     FormsModule,
     BrowserAnimationsModule,
     MatSortModule,
+    MatToolbarModule,
+    MatButtonModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatIconModule,
+    MatTableModule,
+    MatDialogModule,
+    MatDatepickerModule,
 
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },

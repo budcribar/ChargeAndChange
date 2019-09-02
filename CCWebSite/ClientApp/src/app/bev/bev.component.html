@@ -1,7 +1,13 @@
-
+Table of BEVS
+<button mat-button (click)="addVehicle()" mat-flat-button color="primary">Add New Vehicle</button>
+<div class="error" *ngIf="error">{{error}}</div>
 
 <table matSort (matSortChange)="sortData($event)">
   <tr>
+    <th></th>
+    <th></th>
+
+
     <th mat-sort-header="ModelYear">ModelYear</th>
     <th mat-sort-header="Manufacturer">Manufacturer</th>
     <th mat-sort-header="Model">Model</th>
@@ -21,34 +27,36 @@
     <th mat-sort-header="ZeroTo62">ZeroTo62</th>
     <th mat-sort-header="MaxChargePower">MaxChargePower</th>
     <th mat-sort-header="MinutesTo80PercentCharge">MinutesTo80PercentCharge</th>
-    <th >Notes</th>
+    <th>Notes</th>
   </tr>
 
   <tr *ngFor="let bev of sortedData">
-    <td>{{bev.ModelYear}}</td>
-    <td>{{bev.Manufacturer}}</td>
-    <td>{{bev.Model}}</td>
-    <td>{{bev.BodyStyle}}</td>
-    <td>{{bev.Price}}</td>
-    <td>{{bev.FederalTaxCredit}}</td>
-    <td>{{bev.Drive}}</td>
-    <td>{{bev.CombinedRange}}</td>
+    <td> <mat-icon fxFlex="10%" (click)="edit(bev)">mode_edit</mat-icon></td>
+    <td> <mat-icon fxFlex="10%" (click)="deleteVehicle(bev, $event)"> delete</mat-icon></td>
+    <td>{{bev.modelYear}}</td>
+    <td>{{bev.manufacturer}}</td>
+    <td>{{bev.model}}</td>
+    <td>{{bev.bodyStyle}}</td>
+    <td>{{bev.price}}</td>
+    <td>{{bev.federalTaxCredit}}</td>
+    <td>{{bev.erive}}</td>
+    <td>{{bev.combinedRange}}</td>
 
-    <td>{{bev.CityRange}}</td>
-    <td>{{bev.HiwayRange}}</td>
+    <td>{{bev.cityRange}}</td>
+    <td>{{bev.hiwayRange}}</td>
     <td>{{bev.MotorPowerKw}}</td>
 
-    <td>{{bev.Torque}}</td>
-    <td>{{bev.BatteryCapacity}}</td>
-    <td>{{bev.ChargingConnector}}</td>
-    <td>{{bev.Weight}}</td>
-    <td>{{bev.ZeroTo60}}</td>
-    <td>{{bev.ZeroTo62}}</td>
+    <td>{{bev.torque}}</td>
+    <td>{{bev.batteryCapacity}}</td>
+    <td>{{bev.chargingConnector}}</td>
+    <td>{{bev.weight}}</td>
+    <td>{{bev.zeroTo60}}</td>
+    <td>{{bev.zeroTo62}}</td>
 
-    <td>{{bev.MaxChargePower}}</td>
-    <td>{{bev.MinutesTo80PercentCharge}}</td>
-    <td>{{bev.Notes}}</td>
-    
+    <td>{{bev.maxChargePower}}</td>
+    <td>{{bev.minutesTo80PercentCharge}}</td>
+    <td>{{bev.notes}}</td>
+
   </tr>
 </table>
 

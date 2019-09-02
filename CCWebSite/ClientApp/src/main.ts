@@ -5,7 +5,10 @@ import { AppModule } from './app/app.module';
 import { environment } from './environments/environment';
 
 export function getBaseUrl() {
-  return document.getElementsByTagName('base')[0].href;
+  if (environment.production)
+    return document.getElementsByTagName('base')[0].href;
+
+  return "https://localhost:44335/";
 }
 
 const providers = [

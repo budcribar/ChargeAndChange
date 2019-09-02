@@ -1,3 +1,4 @@
+using CCWebSite.Controllers;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -23,6 +24,8 @@ namespace CCWebSite
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
+            services.AddSingleton<IDocumentDBRepository<EVSpecs>>(new DocumentDBRepository<EVSpecs>());
+           
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
             {
@@ -35,6 +38,13 @@ namespace CCWebSite
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "My API", Version = "v1" });
             });
 
+
+           
+            services.AddCors(c =>
+            {
+                c.AddPolicy("AllowOrigin", options => options.AllowAnyOrigin());
+            });
+           
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -51,6 +61,17 @@ namespace CCWebSite
                 app.UseHsts();
             }
 
+            if (env.IsDevelopment())
+            {
+                app.UseCors(builder =>
+                {
+                    builder.AllowAnyOrigin();
+                    builder.AllowAnyHeader();
+                    builder.AllowAnyMethod();
+                    builder.Build();
+                });
+            }
+
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseSpaStaticFiles();
@@ -64,7 +85,6 @@ namespace CCWebSite
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
             });
-
 
             app.UseMvc(routes =>
             {
@@ -85,6 +105,8 @@ namespace CCWebSite
                     spa.UseAngularCliServer(npmScript: "start");
                 }
             });
+
+            
         }
     }
 }
