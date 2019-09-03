@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { Routes,RouterModule } from '@angular/router';
 
@@ -17,7 +17,8 @@ import { NewsComponent } from './news/news.component';
 import { BEVComponent } from './bev/bev.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSortModule } from '@angular/material/sort';
-import { MatToolbarModule, MatButtonModule, MatFormFieldModule, MatInputModule, MatIconModule, MatTableModule, MatDialogModule, MatDatepickerModule } from '@angular/material';
+import { MatToolbarModule, MatButtonModule, MatFormFieldModule,MatSelectModule, MatInputModule, MatIconModule, MatTableModule, MatDialogModule, MatDatepickerModule } from '@angular/material';
+import { ConfirmationDialogComponent } from './confirmationDialog/confirmationDialog.component';
 import { BEVEditorComponent } from './bevEditor/bevEditor.component';
 
 @NgModule({
@@ -29,6 +30,7 @@ import { BEVEditorComponent } from './bevEditor/bevEditor.component';
     AboutComponent,
     BEVComponent,
     BEVEditorComponent,
+    ConfirmationDialogComponent,
     LegalComponent,
     NewslettersComponent,
     FlyersComponent,
@@ -38,8 +40,10 @@ import { BEVEditorComponent } from './bevEditor/bevEditor.component';
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     HttpClientModule,
     FormsModule,
+    ReactiveFormsModule,
     BrowserAnimationsModule,
     MatSortModule,
+    MatSelectModule,
     MatToolbarModule,
     MatButtonModule,
     MatFormFieldModule,
@@ -61,7 +65,8 @@ import { BEVEditorComponent } from './bevEditor/bevEditor.component';
   ],
   providers: [],
   bootstrap: [AppComponent],
-  exports:[RouterModule]
+  exports: [RouterModule],
+  entryComponents:[ConfirmationDialogComponent,BEVEditorComponent]
 })
 export class AppModule { }
 

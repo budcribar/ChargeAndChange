@@ -4,28 +4,28 @@ import { Observable } from 'rxjs';
 
 export interface EVSpecs {
   id: string;
-  DateUpdated: Date;
-  ModelYear: number;
-  Manufacturer: string;
-  Model: string;
-  BodyStyle: string;
-  Price: number;
-  FederalTaxCredit: number;
-  Drive: string;
-  CombinedRange: number;
-  CityRange: number;
-  HiwayRange: number;
-  MotorPowerKw: number;
+  dateUpdated: Date;
+  modelYear: number;
+  manufacturer: string;
+  model: string;
+  bodyStyle: string;
+  price: number;
+  federalTaxCredit: number;
+  drive: string;
+  combinedRange: number;
+  cityRange: number;
+  hiwayRange: number;
+  motorPowerKw: number;
   //PricePerMileOfRange: number;
-  Torque: number;
-  BatteryCapacity: number;
-  ChargingConnector: string;
-  Weight: number;
-  ZeroTo60: number;
-  ZeroTo62: number;
-  MaxChargePower: number;
-  MinutesTo80PercentCharge: number;
-  Notes: string;
+  torque: number;
+  batteryCapacity: number;
+  chargingConnector: string;
+  weight: number;
+  zeroTo60: number;
+  zeroTo62: number;
+  maxChargePower: number;
+  minutesTo80PercentCharge: number;
+  notes: string;
 }
 
 @Injectable({
@@ -35,6 +35,18 @@ export class ApiService {
 
   public getBevs(): Observable<EVSpecs[]> {
     return this.httpClient.get<EVSpecs[]>(this.baseUrl + 'api/SampleData/EVSpecs');
+  }
+
+  public update(bev: EVSpecs) {
+    console.log('updating');
+    let url = `${this.baseUrl + 'api/SampleData/EVSpecs'}/${bev.id}`;
+    return this.httpClient.patch(url,bev);
+  }
+
+  public insert(bev: EVSpecs) {
+    console.log('inserting...');
+    let url = `${this.baseUrl + 'api/SampleData/EVSpecs'}/${bev.id}`;
+    return this.httpClient.put(url, bev);
   }
 
   public delete(bev: EVSpecs, event: any): Observable<Object> {

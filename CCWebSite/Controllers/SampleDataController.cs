@@ -37,6 +37,19 @@ namespace CCWebSite.Controllers
             await respository.DeleteItemAsync(id);
         }
 
+        [HttpPatch("EVSpecs/{id}")]
+        public async void Patch(string id, [FromBody]EVSpecs bev)
+        {
+            bev.Id = id;
+            await respository.UpdateItemAsync(id, bev);
+        }
+
+        [HttpPut("EVSpecs/{id}")]
+        public async void Put(string id, [FromBody]EVSpecs bev)
+        {
+            bev.Id = Guid.NewGuid().ToString();
+            await respository.CreateItemAsync(bev);
+        }
 
 
         [HttpGet("[action]")]
