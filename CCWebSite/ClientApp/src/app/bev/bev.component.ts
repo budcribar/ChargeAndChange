@@ -52,9 +52,12 @@ export class BEVComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(dr => {
       if (dr) {
-        console.log(`Dialog sent: ${JSON.stringify(dr)}`);
+      
         dr.id = bev.id;
+        console.log(`Dialog sent: ${JSON.stringify(dr)}`);
+
         this.apiService.update(dr).subscribe(x => {
+          this.sortedData = null;
           this.ngOnInit();
         })
       }

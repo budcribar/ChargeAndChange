@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
-
+using Newtonsoft.Json.Converters;
 
 namespace CCWebSite.Controllers
 {
@@ -19,9 +19,11 @@ namespace CCWebSite.Controllers
         [JsonProperty(PropertyName = "manufacturer")]
         public string Manufacturer { get; set; }
         public string Model { get; set; }
+        [JsonConverter(typeof(StringEnumConverter))]
         public BodyStyle? BodyStyle { get; set; }
         public decimal? Price { get; set; }
         public decimal? FederalTaxCredit { get; set; }
+        [JsonConverter(typeof(StringEnumConverter))]
         public DriveType? Drive {get;set; }
         public int? CombinedRange { get; set; }
         public int? CityRange { get; set; }
@@ -31,6 +33,7 @@ namespace CCWebSite.Controllers
         public int? Torque { get; set; }
 
         public int? BatteryCapacity { get; set;  }
+        [JsonConverter(typeof(StringEnumConverter))]
         public ChargingConnector? ChargingConnector { get; set;  }
         public int? Weight { get; set;  }
         public double? ZeroTo60 { get; set; }

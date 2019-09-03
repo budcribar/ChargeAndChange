@@ -44,8 +44,8 @@ namespace CCWebSite.Controllers
             await respository.UpdateItemAsync(id, bev);
         }
 
-        [HttpPut("EVSpecs/{id}")]
-        public async void Put(string id, [FromBody]EVSpecs bev)
+        [HttpPut("EVSpecs")]
+        public async void Put([FromBody]EVSpecs bev)
         {
             bev.Id = Guid.NewGuid().ToString();
             await respository.CreateItemAsync(bev);
@@ -53,35 +53,9 @@ namespace CCWebSite.Controllers
 
 
         [HttpGet("[action]")]
-        //public async Task< IEnumerable<EVSpecs>> EVSpecs()
-
-         public IEnumerable<EVSpecs> EVSpecs()
+        public  IEnumerable<EVSpecs> EVSpecs()
         {
-            //var repo = new DocumentDBRepository<EVSpecs>();
-
-            //foreach (var item in Specs)
-            //    repo.CreateItemAsync(item).Wait();
-
-
-            //var collections = db.ListCollectionNames();
-
-            ////db.CreateCollection("bev");
-
-
-
-            //var col = db.GetCollection<string>("bev");
-
-            //col.InsertOne
-
-            //col.InsertMany(Specs, new InsertManyOptions { BypassDocumentValidation = true });
-
-            var result = respository.GetItemsAsync(x => true).Result;
-
-            // return await repo.GetItemsAsync(x => true);
-
-            return result;
-
-      
+            return respository.GetItemsAsync(x => true).Result;
         }
 
         

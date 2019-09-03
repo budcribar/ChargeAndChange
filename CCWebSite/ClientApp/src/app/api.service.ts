@@ -45,7 +45,7 @@ export class ApiService {
 
   public insert(bev: EVSpecs) {
     console.log('inserting...');
-    let url = `${this.baseUrl + 'api/SampleData/EVSpecs'}/${bev.id}`;
+    let url = `${this.baseUrl + 'api/SampleData/EVSpecs'}`;
     return this.httpClient.put(url, bev);
   }
 
