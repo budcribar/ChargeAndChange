@@ -61,6 +61,7 @@ export class BEVComponent implements OnInit {
           dr.motorPowerUnits = 'kw';
         }
           
+        console.log(`After hp mod: ${JSON.stringify(dr)}`);
 
         this.apiService.update(dr).subscribe(x => {
           this.sortedData = null;
@@ -121,7 +122,7 @@ export class BEVComponent implements OnInit {
         case 'ChargingConnector': return compare(a.chargingConnector, b.chargingConnector, isAsc);
         case 'Weight': return compare(a.weight, b.weight, isAsc);
         case 'ZeroTo60': return compare(a.zeroTo60mph, b.zeroTo60mph, isAsc);
-        case 'ZeroTo62': return compare(a.zeroto100kph, b.zeroto100kph, isAsc);
+        case 'ZeroTo62': return compare(a.zeroTo100kph, b.zeroTo100kph, isAsc);
         case 'MaxChargePower': return compare(a.maxChargePower, b.maxChargePower, isAsc);
         case 'MinutesTo80PercentCharge': return compare(a.minutesTo80PercentCharge, b.minutesTo80PercentCharge, isAsc);
         case 'SafetyRating': return compare(a.safetyRating, b.safetyRating, isAsc);

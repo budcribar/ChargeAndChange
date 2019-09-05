@@ -42,7 +42,7 @@ export class BEVEditorComponent implements OnInit {
       chargingConnector: new FormControl(this.bev.chargingConnector),
       weight: new FormControl(this.bev.weight),
       zeroTo60mph: new FormControl(this.bev.zeroTo60mph),
-      zeroTo100kph: new FormControl(this.bev.zeroto100kph),
+      zeroTo100kph: new FormControl(this.bev.zeroTo100kph),
       maxChargePower: new FormControl(this.bev.maxChargePower),
       minutesTo80PercentCharge: new FormControl(this.bev.minutesTo80PercentCharge),
       safetyRating: new FormControl(this.bev.minutesTo80PercentCharge),

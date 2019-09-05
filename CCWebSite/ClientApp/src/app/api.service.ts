@@ -23,7 +23,7 @@ export interface EVSpecs {
   chargingConnector: string;
   weight: number;
   zeroTo60mph: number;
-  zeroto100kph: number;
+  zeroTo100kph: number;
   maxChargePower: number;
   minutesTo80PercentCharge: number;
   safetyRating: number;

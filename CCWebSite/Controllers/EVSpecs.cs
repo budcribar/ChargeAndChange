@@ -17,7 +17,6 @@ namespace CCWebSite.Controllers
         public string Id { get; set; }
         public DateTime DateUpdated { get; set; }
         public int ModelYear { get; set; }
-        [JsonProperty(PropertyName = "manufacturer")]
         public string Manufacturer { get; set; }
         public string Model { get; set; }
         [JsonConverter(typeof(StringEnumConverter))]
