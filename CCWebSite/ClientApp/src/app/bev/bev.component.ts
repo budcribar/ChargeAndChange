@@ -50,11 +50,17 @@ export class BEVComponent implements OnInit {
     
     const dialogRef = this.dialog.open(BEVEditorComponent, { maxWidth: "400px", data: bev });
 
-    dialogRef.afterClosed().subscribe(dr => {
+    dialogRef.afterClosed().subscribe((dr: EVSpecs) => {
       if (dr) {
       
         dr.id = bev.id;
         console.log(`Dialog sent: ${JSON.stringify(dr)}`);
+
+        if (dr.motorPowerUnits === 'hp') {
+          dr.motorPowerKw = dr.motorPowerKw * .7457;
+          dr.motorPowerUnits = 'kw';
+        }
+          
 
         this.apiService.update(dr).subscribe(x => {
           this.sortedData = null;
@@ -102,24 +108,25 @@ export class BEVComponent implements OnInit {
         case 'Model': return compare(a.model, b.model, isAsc);
         case 'BodyStyle': return compare(a.bodyStyle, b.bodyStyle, isAsc);
         case 'Price': return compare(a.price, b.price, isAsc);
-        /*
-        case 'FederalTaxCredit': return compare(a.FederalTaxCredit, b.FederalTaxCredit, isAsc);
-        case 'Drive': return compare(a.Drive, b.Drive, isAsc);
-        case 'CombinedRange': return compare(a.CombinedRange, b.CombinedRange, isAsc);
-        case 'CityRange': return compare(a.CityRange, b.CityRange, isAsc);
-        case 'HiwayRange': return compare(a.HiwayRange, b.HiwayRange, isAsc);
-        case 'MotorPowerKw': return compare(a.MotorPowerKw, b.MotorPowerKw, isAsc);
-        case 'Torque': return compare(a.Torque, b.Torque, isAsc);
-        case 'BatteryCapacity': return compare(a.BatteryCapacity, b.BatteryCapacity, isAsc);
+        
+        case 'FederalTaxCredit': return compare(a.federalTaxCredit, b.federalTaxCredit, isAsc);
+        case 'Drive': return compare(a.driveTrain, b.driveTrain, isAsc);
+        case 'CombinedRange': return compare(a.combinedRange, b.combinedRange, isAsc);
+        case 'CityRange': return compare(a.cityRange, b.cityRange, isAsc);
+        case 'HiwayRange': return compare(a.hiwayRange, b.hiwayRange, isAsc);
+        case 'MotorPowerKw': return compare(a.motorPowerKw, b.motorPowerKw, isAsc);
+        case 'Torque': return compare(a.torque, b.torque, isAsc);
+        case 'BatteryCapacity': return compare(a.batteryCapacity, b.batteryCapacity, isAsc);
 
-        case 'ChargingConnector': return compare(a.ChargingConnector, b.ChargingConnector, isAsc);
-        case 'Weight': return compare(a.Weight, b.Weight, isAsc);
-        case 'ZeroTo60': return compare(a.ZeroTo60, b.ZeroTo60, isAsc);
-        case 'ZeroTo62': return compare(a.ZeroTo62, b.ZeroTo62, isAsc);
-        case 'MaxChargePower': return compare(a.MaxChargePower, b.MaxChargePower, isAsc);
-        case 'MinutesTo80PercentCharge': return compare(a.MinutesTo80PercentCharge, b.MinutesTo80PercentCharge, isAsc);
-        case 'Notes': return compare(a.Notes, b.Notes, isAsc);
-        */
+        case 'ChargingConnector': return compare(a.chargingConnector, b.chargingConnector, isAsc);
+        case 'Weight': return compare(a.weight, b.weight, isAsc);
+        case 'ZeroTo60': return compare(a.zeroTo60mph, b.zeroTo60mph, isAsc);
+        case 'ZeroTo62': return compare(a.zeroto100kph, b.zeroto100kph, isAsc);
+        case 'MaxChargePower': return compare(a.maxChargePower, b.maxChargePower, isAsc);
+        case 'MinutesTo80PercentCharge': return compare(a.minutesTo80PercentCharge, b.minutesTo80PercentCharge, isAsc);
+        case 'SafetyRating': return compare(a.safetyRating, b.safetyRating, isAsc);
+        case 'Notes': return compare(a.notes, b.notes, isAsc);
+        
 
         default: return 0;
       }

@@ -6,7 +6,6 @@
 
   <mat-form-field>
     <input matInput
-           #modelYear
            maxlength="4"
            placeholder="Model Year"
            formControlName="modelYear">
@@ -14,14 +13,12 @@
 
   <mat-form-field>
     <input matInput
-           #manufacturer
            placeholder="Manufacturer"
            formControlName="manufacturer">
   </mat-form-field>
 
   <mat-form-field>
     <input matInput
-           #model
            placeholder="Model"
            formControlName="model">
   </mat-form-field>
@@ -40,11 +37,27 @@
       <mat-option value="Crossover">
         Crossover
       </mat-option>
+
+      <mat-option value="Pickup">
+        Pickup
+      </mat-option>
+      <mat-option value="Minivan">
+        Minivan
+      </mat-option>
+
       <mat-option value="Van">
         Van
       </mat-option>
-      <mat-option value="PickupTruck">
-        PickupTruck
+      <mat-option value="Wagon">
+        Wagon
+      </mat-option>
+
+      <mat-option value="Hatchback">
+        Hatchback
+      </mat-option>
+
+      <mat-option value="Convertible">
+        Convertible
       </mat-option>
 
     </mat-select>
@@ -52,12 +65,152 @@
   </mat-form-field>
 
   <mat-form-field>
-    <input matInput
-           #price
+    <input matInput type="number"
            placeholder="Price"
            formControlName="price">
   </mat-form-field>
+  <mat-form-field>
+    <input matInput type="number"
+           placeholder="Federal Tax Credit"
+           formControlName="federalTaxCredit">
+  </mat-form-field>
 
+  <mat-form-field>
+
+    <mat-select placeholder="Select drivetrain type"
+                formControlName="driveTrain">
+
+      <mat-option value="AWD">
+        AWD
+      </mat-option>
+      <mat-option value="FOURWD">
+        4WD
+      </mat-option>
+      <mat-option value="FWD">
+        FWD
+      </mat-option>
+      <mat-option value="RWD">
+        RWD
+      </mat-option>
+
+    </mat-select>
+
+  </mat-form-field>
+
+  <mat-form-field>
+    <input matInput type="number"
+           placeholder="Combined Range"
+           formControlName="combinedRange">
+  </mat-form-field>
+
+  <mat-form-field>
+    <input matInput type="number"
+           placeholder="City Range"
+           formControlName="cityRange">
+  </mat-form-field>
+
+  <mat-form-field>
+    <input matInput type="number"
+           placeholder="Highway Range"
+           formControlName="hiwayRange">
+  </mat-form-field>
+
+  <mat-grid-list cols="2" gutterSize="0px" rowHeight="70px">
+    <mat-grid-tile >
+
+
+      <mat-form-field>
+        <input matInput type="number"
+               placeholder="Motor Power"
+               formControlName="motorPowerKw">
+      </mat-form-field>
+    </mat-grid-tile>
+
+    <mat-grid-tile>
+
+      <mat-radio-group aria-label="Select an option" formControlName="motorPowerUnits">
+        <mat-radio-button value="hp">hp</mat-radio-button>
+        <mat-radio-button value="kw">kw</mat-radio-button>
+      </mat-radio-group>
+    </mat-grid-tile>
+
+  </mat-grid-list>
+  
+
+  <mat-form-field>
+    <input matInput type="number"
+           placeholder="Torque"
+           formControlName="torque">
+  </mat-form-field>
+
+  <mat-form-field>
+    <input matInput type="number"
+           placeholder="Battery Capacity"
+           formControlName="batteryCapacity">
+  </mat-form-field>
+
+  <mat-form-field>
+
+    <mat-select placeholder="Select charging port type"
+                formControlName="chargingConnector">
+
+      <mat-option value="Chademo">
+        Chademo
+      </mat-option>
+      <mat-option value="CCS">
+        CCS
+      </mat-option>
+      <mat-option value="Tesla">
+        Tesla
+      </mat-option>
+      <
+    </mat-select>
+
+  </mat-form-field>
+
+  <mat-form-field>
+    <input matInput type="number"
+           placeholder="Weight"
+           formControlName="weight">
+  </mat-form-field>
+
+  <mat-form-field>
+    <input matInput type="number"
+           placeholder="0-60 mph"
+           formControlName="zeroTo60mph">
+  </mat-form-field>
+
+  <mat-form-field>
+    <input matInput type="number"
+           placeholder="0-100 kph"
+           formControlName="zeroTo100kph">
+  </mat-form-field>
+
+  <mat-form-field>
+    <input matInput type="number"
+           placeholder="max Charge Power"
+           formControlName="maxChargePower">
+  </mat-form-field>
+
+  <mat-form-field>
+    <input matInput type="number"
+           placeholder="min to  80% charge"
+           formControlName="minutesTo80PercentCharge">
+  </mat-form-field>
+
+  <mat-form-field>
+    <input matInput type="number"
+           placeholder="Safety Rating"
+           formControlName="safetyRating">
+  </mat-form-field>
+  <mat-form-field>
+
+    <textarea matInput placeholder="Notes"
+              formControlName="notes">
+
+        </textarea>
+
+  </mat-form-field>
   <!--
 
       <mat-form-field>
@@ -74,14 +227,7 @@
 
   </mat-form-field>
 
-  <mat-form-field>
 
-    <textarea matInput placeholder="Description"
-              formControlName="longDescription">
-
-        </textarea>
-
-  </mat-form-field>
       -->
 
 

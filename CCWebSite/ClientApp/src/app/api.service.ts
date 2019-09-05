@@ -11,20 +11,22 @@ export interface EVSpecs {
   bodyStyle: string;
   price: number;
   federalTaxCredit: number;
-  drive: string;
+  driveTrain: string;
   combinedRange: number;
   cityRange: number;
   hiwayRange: number;
   motorPowerKw: number;
+  motorPowerUnits: string;
   //PricePerMileOfRange: number;
   torque: number;
   batteryCapacity: number;
   chargingConnector: string;
   weight: number;
-  zeroTo60: number;
-  zeroTo62: number;
+  zeroTo60mph: number;
+  zeroto100kph: number;
   maxChargePower: number;
   minutesTo80PercentCharge: number;
+  safetyRating: number;
   notes: string;
 }
 

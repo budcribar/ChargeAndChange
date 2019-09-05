@@ -7,9 +7,10 @@ using Newtonsoft.Json.Converters;
 
 namespace CCWebSite.Controllers
 {
-    public enum BodyStyle { SUV,Sedan, Crossover, Truck, Hatchback }
-    public enum DriveType {  Front, Rear, AWD }
+    public enum BodyStyle { SUV,Sedan, Crossover, Pickup, Coupe, Minivan, Van, Wagon, Hatchback, Convertible }
+    public enum DriveType {  AWD, FOURWD, FWD, RWD }
     public enum ChargingConnector {  Chademo, CCS, Tesla }
+    public enum MotorPowerUnits {  kw, hp }
     public class EVSpecs
     {
         [JsonProperty(PropertyName = "id")]
@@ -24,11 +25,13 @@ namespace CCWebSite.Controllers
         public decimal? Price { get; set; }
         public decimal? FederalTaxCredit { get; set; }
         [JsonConverter(typeof(StringEnumConverter))]
-        public DriveType? Drive {get;set; }
+        public DriveType? DriveTrain {get;set; }
         public int? CombinedRange { get; set; }
         public int? CityRange { get; set; }
         public int? HiwayRange { get; set; }
         public int? MotorPowerKw { get; set; }
+        [JsonConverter(typeof(StringEnumConverter))]
+        public MotorPowerUnits? MotorPowerUnits { get; set; }
         public decimal? PricePerMileOfRange { get; set;  }
         public int? Torque { get; set; }
 
@@ -36,10 +39,12 @@ namespace CCWebSite.Controllers
         [JsonConverter(typeof(StringEnumConverter))]
         public ChargingConnector? ChargingConnector { get; set;  }
         public int? Weight { get; set;  }
-        public double? ZeroTo60 { get; set; }
-        public double? ZeroTo62 { get; set; }
+        public double? ZeroTo60mph { get; set; }
+        public double? ZeroTo100kph { get; set; }
         public int? MaxChargePower { get; set;  }
         public int? MinutesTo80PercentCharge { get; set;  }
+        public int? SafetyRating { get; set; }
+
         public string Notes { get; set;  }
 
         public override string ToString()
