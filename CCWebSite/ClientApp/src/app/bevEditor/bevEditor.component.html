@@ -1,11 +1,11 @@
 
-<h2 mat-dialog-title>{{bev.ModelYear}}</h2>
+<h2 mat-dialog-title>{{bev.modelYear}} {{bev.manufacturer}}  {{bev.model}}</h2>
 
 
 <mat-dialog-content [formGroup]="form">
 
   <mat-form-field>
-    <input matInput
+    <input matInput  type="number" min="2000" step="1"
            maxlength="4"
            placeholder="Model Year"
            formControlName="modelYear">
@@ -18,7 +18,7 @@
   </mat-form-field>
 
   <mat-form-field>
-    <input matInput
+    <input matInput 
            placeholder="Model"
            formControlName="model">
   </mat-form-field>

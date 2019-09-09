@@ -57,14 +57,13 @@ export class BEVComponent implements OnInit {
         console.log(`Dialog sent: ${JSON.stringify(dr)}`);
 
         if (dr.motorPowerUnits === 'hp') {
-          dr.motorPowerKw = dr.motorPowerKw * .7457;
+          dr.motorPowerKw = Math.round( dr.motorPowerKw * .7457 );
           dr.motorPowerUnits = 'kw';
         }
           
         console.log(`After hp mod: ${JSON.stringify(dr)}`);
 
         this.apiService.update(dr).subscribe(x => {
-          this.sortedData = null;
           this.ngOnInit();
         })
       }

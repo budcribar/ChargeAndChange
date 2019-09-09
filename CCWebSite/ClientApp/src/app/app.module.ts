@@ -20,6 +20,8 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatToolbarModule, MatButtonModule, MatFormFieldModule,MatSelectModule, MatInputModule, MatIconModule, MatTableModule, MatDialogModule, MatDatepickerModule, MatGridListModule, MatRadioModule } from '@angular/material';
 import { ConfirmationDialogComponent } from './confirmationDialog/confirmationDialog.component';
 import { BEVEditorComponent } from './bevEditor/bevEditor.component';
+import { ContactComponent } from './contact/contact.component';
+import { ContactEditorComponent } from './contactEditor/contactEditor.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +32,8 @@ import { BEVEditorComponent } from './bevEditor/bevEditor.component';
     AboutComponent,
     BEVComponent,
     BEVEditorComponent,
+    ContactComponent,
+    ContactEditorComponent,
     ConfirmationDialogComponent,
     LegalComponent,
     NewslettersComponent,
@@ -68,7 +72,7 @@ import { BEVEditorComponent } from './bevEditor/bevEditor.component';
   providers: [],
   bootstrap: [AppComponent],
   exports: [RouterModule],
-  entryComponents:[ConfirmationDialogComponent,BEVEditorComponent]
+  entryComponents:[ConfirmationDialogComponent,BEVEditorComponent,ContactEditorComponent]
 })
 export class AppModule { }
 

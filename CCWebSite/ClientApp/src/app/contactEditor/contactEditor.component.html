@@ -1,0 +1,78 @@
+
+<h2 mat-dialog-title>{{contact.FirstName}} {{contact.LastName}}</h2>
+
+
+<mat-dialog-content [formGroup]="form">
+
+
+
+  <mat-form-field>
+    <input matInput
+           placeholder="FirstName"
+           formControlName="firstName">
+  </mat-form-field>
+
+  <mat-form-field>
+    <input matInput
+           placeholder="LastName"
+           formControlName="lastName">
+  </mat-form-field>
+
+
+
+
+
+
+  <mat-form-field>
+    <input matInput type="number" step="1"
+           maxlength="10"
+           placeholder="Number"
+           formControlName="streetNumber">
+  </mat-form-field>
+
+  <mat-form-field>
+    <input matInput
+           placeholder="Street"
+           formControlName="street">
+  </mat-form-field>
+
+  <mat-form-field>
+    <input matInput type="email"
+           placeholder="Email"
+           formControlName="email">
+  </mat-form-field>
+
+  <mat-form-field>
+    <input matInput type="tel"
+           placeholder="Phone"
+           formControlName="phone">
+  </mat-form-field>
+
+  <mat-form-field>
+    <textarea matInput placeholder="Notes"
+              formControlName="notes">
+
+        </textarea>
+
+  </mat-form-field>
+
+
+
+
+</mat-dialog-content>
+
+<mat-dialog-actions>
+
+  <button class="mat-raised-button"
+          (click)="close()">
+    Close
+  </button>
+
+  <button class="mat-raised-button mat-primary"
+          [disabled]="!form.valid"
+          (click)="save()">
+    Save
+  </button>
+
+</mat-dialog-actions>
+

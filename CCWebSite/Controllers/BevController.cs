@@ -9,10 +9,10 @@ using Microsoft.Azure.Cosmos;
 namespace CCWebSite.Controllers
 {
     [Route("api/[controller]")]
-    public class SampleDataController : Controller
+    public class BEVController : Controller
     {
         private readonly IDocumentDBRepository<EVSpecs> respository;
-        public SampleDataController(IDocumentDBRepository<EVSpecs> Respository)
+        public BEVController(IDocumentDBRepository<EVSpecs> Respository)
         {
             this.respository = Respository;
         }
@@ -40,6 +40,7 @@ namespace CCWebSite.Controllers
         [HttpPatch("EVSpecs/{id}")]
         public async void Patch(string id, [FromBody]EVSpecs bev)
         {
+            if (bev == null) return;
             bev.Id = id;
             await respository.UpdateItemAsync(id, bev);
         }
@@ -47,6 +48,7 @@ namespace CCWebSite.Controllers
         [HttpPut("EVSpecs")]
         public async void Put([FromBody]EVSpecs bev)
         {
+            if (bev == null) return;
             bev.Id = Guid.NewGuid().ToString();
             await respository.CreateItemAsync(bev);
         }

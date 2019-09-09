@@ -1,0 +1,14 @@
+.mat-form-field {
+  display: block;
+  
+}
+
+.mat-dialog-content {
+  width:430px;
+}
+
+
+textarea {
+  height: 100px;
+  resize: vertical;
+}

@@ -30,33 +30,88 @@ export interface EVSpecs {
   notes: string;
 }
 
+export interface LarimerCountyRecord {
+  zipcode: number;
+  locationcity: string;
+  locationaddress: string;
+  ownername1: string;
+  proptype: string;
+}
+
+export interface LarimerCountyRecords {
+  columns: any;
+  records: LarimerCountyRecord[];
+}
+
+export interface Contact {
+  id: string;
+  dateUpdated: Date;
+  firstName: string;
+  lastName: string;
+  subdivision: string;
+  streetNumber: number;
+  street: string;
+  city: string;
+  state: string;
+  zipCode: string;
+  email: string;
+  phone: string;
+  notes: string;
+}
+
 @Injectable({
   providedIn: 'root'
 })
 export class ApiService {
 
+  public getContactsFrom(subdivision: string): Observable<Contact[]> {
+    return this.httpClient.get<Contact[]>(`${this.baseUrl + 'api/contact/contactsFrom'}/${encodeURI(subdivision)}`);
+  }
+
   public getBevs(): Observable<EVSpecs[]> {
-    return this.httpClient.get<EVSpecs[]>(this.baseUrl + 'api/SampleData/EVSpecs');
+    return this.httpClient.get<EVSpecs[]>(this.baseUrl + 'api/bev/EVSpecs');
+  }
+
+  public getContacts(): Observable<Contact[]> {
+    return this.httpClient.get<Contact[]>(this.baseUrl + 'api/contact/contacts');
+  }
+  public insertContact(contact: Contact) {
+    console.log('inserting...');
+    let url = `${this.baseUrl + 'api/contact/contacts'}`;
+    return this.httpClient.put(url, contact);
+  }
+  public updateContact(contact: Contact) {
+    console.log('updating');
+    let url = `${this.baseUrl + 'api/contact/contacts'}/${contact.id}`;
+    return this.httpClient.patch(url, contact);
   }
 
   public update(bev: EVSpecs) {
     console.log('updating');
-    let url = `${this.baseUrl + 'api/SampleData/EVSpecs'}/${bev.id}`;
+    let url = `${this.baseUrl + 'api/bev/EVSpecs'}/${bev.id}`;
     return this.httpClient.patch(url,bev);
   }
 
   public insert(bev: EVSpecs) {
     console.log('inserting...');
-    let url = `${this.baseUrl + 'api/SampleData/EVSpecs'}`;
+    let url = `${this.baseUrl + 'api/bev/EVSpecs'}`;
     return this.httpClient.put(url, bev);
   }
 
   public delete(bev: EVSpecs, event: any): Observable<Object> {
     console.log(bev);
     console.debug(bev);
-    let url = `${this.baseUrl + 'api/SampleData/EVSpecs'}/${bev.id}`;
+    let url = `${this.baseUrl + 'api/bev/EVSpecs'}/${bev.id}`;
     return this.httpClient.delete(url);
   }
+
+  public deleteContact(contact: Contact, event: any): Observable<Object> {
+    console.log(contact);
+   
+    let url = `${this.baseUrl + 'api/contact/contacts'}/${contact.id}`;
+    return this.httpClient.delete(url);
+  }
+
 
   constructor(private httpClient: HttpClient, @Inject('BASE_URL') private baseUrl: string) {
   }

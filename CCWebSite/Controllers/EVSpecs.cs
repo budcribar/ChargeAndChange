@@ -34,7 +34,7 @@ namespace CCWebSite.Controllers
         public decimal? PricePerMileOfRange { get; set;  }
         public int? Torque { get; set; }
 
-        public int? BatteryCapacity { get; set;  }
+        public double? BatteryCapacity { get; set;  }
         [JsonConverter(typeof(StringEnumConverter))]
         public ChargingConnector? ChargingConnector { get; set;  }
         public int? Weight { get; set;  }

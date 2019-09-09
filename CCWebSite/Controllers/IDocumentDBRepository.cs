@@ -14,5 +14,6 @@ namespace CCWebSite.Controllers
         Task<T> GetItemAsync(string id);
         Task<IEnumerable<T>> GetItemsAsync(Expression<Func<T, bool>> predicate);
         Task<Document> UpdateItemAsync(string id, T item);
+        void CreateItemsAsync(T[] item);
     }
 }
