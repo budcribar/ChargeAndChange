@@ -18,7 +18,7 @@ Table of BEVS
     <th mat-sort-header="CombinedRange">Combined Range</th>
     <th mat-sort-header="CityRange">City Range</th>
     <th mat-sort-header="HiwayRange">Hiway Range</th>
-    <th mat-sort-header="MotorPowerKw">MotorPower (Kw)</th>
+    <th mat-sort-header="MotorPowerKw">MotorPower (Kw)/(hp)</th>
     <th mat-sort-header="Torque">Torque</th>
     <th mat-sort-header="BatteryCapacity">Battery Capacity</th>
     <th mat-sort-header="ChargingConnector">Charging Connector</th>
@@ -45,8 +45,10 @@ Table of BEVS
 
     <td>{{bev.cityRange}}</td>
     <td>{{bev.hiwayRange}}</td>
-    <td>{{bev.motorPowerKw}}</td>
 
+    <td ng-if="bev.motorPowerKw; else elseBlock">{{bev.motorPowerKw}}/{{bev.motorPowerKw*1.341 | number:'1.0-0'}}</td>
+    <ng-template #elseBlock><td></td></ng-template>
+    
     <td>{{bev.torque}}</td>
     <td>{{bev.batteryCapacity}}</td>
     <td>{{bev.chargingConnector}}</td>
