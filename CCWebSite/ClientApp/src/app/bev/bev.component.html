@@ -34,6 +34,7 @@ Table of BEVS
   <tr *ngFor="let bev of sortedData">
     <td> <mat-icon fxFlex="10%" (click)="edit(bev)">mode_edit</mat-icon></td>
     <td> <mat-icon fxFlex="10%" (click)="deleteVehicle(bev, $event)"> delete</mat-icon></td>
+    <td><img src="{{getLogo(bev.manufacturer)}}" /> </td>
     <td>{{bev.modelYear}}</td>
     <td>{{bev.manufacturer}}</td>
     <td>{{bev.model}}</td>

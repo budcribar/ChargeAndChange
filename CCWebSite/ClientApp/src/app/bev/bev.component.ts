@@ -132,7 +132,12 @@ export class BEVComponent implements OnInit {
       }
     });
   }
+  getLogo(manufacturer: string): string {
+    return `../../assets/pics/brands/${manufacturer}-Logo.jpg`;
+  }
 }
+
+
 
 function compare(a: number | string, b: number | string, isAsc: boolean) {
   return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
