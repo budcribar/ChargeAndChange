@@ -6,7 +6,7 @@ Table of BEVS
   <tr>
     <th></th>
     <th></th>
-
+    <th></th>
 
     <th mat-sort-header="ModelYear">Model Year</th>
     <th mat-sort-header="Manufacturer">Manufacturer</th>
@@ -39,8 +39,8 @@ Table of BEVS
     <td>{{bev.manufacturer}}</td>
     <td>{{bev.model}}</td>
     <td>{{bev.bodyStyle}}</td>
-    <td>{{bev.price}}</td>
-    <td>{{bev.federalTaxCredit}}</td>
+    <td>{{bev.price|currency}}</td>
+    <td>{{bev.federalTaxCredit|currency}}</td>
     <td>{{bev.driveTrain}}</td>
     <td>{{bev.combinedRange}}</td>
 
