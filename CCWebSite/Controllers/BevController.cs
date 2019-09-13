@@ -8,6 +8,12 @@ using Microsoft.Azure.Cosmos;
 
 namespace CCWebSite.Controllers
 {
+    public class ChartData
+    {
+        public string Name { get; set; }
+        public double? Y { get; set; }
+    }
+
     [Route("api/[controller]")]
     public class BEVController : Controller
     {
@@ -53,6 +59,19 @@ namespace CCWebSite.Controllers
             await respository.CreateItemAsync(bev);
         }
 
+        private double? GetValue(EVSpecs evspec, string spec)
+        {
+            var o =  typeof(EVSpecs).GetProperty(spec).GetValue(evspec);
+            if (o == null) return null;
+
+            return ((IConvertible)o).ToDouble(null);
+        }
+
+        [HttpGet("Spec/{spec}")]
+        public IEnumerable<ChartData> Spec(string spec)
+        {
+            return respository.GetItemsAsync(x => true).Result.Select(x => new ChartData { Name = x.Manufacturer + ' ' + x.Model, Y = GetValue(x, spec) }).Where(x => x.Y != null).OrderBy(x => x.Y);
+        }
 
         [HttpGet("[action]")]
         public  IEnumerable<EVSpecs> EVSpecs()

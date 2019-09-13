@@ -1,0 +1,17 @@
+
+  <mat-form-field>
+    
+
+    <mat-select placeholder="Select Spec" (selectionChange)="onSpecSelected($event)"
+                [(ngModel)]="selectedSpec" name="food" >
+      <mat-option *ngFor="let spec of specs"
+                  [value]="spec.value">
+        {{spec.display}}
+      </mat-option>
+    </mat-select>
+    
+    
+  </mat-form-field>
+
+<div [chart]="chart" style="height:600px"></div>
+

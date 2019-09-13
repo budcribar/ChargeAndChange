@@ -2,6 +2,11 @@ import { Injectable,Component,Inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
+export interface ChartData {
+  name: string;
+  y: number;
+}
+
 export interface EVSpecs {
   id: string;
   dateUpdated: Date;
@@ -70,6 +75,10 @@ export class ApiService {
 
   public getBevs(): Observable<EVSpecs[]> {
     return this.httpClient.get<EVSpecs[]>(this.baseUrl + 'api/bev/EVSpecs');
+  }
+
+  public getChartData(spec: string): Observable<ChartData[]> {
+    return this.httpClient.get<ChartData[]>(this.baseUrl + `api/bev/spec/${spec}`);
   }
 
   public getContacts(): Observable<Contact[]> {

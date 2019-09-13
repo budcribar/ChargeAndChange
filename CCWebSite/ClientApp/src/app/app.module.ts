@@ -22,6 +22,9 @@ import { ConfirmationDialogComponent } from './confirmationDialog/confirmationDi
 import { BEVEditorComponent } from './bevEditor/bevEditor.component';
 import { ContactComponent } from './contact/contact.component';
 import { ContactEditorComponent } from './contactEditor/contactEditor.component';
+import { ChartModule } from 'angular-highcharts';
+import { BEVChartComponent } from './bevChart/bevChart.component';
+
 
 @NgModule({
   declarations: [
@@ -39,6 +42,8 @@ import { ContactEditorComponent } from './contactEditor/contactEditor.component'
     NewslettersComponent,
     FlyersComponent,
     NewsComponent,
+   
+    BEVChartComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -58,7 +63,7 @@ import { ContactEditorComponent } from './contactEditor/contactEditor.component'
     MatDatepickerModule,
     MatGridListModule,
     MatRadioModule,
-
+    ChartModule,
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
       { path: 'mission', component: MissionComponent },
