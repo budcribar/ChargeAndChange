@@ -106,6 +106,7 @@ export class BEVComponent implements OnInit {
         case 'ModelYear': return compare(a.modelYear, b.modelYear, isAsc);
         case 'Manufacturer': return compare(a.manufacturer, b.manufacturer, isAsc);
         case 'Model': return compare(a.model, b.model, isAsc);
+        case 'Available': return compare(a.available.toString(), b.available.toString(), isAsc);
         case 'BodyStyle': return compare(a.bodyStyle, b.bodyStyle, isAsc);
         case 'Price': return compare(a.price, b.price, isAsc);
         

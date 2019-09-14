@@ -13,6 +13,7 @@ export interface EVSpecs {
   modelYear: number;
   manufacturer: string;
   model: string;
+  available: boolean;
   bodyStyle: string;
   price: number;
   federalTaxCredit: number;

@@ -11,6 +11,7 @@ Table of BEVS
     <th mat-sort-header="ModelYear">Model Year</th>
     <th mat-sort-header="Manufacturer">Manufacturer</th>
     <th mat-sort-header="Model">Model</th>
+    <th mat-sort-header="Available">Available</th>
     <th mat-sort-header="BodyStyle">Body Style</th>
     <th mat-sort-header="Price">Price</th>
     <th mat-sort-header="FederalTaxCredit">Federal Tax Credit</th>
@@ -38,6 +39,7 @@ Table of BEVS
     <td>{{bev.modelYear}}</td>
     <td>{{bev.manufacturer}}</td>
     <td>{{bev.model}}</td>
+    <td>{{bev.available}}</td>
     <td>{{bev.bodyStyle}}</td>
     <td>{{bev.price|currency}}</td>
     <td>{{bev.federalTaxCredit|currency}}</td>
@@ -49,7 +51,7 @@ Table of BEVS
 
     <td ng-if="bev.motorPowerKw; else elseBlock">{{bev.motorPowerKw}}/{{bev.motorPowerKw*1.341 | number:'1.0-0'}}</td>
     <ng-template #elseBlock><td></td></ng-template>
-    
+
     <td>{{bev.torque}}</td>
     <td>{{bev.batteryCapacity}}</td>
     <td>{{bev.chargingConnector}}</td>

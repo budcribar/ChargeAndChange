@@ -17,7 +17,7 @@ import { NewsComponent } from './news/news.component';
 import { BEVComponent } from './bev/bev.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSortModule } from '@angular/material/sort';
-import { MatToolbarModule, MatButtonModule, MatFormFieldModule,MatSelectModule, MatInputModule, MatIconModule, MatTableModule, MatDialogModule, MatDatepickerModule, MatGridListModule, MatRadioModule } from '@angular/material';
+import { MatToolbarModule, MatButtonModule, MatFormFieldModule,MatSelectModule, MatInputModule, MatIconModule, MatTableModule, MatDialogModule, MatDatepickerModule, MatGridListModule, MatRadioModule, MatCheckboxModule } from '@angular/material';
 import { ConfirmationDialogComponent } from './confirmationDialog/confirmationDialog.component';
 import { BEVEditorComponent } from './bevEditor/bevEditor.component';
 import { ContactComponent } from './contact/contact.component';
@@ -56,6 +56,7 @@ import { BEVChartComponent } from './bevChart/bevChart.component';
     MatToolbarModule,
     MatButtonModule,
     MatFormFieldModule,
+    MatCheckboxModule,
     MatInputModule,
     MatIconModule,
     MatTableModule,
@@ -71,7 +72,8 @@ import { BEVChartComponent } from './bevChart/bevChart.component';
       { path: 'legal', component: LegalComponent },
       { path: 'newsletters', component: NewslettersComponent },
       { path: 'flyers', component: FlyersComponent },
-
+      { path: 'bevs', component: BEVComponent },
+      { path: 'contacts', component: ContactComponent },
     ])
   ],
   providers: [],

@@ -28,6 +28,7 @@ export class BEVEditorComponent implements OnInit {
       modelYear: new FormControl(this.bev.modelYear),
       manufacturer: new FormControl(this.bev.manufacturer),
       model: new FormControl(this.bev.model),
+      available: new FormControl(this.bev.available),
       bodyStyle: new FormControl(this.bev.bodyStyle),
       price: new FormControl(this.bev.price),
       federalTaxCredit: new FormControl(this.bev.federalTaxCredit),

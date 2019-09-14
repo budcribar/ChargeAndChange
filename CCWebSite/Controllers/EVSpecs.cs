@@ -18,6 +18,7 @@ namespace CCWebSite.Controllers
         public DateTime DateUpdated { get; set; }
         public int ModelYear { get; set; }
         public string Manufacturer { get; set; }
+        public Boolean Available { get; set; }
         public string Model { get; set; }
         [JsonConverter(typeof(StringEnumConverter))]
         public BodyStyle? BodyStyle { get; set; }
