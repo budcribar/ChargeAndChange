@@ -7,22 +7,37 @@ import { BEVEditorComponent } from '../bevEditor/bevEditor.component';
 import { Chart } from 'angular-highcharts';
 import { seriesType, Series } from 'highcharts';
 import { MatSelectModule } from '@angular/material/select';
+import { FormGroup, FormControl } from '@angular/forms';
+
 export interface Specs {
   value: string;
   display: string;
 }
 @Component({
   selector: 'app-bev-chart-component',
-  templateUrl: './bevChart.component.html'
+  templateUrl: './bevChart.component.html',
+  styleUrls: ['./bevChart.component.css']
 })
 export class BEVChartComponent implements OnInit {
-
+  form: FormGroup;
   selectedSpec: string;
-  selectedValue: string; 
+  selectedValue: string;
+  onlyAvailable: boolean = false;
+
+
   specs: Specs[] = [
     { value: 'Price', display: 'Price' },
     { value: 'CombinedRange', display: 'Range' },
-    { value: 'MotorPowerKw', display: 'Motor Power' }
+    { value: 'MotorPowerKw', display: 'Motor Power' },
+    { value: 'Torque', display: 'Torque' },
+    { value: 'BatteryCapacity', display: 'Batery Capacity (kwh)' },
+    { value: 'Weight', display: 'Weight (lbs)' },
+    { value: 'ZeroTo60mph', display: 'Zero To 60 mph' },
+    { value: 'MaxChargePower', display: 'Max Charge Power (kw)' },
+    { value: 'MinutesTo80PercentCharge', display: 'Minutes To 80% Charge' },
+    { value: 'SafetyRating', display: 'Safety Rating' },
+
+    
   ];
    
   chart = new Chart({
@@ -35,16 +50,7 @@ export class BEVChartComponent implements OnInit {
     credits: {
       enabled: true
     },
-    /*
-    xAxis: {
-      categories: ['Tesla', 'Porsche', 'BMW', 'Bananas', 'Carrots'],
-
-      labels: {
-        enabled: true,
-        
-      }
-    },
-    */
+   
     yAxis: {
       allowDecimals: true,
       title: {
@@ -80,54 +86,28 @@ export class BEVChartComponent implements OnInit {
     },
     */
 
-    //series: [{
-    //  type: 'bar',
-    //  data: [
-    //    { name: 'bud', y: 14, color: 'rgba(253, 185, 19, 0.85)' },
-    //    { name: 'deb', y: 22, color: 'rgba(0, 76, 147, 0.85)' },
-      
-    //  ],
-    //}]
-
      series: [{
        type: 'bar',
        name: this.selectedSpec,
      
        showInLegend: false,
-      data: [
-        //{ name: 'Tesla', y: 14 },
-        //{ name: 'Porsche', y: 22.2 },
-
-       ],
-      
 
     }]
 
-    //series:  [
-    //  {
-    //    name: 'Line 1',
-    //    data: [1, 2, 3]
-    //  }
-    //]
   });
   
 
   constructor(private apiService: ApiService, public dialog: MatDialog) {
   }
 
-  // add point to chart serie
-  add() {
-    this.chart.addPoint(Math.floor(Math.random() * 10));
-     //  this.chart.addPoint(42);
-  }
 
   ngOnInit() {
-    
+   
   }
 
-  onSpecSelected(event) {
-    console.log(event.value);
-    this.apiService.getChartData(event.value).subscribe((data) => {
+  getData() {
+    console.log(this.selectedSpec);
+    this.apiService.getChartData(this.selectedSpec, this.onlyAvailable).subscribe((data) => {
       console.log(data);
 
       this.chart.ref.setTitle({ text: this.selectedSpec });
@@ -135,22 +115,30 @@ export class BEVChartComponent implements OnInit {
       this.chart.removeSeries(0);
       this.chart.addSeries(<any>{
         type: 'bar',
-        name: event.value,
+        name: this.selectedSpec,
 
         showInLegend: false,
         data: data
-      },true,true);
+      }, true, true);
 
 
-      //data.forEach(x => { this.chart.addPoint(<any>x); })
-      
+    });
+  }
 
-    })
 
+  onSpecSelected(event) {
+   
+    this.getData();
+    
   }
   
 
-  
+  onAvailableChanged(event) {
+    this.onlyAvailable = event.checked;
+
+    if  (this.selectedSpec)
+    this.getData();
+  }
 
   
 

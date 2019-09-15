@@ -67,10 +67,10 @@ namespace CCWebSite.Controllers
             return ((IConvertible)o).ToDouble(null);
         }
 
-        [HttpGet("Spec/{spec}")]
-        public IEnumerable<ChartData> Spec(string spec)
+        [HttpGet("Spec/{spec}/{availableOnly}")]
+        public IEnumerable<ChartData> Spec(string spec, Boolean availableOnly)
         {
-            return respository.GetItemsAsync(x => true).Result.Select(x => new ChartData { Name = x.Manufacturer + ' ' + x.Model, Y = GetValue(x, spec) }).Where(x => x.Y != null).OrderBy(x => x.Y);
+            return respository.GetItemsAsync(x => true).Result.Where(y => !availableOnly || y.Available).Select(x => new ChartData { Name = x.Manufacturer + ' ' + x.Model, Y = GetValue(x, spec) }).Where(x => x.Y != null).OrderBy(x => x.Y);
         }
 
         [HttpGet("[action]")]

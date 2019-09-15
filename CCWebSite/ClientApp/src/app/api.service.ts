@@ -78,8 +78,8 @@ export class ApiService {
     return this.httpClient.get<EVSpecs[]>(this.baseUrl + 'api/bev/EVSpecs');
   }
 
-  public getChartData(spec: string): Observable<ChartData[]> {
-    return this.httpClient.get<ChartData[]>(this.baseUrl + `api/bev/spec/${spec}`);
+  public getChartData(spec: string, onlyAvailable:boolean): Observable<ChartData[]> {
+    return this.httpClient.get<ChartData[]>(this.baseUrl + `api/bev/spec/${spec}/${onlyAvailable}`);
   }
 
   public getContacts(): Observable<Contact[]> {
