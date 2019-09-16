@@ -15,9 +15,10 @@ import { AboutComponent } from './about/about.component';
 import { NewsComponent } from './news/news.component';
 
 import { BEVComponent } from './bev/bev.component';
+import { SigninComponent } from './signin/signin.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSortModule } from '@angular/material/sort';
-import { MatToolbarModule, MatButtonModule, MatFormFieldModule,MatSelectModule, MatInputModule, MatIconModule, MatTableModule, MatDialogModule, MatDatepickerModule, MatGridListModule, MatRadioModule, MatCheckboxModule } from '@angular/material';
+import { MatToolbarModule, MatButtonModule, MatFormFieldModule,MatSelectModule, MatInputModule, MatIconModule, MatTableModule, MatDialogModule, MatDatepickerModule, MatGridListModule, MatRadioModule, MatCheckboxModule, MatHeaderCell } from '@angular/material';
 import { ConfirmationDialogComponent } from './confirmationDialog/confirmationDialog.component';
 import { BEVEditorComponent } from './bevEditor/bevEditor.component';
 import { ContactComponent } from './contact/contact.component';
@@ -42,6 +43,8 @@ import { BEVChartComponent } from './bevChart/bevChart.component';
     NewslettersComponent,
     FlyersComponent,
     NewsComponent,
+    SigninComponent,
+
    
     BEVChartComponent,
   ],
@@ -60,6 +63,9 @@ import { BEVChartComponent } from './bevChart/bevChart.component';
     MatInputModule,
     MatIconModule,
     MatTableModule,
+   
+    
+  
     MatDialogModule,
     MatDatepickerModule,
     MatGridListModule,
