@@ -1,23 +1,39 @@
 
-  <div class="login" width="100%">
+  <div *ngIf="globals.userData.isLoggedIn; else login">
 
-
-
-    <h1>Login</h1>
-
-
-    <table>
-      <tr>
-
-        <th>Social Login:</th>
-        <th>       </th>
-        <th>Direct Login:</th>
-
-      </tr>
-      <tr>
-        <td></td>
-        <td></td>
-        <td></td>
-      </tr>
-    </table>
+    Hi {{globals.userData.name}}
   </div>
+
+<ng-template #login>
+
+ <div class="loginDiv" width="100%" >
+
+
+
+  <h1>Login</h1>
+
+
+  <table>
+    <tr>
+
+      <th>Social Login:</th>
+      <th>       </th>
+      <th>Direct Login:</th>
+
+    </tr>
+    <tr>
+      <td>
+        <button type="button" class="btn" (click)="submitLogin();">Login with facebook</button>
+
+      </td>
+      <td></td>
+      <td></td>
+    </tr>
+  </table>
+  </div>
+
+
+</ng-template>
+
+
+

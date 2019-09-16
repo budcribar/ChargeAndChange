@@ -49,6 +49,9 @@
               </div>
             </li>
 
+            <li *ngIf="globals.userData.isLoggedIn; else showLogin" class="nav-item" [routerLinkActive]='["link-active"]' [routerLinkActiveOptions]='{ exact: true }'>
+              <a class="nav-link text-dark" [routerLink]='["/logout"]'>Logout</a>
+            </li>
 
 
           </ul>
@@ -57,3 +60,9 @@
     </nav>
   </div>
 </header>
+
+<ng-template #showLogin>
+  <li class="nav-item" [routerLinkActive]='["link-active"]' [routerLinkActiveOptions]='{ exact: true }'>
+    <a class="nav-link text-dark" [routerLink]='["/login"]'>Login</a>
+  </li>
+</ng-template>

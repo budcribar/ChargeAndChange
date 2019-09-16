@@ -16,6 +16,7 @@ import { NewsComponent } from './news/news.component';
 
 import { BEVComponent } from './bev/bev.component';
 import { SigninComponent } from './signin/signin.component';
+import { SignoutComponent } from './signout/signout.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSortModule } from '@angular/material/sort';
 import { MatToolbarModule, MatButtonModule, MatFormFieldModule,MatSelectModule, MatInputModule, MatIconModule, MatTableModule, MatDialogModule, MatDatepickerModule, MatGridListModule, MatRadioModule, MatCheckboxModule, MatHeaderCell } from '@angular/material';
@@ -25,7 +26,7 @@ import { ContactComponent } from './contact/contact.component';
 import { ContactEditorComponent } from './contactEditor/contactEditor.component';
 import { ChartModule } from 'angular-highcharts';
 import { BEVChartComponent } from './bevChart/bevChart.component';
-
+import { Globals } from './globals';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,7 @@ import { BEVChartComponent } from './bevChart/bevChart.component';
     FlyersComponent,
     NewsComponent,
     SigninComponent,
-
+    SignoutComponent,
    
     BEVChartComponent,
   ],
@@ -63,9 +64,6 @@ import { BEVChartComponent } from './bevChart/bevChart.component';
     MatInputModule,
     MatIconModule,
     MatTableModule,
-   
-    
-  
     MatDialogModule,
     MatDatepickerModule,
     MatGridListModule,
@@ -80,9 +78,11 @@ import { BEVChartComponent } from './bevChart/bevChart.component';
       { path: 'flyers', component: FlyersComponent },
       { path: 'bevs', component: BEVComponent },
       { path: 'contacts', component: ContactComponent },
+      { path: 'login', component: SigninComponent },
+      { path: 'logout', component: SignoutComponent }
     ])
   ],
-  providers: [],
+  providers: [Globals],
   bootstrap: [AppComponent],
   exports: [RouterModule],
   entryComponents:[ConfirmationDialogComponent,BEVEditorComponent,ContactEditorComponent]
