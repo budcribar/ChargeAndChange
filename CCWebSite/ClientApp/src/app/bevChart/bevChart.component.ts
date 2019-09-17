@@ -42,11 +42,13 @@ export class BEVChartComponent implements OnInit {
    
   chart = new Chart({
     chart: {
+      backgroundColor: '#90bd56',
       type: 'line'
     },
     title: {
       text: this.selectedSpec,
     },
+    
     credits: {
       enabled: true
     },
@@ -102,7 +104,8 @@ export class BEVChartComponent implements OnInit {
 
 
   ngOnInit() {
-   
+    this.selectedSpec = 'Price';
+    this.getData();
   }
 
   getData() {

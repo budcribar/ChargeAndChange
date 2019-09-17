@@ -14,6 +14,11 @@ import { FlyersComponent } from './flyers/flyers.component';
 import { AboutComponent } from './about/about.component';
 import { NewsComponent } from './news/news.component';
 
+import { DonateComponent } from './donate/donate.component';
+import { DonationCompletedComponent } from './donationcompleted/donationcompleted.component';
+import { DonationCancelledComponent } from './donationcancelled/donationcancelled.component';
+
+
 import { BEVComponent } from './bev/bev.component';
 import { SigninComponent } from './signin/signin.component';
 import { SignoutComponent } from './signout/signout.component';
@@ -58,6 +63,9 @@ export function provideConfig() {
     NewsComponent,
     SigninComponent,
     SignoutComponent,
+    DonateComponent,
+    DonationCancelledComponent,
+    DonationCompletedComponent,
    
     BEVChartComponent,
   ],
@@ -93,7 +101,10 @@ export function provideConfig() {
       { path: 'contacts', component: ContactComponent },
       { path: 'login', component: SigninComponent },
       { path: 'logout', component: SignoutComponent },
-      { path: 'charts', component: BEVChartComponent }
+      { path: 'charts', component: BEVChartComponent },
+      { path: 'donate', component: DonateComponent },
+      { path: 'donationcancelled', component: DonationCancelledComponent },
+      { path: 'donationcompleted', component: DonationCompletedComponent },
     ])
   ],
   providers: [Globals,
