@@ -52,6 +52,7 @@ export interface LarimerCountyRecords {
 export interface Contact {
   id: string;
   dateUpdated: Date;
+  status: string;
   firstName: string;
   lastName: string;
   subdivision: string;

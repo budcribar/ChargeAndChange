@@ -27,6 +27,7 @@ export class ContactEditorComponent implements OnInit {
     this.form = new FormGroup({
       firstName: new FormControl(this.contact.firstName),
       lastName: new FormControl(this.contact.lastName),
+      status: new FormControl(this.contact.status),
       streetNumber: new FormControl(this.contact.streetNumber),
       street: new FormControl(this.contact.street),
       email: new FormControl(this.contact.email),

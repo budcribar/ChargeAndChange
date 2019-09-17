@@ -7,7 +7,7 @@ using Newtonsoft.Json.Converters;
 
 namespace CCWebSite.Controllers
 {
-    public enum ContactState { NoContact, Contacted, Member, Administrator }
+    public enum ContactStatus { Uncontacted, Contacted, Member, Administrator }
 
     public class Contact
     {
@@ -16,7 +16,9 @@ namespace CCWebSite.Controllers
 
 
         public DateTime DateUpdated { get; set; }
-        public ContactState ContactState { get; set; }
+
+        [JsonConverter(typeof(StringEnumConverter))]
+        public ContactStatus? Status { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Subdivision { get; set; }
@@ -80,7 +82,7 @@ namespace CCWebSite.Controllers
             Contact c = null;
             try
             {
-                c =new Contact { DateUpdated = DateTime.Now, Id = Guid.NewGuid().ToString(), City = FirstCharToUpper(locationcity), StreetNumber = int.Parse(locationaddress.Split(' ')[0]), Street = FirstCharToUpper(locationaddress.Substring(locationaddress.IndexOf(' '))).Trim(), State = "CO", ZipCode = zipcode, Subdivision = subdivision, FirstName = FirstCharToUpper(ownername1.Split(' ')[1]), LastName = FirstCharToUpper(ownername1.Split(' ')[0]) };
+                c =new Contact { DateUpdated = DateTime.Now, Id = Guid.NewGuid().ToString(), Status= ContactStatus.Uncontacted, City = FirstCharToUpper(locationcity), StreetNumber = int.Parse(locationaddress.Split(' ')[0]), Street = FirstCharToUpper(locationaddress.Substring(locationaddress.IndexOf(' '))).Trim(), State = "CO", ZipCode = zipcode, Subdivision = subdivision, FirstName = FirstCharToUpper(ownername1.Split(' ')[1]), LastName = FirstCharToUpper(ownername1.Split(' ')[0]) };
 
             }
             catch (Exception) { return null;  }

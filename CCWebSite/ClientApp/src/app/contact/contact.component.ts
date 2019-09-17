@@ -16,6 +16,7 @@ export class ContactComponent implements OnInit {
   contact: Contact;
   selectedContact: Contact;
   error: any;
+  selectedStatus: string;
 
   constructor(private apiService: ApiService, public dialog: MatDialog) {
   }
@@ -33,6 +34,10 @@ export class ContactComponent implements OnInit {
     this.apiService.getContactsFrom('WILLOW SPRINGS PUD').subscribe((data) => {
 
     })
+  }
+
+  filterByStatus() {
+    this.sortedData = this.unsortedData.filter(x => x.status === this.selectedStatus);
   }
 
   addContact() {
@@ -105,12 +110,12 @@ export class ContactComponent implements OnInit {
       switch (sort.active) {
         case 'FirstName': return compare(a.firstName, b.firstName, isAsc);
         case 'LastName': return compare(a.lastName, b.lastName, isAsc);
-
+        case 'Status': return compare(a.status, b.status, isAsc);
         case 'Subdivision': return compare(a.subdivision, b.subdivision, isAsc);
 
 
         case 'StreetNumber': return compare(a.streetNumber, b.streetNumber, isAsc);
-        case 'Street': return compare(a.street, b.street, isAsc);
+        case 'Street': return compare(a.street + a.streetNumber % 2 + a.streetNumber, b.street + b.streetNumber%2 + b.streetNumber, isAsc);
         
         case 'City': return compare(a.city, b.city, isAsc);
 

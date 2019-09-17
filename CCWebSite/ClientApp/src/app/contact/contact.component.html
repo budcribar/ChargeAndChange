@@ -4,6 +4,27 @@ Table of Contacts
   <tr>
     <td><button mat-button (click)="addSubdivision()" mat-flat-button color="primary">Add Subdivision</button></td>
     <td><button mat-button (click)="addContact()" mat-flat-button color="primary">Add New Contact</button></td>
+    <td>
+      <mat-select style="width:120px" placeholder="Select status" (selectionChange)="filterByStatus($event)"  [(ngModel)]="selectedStatus">
+
+        <mat-option value="Uncontacted">
+          Uncontacted
+        </mat-option>
+        <mat-option value="Contacted">
+          Contacted
+        </mat-option>
+        <mat-option value="Member">
+          Member
+        </mat-option>
+
+        <mat-option value="Administrator">
+          Administrator
+        </mat-option>
+
+
+      </mat-select>
+
+    </td>
   </tr>
 
 </table>
@@ -19,7 +40,7 @@ Table of Contacts
 
 
     <th mat-sort-header="DateUpdated">Date Updated</th>
-
+    <th mat-sort-header="Status">Status</th>
     <th mat-sort-header="StreetNumber">Street Number</th>
     <th mat-sort-header="Street">Street</th>
 
@@ -28,7 +49,7 @@ Table of Contacts
 
     <th mat-sort-header="Email">Email</th>
     <th mat-sort-header="Phone">Phone</th>
-    
+
     <th>Notes</th>
   </tr>
 
@@ -36,7 +57,8 @@ Table of Contacts
     <td> <mat-icon fxFlex="10%" (click)="edit(contact)">mode_edit</mat-icon></td>
     <td> <mat-icon fxFlex="10%" (click)="deleteContact(contact, $event)"> delete</mat-icon></td>
 
-    <td>{{contact.dateUpdated}}</td>
+    <td>{{contact.dateUpdated|date:shortDate}}</td>
+    <td>{{contact.status}}</td>
     <td>{{contact.streetNumber}}</td>
     <td>{{contact.street}}</td>
     <td>{{contact.firstName}}</td>
