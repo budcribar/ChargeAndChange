@@ -7,7 +7,8 @@ using Newtonsoft.Json.Converters;
 
 namespace CCWebSite.Controllers
 {
-    
+    public enum ContactState { NoContact, Contacted, Member, Administrator }
+
     public class Contact
     {
         [JsonProperty(PropertyName = "id")]
@@ -15,7 +16,7 @@ namespace CCWebSite.Controllers
 
 
         public DateTime DateUpdated { get; set; }
-
+        public ContactState ContactState { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Subdivision { get; set; }

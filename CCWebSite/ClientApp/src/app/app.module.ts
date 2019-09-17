@@ -92,7 +92,8 @@ export function provideConfig() {
       { path: 'bevs', component: BEVComponent },
       { path: 'contacts', component: ContactComponent },
       { path: 'login', component: SigninComponent },
-      { path: 'logout', component: SignoutComponent }
+      { path: 'logout', component: SignoutComponent },
+      { path: 'charts', component: BEVChartComponent }
     ])
   ],
   providers: [Globals,
