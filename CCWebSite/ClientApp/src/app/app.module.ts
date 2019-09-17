@@ -27,6 +27,18 @@ import { ContactEditorComponent } from './contactEditor/contactEditor.component'
 import { ChartModule } from 'angular-highcharts';
 import { BEVChartComponent } from './bevChart/bevChart.component';
 import { Globals } from './globals';
+import { SocialLoginModule, AuthServiceConfig, FacebookLoginProvider } from 'angularx-social-login';
+
+const config = new AuthServiceConfig([
+  {
+    id: FacebookLoginProvider.PROVIDER_ID,
+    provider: new FacebookLoginProvider('447198995878594')
+  }
+]);
+
+export function provideConfig() {
+  return config;
+}
 
 @NgModule({
   declarations: [
@@ -51,6 +63,7 @@ import { Globals } from './globals';
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
+    SocialLoginModule,
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
@@ -82,7 +95,11 @@ import { Globals } from './globals';
       { path: 'logout', component: SignoutComponent }
     ])
   ],
-  providers: [Globals],
+  providers: [Globals,
+    {
+      provide: AuthServiceConfig,
+      useFactory: provideConfig
+    }],
   bootstrap: [AppComponent],
   exports: [RouterModule],
   entryComponents:[ConfirmationDialogComponent,BEVEditorComponent,ContactEditorComponent]
