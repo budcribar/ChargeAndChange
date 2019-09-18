@@ -5,7 +5,7 @@ Table of Contacts
     <td><button mat-button (click)="addSubdivision()" mat-flat-button color="primary">Add Subdivision</button></td>
     <td><button mat-button (click)="addContact()" mat-flat-button color="primary">Add New Contact</button></td>
     <td>
-      <mat-select style="width:120px" placeholder="Select status" (selectionChange)="filterByStatus($event)"  [(ngModel)]="selectedStatus">
+      <mat-select style="width:120px" placeholder="Select status" (selectionChange)="filterByStatus()"  [(ngModel)]="selectedStatus">
 
         <mat-option value="Uncontacted">
           Uncontacted
