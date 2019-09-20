@@ -2,7 +2,8 @@ import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-donate-component',
-  templateUrl: './donate.component.html'
+  templateUrl: './donate.component.html',
+   styleUrls: ['./donate.component.css']
 })
 export class DonateComponent {
   
