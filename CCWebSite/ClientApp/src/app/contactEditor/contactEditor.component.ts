@@ -27,12 +27,13 @@ export class ContactEditorComponent implements OnInit {
     this.form = new FormGroup({
       firstName: new FormControl(this.contact.firstName),
       lastName: new FormControl(this.contact.lastName),
-      status: new FormControl(this.contact.status),
-      streetNumber: new FormControl(this.contact.streetNumber),
-      street: new FormControl(this.contact.street),
+      address: new FormControl(this.contact.street),
+      city: new FormControl(this.contact.city),
+      state: new FormControl(this.contact.state),
+      zip: new FormControl(this.contact.zipCode),
       email: new FormControl(this.contact.email),
       phone: new FormControl(this.contact.phone),
-      notes: new FormControl(this.contact.notes),
+    
 
     });
 

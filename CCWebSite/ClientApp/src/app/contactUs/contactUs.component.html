@@ -1,0 +1,97 @@
+<!--
+    <h2 mat-dialog-title>Contact Us</h2>
+https://stackblitz.com/edit/example-angular-material-reactive-form
+
+-->
+<mat-toolbar color="primary">
+  <span class="fill-remaining-space">Contact Us</span>
+</mat-toolbar>
+
+
+<div class="container" *ngIf="!post; else forminfo" novalidate>
+  <form [formGroup]="formGroup" (ngSubmit)="onSubmit(formGroup.value)" class="form">
+
+
+    <mat-form-field>
+      <input matInput
+             placeholder="FirstName"
+             formControlName="firstName">
+      <mat-error *ngIf="!firstName.valid && firstName.touched">
+        {{ titleAlert }}
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matInput
+             placeholder="LastName"
+             formControlName="lastName">
+      <mat-error *ngIf="!lastName.valid && lastName.touched">
+        {{ titleAlert }}
+      </mat-error>
+    </mat-form-field>
+
+
+    <mat-form-field>
+      <input matInput
+             placeholder="Address"
+             formControlName="street">
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matInput
+             placeholder="City"
+             formControlName="city">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput
+             placeholder="State"
+             formControlName="state">
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matInput
+             placeholder="Zip"
+             formControlName="zipCode">
+    </mat-form-field>
+
+
+    <mat-form-field>
+      <input matInput type="email"
+             placeholder="Email"
+             formControlName="email">
+      <mat-error *ngIf="!formGroup.controls['email'].valid && formGroup.controls['email'].touched">
+        {{ getErrorEmail() }}
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matInput type="tel"
+             placeholder="Phone"
+             formControlName="phone">
+    </mat-form-field>
+
+    <mat-form-field>
+
+      <textarea matInput placeholder="Comments/Questions"
+                formControlName="notes">
+
+        </textarea>
+
+    </mat-form-field>
+
+    <div class="form-element">
+      <button mat-raised-button color="primary" type="submit" class="button" [disabled]="!formGroup.valid">Submit Form</button>
+    </div>
+
+
+
+
+  </form>
+
+</div>
+
+<ng-template #forminfo>
+  <div class="container">
+    {{ post | json }}
+  </div>
+</ng-template>
