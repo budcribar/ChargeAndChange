@@ -28,7 +28,7 @@ import { MatToolbarModule, MatButtonModule, MatFormFieldModule,MatSelectModule, 
 import { ConfirmationDialogComponent } from './confirmationDialog/confirmationDialog.component';
 import { BEVEditorComponent } from './bevEditor/bevEditor.component';
 import { ContactComponent } from './contact/contact.component';
-import { ContactUsComponent } from './contactus/contactus.component';
+import { ContactUsComponent } from './contactUs/contactUs.component';
 import { ContactEditorComponent } from './contactEditor/contactEditor.component';
 import { ChartModule } from 'angular-highcharts';
 import { BEVChartComponent } from './bevChart/bevChart.component';
@@ -68,7 +68,6 @@ export function provideConfig() {
     DonateComponent,
     DonationCancelledComponent,
     DonationCompletedComponent,
-   
     BEVChartComponent,
   ],
   imports: [

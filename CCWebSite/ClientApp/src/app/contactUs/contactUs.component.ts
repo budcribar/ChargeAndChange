@@ -7,8 +7,8 @@ import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms'
 
 @Component({
   selector: 'app-contact-us-component',
-  templateUrl: './contactus.component.html',
-  styleUrls: ['./contactus.component.css']
+  templateUrl: './contactUs.component.html',
+  styleUrls: ['./contactUs.component.css']
  
 })
 export class ContactUsComponent implements OnInit {
