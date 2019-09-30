@@ -24,11 +24,13 @@ import { SigninComponent } from './signin/signin.component';
 import { SignoutComponent } from './signout/signout.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSortModule } from '@angular/material/sort';
-import { MatToolbarModule, MatButtonModule, MatFormFieldModule,MatSelectModule, MatInputModule, MatIconModule, MatTableModule, MatDialogModule, MatDatepickerModule, MatGridListModule, MatRadioModule, MatCheckboxModule } from '@angular/material';
+import { MatToolbarModule, MatButtonModule, MatFormFieldModule,MatSelectModule, MatInputModule, MatIconModule, MatTableModule, MatDialogModule, MatDatepickerModule, MatGridListModule, MatRadioModule, MatCheckboxModule, MatListModule } from '@angular/material';
 import { ConfirmationDialogComponent } from './confirmationDialog/confirmationDialog.component';
 import { BEVEditorComponent } from './bevEditor/bevEditor.component';
 import { ContactComponent } from './contact/contact.component';
 import { ContactUsComponent } from './contactUs/contactUs.component';
+import { BenefitsComponent } from './benefits/benefits.component';
+import { MythsComponent } from './myths/myths.component';
 import { ContactEditorComponent } from './contactEditor/contactEditor.component';
 import { ChartModule } from 'angular-highcharts';
 import { BEVChartComponent } from './bevChart/bevChart.component';
@@ -63,9 +65,11 @@ export function provideConfig() {
     NewslettersComponent,
     FlyersComponent,
     NewsComponent,
+    BenefitsComponent,
     SigninComponent,
     SignoutComponent,
     DonateComponent,
+    MythsComponent,
     DonationCancelledComponent,
     DonationCompletedComponent,
     BEVChartComponent,
@@ -87,6 +91,7 @@ export function provideConfig() {
     MatIconModule,
     MatTableModule,
     MatDialogModule,
+    MatListModule,
     MatDatepickerModule,
     MatGridListModule,
     MatRadioModule,
