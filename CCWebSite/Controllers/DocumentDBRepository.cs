@@ -29,8 +29,12 @@ namespace CCWebSite.Controllers
         {
             this.CollectionId = collectionId;
             this.client = new DocumentClient(new Uri(Endpoint), Key);
-            CreateDatabaseIfNotExistsAsync().Wait();
-            CreateCollectionIfNotExistsAsync().Wait();
+            try
+            {
+                CreateDatabaseIfNotExistsAsync().Wait();
+                CreateCollectionIfNotExistsAsync().Wait();
+            }
+            catch (Exception) { }
         }
 
         public async Task<T> GetItemAsync(string id)
