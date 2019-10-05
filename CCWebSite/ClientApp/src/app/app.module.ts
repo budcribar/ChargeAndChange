@@ -31,6 +31,8 @@ import { ContactComponent } from './contact/contact.component';
 import { ContactUsComponent } from './contactUs/contactUs.component';
 import { BenefitsComponent } from './benefits/benefits.component';
 import { MythsComponent } from './myths/myths.component';
+import { SubscribeComponent } from './subscribe/subscribe.component';
+import { UnsubscribeComponent } from './unsubscribe/unsubscribe.component';
 import { ContactEditorComponent } from './contactEditor/contactEditor.component';
 import { ChartModule } from 'angular-highcharts';
 import { BEVChartComponent } from './bevChart/bevChart.component';
@@ -73,6 +75,8 @@ export function provideConfig() {
     DonationCancelledComponent,
     DonationCompletedComponent,
     BEVChartComponent,
+    SubscribeComponent,
+    UnsubscribeComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -110,6 +114,7 @@ export function provideConfig() {
       { path: 'logout', component: SignoutComponent },
       { path: 'charts', component: BEVChartComponent },
       { path: 'donate', component: DonateComponent },
+      { path: 'unsubscribe', component: UnsubscribeComponent },
       { path: 'donationcancelled', component: DonationCancelledComponent },
       { path: 'donationcompleted', component: DonationCompletedComponent },
     ])

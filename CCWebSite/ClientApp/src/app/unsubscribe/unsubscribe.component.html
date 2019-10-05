@@ -1,0 +1,41 @@
+
+<div *ngIf="!contact" novalidate>
+  <h1 class="Heading">
+    Unsubscribe from the Charge and Change Newsletter
+  </h1>
+  
+
+  <form [formGroup]="formGroup" (ngSubmit)="onSubmit(formGroup.value)" class="form">
+    <mat-form-field>
+      <input matInput type="email"
+             placeholder="Email"
+             formControlName="email">
+      <mat-error *ngIf="!formGroup.controls['email'].valid && formGroup.controls['email'].touched">
+        {{ getErrorEmail() }}
+      </mat-error>
+    </mat-form-field>
+
+    <div class="form-element">
+      <button mat-raised-button color="primary" type="submit" class="button" [disabled]="!formGroup.valid">Unsubscribe</button>
+    </div>
+
+  </form>
+</div>
+
+
+
+<div *ngIf="!emailFound">
+  <h1 class="Heading">
+    Unable to find your email!!
+  </h1>
+</div>
+
+<div *ngIf="unsubscribed">
+  <h2 class="Subheading">
+    Sorry to see you go. Please come back and visit the website.
+
+  </h2>
+
+</div>
+
+

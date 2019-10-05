@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Globals } from '../globals';
+import { NavBarService } from '../nav-bar.service'
 
 @Component({
   selector: 'app-nav-menu',
@@ -8,7 +9,7 @@ import { Globals } from '../globals';
   
 })
 export class NavMenuComponent {
-  constructor(public globals: Globals) { }
+  constructor(public globals: Globals, public nav: NavBarService ) { }
 
   isExpanded = false;
 
