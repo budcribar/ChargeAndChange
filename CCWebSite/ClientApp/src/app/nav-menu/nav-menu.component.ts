@@ -19,4 +19,8 @@ export class NavMenuComponent {
   toggle() {
     this.isExpanded = !this.isExpanded;
   }
+
+  toggleShowSubscribe() {
+    this.globals.showNewsletterSignup = !this.globals.showNewsletterSignup;
+  }
 }

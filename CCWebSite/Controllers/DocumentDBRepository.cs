@@ -74,6 +74,23 @@ namespace CCWebSite.Controllers
             return results;
         }
 
+        public async Task<T> GetItemAsync(Expression<Func<T, bool>> predicate)
+        {
+            IDocumentQuery<T> query = client.CreateDocumentQuery<T>(
+                UriFactory.CreateDocumentCollectionUri(DatabaseId, CollectionId),
+                new FeedOptions { MaxItemCount = -1, EnableCrossPartitionQuery = true })
+                .Where(predicate)
+                .AsDocumentQuery();
+
+            List<T> results = new List<T>();
+            while (query.HasMoreResults)
+            {
+                results.AddRange(await query.ExecuteNextAsync<T>());
+            }
+
+            return results.Count() == 0 ? null : results.First();
+        }
+
         static internal DocumentCollection GetCollectionIfExists(DocumentClient client, string databaseName, string collectionName)
         {
            

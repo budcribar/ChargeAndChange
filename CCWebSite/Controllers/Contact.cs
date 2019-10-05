@@ -11,6 +11,7 @@ namespace CCWebSite.Controllers
 
     public class Contact
     {
+        public Boolean? Subscriber { get; set; }
         [JsonProperty(PropertyName = "id")]
         public string Id { get; set; }
 

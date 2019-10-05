@@ -11,7 +11,7 @@ export interface UserData {
 export class Globals {
 
   userData: UserData = { name: "", isAdministrator: false, isLoggedIn: false };
-
+  showNewsletterSignup: boolean = false;
 }
 
 

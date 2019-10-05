@@ -33,6 +33,12 @@ namespace CCWebSite.Controllers
             return View(item);
         }
 
+        [HttpGet("Contact/{email}")]
+        public  Task<Contact> Get(string email)
+        {
+            return respository.GetItemAsync(x => x.Email.ToLower() == email.ToLower());
+        }
+
         [HttpDelete("Contacts/{id}")]
         public async void Delete(string id)
         {

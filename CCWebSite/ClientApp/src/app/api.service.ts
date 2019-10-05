@@ -1,6 +1,7 @@
 import { Injectable,Component,Inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { encode } from 'punycode';
 
 export interface ChartData {
   name: string;
@@ -51,6 +52,7 @@ export interface LarimerCountyRecords {
 
 export interface Contact {
   id: string;
+  subscriber: boolean;
   dateUpdated: Date;
   status: string;
   firstName: string;
@@ -91,6 +93,14 @@ export class ApiService {
     let url = `${this.baseUrl + 'api/contact/contacts'}`;
     return this.httpClient.put(url, contact);
   }
+
+  public getContact(email: String): Observable<Contact> {
+    console.log('get contact...');
+    let url = `${this.baseUrl}` + 'api/contact/contact/' + encodeURI(`${email}`);
+    return this.httpClient.get<Contact>(url);
+  }
+
+
   public updateContact(contact: Contact) {
     console.log('updating');
     let url = `${this.baseUrl + 'api/contact/contacts'}/${contact.id}`;
