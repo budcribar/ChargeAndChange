@@ -19,13 +19,18 @@ export class ContactComponent implements OnInit {
   selectedStatus: string;
 
   constructor(private apiService: ApiService, public dialog: MatDialog) {
+    this.selectedStatus = "Uncontacted";
   }
 
   ngOnInit() {
+
+   
+
     this.apiService.getContacts().subscribe((data) => {
       console.log(data);
       this.sortedData = data.slice();
       this.unsortedData = data.slice();
+      this.filterByStatus();
 
     })
   }

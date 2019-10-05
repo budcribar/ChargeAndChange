@@ -62,7 +62,7 @@
             </li>
 
             <li class="nav-item" [routerLinkActive]='["link-active"]' [routerLinkActiveOptions]='{ exact: true }'>
-              <a class="nav-link navbar-text" (click)="toggleShowSubscribe()">Newsletter</a>
+              <a class="nav-link navbar-text" [routerLink]='["/"]' (click)="toggleShowSubscribe()">Newsletter</a>
             </li>
 
             <li *ngIf="globals.userData.isLoggedIn; else showLogin" class="nav-item" [routerLinkActive]='["link-active"]' [routerLinkActiveOptions]='{ exact: true }'>

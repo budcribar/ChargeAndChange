@@ -11,6 +11,7 @@ export class HomeComponent implements OnInit {
   formGroup: FormGroup;
   contact: Contact;
   post: any = '';
+  subscribed: boolean = false;
 
 
   constructor(public globals: Globals, private fb: FormBuilder, private apiService: ApiService,) { }
@@ -32,18 +33,25 @@ export class HomeComponent implements OnInit {
 
   onSubmit(post) {
     this.contact = post;
-    this.contact.dateUpdated = Date.now();
+    this.contact.dateUpdated = new Date();
     console.log("submitted");
+    this.globals.showNewsletterSignup = false;
 
     this.apiService.getContact(this.contact.email).subscribe(x => {
       if (x == null)
         this.apiService.insertContact(this.contact).subscribe(x => {
+          this.subscribed = true;
           console.log("Added new contact");
+          // Hack
+          setTimeout(() => { this.subscribed = false; }, 5000);
         })
       else {
         x.subscriber = true;
         this.apiService.updateContact(x).subscribe(x => {
+          this.subscribed = true;
           console.log("Email subscribed successfully")
+          // Hack
+          setTimeout(() => { this.subscribed = false; }, 5000);
         })
       }
      

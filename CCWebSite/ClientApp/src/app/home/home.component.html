@@ -18,7 +18,7 @@
     </mat-form-field>
 
     <div class="form-element">
-      <button mat-raised-button color="primary" type="submit" class="button" [disabled]="!formGroup.valid">Submit Form</button>
+      <button mat-raised-button color="primary" type="submit" class="button" [disabled]="!formGroup.valid">SIGN UP TODAY!</button>
     </div>
 
   </form>
@@ -31,6 +31,14 @@
     Welcome to the Charge and Change Nonprofit!
   </h1>
 </ng-template>
+
+<div *ngIf="subscribed">
+  <h1 class="Heading">
+    Thanks for subscribing!
+  </h1>
+
+</div>
+
 
   <!--
     <app-contact-component></app-contact-component>
