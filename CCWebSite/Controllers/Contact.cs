@@ -81,7 +81,7 @@ namespace CCWebSite.Controllers
 
         public Contact ToContact(string subdivision)
         {
-            Contact c = null;
+            Contact c;
             try
             {
                 c =new Contact { DateUpdated = DateTime.Now, Id = Guid.NewGuid().ToString(), Status= ContactStatus.Uncontacted, City = FirstCharToUpper(locationcity), StreetNumber = int.Parse(locationaddress.Split(' ')[0]), Street = FirstCharToUpper(locationaddress.Substring(locationaddress.IndexOf(' '))).Trim(), State = "CO", ZipCode = zipcode, Subdivision = subdivision, FirstName = FirstCharToUpper(ownername1.Split(' ')[1]), LastName = FirstCharToUpper(ownername1.Split(' ')[0]) };

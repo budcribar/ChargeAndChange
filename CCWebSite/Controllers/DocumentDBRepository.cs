@@ -23,7 +23,7 @@ namespace CCWebSite.Controllers
         private readonly string Key = "hKi3EPRIufbRmIFk5ehkAsp6OXyfUdLvEoHRhrv0ADVxIJyoPS3RA3JgqWRBhAYLTjoXkL9aZAOfvmMNl64SDw==";
         private readonly string DatabaseId = "chargeAndChange";
         private readonly string CollectionId;// = "bev";
-        private DocumentClient client;
+        private readonly DocumentClient client;
 
         public DocumentDBRepository(string collectionId)
         {
