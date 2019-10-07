@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Azure.Cosmos;
 using Newtonsoft.Json;
 using TeslaSuperchargers;
+using Microsoft.AspNetCore.Identity;
 
 namespace CCWebSite.Controllers
 {
@@ -50,17 +51,48 @@ namespace CCWebSite.Controllers
         {
             if (bev == null) return;
             bev.Id = id;
+
+            // Don't overwrite hashed password
+            var old = await respository.GetItemAsync(x => x.Id == bev.Id);
+            bev.HashedPassword = old.HashedPassword;
+
             await respository.UpdateItemAsync(id, bev);
         }
 
         [HttpPut("Contacts")]
-        public async void Put([FromBody]Contact bev)
+        public async void Put([FromBody]Contact contact)
         {
-            if (bev == null) return;
-            bev.Id = Guid.NewGuid().ToString();
-            await respository.CreateItemAsync(bev);
+            if (contact == null) return;
+            contact.Id = Guid.NewGuid().ToString();
+            if (contact.Password.Length > 0)
+            {
+                var h = new PasswordHasher<Contact>();
+                contact.HashedPassword = h.HashPassword(contact, contact.Password);
+                contact.Password = "";
+                contact.DateUpdated = DateTime.Now;
+            }
+           
+            await respository.CreateItemAsync(contact);
         }
 
+        [HttpPost("login")]
+        public async Task<Contact> Login([FromBody]Contact bev)
+        {
+            if (bev == null) return null;
+
+            Contact c = await respository.GetItemAsync(x => x.Email.ToLower() == bev.Email.ToLower());
+
+            if (c == null) return null;
+
+            var h = new PasswordHasher<Contact>();
+            var pvr = h.VerifyHashedPassword(c, c.HashedPassword, bev.Password);
+
+            var loggedin = pvr == PasswordVerificationResult.Success;
+
+            if (!loggedin) return null;
+
+            return c;
+        }
 
         [HttpGet("[action]")]
         public  IEnumerable<Contact> Contacts()

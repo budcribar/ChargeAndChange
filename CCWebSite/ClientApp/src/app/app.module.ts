@@ -14,6 +14,9 @@ import { FlyersComponent } from './flyers/flyers.component';
 import { AboutComponent } from './about/about.component';
 import { NewsComponent } from './news/news.component';
 
+import { PrivacyComponent } from './privacy/privacy.component';
+import { TermsOfServiceComponent } from './terms-of-service/terms-of-service.component';
+
 import { DonateComponent } from './donate/donate.component';
 import { DonationCompletedComponent } from './donationcompleted/donationcompleted.component';
 import { DonationCancelledComponent } from './donationcancelled/donationcancelled.component';
@@ -24,7 +27,8 @@ import { SigninComponent } from './signin/signin.component';
 import { SignoutComponent } from './signout/signout.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSortModule } from '@angular/material/sort';
-import { MatToolbarModule, MatButtonModule, MatFormFieldModule,MatSelectModule, MatInputModule, MatIconModule, MatTableModule, MatDialogModule, MatDatepickerModule, MatGridListModule, MatRadioModule, MatCheckboxModule, MatListModule } from '@angular/material';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatToolbarModule, MatButtonModule, MatFormFieldModule, MatSelectModule, MatInputModule, MatIconModule, MatTableModule, MatDialogModule, MatGridListModule, MatRadioModule, MatCheckboxModule, MatListModule, MatCardModule, MatNativeDateModule } from '@angular/material';
 import { ConfirmationDialogComponent } from './confirmationDialog/confirmationDialog.component';
 import { BEVEditorComponent } from './bevEditor/bevEditor.component';
 import { ContactComponent } from './contact/contact.component';
@@ -77,6 +81,8 @@ export function provideConfig() {
     BEVChartComponent,
     SubscribeComponent,
     UnsubscribeComponent,
+    PrivacyComponent,
+    TermsOfServiceComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -97,6 +103,7 @@ export function provideConfig() {
     MatDialogModule,
     MatListModule,
     MatDatepickerModule,
+    MatCardModule,
     MatGridListModule,
     MatRadioModule,
     ChartModule,
@@ -114,6 +121,8 @@ export function provideConfig() {
       { path: 'logout', component: SignoutComponent },
       { path: 'charts', component: BEVChartComponent },
       { path: 'donate', component: DonateComponent },
+      { path: 'privacy', component: PrivacyComponent },
+      { path: 'termsofservice', component: TermsOfServiceComponent },
       { path: 'unsubscribe', component: UnsubscribeComponent },
       { path: 'donationcancelled', component: DonationCancelledComponent },
       { path: 'donationcompleted', component: DonationCompletedComponent },

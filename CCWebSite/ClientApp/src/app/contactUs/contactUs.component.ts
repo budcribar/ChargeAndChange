@@ -45,9 +45,9 @@ export class ContactUsComponent implements OnInit {
       'zipCode': [null,],
 
       'email': [null, [Validators.required, Validators.pattern(emailregex)],],// this.checkInUseEmail],
-    
+      'password': [null, Validators.required],
       'phone': [null,],
-      'notes': [null,],
+      'notes': [null, Validators.required],
      
     });
 
@@ -69,11 +69,17 @@ export class ContactUsComponent implements OnInit {
   getErrorEmail() {
     return this.formGroup.get('email').hasError('required') ? 'Field is required' :
       this.formGroup.get('email').hasError('pattern') ? 'Not a valid emailaddress' :
-        this.formGroup.get('email').hasError('alreadyInUse') ? 'This emailaddress is already in use' : '';
+      this.formGroup.get('email').hasError('alreadyInUse') ? 'This emailaddress is already in use' : '';
   }
 
   onSubmit(post) {
-    this.post = post;
+    this.contact = post;
+
+    // TODO contact vs new user
+    this.apiService.insertContact(this.contact).subscribe(x => {
+      
+    })
+
   }
   
 }

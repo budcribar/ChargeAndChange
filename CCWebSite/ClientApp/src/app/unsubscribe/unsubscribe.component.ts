@@ -10,7 +10,7 @@ import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms'
   selector: 'app-unsubscribe-component',
   templateUrl: './unsubscribe.component.html'
 })
-export class UnsubscribeComponent {
+export class UnsubscribeComponent implements OnInit {
   unsubscribed: Boolean = false;
   emailFound: Boolean = true;
   contact: Contact;
@@ -23,12 +23,7 @@ export class UnsubscribeComponent {
     let emailregex: RegExp = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
 
     this.formGroup = this.fb.group({
-
-
       'email': [null, [Validators.required, Validators.pattern(emailregex)],],// this.checkInUseEmail],
-
-
-
     });
 
   }

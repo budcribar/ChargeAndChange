@@ -9,7 +9,7 @@ import { ApiService, Contact } from '../api.service';
 })
 export class SubscribeComponent {
  
-  constructor(private globals: Globals, private apiService: ApiService, ) { }
+  constructor(public globals: Globals, private apiService: ApiService, ) { }
   ngOnInit() {
    
   }

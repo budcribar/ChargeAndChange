@@ -15,7 +15,8 @@ namespace CCWebSite.Controllers
         [JsonProperty(PropertyName = "id")]
         public string Id { get; set; }
 
-
+        public string Password { get; set; }
+        public string HashedPassword { get; set; }
         public DateTime DateUpdated { get; set; }
 
         [JsonConverter(typeof(StringEnumConverter))]

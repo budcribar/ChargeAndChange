@@ -51,8 +51,11 @@ export interface LarimerCountyRecords {
 }
 
 export interface Contact {
-  id: string;
+
   subscriber: boolean;
+  id: string;
+  password: string;
+  hashedPassword: string;
   dateUpdated: Date;
   status: string;
   firstName: string;
@@ -92,6 +95,13 @@ export class ApiService {
     console.log('inserting...');
     let url = `${this.baseUrl + 'api/contact/contacts'}`;
     return this.httpClient.put(url, contact);
+  }
+
+  // TODO Change to get
+
+  public login(contact: Contact): Observable<Contact> {
+    let url = `${this.baseUrl + 'api/contact/login'}`;
+    return this.httpClient.post<Contact>(url, contact);
   }
 
   public getContact(email: String): Observable<Contact> {

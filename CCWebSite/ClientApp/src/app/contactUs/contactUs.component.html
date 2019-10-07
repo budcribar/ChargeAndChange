@@ -8,7 +8,7 @@ https://stackblitz.com/edit/example-angular-material-reactive-form
 </mat-toolbar>
 
 
-<div class="container" *ngIf="!post; else forminfo" novalidate>
+<div class="container" novalidate>
   <form [formGroup]="formGroup" (ngSubmit)="onSubmit(formGroup.value)" class="form">
 
 
@@ -65,6 +65,11 @@ https://stackblitz.com/edit/example-angular-material-reactive-form
     </mat-form-field>
 
     <mat-form-field>
+     
+      <input matInput type="password" placeholder="Password" formControlName="password">
+    </mat-form-field>
+
+    <mat-form-field>
       <input matInput type="tel"
              placeholder="Phone"
              formControlName="phone">
@@ -90,8 +95,3 @@ https://stackblitz.com/edit/example-angular-material-reactive-form
 
 </div>
 
-<ng-template #forminfo>
-  <div class="container">
-    {{ post | json }}
-  </div>
-</ng-template>
