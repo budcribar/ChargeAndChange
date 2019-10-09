@@ -27,8 +27,9 @@ export class BEVChartComponent implements OnInit {
 
   specs: Specs[] = [
     { value: 'Price', display: 'Price' },
+    { value: 'PriceMinusFederalTaxCredit', display: 'Price After Tax Credit' },
     { value: 'CombinedRange', display: 'Range' },
-    { value: 'MotorPowerKw', display: 'Motor Power' },
+    { value: 'MotorPowerHp', display: 'Motor Power' },
     { value: 'Torque', display: 'Torque' },
     { value: 'BatteryCapacity', display: 'Batery Capacity (kwh)' },
     { value: 'Weight', display: 'Weight (lbs)' },
