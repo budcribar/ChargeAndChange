@@ -42,6 +42,7 @@ import { ChartModule } from 'angular-highcharts';
 import { BEVChartComponent } from './bevChart/bevChart.component';
 import { Globals } from './globals';
 import { SocialLoginModule, AuthServiceConfig, FacebookLoginProvider } from 'angularx-social-login';
+import { ValidationService } from './validation.service';
 
 const config = new AuthServiceConfig([
   {
@@ -128,7 +129,7 @@ export function provideConfig() {
       { path: 'donationcompleted', component: DonationCompletedComponent },
     ])
   ],
-  providers: [Globals,
+  providers: [Globals, ValidationService,
     {
       provide: AuthServiceConfig,
       useFactory: provideConfig

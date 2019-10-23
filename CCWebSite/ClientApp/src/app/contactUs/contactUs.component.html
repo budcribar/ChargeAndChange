@@ -3,95 +3,121 @@
 https://stackblitz.com/edit/example-angular-material-reactive-form
 
 -->
-<mat-toolbar color="primary">
-  <span class="fill-remaining-space">Create Login</span>
-</mat-toolbar>
+
+  <div *ngIf="!globals.userData.isLoggedIn">
 
 
-<div class="container" novalidate>
-  <form [formGroup]="formGroup" (ngSubmit)="onSubmit(formGroup.value)" class="form">
+    <mat-toolbar color="primary">
+      <span class="fill-remaining-space">Create Login</span>
+    </mat-toolbar>
 
 
-    <mat-form-field>
-      <input matInput
-             placeholder="FirstName"
-             formControlName="firstName">
-      <mat-error *ngIf="!firstName.valid && firstName.touched">
-        {{ titleAlert }}
-      </mat-error>
-    </mat-form-field>
-
-    <mat-form-field>
-      <input matInput
-             placeholder="LastName"
-             formControlName="lastName">
-      <mat-error *ngIf="!lastName.valid && lastName.touched">
-        {{ titleAlert }}
-      </mat-error>
-    </mat-form-field>
+    <div  class="container" novalidate>
+      <form [formGroup]="formGroup" (ngSubmit)="onSubmit(formGroup.value)" class="form">
 
 
-    <mat-form-field>
-      <input matInput
-             placeholder="Address"
-             formControlName="street">
-    </mat-form-field>
+        <mat-form-field>
+          <input matInput
+                 placeholder="FirstName"
+                 formControlName="firstName">
+          <mat-error *ngIf="!firstName.valid && firstName.touched">
+            {{ titleAlert }}
+          </mat-error>
+        </mat-form-field>
 
-    <mat-form-field>
-      <input matInput
-             placeholder="City"
-             formControlName="city">
-    </mat-form-field>
-    <mat-form-field>
-      <input matInput
-             placeholder="State"
-             formControlName="state">
-    </mat-form-field>
-
-    <mat-form-field>
-      <input matInput
-             placeholder="Zip"
-             formControlName="zipCode">
-    </mat-form-field>
+        <mat-form-field>
+          <input matInput
+                 placeholder="LastName"
+                 formControlName="lastName">
+          <mat-error *ngIf="!lastName.valid && lastName.touched">
+            {{ titleAlert }}
+          </mat-error>
+        </mat-form-field>
 
 
-    <mat-form-field>
-      <input matInput type="email"
-             placeholder="Email"
-             formControlName="email">
-      <mat-error *ngIf="!formGroup.controls['email'].valid && formGroup.controls['email'].touched">
-        {{ getErrorEmail() }}
-      </mat-error>
-    </mat-form-field>
+        <mat-form-field>
+          <input matInput
+                 placeholder="Address"
+                 formControlName="street">
+        </mat-form-field>
 
-    <mat-form-field>
-     
-      <input matInput type="password" placeholder="Password" formControlName="password">
-    </mat-form-field>
+        <mat-form-field>
+          <input matInput
+                 placeholder="City"
+                 formControlName="city">
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput
+                 placeholder="State"
+                 formControlName="state">
+        </mat-form-field>
 
-    <mat-form-field>
-      <input matInput type="tel"
-             placeholder="Phone"
-             formControlName="phone">
-    </mat-form-field>
+        <mat-form-field>
+          <input matInput
+                 placeholder="Zip"
+                 formControlName="zipCode">
+        </mat-form-field>
 
-    <mat-form-field>
 
-      <textarea matInput placeholder="Comments/Questions"
-                formControlName="notes">
+        <mat-form-field>
+          <input matInput type="email"
+                 placeholder="Email"
+                 formControlName="email">
+          <mat-error *ngIf="!formGroup.controls['email'].valid && formGroup.controls['email'].touched">
+            {{ getErrorEmail() }}
+          </mat-error>
+        </mat-form-field>
 
-        </textarea>
+        <mat-form-field>
 
-    </mat-form-field>
+          <input matInput type="password" placeholder="Password" formControlName="password" required>
+          <mat-error *ngIf="formGroup.hasError('required', 'password')">
+            Please enter your newpassword
+          </mat-error>
 
-    <div class="form-element">
-      <button mat-raised-button color="primary" type="submit" class="button" [disabled]="!formGroup.valid">Submit Form</button>
+        </mat-form-field>
+
+        <mat-form-field>
+
+          <input matInput type="password" placeholder="Confirm Password" formControlName="confirmPassword">
+          <mat-error *ngIf="formGroup.hasError('notSame')">
+            Passwords do not match
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+          <input matInput type="tel"
+                 placeholder="Phone"
+                 formControlName="phone">
+        </mat-form-field>
+
+        <!--
+
+
+      <mat-form-field>
+
+        <textarea matInput placeholder="Comments/Questions"
+                  formControlName="notes">
+
+          </textarea>
+
+      </mat-form-field>
+           -->
+        <div class="form-element">
+          <button mat-raised-button color="primary" type="submit" class="button" [disabled]="!formGroup.valid">Submit Form</button>
+        </div>
+
+
+
+
+      </form>
     </div>
+  </div>
+
+  <div *ngIf="globals.userData.isLoggedIn">
+    <h1 class="Heading">Welcome to Charge and Change Nonprofit  !!</h1>
+    
+  </div>
 
 
-
-
-  </form>
-
-</div>
 
