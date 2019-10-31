@@ -3,7 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29201.188
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CCWebSite", "CCWebSite.csproj", "{E179F908-EA8B-422E-9F2C-B24CFF4F4CF1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CCWebSite", "CCWebSite.csproj", "{E179F908-EA8B-422E-9F2C-B24CFF4F4CF1}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebServerTransporter", "..\..\WebServerTransporter\WebServerTransporter.csproj", "{5C891BAE-58AF-4367-9386-167D36622097}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Transporter", "..\..\Transporter\Transporter.csproj", "{F71D3548-21D8-47CF-AB7E-45C142BF1B3C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +19,14 @@ Global
 		{E179F908-EA8B-422E-9F2C-B24CFF4F4CF1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E179F908-EA8B-422E-9F2C-B24CFF4F4CF1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E179F908-EA8B-422E-9F2C-B24CFF4F4CF1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5C891BAE-58AF-4367-9386-167D36622097}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5C891BAE-58AF-4367-9386-167D36622097}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5C891BAE-58AF-4367-9386-167D36622097}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5C891BAE-58AF-4367-9386-167D36622097}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F71D3548-21D8-47CF-AB7E-45C142BF1B3C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F71D3548-21D8-47CF-AB7E-45C142BF1B3C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F71D3548-21D8-47CF-AB7E-45C142BF1B3C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F71D3548-21D8-47CF-AB7E-45C142BF1B3C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
