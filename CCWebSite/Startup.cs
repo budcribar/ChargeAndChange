@@ -8,7 +8,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
-using WebServerTransporter;                             // Mod for Transporter
 
 namespace CCWebSite
 {
@@ -48,8 +47,6 @@ namespace CCWebSite
                 c.AddPolicy("AllowOrigin", options => options.AllowAnyOrigin());
             });
 
-            services.AddWebServerTransporter("http://localhost:53343/TransporterHub");
-            //services.AddWebServerTransporter("http://localhost:5000/TransporterHub");
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -113,7 +110,6 @@ namespace CCWebSite
                 }
             });
 
-            app.UseWebServerTransporter();
         }
     }
 }
