@@ -23,19 +23,19 @@ namespace CCWebSite.Controllers
             this.respository = Respository;
         }
 
-        [HttpPost]
-        [ActionName("Edit")]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> EditAsync([Bind("Id,Name,Description,Completed")] EVSpecs item)
-        {
-            if (ModelState.IsValid)
-            {
-                await respository.UpdateItemAsync(item.Id, item);
-                return RedirectToAction("Index");
-            }
+        //[HttpPost]
+        //[ActionName("Edit")]
+        //[ValidateAntiForgeryToken]
+        //public async Task<ActionResult> EditAsync([Bind("Id,Name,Description,Completed")] EVSpecs item)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        await respository.UpdateItemAsync(item.Id, item);
+        //        return RedirectToAction("Index");
+        //    }
 
-            return View(item);
-        }
+        //    return View(item);
+        //}
 
         [HttpDelete("EVSpecs/{id}")]
         public async void Delete(string id)
@@ -51,9 +51,13 @@ namespace CCWebSite.Controllers
             await respository.UpdateItemAsync(id, bev);
         }
 
-        [HttpPut("EVSpecs")]
-        public async void Put([FromBody]EVSpecs bev)
+        [HttpPost("EVSpecs")]
+        public async void Post([FromBody]EVSpecs bev)
         {
+            var ss = await this.Request.BodyReader.ReadAsync();
+            
+            //var buffer = new byte[this.Request.Body.Length];
+            //var s = this.Request.Body.Read(buffer, 0, (int)Request.Body.Length);
             if (bev == null) return;
             bev.Id = Guid.NewGuid().ToString();
             await respository.CreateItemAsync(bev);

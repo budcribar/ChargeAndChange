@@ -25,6 +25,7 @@ namespace CCWebSite
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
 
+            services.AddControllers().AddNewtonsoftJson(); 
             services.AddSingleton<IDocumentDBRepository<EVSpecs>>(new DocumentDBRepository<EVSpecs>("bev"));
             services.AddSingleton<IDocumentDBRepository<Contact>>(new DocumentDBRepository<Contact>("contact"));
 
@@ -60,7 +61,7 @@ namespace CCWebSite
             {
                 app.UseExceptionHandler("/Error");
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-                app.UseHsts();
+                //app.UseHsts();
             }
 
             if (env.IsDevelopment())
@@ -74,7 +75,7 @@ namespace CCWebSite
                 });
             }
 
-            app.UseHttpsRedirection();
+            //app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseSpaStaticFiles();
 

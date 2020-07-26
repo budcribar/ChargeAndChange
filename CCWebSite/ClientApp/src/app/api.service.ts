@@ -7,14 +7,17 @@ export interface ChartData {
   name: string;
   y: number;
 }
-
+//{ { "id": null, "DateUpdated": "2020-01-12T20:31:57.943Z", "ModelYear": 2020, "Manufacturer": "Jaguar", "Available": true, "Model": "I-Pace",
+// "BodyStyle": null, "Price": null, "FederalTaxCredit": null, "DriveTrain": null, "CombinedRange": null, "CityRange": null, "HiwayRange": null,
+//"MotorPowerKw": null, "MotorPowerUnits": null, "Torque": null, "BatteryCapacity": null, "ChargingConnector": null, "Weight": null, "ZeroTo60mph": null, "ZeroTo100kph": null, "MaxChargePower": null, "MinutesTo80PercentCharge": null, "SafetyRating": null, "Notes": null } }
 export interface EVSpecs {
   id: string;
   dateUpdated: Date;
   modelYear: number;
   manufacturer: string;
-  model: string;
   available: boolean;
+  model: string;
+  
   bodyStyle: string;
   price: number;
   federalTaxCredit: number;
@@ -26,11 +29,15 @@ export interface EVSpecs {
   motorPowerUnits: string;
   //PricePerMileOfRange: number;
   torque: number;
+  //"MotorPowerKw": null, "MotorPowerUnits": null, "Torque": null, "BatteryCapacity": null, "ChargingConnector": null, "Weight": null, "ZeroTo60mph": null, "ZeroTo100kph": null, "MaxChargePower": null, "MinutesTo80PercentCharge": null, "SafetyRating": null, "Notes": null } }
+
   batteryCapacity: number;
   chargingConnector: string;
   weight: number;
   zeroTo60mph: number;
   zeroTo100kph: number;
+  //"MaxChargePower": null, "MinutesTo80PercentCharge": null, "SafetyRating": null, "Notes": null } }
+
   maxChargePower: number;
   minutesTo80PercentCharge: number;
   safetyRating: number;
@@ -124,9 +131,13 @@ export class ApiService {
   }
 
   public insert(bev: EVSpecs) {
+    bev.id = null;
+    // These fields are required for some reason otherwise the Controller does not see
+    if (bev.available == null) bev.available = true;
+    //if (bev.modelYear == null) bev.modelYear = 2020;
     console.log('inserting...');
     let url = `${this.baseUrl + 'api/bev/EVSpecs'}`;
-    return this.httpClient.put(url, bev);
+    return this.httpClient.post(url, bev);
   }
 
   public delete(bev: EVSpecs, event: any): Observable<Object> {

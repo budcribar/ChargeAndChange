@@ -18,7 +18,7 @@ namespace CCWebSite
         }
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
-            WebHost.CreateDefaultBuilder(args)
+            WebHost.CreateDefaultBuilder(args).UseConfiguration(new ConfigurationBuilder().AddJsonFile("hosting.json",true).Build())
                 .UseStartup<Startup>();
     }
 }

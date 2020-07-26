@@ -13,20 +13,24 @@ namespace CCWebSite.Controllers
     public enum MotorPowerUnits {  kw, hp }
     public class EVSpecs
     {
-        [JsonProperty(PropertyName = "id")]
+        [JsonProperty(PropertyName = "id")] // Must be lower case for database
         public string Id { get; set; }
         public DateTime DateUpdated { get; set; }
-        public int ModelYear { get; set; }
+        public int? ModelYear { get; set; }
         public string Manufacturer { get; set; }
         public Boolean Available { get; set; }
         public string Model { get; set; }
         [JsonConverter(typeof(StringEnumConverter))]
         public BodyStyle? BodyStyle { get; set; }
-        public decimal? PriceMinusFederalTaxCredit { get {
-                if (Price == null || FederalTaxCredit == null) return null;
-                return Price - FederalTaxCredit;
+        //public decimal? PriceMinusFederalTaxCredit
+        //{
+        //    get
+        //    {
+        //        if (Price == null || FederalTaxCredit == null) return null;
+        //        return Price - FederalTaxCredit;
 
-            } }
+        //    }
+        //}
         public decimal? Price { get; set; }
         public decimal? FederalTaxCredit { get; set; }
         [JsonConverter(typeof(StringEnumConverter))]
@@ -35,16 +39,19 @@ namespace CCWebSite.Controllers
         public int? CityRange { get; set; }
         public int? HiwayRange { get; set; }
         public int? MotorPowerKw { get; set; }
-        public int? MotorPowerHp {  get
-            {
-                if (MotorPowerKw == null) return null;
-                return (int)Math.Round((double)MotorPowerKw * 1.34102);
+        //public int? MotorPowerHp
+        //{
+        //    get
+        //    {
+        //        if (MotorPowerKw == null) return null;
+        //        return (int)Math.Round((double)MotorPowerKw * 1.34102);
 
-            } }
+        //    }
+        //}
 
         [JsonConverter(typeof(StringEnumConverter))]
         public MotorPowerUnits? MotorPowerUnits { get; set; }
-        public decimal? PricePerMileOfRange { get; set;  }
+        //public decimal? PricePerMileOfRange { get; set;  }
         public int? Torque { get; set; }
 
         public double? BatteryCapacity { get; set;  }
@@ -57,7 +64,7 @@ namespace CCWebSite.Controllers
         public int? MinutesTo80PercentCharge { get; set;  }
         public int? SafetyRating { get; set; }
 
-        public string Notes { get; set;  }
+        public string? Notes { get; set;  }
 
         public override string ToString()
         {
