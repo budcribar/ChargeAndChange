@@ -10,7 +10,7 @@
 	<UseBlazorWebAssembly>true</UseBlazorWebAssembly>  
 	-->
 	  
-    
+     <Nullable>enable</Nullable>
   </PropertyGroup>
 
   <ItemGroup>

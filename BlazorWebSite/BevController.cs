@@ -7,7 +7,7 @@ namespace CCWebSite.Controllers
 {
     public class ChartData
     {
-        public string Name { get; set; }
+        public string Name { get; set; } = "";
         public double? Y { get; set; }
     }
 

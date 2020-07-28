@@ -14,12 +14,12 @@ namespace CCWebSite.Controllers
     public class EVSpecs
     {
         [JsonProperty(PropertyName = "id")] // Must be lower case for database
-        public string Id { get; set; }
+        public string Id { get; set; } = "";
         public DateTime DateUpdated { get; set; }
         public int? ModelYear { get; set; }
-        public string Manufacturer { get; set; }
+        public string Manufacturer { get; set; } = "";
         public Boolean Available { get; set; }
-        public string Model { get; set; }
+        public string Model { get; set; } = "";
         [JsonConverter(typeof(StringEnumConverter))]
         public BodyStyle? BodyStyle { get; set; }
         //public decimal? PriceMinusFederalTaxCredit
@@ -62,7 +62,7 @@ namespace CCWebSite.Controllers
         public double? ZeroTo100kph { get; set; }
         public int? MaxChargePower { get; set;  }
         public int? MinutesTo80PercentCharge { get; set;  }
-        public int? SafetyRating { get; set; }
+        public double? SafetyRating { get; set; }
 
         public string? Notes { get; set;  }
 
