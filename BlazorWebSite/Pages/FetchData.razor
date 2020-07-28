@@ -1,49 +1,181 @@
 @page "/fetchdata"
-@inject HttpClient Http
-@inject CCWebSite.Controllers.BEVController controller;
 @using CCWebSite.Controllers;
 @using System.Linq;
- 
-<h1>EV Specs</h1>
 
-@if (evSpecs == null)
-{
-    <p><em>Loading...</em></p>
-}
-else
-{
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Manufacturer</th>
-                <th>Model</th>
-                
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var spec in evSpecs)
-            {
-                <tr>
+@inject HttpClient Http
+@inject BEVController controller;
+
+<h1>EV Specs</h1>
+<Radzen.Blazor.RadzenButton Click="@InsertRow">Insert</Radzen.Blazor.RadzenButton>
+
+<RadzenGrid @ref="evSpecsGrid" AllowFiltering="true" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" AllowPaging="true" PageSize="50" EditMode="DataGridEditMode.Single" RowUpdate="@OnUpdateRow"
+            AllowSorting="true" Data="@evSpecs" TItem="EVSpecs" ColumnWidth="100px">
+    <Columns>
+       
+
+        <RadzenGridColumn TItem="EVSpecs" Property="ModelYear" Title="Model Year">
+            <EditTemplate Context="evSpec">
+                <RadzenNumeric @bind-Value="evSpec.ModelYear" Style="width:100%" />
+            </EditTemplate>
+        </RadzenGridColumn>
+
+        <RadzenGridColumn TItem="EVSpecs" Property="Manufacturer" Title="Manufacturer">
+            <EditTemplate Context="evSpec">
+                <RadzenTextBox @bind-Value="evSpec.Manufacturer" Style="width:100%" />
+            </EditTemplate>
+        </RadzenGridColumn>
+
+
+
+        <RadzenGridColumn TItem="EVSpecs" Property="Available" Title="Available">
+            <EditTemplate Context="evSpec">
+                <RadzenCheckBox @bind-Value="evSpec.Available" Style="width:50%" />
+            </EditTemplate>
+        </RadzenGridColumn>
+
+        <RadzenGridColumn TItem="EVSpecs" Property="Model" Title="Model" Width="150px">
+            <EditTemplate Context="evSpec">
+                <RadzenTextBox @bind-Value="evSpec.Model" Style="width:100%" />
+            </EditTemplate>
+        </RadzenGridColumn>
+
+
+        <RadzenGridColumn TItem="EVSpecs" Property="BodyStyle" Title="Body Style">
+            <EditTemplate Context="evSpec">
+                <RadzenDropDown TValue="string"  Data="@bodyStyles" Style="width:100%" Change="@(args => Change(args.ToString(), evSpec))">
                     
-                    <td>@spec.Manufacturer</td>
-                    <td>@spec.Model</td>
-                   
-                </tr>
-            }
-        </tbody>
-    </table>
-}
+
+                </RadzenDropDown>
+            </EditTemplate>
+        </RadzenGridColumn>
+
+
+        <RadzenGridColumn TItem="EVSpecs" Property="Price" Title="Price">
+            <Template Context="data">
+                @String.Format("{0:C}", data.Price)
+            </Template>
+        </RadzenGridColumn>
+
+        <RadzenGridColumn TItem="EVSpecs" Property="FederalTaxCredit" Title="Federal Tax Credit" />
+        <RadzenGridColumn TItem="EVSpecs" Property="DriveTrain" Title="Drive Train" />
+        <RadzenGridColumn TItem="EVSpecs" Property="CombinedRange" Title="Combined Range" />
+        <RadzenGridColumn TItem="EVSpecs" Property="CityRange" Title="City Range" />
+        <RadzenGridColumn TItem="EVSpecs" Property="HiwayRange" Title="Hiway Range" />
+        <RadzenGridColumn TItem="EVSpecs" Property="MotorPowerKw" Title="Motor Power Kw" />
+        <RadzenGridColumn TItem="EVSpecs" Property="Torque" Title="Torque" />
+        <RadzenGridColumn TItem="EVSpecs" Property="BatteryCapacity" Title="Battery Capacity" />
+        <RadzenGridColumn TItem="EVSpecs" Property="ChargingConnector" Title="Charging Connector" />
+        <RadzenGridColumn TItem="EVSpecs" Property="Weight" Title="Weight" />
+        <RadzenGridColumn TItem="EVSpecs" Property="ZeroTo60mph" Title="0-60mph" />
+        <RadzenGridColumn TItem="EVSpecs" Property="ZeroTo100kph" Title="0-100kph" />
+        <RadzenGridColumn TItem="EVSpecs" Property="MaxChargePower" Title="Max Charge Power" />
+        <RadzenGridColumn TItem="EVSpecs" Property="MinutesTo80PercentCharge" Title="Minutes To 80% Charge" />
+        <RadzenGridColumn TItem="EVSpecs" Property="SafetyRating" Title="Safety Rating" />
+
+        <RadzenGridColumn TItem="EVSpecs" Context="evSpec" Bubble="false" Filterable="false" Sortable="false" TextAlign="TextAlign.Center" Width="100px">
+            <Template Context="evSpec">
+                <RadzenButton Icon="edit" Size="ButtonSize.Small" Click="@(args => EditRow(evSpec))">
+                </RadzenButton>
+            </Template>
+            <EditTemplate Context="evSpec">
+                <RadzenButton Icon="save" Size="ButtonSize.Small" Click="@((args) => SaveRow(evSpec))">
+                </RadzenButton>
+                <RadzenButton Icon="cancel" Size="ButtonSize.Small" ButtonStyle="ButtonStyle.Secondary" Click="@((args) => CancelEdit(evSpec))">
+                </RadzenButton>
+            </EditTemplate>
+        </RadzenGridColumn>
+        <RadzenGridColumn TItem="EVSpecs" Context="evSpec" Bubble="false" Filterable="false" Sortable="false" TextAlign="TextAlign.Center" Width="70px">
+            <Template Context="evSpec">
+                <RadzenButton ButtonStyle="ButtonStyle.Danger" Icon="close" Size="ButtonSize.Small" Click="@(args => DeleteRow(evSpec))">
+                </RadzenButton>
+            </Template>
+            <EditTemplate Context="evSpec">
+                <RadzenButton ButtonStyle="ButtonStyle.Danger" Icon="close" Size="ButtonSize.Small" Click="@(args => DeleteRow(evSpec))">
+                </RadzenButton>
+            </EditTemplate>
+        </RadzenGridColumn>
+
+    </Columns>
+</RadzenGrid>
+
+
+
+
 
 @code {
+    private RadzenGrid<EVSpecs> evSpecsGrid;
+   
     private EVSpecs[] evSpecs;
+    string[] bodyStyles = Enum.GetNames(typeof(BodyStyle));
+
 
     protected override async Task OnInitializedAsync()
     {
-        //forecasts = await Http.GetFromJsonAsync<WeatherForecast[]>("sample-data/weather.json");
+
 
         evSpecs = (await controller.EVSpecs()).ToArray();
-       
+
     }
 
-   
+    void Change(string value, EVSpecs spec)
+    {
+     
+        spec.BodyStyle = Enum.Parse<BodyStyle> (value);
+
+        StateHasChanged();
+    }
+
+    void EditRow(EVSpecs evSpec)
+    {
+        evSpecsGrid.EditRow(evSpec);
+    }
+
+    async void OnUpdateRow(EVSpecs evSpecs)
+    {
+        await controller.Patch (evSpecs.Id, evSpecs);
+
+    }
+
+    void SaveRow(EVSpecs evSpecs)
+    {
+        evSpecsGrid.UpdateRow(evSpecs);
+    }
+
+    void CancelEdit(EVSpecs evSpecs)
+    {
+        evSpecsGrid.CancelEditRow(evSpecs);
+
+        // For production
+        // var orderEntry = dbContext.Entry(order);
+        // orderEntry.CurrentValues.SetValues(orderEntry.OriginalValues);
+        // orderEntry.State = EntityState.Unchanged;
+    }
+
+    async void InsertRow() {
+        EVSpecs spec = new EVSpecs();
+        spec.Model = "New model";
+        spec.ModelYear = DateTime.Now.Year;
+
+        await controller.Post(spec);
+
+        evSpecs = (await controller.EVSpecs()).ToArray();
+        evSpecsGrid.Reload();
+    }
+
+    async void DeleteRow(EVSpecs evSpec)
+    {
+        await controller.Delete(evSpec.Id);
+
+
+        // For demo purposes only
+        //orders.Remove(order);
+
+        // For production
+        //dbContext.SaveChanges();
+
+        evSpecs = (await controller.EVSpecs()).ToArray();
+
+        evSpecsGrid.Reload();
+    }
+
 }

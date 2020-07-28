@@ -35,25 +35,25 @@ namespace CCWebSite.Controllers
         //}
 
        
-        public async void Delete(string id)
+        public Task Delete(string id)
         {
-            await respository.DeleteItemAsync(id);
+            return respository.DeleteItemAsync(id);
         }
 
         
-        public async void Patch(string id,EVSpecs bev)
+        public Task Patch(string id,EVSpecs bev)
         {
-            if (bev == null) return;
+            if (bev == null) return Task.CompletedTask;
             bev.Id = id;
-            await respository.UpdateItemAsync(id, bev);
+            return respository.UpdateItemAsync(id, bev);
         }
 
         
-        public async void Post(EVSpecs bev)
+        public Task Post(EVSpecs bev)
         {
-            if (bev == null) return;
+            if (bev == null) return Task.CompletedTask; 
             bev.Id = Guid.NewGuid().ToString();
-            await respository.CreateItemAsync(bev);
+            return respository.CreateItemAsync(bev);
         }
 
         private double? GetValue(EVSpecs evspec, string spec)
