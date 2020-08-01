@@ -201,7 +201,7 @@
     int powerMode = 1;
     private RadzenGrid<EVSpecs> evSpecsGrid;
 
-    private EVSpecs[] evSpecs;
+    private EVSpecs[] evSpecs = Array.Empty<EVSpecs>();
     string[] bodyStyles = Enum.GetNames(typeof(BodyStyle));
     string[] driveTypes = Enum.GetNames(typeof(DriveType));
     string[] connectorTypes = Enum.GetNames(typeof(ChargingConnector));
