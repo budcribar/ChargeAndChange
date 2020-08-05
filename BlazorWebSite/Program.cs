@@ -23,6 +23,8 @@ namespace BlazorWebSite
 
             builder.Services.AddSingleton<IDocumentDBRepository<EVSpecs>>(new DocumentDBRepository<EVSpecs>("bev"));
             builder.Services.AddSingleton<BEVController>();
+            builder.Services.AddSingleton<IDocumentDBRepository<Contact>>(new DocumentDBRepository<Contact>("contact"));
+            builder.Services.AddSingleton<ContactController>();
 
             builder.Services.AddOidcAuthentication(options =>
             {

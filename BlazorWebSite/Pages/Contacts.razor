@@ -1,0 +1,185 @@
+@page "/contacts"
+@using CCWebSite.Controllers;
+@using System.Linq;
+
+@inject HttpClient Http
+@inject ContactController controller;
+
+<h1>Contacts</h1>
+<Radzen.Blazor.RadzenButton Click="@InsertRow">Insert</Radzen.Blazor.RadzenButton>
+
+<RadzenGrid @ref="contactsGrid" AllowFiltering="true" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" AllowPaging="true" PageSize="50" EditMode="DataGridEditMode.Single" RowUpdate="@OnUpdateRow"
+            AllowSorting="true" Data="@contacts" TItem="Contact" ColumnWidth="130px">
+    <Columns>
+
+
+        <RadzenGridColumn TItem="Contact" Property="DateUpdated" Title="Date Updated">
+            <EditTemplate Context="evSpec">
+                <RadzenNumeric @bind-Value="evSpec.DateUpdated" Style="width:100%" />
+            </EditTemplate>
+        </RadzenGridColumn>
+
+        <RadzenGridColumn TItem="Contact" Property="FirstName" Title="First Name">
+            <EditTemplate Context="evSpec">
+                <RadzenTextBox @bind-Value="evSpec.FirstName" Style="width:100%" />
+            </EditTemplate>
+        </RadzenGridColumn>
+
+
+
+        <RadzenGridColumn TItem="Contact" Property="LastName" Title="Last Name">
+            <EditTemplate Context="evSpec">
+                <RadzenTextBox @bind-Value="evSpec.LastName" Style="width:50%" />
+            </EditTemplate>
+        </RadzenGridColumn>
+
+        <RadzenGridColumn TItem="Contact" Property="Email" Title="Email" Width="150px">
+            <EditTemplate Context="evSpec">
+                <RadzenEmailValidator @bind-Value="evSpec.Email" Style="width:100%" />
+            </EditTemplate>
+        </RadzenGridColumn>
+
+         <RadzenGridColumn TItem="Contact" Property="Subscriber" Title="Subscriber">
+            <EditTemplate Context="evSpec">
+                <RadzenCheckBox @bind-Value="evSpec.Subscriber" Style="width:50%" />
+            </EditTemplate>
+        </RadzenGridColumn>
+
+
+        <RadzenGridColumn TItem="Contact" Property="Status" Title="Status">
+            <EditTemplate Context="evSpec">
+                <RadzenDropDown TValue="string" Data="@statusTypes" Style="width:100%" Change="@(args => Change(args.ToString(), evSpec))" SelectedItem="evSpec.Status.ToString()" />
+            </EditTemplate>
+        </RadzenGridColumn>
+
+
+
+         <RadzenGridColumn TItem="Contact" Property="StreetNumber" Title="Street Number">
+            <EditTemplate Context="evSpec">
+                <RadzenNumeric @bind-Value="evSpec.StreetNumber" Style="width:100%" />
+            </EditTemplate>
+        </RadzenGridColumn>
+
+
+         <RadzenGridColumn TItem="Contact" Property="Street" Title="Street">
+            <EditTemplate Context="evSpec">
+                <RadzenTextBox @bind-Value="evSpec.Street" Style="width:50%" />
+            </EditTemplate>
+        </RadzenGridColumn>
+
+        
+         <RadzenGridColumn TItem="Contact" Property="Phone" Title="Phone">
+            <EditTemplate Context="evSpec">
+                <RadzenNumeric @bind-Value="evSpec.Phone" Style="width:50%" />
+            </EditTemplate>
+        </RadzenGridColumn>
+
+        <RadzenGridColumn TItem="Contact" Property="Notes" Title="Notes">
+            <EditTemplate Context="evSpec">
+                <RadzenTextBox @bind-Value="evSpec.Notes" Style="width:50%" />
+            </EditTemplate>
+        </RadzenGridColumn>
+
+
+        <RadzenGridColumn TItem="Contact" Context="evSpec" Bubble="false" Filterable="false" Sortable="false" TextAlign="TextAlign.Center" Width="100px">
+            <Template Context="evSpec">
+                <RadzenButton Icon="edit" Size="ButtonSize.Small" Click="@(args => EditRow(evSpec))">
+                </RadzenButton>
+            </Template>
+            <EditTemplate Context="evSpec">
+                <RadzenButton Icon="save" Size="ButtonSize.Small" Click="@((args) => SaveRow(evSpec))">
+                </RadzenButton>
+                <RadzenButton Icon="cancel" Size="ButtonSize.Small" ButtonStyle="ButtonStyle.Secondary" Click="@((args) => CancelEdit(evSpec))">
+                </RadzenButton>
+            </EditTemplate>
+        </RadzenGridColumn>
+        <RadzenGridColumn TItem="EVSpecs" Context="evSpec" Bubble="false" Filterable="false" Sortable="false" TextAlign="TextAlign.Center" Width="70px">
+            <Template Context="evSpec">
+                <RadzenButton ButtonStyle="ButtonStyle.Danger" Icon="close" Size="ButtonSize.Small" Click="@(args => DeleteRow(evSpec))">
+                </RadzenButton>
+            </Template>
+            <EditTemplate Context="evSpec">
+                <RadzenButton ButtonStyle="ButtonStyle.Danger" Icon="close" Size="ButtonSize.Small" Click="@(args => DeleteRow(evSpec))">
+                </RadzenButton>
+            </EditTemplate>
+        </RadzenGridColumn>
+
+    </Columns>
+</RadzenGrid>
+
+
+
+
+
+@code {
+    int powerMode = 1;
+    private RadzenGrid<Contact> contactsGrid;
+
+    private Contact[] contacts = Array.Empty<Contact>();
+    string[] statusTypes = Enum.GetNames(typeof(ContactStatus));
+
+    protected override async Task OnInitializedAsync()
+    {
+        contacts = (await controller.Contacts()).ToList().OrderBy(x => x.Street).ThenBy(x => x.StreetNumber).ToArray();
+    }
+   
+    void Change(string value, Contact spec)
+    {
+        spec.Status = Enum.Parse<ContactStatus> (value);
+
+        StateHasChanged();
+    }
+
+    void EditRow(Contact evSpec)
+    {
+        contactsGrid.EditRow(evSpec);
+    }
+
+    async void OnUpdateRow(Contact evSpecs)
+    {
+        await controller.Patch (evSpecs.Id, evSpecs);
+
+    }
+
+    void SaveRow(Contact evSpecs)
+    {
+        contactsGrid.UpdateRow(evSpecs);
+    }
+
+    void CancelEdit(Contact evSpecs)
+    {
+        contactsGrid.CancelEditRow(evSpecs);
+
+        // For production
+        // var orderEntry = dbContext.Entry(order);
+        // orderEntry.CurrentValues.SetValues(orderEntry.OriginalValues);
+        // orderEntry.State = EntityState.Unchanged;
+    }
+
+    async void InsertRow() {
+        Contact spec = new Contact();
+       
+
+        await controller.Put(spec);
+
+        contacts = (await controller.Contacts()).ToArray();
+        contactsGrid.Reload();
+    }
+
+    async void DeleteRow(EVSpecs evSpec)
+    {
+        await controller.Delete(evSpec.Id);
+
+
+        // For demo purposes only
+        //orders.Remove(order);
+
+        // For production
+        //dbContext.SaveChanges();
+
+        contacts = (await controller.Contacts()).ToArray();
+
+        contactsGrid.Reload();
+    }
+
+}
