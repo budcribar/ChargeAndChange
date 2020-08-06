@@ -37,6 +37,12 @@ namespace CCWebSite.Controllers
         //}
 
         //[HttpGet("Contact/{email}")]
+
+        public Task<Contact> GetById(string id)
+        {
+            return repository.GetItemAsync(x => x.Id == id);
+        }
+
         public  Task<Contact> Get(string email)
         {
             return repository.GetItemAsync(x => x.Email.ToLower() == email.ToLower());
@@ -49,16 +55,16 @@ namespace CCWebSite.Controllers
         }
 
         //[HttpPatch("Contacts/{id}")]
-        public Task Patch(string id, Contact bev)
+        public Task Patch(string id, Contact contact)
         {
             //if (bev == null) return;
-            bev.Id = id;
+            contact.Id = id;
 
             // Don't overwrite hashed password
-            var old = repository.GetItemAsync(x => x.Id == bev.Id).Result;
-            bev.HashedPassword = old.HashedPassword;
+            //var old = repository.GetItemAsync(x => x.Id == contact.Id).Result;
+            //contact.HashedPassword = old.HashedPassword;
 
-            return repository.UpdateItemAsync(id, bev);
+            return repository.UpdateItemAsync(id, contact);
         }
 
         //[HttpPut("Contacts")]
