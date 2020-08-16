@@ -9,6 +9,15 @@ namespace CCWebSite.Controllers
 {
     public enum ContactStatus { Uncontacted, Contacted, Member, Administrator }
 
+    [Flags]
+    public enum InterestLevel
+    {
+        Unknown,
+        None,
+        Interested,
+        Owns
+    }
+
     public class Contact
     {
         public Boolean? Subscriber { get; set; }
@@ -18,6 +27,12 @@ namespace CCWebSite.Controllers
         public string Password { get; set; }
         public string HashedPassword { get; set; }
         public DateTime DateUpdated { get; set; }
+
+        [JsonConverter(typeof(StringEnumConverter))]
+        public InterestLevel? EVInterest { get; set; }
+
+        [JsonConverter(typeof(StringEnumConverter))]
+        public InterestLevel? LawnEquipmentInterest { get; set; }
 
         [JsonConverter(typeof(StringEnumConverter))]
         public ContactStatus? Status { get; set; }
@@ -31,6 +46,8 @@ namespace CCWebSite.Controllers
         public int? ZipCode { get; set; }
         public string Email { get; set; }
         public string Phone { get; set; }
+
+        
 
         public string Notes { get; set;  }
 

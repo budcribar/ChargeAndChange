@@ -90,6 +90,26 @@
             </EditTemplate>
         </RadzenGridColumn>
 
+         <RadzenGridColumn TItem="Contact" Property="EVInterest" Title="EV Interest">
+             <Template Context="contact">
+                    @contact.EVInterest.ToString()
+                </Template>
+            <EditTemplate Context="contact">
+                <RadzenDropDown TValue="string" Data="@interestTypes" Style="width:100%" Change="@(args => ChangeEVInterest(args.ToString(), contact))" SelectedItem="contact.EVInterest.ToString()" />
+            </EditTemplate>
+        </RadzenGridColumn>
+
+         <RadzenGridColumn TItem="Contact" Property="LawnEquipmentInterest" Title="Lawn Equipment Interest">
+             <Template Context="contact">
+                    @contact.LawnEquipmentInterest.ToString()
+                </Template>
+            <EditTemplate Context="contact">
+                <RadzenDropDown TValue="string" Data="@interestTypes" Style="width:100%" Change="@(args => ChangeLawnEquipmentInterest(args.ToString(), contact))" SelectedItem="contact.LawnEquipmentInterest.ToString()" />
+            </EditTemplate>
+        </RadzenGridColumn>
+
+
+
         <RadzenGridColumn TItem="Contact" Property="Notes" Title="Notes">
             <EditTemplate Context="contact">
                 <RadzenTextBox @bind-Value="contact.Notes" Style="width:50%" />
@@ -140,6 +160,7 @@
     private string selectedStreet = "";
 
     string[] statusTypes = Enum.GetNames(typeof(ContactStatus));
+    string[] interestTypes = Enum.GetNames(typeof(InterestLevel));
 
     protected override async Task OnInitializedAsync()
     {
@@ -212,6 +233,20 @@
     void Change(string value, Contact spec)
     {
         spec.Status = Enum.Parse<ContactStatus> (value);
+
+        StateHasChanged();
+    }
+
+    void ChangeEVInterest(string value, Contact spec)
+    {
+        spec.EVInterest = Enum.Parse<InterestLevel> (value);
+
+        StateHasChanged();
+    }
+
+     void ChangeLawnEquipmentInterest(string value, Contact spec)
+    {
+        spec.LawnEquipmentInterest = Enum.Parse<InterestLevel> (value);
 
         StateHasChanged();
     }
