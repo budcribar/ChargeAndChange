@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Sort } from '@angular/material/sort';
 import { ApiService, Contact } from '../api.service';
 import { ConfirmationDialogComponent, ConfirmationDialogModel } from '../confirmationDialog/confirmationDialog.component';
-import { MatDialog } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
 import { ContactEditorComponent } from '../contactEditor/contactEditor.component';
 
 @Component({

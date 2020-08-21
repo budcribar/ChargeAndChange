@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Sort } from '@angular/material/sort';
 import { ApiService, EVSpecs } from '../api.service';
 import { ConfirmationDialogComponent, ConfirmationDialogModel } from '../confirmationDialog/confirmationDialog.component';
-import { MatDialog } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
 import { BEVEditorComponent } from '../bevEditor/bevEditor.component';
 
 @Component({

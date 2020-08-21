@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Globals } from '../globals';
-import { AuthService, FacebookLoginProvider, SocialUser } from 'angularx-social-login';
+//import { AuthService, FacebookLoginProvider, SocialUser } from 'angularx-social-login';
 import { ApiService, Contact } from '../api.service';
 import { NavBarService } from '../nav-bar.service'
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';

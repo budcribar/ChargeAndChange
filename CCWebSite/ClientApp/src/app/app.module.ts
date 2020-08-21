@@ -28,7 +28,20 @@ import { SignoutComponent } from './signout/signout.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSortModule } from '@angular/material/sort';
 import { MatDatepickerModule } from '@angular/material/datepicker';
-import { MatToolbarModule, MatButtonModule, MatFormFieldModule, MatSelectModule, MatInputModule, MatIconModule, MatTableModule, MatDialogModule, MatGridListModule, MatRadioModule, MatCheckboxModule, MatListModule, MatCardModule, MatNativeDateModule } from '@angular/material';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
+import { MatListModule } from '@angular/material/list';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatSelectModule } from '@angular/material/select';
+import { MatTableModule } from '@angular/material/table';
+import { MatToolbarModule } from '@angular/material/toolbar';
 import { ConfirmationDialogComponent } from './confirmationDialog/confirmationDialog.component';
 import { BEVEditorComponent } from './bevEditor/bevEditor.component';
 import { ContactComponent } from './contact/contact.component';
@@ -41,15 +54,17 @@ import { ContactEditorComponent } from './contactEditor/contactEditor.component'
 import { ChartModule } from 'angular-highcharts';
 import { BEVChartComponent } from './bevChart/bevChart.component';
 import { Globals } from './globals';
-import { SocialLoginModule, AuthServiceConfig, FacebookLoginProvider } from 'angularx-social-login';
+import { SocialLoginModule, SocialAuthService, FacebookLoginProvider, SocialAuthServiceConfig } from 'angularx-social-login';
 import { ValidationService } from './validation.service';
 
-const config = new AuthServiceConfig([
-  {
-    id: FacebookLoginProvider.PROVIDER_ID,
-    provider: new FacebookLoginProvider('447198995878594')
-  }
-]);
+const config: SocialAuthServiceConfig = {
+  providers: [
+    {
+      id: FacebookLoginProvider.PROVIDER_ID,
+      provider: new FacebookLoginProvider('447198995878594')
+    }
+  ]
+};
 
 export function provideConfig() {
   return config;
@@ -131,8 +146,19 @@ export function provideConfig() {
   ],
   providers: [Globals, ValidationService,
     {
-      provide: AuthServiceConfig,
-      useFactory: provideConfig
+      provide: 'SocialAuthServiceConfig',
+      useValue: {
+        autoLogin: false,
+        providers: [
+          
+          {
+            id: FacebookLoginProvider.PROVIDER_ID,
+            provider: new FacebookLoginProvider('clientId'),
+          },
+         
+        ],
+      } as SocialAuthServiceConfig,
+     
     }],
   bootstrap: [AppComponent],
   exports: [RouterModule],

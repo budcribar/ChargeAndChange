@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Globals } from '../globals';
-import { AuthService, FacebookLoginProvider, SocialUser, LoginOpt } from 'angularx-social-login';
+import { SocialAuthService, FacebookLoginProvider, SocialUser, SocialAuthServiceConfig  } from 'angularx-social-login';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { ApiService, Contact } from '../api.service';
 
@@ -14,11 +14,14 @@ export class SigninComponent {
   formGroup: FormGroup;
   contact: Contact;
 
-  constructor(public globals: Globals, private authService: AuthService, private fb: FormBuilder, private apiService: ApiService) { }
+  constructor(public globals: Globals, private authService: SocialAuthService, private fb: FormBuilder, private apiService: ApiService) { }
 
   signInWithFB(): void {
-    const fbLoginOptions: LoginOpt = {
-      scope: 'email',
+    const fbLoginOptions: SocialAuthServiceConfig = {
+      providers: [
+        { id: '', provider: new FacebookLoginProvider('') }
+      ]
+      //scope: 'email',
       //return_scopes: true,
       //enable_profile_selector: true
     }; 

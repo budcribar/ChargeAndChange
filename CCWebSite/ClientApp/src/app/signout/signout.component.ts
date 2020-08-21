@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Globals } from '../globals';
-import { AuthService, FacebookLoginProvider, SocialUser } from 'angularx-social-login';
+import { SocialAuthService, FacebookLoginProvider, SocialUser } from 'angularx-social-login';
 
 
 @Component({
@@ -9,7 +9,7 @@ import { AuthService, FacebookLoginProvider, SocialUser } from 'angularx-social-
 })
 export class SignoutComponent {
  
-  constructor(public globals: Globals, private authService: AuthService) { }
+  constructor(public globals: Globals, private authService: SocialAuthService) { }
   ngOnInit() {
     this.signOut();
   }
