@@ -59,7 +59,7 @@
     "webpack": "^4.44.1"
   },
   "optionalDependencies": {
-    "node-sass": "^4.9.3",
+    "node-sass": "^4.13.1",
     "ts-node": "~5.0.1"
   }
 }
