@@ -41,7 +41,7 @@ namespace CCWebSite.Controllers
             catch (Exception) { }
         }
 
-        public async Task<T> GetItemAsync(string id)
+        public async Task<T?> GetItemAsync(string id)
         {
             try
             {
@@ -78,7 +78,7 @@ namespace CCWebSite.Controllers
             return results;
         }
 
-        public async Task<T> GetItemAsync(Expression<Func<T, bool>> predicate)
+        public async Task<T?> GetItemAsync(Expression<Func<T, bool>> predicate)
         {
             IDocumentQuery<T> query = client.CreateDocumentQuery<T>(
                 UriFactory.CreateDocumentCollectionUri(DatabaseId, CollectionId),

@@ -38,12 +38,12 @@ namespace CCWebSite.Controllers
 
         //[HttpGet("Contact/{email}")]
 
-        public Task<Contact> GetById(string id)
+        public Task<Contact?> GetById(string id)
         {
             return repository.GetItemAsync(x => x.Id == id);
         }
 
-        public  Task<Contact> Get(string email)
+        public  Task<Contact?> Get(string email)
         {
             return repository.GetItemAsync(x => x.Email.ToLower() == email.ToLower());
         }
@@ -88,7 +88,7 @@ namespace CCWebSite.Controllers
         {
             if (bev == null) return null;
 
-            Contact c = await repository.GetItemAsync(x => x.Email.ToLower() == bev.Email.ToLower());
+            Contact? c = await repository.GetItemAsync(x => x.Email.ToLower() == bev.Email.ToLower());
 
             if (c == null) return null;
 
