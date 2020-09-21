@@ -1,5 +1,6 @@
-﻿<Project Sdk="Microsoft.NET.Sdk.Web">
-	<!-- Uncomment for 2.1 -->
+﻿<!-- Uncomment for 2.1 -->
+<Project Sdk="Microsoft.NET.Sdk.Web">
+	
   <PropertyGroup>
 	 
     <TargetFramework>netstandard2.1</TargetFramework>
@@ -12,22 +13,25 @@
    
 	 
    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Build" Version="3.2.1" PrivateAssets="all" />
-   <PackageReference Include="Microsoft.AspNetCore.JsonPatch" Version="5.0.0-preview.8.20414.8" />
+   <PackageReference Include="Microsoft.AspNetCore.JsonPatch" Version="5.0.0-rc.1.20451.17" />
    <PackageReference Include="Microsoft.Extensions.Caching.Abstractions" Version="5.0.0-preview.8.20407.11" />
 	  <PackageReference Include="Microsoft.Extensions.Identity.Core" Version="3.1.7" />
-   <PackageReference Include="System.Net.Http.Json" Version="5.0.0-preview.8.20407.11" />
+   <PackageReference Include="System.Net.Http.Json" Version="5.0.0-rc.1.20451.14" />
 	 
 	  
-    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="5.0.0-preview.8.20414.8" PrivateAssets="all" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="5.0.0-rc.1.20451.17" PrivateAssets="all" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Authentication" Version="3.2.1" />	
-	  <PackageReference Include="Radzen.Blazor" Version="2.11.16" />
+	  <PackageReference Include="Radzen.Blazor" Version="2.14.3" />
 	 
 	 
 	  <PackageReference Include="Microsoft.Azure.Cosmos" Version="3.13.0-preview" />
 	  <PackageReference Include="Microsoft.Azure.DocumentDB.Core" Version="2.11.6" />
 	  
-   
-	  <!-- Uncomment for 5.0 
+    
+
+	  <!-- Uncomment for 5.0  -
+    <Project Sdk="Microsoft.NET.Sdk.BlazorWebAssembly">
+    
 	  <PropertyGroup>
 		  <TargetFramework>net5</TargetFramework>
 		 
@@ -43,27 +47,26 @@
 
 	  <ItemGroup>
 	  
-	   <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="5.0.0-preview.8.20414.8" />
+	   <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="5.0.0-rc.1.20451.17" />
 
-	  <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="5.0.0-preview.8.20414.8" PrivateAssets="all" />
-	  <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Authentication" Version="5.0.0-preview.8.20414.8" />
-	  <PackageReference Include="Radzen.Blazor" Version="2.11.14" />
+	  <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="5.0.0-rc.1.20451.17" PrivateAssets="all" />
+	  <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Authentication" Version="5.0.0-rc.1.20451.17" />
+	  <PackageReference Include="Radzen.Blazor" Version="2.13.0" />
 
 
 	  <PackageReference Include="Microsoft.Azure.Cosmos" Version="3.13.0-preview" />
 	  <PackageReference Include="Microsoft.Azure.DocumentDB.Core" Version="2.11.6" />
 
-	  <PackageReference Include="Microsoft.Extensions.Identity.Core" Version="5.0.0-preview.8.20414.8" />
+	  <PackageReference Include="Microsoft.Extensions.Identity.Core" Version="5.0.0-rc.1.20451.17" />
    <PackageReference Include="Microsoft.AspNetCore.JsonPatch" Version="5.0.0-preview.7.20365.19" />
-   <PackageReference Include="Microsoft.Extensions.Caching.Abstractions" Version="5.0.0-preview.8.20407.11" />
-   <PackageReference Include="System.Net.Http.Json" Version="5.0.0-preview.8.20407.11" />
-   <PackageReference Include="Microsoft.AspNetCore.JsonPatch" Version="5.0.0-preview.8.20414.8" />
-	  </ItemGroup>
-	  <!-Uncomment for 5.0 -->
+   <PackageReference Include="Microsoft.Extensions.Caching.Abstractions" Version="5.0.0-rc.1.20451.14" />
+   <PackageReference Include="System.Net.Http.Json" Version="5.0.0-rc.1.20451.14" />
+   <PackageReference Include="Microsoft.AspNetCore.JsonPatch" Version="5.0.0-rc.1.20451.17" />
+	 
+    <!- Uncomment for 5.0 -->
+   </ItemGroup>
+     
 	  
-
-
-</ItemGroup>
 
   <ItemGroup>
     <Content Update="wwwroot\css\app.css">
