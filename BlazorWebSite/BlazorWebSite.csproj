@@ -1,4 +1,4 @@
-﻿<!-- Make Comment for 2.1 --> 
+﻿<!-- Make Comment for 2.1 -->
 <Project Sdk="Microsoft.NET.Sdk.Web">
 	
   <PropertyGroup>
@@ -31,7 +31,7 @@
 
 	  <!-- Comment for 5.0  
     <Project Sdk="Microsoft.NET.Sdk.BlazorWebAssembly">
-    
+      
 	  <PropertyGroup>
 		  <TargetFramework>net5</TargetFramework>
 		 
@@ -47,23 +47,23 @@
 
 	  <ItemGroup>
 	  
-	   <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="5.0.0-rc.1.20451.17" />
+	   <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="5.0.0-rtm.20502.15" />
 
-	  <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="5.0.0-rc.1.20451.17" PrivateAssets="all" />
-	  <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Authentication" Version="5.0.0-rc.1.20451.17" />
+	  <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="5.0.0-rtm.20502.15" PrivateAssets="all" />
+	  <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Authentication" Version="5.0.0-rtm.20502.15" />
 	  <PackageReference Include="Radzen.Blazor" Version="2.15.7" />
 
 
 	  <PackageReference Include="Microsoft.Azure.Cosmos" Version="3.13.0" />
 	  <PackageReference Include="Microsoft.Azure.DocumentDB.Core" Version="2.11.6" />
 
-	  <PackageReference Include="Microsoft.Extensions.Identity.Core" Version="5.0.0-rc.1.20451.17" />
+	  <PackageReference Include="Microsoft.Extensions.Identity.Core" Version="5.0.0-rtm.20502.15" />
    <PackageReference Include="Microsoft.AspNetCore.JsonPatch" Version="5.0.0-preview.7.20365.19" />
-   <PackageReference Include="Microsoft.Extensions.Caching.Abstractions" Version="5.0.0-rc.1.20451.14" />
-   <PackageReference Include="System.Net.Http.Json" Version="5.0.0-rc.1.20451.14" />
-   <PackageReference Include="Microsoft.AspNetCore.JsonPatch" Version="5.0.0-rc.1.20451.17" />
-	 
-    Make comment for 5.0 -->
+   <PackageReference Include="Microsoft.Extensions.Caching.Abstractions" Version="5.0.0-rtm.20502.8" />
+   <PackageReference Include="System.Net.Http.Json" Version="5.0.0-rtm.20502.8" />
+   <PackageReference Include="Microsoft.AspNetCore.JsonPatch" Version="5.0.0-rtm.20502.15" />
+
+		   Make comment for 5.0 -->
    </ItemGroup>
      
 	  
