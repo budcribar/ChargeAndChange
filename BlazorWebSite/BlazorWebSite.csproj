@@ -26,10 +26,10 @@
 	 
 	  <PackageReference Include="Microsoft.Azure.Cosmos" Version="3.14.0" />
 	  <PackageReference Include="Microsoft.Azure.DocumentDB.Core" Version="2.12.0" />
-	  
-    
 
-	  <!-- Comment for 5.0  
+
+
+    <!-- Comment for 5.0  
     <Project Sdk="Microsoft.NET.Sdk.BlazorWebAssembly">
       
 	  <PropertyGroup>
@@ -37,33 +37,25 @@
 		 
 		  <RazorLangVersion>3.0</RazorLangVersion>
 
-		
-		  <RuntimeIdentifier>browser-wasm</RuntimeIdentifier>
-		  <UseBlazorWebAssembly>true</UseBlazorWebAssembly>
-		
 
 		  <Nullable>enable</Nullable>
 	  </PropertyGroup>
 
 	  <ItemGroup>
-	  
-	   <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="5.0.0-rtm.20509.9" />
+		  <PackageReference Include="Microsoft.Azure.DocumentDB.Core" Version="2.12.0" />
+		  <PackageReference Include="Radzen.Blazor" Version="2.15.12" />
+		  <PackageReference Include="Microsoft.Azure.Cosmos" Version="3.14.0" />
+		  <PackageReference Include="Microsoft.AspNetCore.JsonPatch" Version="5.0.0-rc.2.20475.17" />
+		  <PackageReference Include="System.Net.Http.Json" Version="5.0.0-rc.2.20475.5" />
+		  <PackageReference Include="Microsoft.Extensions.Identity.Core" Version="5.0.0-rc.2.20475.17" />
 
-	  <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="5.0.0-rtm.20509.9" PrivateAssets="all" />
-	  <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Authentication" Version="5.0.0-rtm.20509.9" />
-	  <PackageReference Include="Radzen.Blazor" Version="2.15.10" />
+		  <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Authentication" Version="5.0.0-rc.2.20475.17" />
+		  <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="5.0.0-rc.2.20475.17" PrivateAssets="all" />
+		  <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="5.0.0-rc.2.20475.17" />
 
-
-	  <PackageReference Include="Microsoft.Azure.Cosmos" Version="3.14.0" />
-	  <PackageReference Include="Microsoft.Azure.DocumentDB.Core" Version="2.12.0" />
-
-	  <PackageReference Include="Microsoft.Extensions.Identity.Core" Version="5.0.0-rtm.20509.9" />
-   <PackageReference Include="Microsoft.AspNetCore.JsonPatch" Version="5.0.0-preview.7.20365.19" />
-   <PackageReference Include="Microsoft.Extensions.Caching.Abstractions" Version="5.0.0-rtm.20509.6" />
-   <PackageReference Include="System.Net.Http.Json" Version="5.0.0-rtm.20509.6" />
-   <PackageReference Include="Microsoft.AspNetCore.JsonPatch" Version="5.0.0-rtm.20509.9" />
-
-		   Make comment for 5.0 -->
+-->
+		  
+		<!--   Make comment for 5.0 -->
    </ItemGroup>
      
 	  
