@@ -7,15 +7,27 @@
 	  <RazorLangVersion>3.0</RazorLangVersion>  
      <Nullable>enable</Nullable>
   </PropertyGroup>
+	
+  <ItemGroup>
+    <Compile Remove="Common\**" />
+    <Content Remove="Common\**" />
+    <EmbeddedResource Remove="Common\**" />
+    <None Remove="Common\**" />
+  </ItemGroup>
+	
+  <ItemGroup>
+    <Compile Remove="Data\BlogClient.cs" />
+  </ItemGroup>
 
   <ItemGroup>
 	  <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="3.2.1" />
-   
-	 
    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Build" Version="3.2.1" PrivateAssets="all" />
    <PackageReference Include="Microsoft.AspNetCore.JsonPatch" Version="5.0.0-rc.1.20451.17" />
+   <PackageReference Include="Microsoft.Authentication.WebAssembly.Msal" Version="3.2.1" />
    <PackageReference Include="Microsoft.Extensions.Caching.Abstractions" Version="5.0.0-rc.1.20451.14" />
+   <PackageReference Include="Microsoft.Extensions.Http" Version="3.1.9" />
 	  <PackageReference Include="Microsoft.Extensions.Identity.Core" Version="3.1.9" />
+	  <PackageReference Include="System.Net.Http" Version="4.3.4" />
    <PackageReference Include="System.Net.Http.Json" Version="5.0.0-rc.1.20451.14" />
 	 
 	  
@@ -57,6 +69,10 @@
 		  
 		<!--   Make comment for 5.0 -->
    </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="Common\Common.csproj" />
+  </ItemGroup>
      
 	  
 

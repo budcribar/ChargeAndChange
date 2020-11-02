@@ -25,6 +25,8 @@ namespace CCWebSite.Controllers
 
         private readonly string Endpoint = "https://charge-and-change.documents.azure.com:443/";
         private readonly string Key = "hKi3EPRIufbRmIFk5ehkAsp6OXyfUdLvEoHRhrv0ADVxIJyoPS3RA3JgqWRBhAYLTjoXkL9aZAOfvmMNl64SDw==";
+
+        private readonly string readOnlyKey = "StKc4jyS25jiGdzt9ypXBBvqUBADyo59kljTc0lUISGwsBKVQ0gpMrkh9gmMOpXSRLNLfEjDymMLrY3BzuyuXA==";
         private readonly string DatabaseId = "chargeAndChange";
         private readonly string CollectionId;// = "bev";
         private readonly DocumentClient client;
