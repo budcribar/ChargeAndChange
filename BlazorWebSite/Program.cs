@@ -27,12 +27,12 @@ namespace BlazorWebSite
 
             // sets up Azure Active Directory authentication and adds the 
             // user_impersonation scope to access functions.
-            //builder.Services.AddMsalAuthentication(options =>
-            //{
-            //    options.ProviderOptions
-            //    .DefaultAccessTokenScopes.Add($"{functionEndpoint(builder)}user_impersonation");
-            //    builder.Configuration.Bind("AzureAd", options.ProviderOptions.Authentication);
-            //});
+            builder.Services.AddMsalAuthentication(options =>
+            {
+                options.ProviderOptions
+                .DefaultAccessTokenScopes.Add($"{functionEndpoint(builder)}user_impersonation");
+                builder.Configuration.Bind("AzureAd", options.ProviderOptions.Authentication);
+            });
 
             // set up the authorization handler to inject tokens
             builder.Services.AddTransient<CosmosAuthorizationMessageHandler>();
@@ -45,15 +45,19 @@ namespace BlazorWebSite
                 }).AddHttpMessageHandler<CosmosAuthorizationMessageHandler>();
 
             // register the client to retrieve Cosmos DB tokens.
+
             builder.Services.AddTransient<TokenClient>();
 
             // not used
             //builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
 
 
-            builder.Services.AddSingleton<IDocumentDBRepository<EVSpecs>>(new DocumentDBRepository<EVSpecs>("bev"));
+            builder.Services.AddSingleton<IDocumentDBRepository<EVSpecs>>(x => new DocumentDBRepository<EVSpecs>("bev", x.GetRequiredService<TokenClient>()));
+            builder.Services.AddSingleton<IDocumentDBRepository<Contact>>(x => new DocumentDBRepository<Contact>("contact", x.GetRequiredService<TokenClient>()));
+
+            //builder.Services.AddSingleton<IDocumentDBRepository<EVSpecs>>(new DocumentDBRepository<EVSpecs>("bev"));
             builder.Services.AddSingleton<BEVController>();
-            builder.Services.AddSingleton<IDocumentDBRepository<Contact>>(new DocumentDBRepository<Contact>("contact"));
+            //builder.Services.AddSingleton<IDocumentDBRepository<Contact>>(new DocumentDBRepository<Contact>("contact"));
             builder.Services.AddSingleton<ContactController>();
 
             //builder.Services.AddOidcAuthentication(options =>

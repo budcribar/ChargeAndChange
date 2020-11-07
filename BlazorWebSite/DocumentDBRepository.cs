@@ -13,6 +13,8 @@ namespace CCWebSite.Controllers
     using System.Linq.Expressions;
     using System.Threading;
     using System.Threading.Tasks;
+    using AzureBlazorCosmosWasm.Data;
+    using Common;
     //using Microsoft.Azure.CosmosDB.BulkExecutor;
     //using Microsoft.Azure.CosmosDB.BulkExecutor.BulkImport;
     using Microsoft.Azure.Documents;
@@ -29,25 +31,43 @@ namespace CCWebSite.Controllers
         private readonly string readOnlyKey = "StKc4jyS25jiGdzt9ypXBBvqUBADyo59kljTc0lUISGwsBKVQ0gpMrkh9gmMOpXSRLNLfEjDymMLrY3BzuyuXA==";
         private readonly string DatabaseId = "chargeAndChange";
         private readonly string CollectionId;// = "bev";
-        private readonly DocumentClient client;
+        private DocumentClient client = null;
+        private readonly TokenClient tokenClient;
+        private CosmosToken _credentials;
 
-        public DocumentDBRepository(string collectionId)
+        private async Task<DocumentClient> Client()
         {
-            this.CollectionId = collectionId;
-            this.client = new DocumentClient(new Uri(Endpoint), Key);
-            try
+            if (_credentials == null)
             {
-                CreateDatabaseIfNotExistsAsync().Wait();
-                CreateCollectionIfNotExistsAsync().Wait();
+                //_credentials = await tokenClient.GetTokenAsync();
             }
-            catch (Exception) { }
+
+            if (client == null)
+            {
+                this.client = new DocumentClient(new Uri(Endpoint), Key);
+                try
+                {
+                    await CreateDatabaseIfNotExistsAsync();
+                    await CreateCollectionIfNotExistsAsync();
+                }
+                catch (Exception) { }
+            }
+
+            return client;
+
+        }
+
+        public DocumentDBRepository(string collectionId, TokenClient tokenClient)
+        {
+            this.tokenClient = tokenClient;
+            this.CollectionId = collectionId;        
         }
 
         public async Task<T?> GetItemAsync(string id)
         {
             try
             {
-                Document document = await client.ReadDocumentAsync(UriFactory.CreateDocumentUri(DatabaseId, CollectionId, id));
+                Document document = await (await Client()).ReadDocumentAsync(UriFactory.CreateDocumentUri(DatabaseId, CollectionId, id));
                 return (T)(dynamic)document;
             }
             catch (DocumentClientException e)
@@ -65,7 +85,8 @@ namespace CCWebSite.Controllers
 
         public async Task<IEnumerable<T>> GetItemsAsync(Expression<Func<T, bool>> predicate)
         {
-            IDocumentQuery<T> query = client.CreateDocumentQuery<T>(
+          
+            IDocumentQuery<T> query = (await Client()).CreateDocumentQuery<T>(
                 UriFactory.CreateDocumentCollectionUri(DatabaseId, CollectionId),
                 new FeedOptions { MaxItemCount = -1, EnableCrossPartitionQuery = true })
                 .Where(predicate)
@@ -82,7 +103,8 @@ namespace CCWebSite.Controllers
 
         public async Task<T?> GetItemAsync(Expression<Func<T, bool>> predicate)
         {
-            IDocumentQuery<T> query = client.CreateDocumentQuery<T>(
+          
+            IDocumentQuery<T> query = (await Client()).CreateDocumentQuery<T>(
                 UriFactory.CreateDocumentCollectionUri(DatabaseId, CollectionId),
                 new FeedOptions { MaxItemCount = -1, EnableCrossPartitionQuery = true })
                 .Where(predicate)
@@ -97,12 +119,12 @@ namespace CCWebSite.Controllers
             return results.Count() == 0 ? null : results.First();
         }
 
-        static internal DocumentCollection GetCollectionIfExists(DocumentClient client, string databaseName, string collectionName)
-        {
-           
-            return client.CreateDocumentCollectionQuery(UriFactory.CreateDatabaseUri(databaseName))
-                .Where(c => c.Id == collectionName).AsEnumerable().FirstOrDefault();
-        }
+        //static internal DocumentCollection GetCollectionIfExists(DocumentClient client, string databaseName, string collectionName)
+        //{
+        
+        //    return (await Client()).CreateDocumentCollectionQuery(UriFactory.CreateDatabaseUri(databaseName))
+        //        .Where(c => c.Id == collectionName).AsEnumerable().FirstOrDefault();
+        //}
 
         //public async void CreateItemsAsync(T[] item)
         //{
@@ -213,30 +235,30 @@ namespace CCWebSite.Controllers
         //}
         public async Task<Document> CreateItemAsync(T item)
         {
-            return await client.CreateDocumentAsync(UriFactory.CreateDocumentCollectionUri(DatabaseId, CollectionId), item);
+            return await (await Client()).CreateDocumentAsync(UriFactory.CreateDocumentCollectionUri(DatabaseId, CollectionId), item);
         }
 
         public async Task<Document> UpdateItemAsync(string id, T item)
         {
-            return await client.ReplaceDocumentAsync(UriFactory.CreateDocumentUri(DatabaseId, CollectionId, id), item);
+            return await (await Client()).ReplaceDocumentAsync(UriFactory.CreateDocumentUri(DatabaseId, CollectionId, id), item);
         }
 
         public async Task DeleteItemAsync(string id)
         {
-            await client.DeleteDocumentAsync(UriFactory.CreateDocumentUri(DatabaseId, CollectionId, id),new RequestOptions { PartitionKey = new PartitionKey(id) });
+            await (await Client()).DeleteDocumentAsync(UriFactory.CreateDocumentUri(DatabaseId, CollectionId, id),new RequestOptions { PartitionKey = new PartitionKey(id) });
         }
 
         private async Task CreateDatabaseIfNotExistsAsync()
         {
             try
             {
-                await client.ReadDatabaseAsync(UriFactory.CreateDatabaseUri(DatabaseId));
+                await (await Client()).ReadDatabaseAsync(UriFactory.CreateDatabaseUri(DatabaseId));
             }
             catch (DocumentClientException e)
             {
                 if (e.StatusCode == System.Net.HttpStatusCode.NotFound)
                 {
-                    await client.CreateDatabaseAsync(new Database { Id = DatabaseId });
+                    await (await Client()).CreateDatabaseAsync(new Database { Id = DatabaseId });
                 }
                 else
                 {
@@ -249,13 +271,13 @@ namespace CCWebSite.Controllers
         {
             try
             {
-                await client.ReadDocumentCollectionAsync(UriFactory.CreateDocumentCollectionUri(DatabaseId, CollectionId));
+                await (await Client()).ReadDocumentCollectionAsync(UriFactory.CreateDocumentCollectionUri(DatabaseId, CollectionId));
             }
             catch (DocumentClientException e)
             {
                 if (e.StatusCode == System.Net.HttpStatusCode.NotFound)
                 {
-                    await client.CreateDocumentCollectionAsync(
+                    await (await Client()).CreateDocumentCollectionAsync(
                         UriFactory.CreateDatabaseUri(DatabaseId),
                         new DocumentCollection { Id = CollectionId,   PartitionKey=new PartitionKeyDefinition {  Paths= new Collection<string> { "/id" } } },
                         new RequestOptions { OfferThroughput = 400 });
