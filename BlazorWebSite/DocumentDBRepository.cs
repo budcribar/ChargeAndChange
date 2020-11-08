@@ -31,15 +31,15 @@ namespace CCWebSite.Controllers
         private readonly string readOnlyKey = "StKc4jyS25jiGdzt9ypXBBvqUBADyo59kljTc0lUISGwsBKVQ0gpMrkh9gmMOpXSRLNLfEjDymMLrY3BzuyuXA==";
         private readonly string DatabaseId = "chargeAndChange";
         private readonly string CollectionId;// = "bev";
-        private DocumentClient client = null;
+        private DocumentClient? client = null;
         private readonly TokenClient tokenClient;
-        private CosmosToken _credentials;
+        private CosmosToken? _credentials;
 
         private async Task<DocumentClient> Client()
         {
             if (_credentials == null)
             {
-                //_credentials = await tokenClient.GetTokenAsync();
+                _credentials = await tokenClient.GetTokenAsync();
             }
 
             if (client == null)

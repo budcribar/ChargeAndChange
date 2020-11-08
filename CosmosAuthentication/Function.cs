@@ -3,7 +3,7 @@ using System.IO;
 using Microsoft.Azure.WebJobs;
 using Microsoft.Azure.WebJobs.Host;
 using Microsoft.Extensions.Logging;
-using Microsoft.WindowsAzure.Storage.Blob;
+//using Microsoft.WindowsAzure.Storage.Blob;
 
 namespace CosmosAuthentication
 {

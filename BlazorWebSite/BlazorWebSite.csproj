@@ -20,54 +20,36 @@
   </ItemGroup>
 
   <ItemGroup>
+    
 	  <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="3.2.1" />
    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Build" Version="3.2.1" PrivateAssets="all" />
-   <PackageReference Include="Microsoft.AspNetCore.JsonPatch" Version="3.1.9" />
-   <PackageReference Include="Microsoft.Authentication.WebAssembly.Msal" Version="3.2.1" />
-   <PackageReference Include="Microsoft.Extensions.Caching.Abstractions" Version="3.1.9" />
-   <PackageReference Include="Microsoft.Extensions.Http" Version="3.1.9" />
-	  <PackageReference Include="Microsoft.Extensions.Identity.Core" Version="3.1.9" />
-	  <PackageReference Include="System.Net.Http" Version="4.3.4" />
-   <PackageReference Include="System.Net.Http.Json" Version="3.2.1" />
-	 
-	  
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="3.2.1" PrivateAssets="all" />
-    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Authentication" Version="3.2.1" />	
-	  <PackageReference Include="Radzen.Blazor" Version="2.15.20" />
-	 
-	 
-	  <PackageReference Include="Microsoft.Azure.Cosmos" Version="3.14.0" />
-	  <PackageReference Include="Microsoft.Azure.DocumentDB.Core" Version="2.12.0" />
+    <PackageReference Include="Microsoft.Authentication.WebAssembly.Msal" Version="3.2.1" />
+    <PackageReference Include="Microsoft.Azure.Cosmos" Version="3.14.0" />
+    <PackageReference Include="Microsoft.Azure.DocumentDB.Core" Version="2.12.0" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="3.1.9" />
+    <PackageReference Include="Microsoft.Extensions.Http" Version="3.1.9" />
+    <PackageReference Include="System.Net.Http.Json" Version="3.2.1" />
+    <PackageReference Include="Microsoft.Extensions.Identity.Core" Version="3.1.9" />
+    <!--
+    <PackageReference Include="Microsoft.AspNetCore.JsonPatch" Version="3.1.9" />
+    <PackageReference Include="System.Net.Http" Version="4.3.4" />
+    <PackageReference Include="Microsoft.Extensions.Caching.Abstractions" Version="3.1.9" />
+    
+    replaced with System.Net.Http.Json
+    <PackageReference Include="Microsoft.AspNetCore.Blazor.HttpClient" Version="3.2-preview3.20168.3" />
+   
+	  
+    -->
+   
+   
+	  
+   
+    
+	  <PackageReference Include="Radzen.Blazor" Version="2.16.1" />	 
+	  
 
 
-
-    <!-- Comment for 5.0  
-    <Project Sdk="Microsoft.NET.Sdk.BlazorWebAssembly">
-      
-	  <PropertyGroup>
-		  <TargetFramework>net5</TargetFramework>
-		 
-		  <RazorLangVersion>3.0</RazorLangVersion>
-
-
-		  <Nullable>enable</Nullable>
-	  </PropertyGroup>
-
-	  <ItemGroup>
-		  <PackageReference Include="Microsoft.Azure.DocumentDB.Core" Version="2.12.0" />
-		  <PackageReference Include="Radzen.Blazor" Version="2.15.12" />
-		  <PackageReference Include="Microsoft.Azure.Cosmos" Version="3.14.0" />
-		  <PackageReference Include="Microsoft.AspNetCore.JsonPatch" Version="5.0.0-rc.2.20475.17" />
-		  <PackageReference Include="System.Net.Http.Json" Version="5.0.0-rc.2.20475.5" />
-		  <PackageReference Include="Microsoft.Extensions.Identity.Core" Version="5.0.0-rc.2.20475.17" />
-
-		  <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Authentication" Version="5.0.0-rc.2.20475.17" />
-		  <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="5.0.0-rc.2.20475.17" PrivateAssets="all" />
-		  <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="5.0.0-rc.2.20475.17" />
-
--->
-		  
-		<!--   Make comment for 5.0 -->
    </ItemGroup>
 
   <ItemGroup>
