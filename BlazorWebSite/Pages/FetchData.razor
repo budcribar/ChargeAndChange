@@ -42,7 +42,7 @@
 
         <RadzenGridColumn TItem="EVSpecs" Property="BodyStyle" Title="Body Style">
             <EditTemplate Context="evSpec">
-                <RadzenDropDown TValue="string" Data="@bodyStyles" Style="width:100%" Change="@(args => Change(args.ToString(), evSpec))" SelectedItem="evSpec.BodyStyle.ToString()" />
+                <RadzenDropDown TValue="string" Data="@bodyStyles" Style="width:100%" Change="@(args => Change(args?.ToString() ?? "", evSpec))" SelectedItem="evSpec.BodyStyle.ToString()" />
             </EditTemplate>
         </RadzenGridColumn>
 
@@ -71,7 +71,7 @@
         <RadzenGridColumn TItem="EVSpecs" Property="DriveTrain" Title="Drive Train">
 
             <EditTemplate Context="evSpec">
-                <RadzenDropDown TValue="string" Data="@driveTypes" Style="width:100%" Change="@(args => ChangeDriveType(args.ToString(), evSpec))" SelectedItem="evSpec.DriveTrain.ToString()" />
+                <RadzenDropDown TValue="string" Data="@driveTypes" Style="width:100%" Change="@(args => ChangeDriveType(args?.ToString() ?? "", evSpec))" SelectedItem="evSpec.DriveTrain.ToString()" />
             </EditTemplate>
         </RadzenGridColumn>
 
@@ -124,7 +124,7 @@
 
         <RadzenGridColumn TItem="EVSpecs" Property="ChargingConnector" Title="Charging Connector">
             <EditTemplate Context="evSpec">
-                <RadzenDropDown TValue="string" Data="@connectorTypes" Style="width:100%" Change="@(args => ChangeConnectorType(args.ToString(), evSpec))" SelectedItem="evSpec.ChargingConnector.ToString()" />
+                <RadzenDropDown TValue="string" Data="@connectorTypes" Style="width:100%" Change="@(args => ChangeConnectorType(args?.ToString() ?? "", evSpec))" SelectedItem="evSpec.ChargingConnector.ToString()" />
             </EditTemplate>
         </RadzenGridColumn>
 
@@ -199,7 +199,7 @@
 
 @code {
     int powerMode = 1;
-    private RadzenGrid<EVSpecs> evSpecsGrid;
+    private RadzenGrid<EVSpecs>? evSpecsGrid;
 
     private EVSpecs[] evSpecs = Array.Empty<EVSpecs>();
     string[] bodyStyles = Enum.GetNames(typeof(BodyStyle));
@@ -246,7 +246,7 @@
 
     void EditRow(EVSpecs evSpec)
     {
-        evSpecsGrid.EditRow(evSpec);
+        evSpecsGrid?.EditRow(evSpec);
     }
 
     async void OnUpdateRow(EVSpecs evSpecs)
@@ -257,12 +257,12 @@
 
     void SaveRow(EVSpecs evSpecs)
     {
-        evSpecsGrid.UpdateRow(evSpecs);
+        evSpecsGrid?.UpdateRow(evSpecs);
     }
 
     void CancelEdit(EVSpecs evSpecs)
     {
-        evSpecsGrid.CancelEditRow(evSpecs);
+        evSpecsGrid?.CancelEditRow(evSpecs);
 
         // For production
         // var orderEntry = dbContext.Entry(order);
@@ -278,7 +278,7 @@
         await controller.Post(spec);
 
         evSpecs = (await controller.EVSpecs()).ToArray();
-        evSpecsGrid.Reload();
+        await (evSpecsGrid?.Reload() ?? Task.CompletedTask);
     }
 
     async void DeleteRow(EVSpecs evSpec)
@@ -294,7 +294,7 @@
 
         evSpecs = (await controller.EVSpecs()).ToArray();
 
-        evSpecsGrid.Reload();
+        await (evSpecsGrid?.Reload() ?? Task.CompletedTask);
     }
 
 }

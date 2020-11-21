@@ -7,8 +7,8 @@
 
 <h1>Contacts</h1>
 <Radzen.Blazor.RadzenButton Click="@InsertRow">Insert</Radzen.Blazor.RadzenButton> 
-<RadzenDropDown TValue="string" Data="@subdivisions" Style="width:20%" Change="@(args => ChangeSubdivision(args.ToString()))" SelectedItem="selectedSubdivision" />
-<RadzenDropDown TValue="string" Data="@streets" Style="width:20%" Change="@(args => ChangeStreet(args.ToString()))" SelectedItem="selectedStreet" />
+<RadzenDropDown TValue="string" Data="@subdivisions" Style="width:20%" Change="@(args => ChangeSubdivision(args?.ToString() ?? ""))" SelectedItem="selectedSubdivision" />
+<RadzenDropDown TValue="string" Data="@streets" Style="width:20%" Change="@(args => ChangeStreet(args?.ToString() ?? ""))" SelectedItem="selectedStreet" />
 
 <RadzenGrid @ref="contactsGrid" AllowFiltering="true" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" AllowPaging="true" PageSize="50" EditMode="DataGridEditMode.Single" RowUpdate="@OnUpdateRow"
             AllowSorting="true" Data="@filteredContacts" TItem="Contact" ColumnWidth="130px">
@@ -60,7 +60,7 @@
                     @contact.Status.ToString()
                 </Template>
             <EditTemplate Context="contact">
-                <RadzenDropDown TValue="string" Data="@statusTypes" Style="width:100%" Change="@(args => Change(args.ToString(), contact))" SelectedItem="contact.Status.ToString()" />
+                <RadzenDropDown TValue="string" Data="@statusTypes" Style="width:100%" Change="@(args => Change(args?.ToString() ?? "", contact))" SelectedItem="contact.Status.ToString()" />
             </EditTemplate>
         </RadzenGridColumn>
 
@@ -95,7 +95,7 @@
                     @contact.EVInterest.ToString()
                 </Template>
             <EditTemplate Context="contact">
-                <RadzenDropDown TValue="string" Data="@interestTypes" Style="width:100%" Change="@(args => ChangeEVInterest(args.ToString(), contact))" SelectedItem="contact.EVInterest.ToString()" />
+                <RadzenDropDown TValue="string" Data="@interestTypes" Style="width:100%" Change="@(args => ChangeEVInterest(args?.ToString() ?? "", contact))" SelectedItem="contact.EVInterest.ToString()" />
             </EditTemplate>
         </RadzenGridColumn>
 
@@ -104,7 +104,7 @@
                     @contact.LawnEquipmentInterest.ToString()
                 </Template>
             <EditTemplate Context="contact">
-                <RadzenDropDown TValue="string" Data="@interestTypes" Style="width:100%" Change="@(args => ChangeLawnEquipmentInterest(args.ToString(), contact))" SelectedItem="contact.LawnEquipmentInterest.ToString()" />
+                <RadzenDropDown TValue="string" Data="@interestTypes" Style="width:100%" Change="@(args => ChangeLawnEquipmentInterest(args?.ToString() ?? "", contact))" SelectedItem="contact.LawnEquipmentInterest.ToString()" />
             </EditTemplate>
         </RadzenGridColumn>
 
@@ -148,13 +148,13 @@
 
 
 @code {
-    int powerMode = 1;
-    private RadzenGrid<Contact> contactsGrid;
+    //int powerMode = 1;
+    private RadzenGrid<Contact>? contactsGrid;
 
     private Contact[] contacts = Array.Empty<Contact>();
     private Contact[] filteredContacts = Array.Empty<Contact>();
-    private string[] subdivisions = Array.Empty<string>();
-    private string[] streets = Array.Empty<string>();
+    private string?[] subdivisions = Array.Empty<string?>();
+    private string?[] streets = Array.Empty<string>();
 
     private string selectedSubdivision = "";
     private string selectedStreet = "";
@@ -178,11 +178,11 @@
     void BuildSelections() {
         var temp = contacts.Select(x => x.Subdivision?.Trim()).Distinct().ToList();
         temp.Insert(0,"<all>");
-        subdivisions = temp.ToArray();
+        subdivisions = temp?.ToArray() ?? Array.Empty<string?>();
 
         temp = contacts.Select(x => x.Street?.Trim()).Distinct().ToList();
         temp.Insert(0,"<all>");
-        streets = temp.ToArray();
+        streets = temp?.ToArray() ?? Array.Empty<string?>();
     }
 
 
@@ -203,7 +203,7 @@
     {
         selectedStreet = value;
 
-         
+
         Reload();
         StateHasChanged();
     }
@@ -218,18 +218,18 @@
             else
                 filteredContacts = contacts.Where(x => x.Subdivision?.Trim() == selectedSubdivision).ToArray();
         }
-           
-        else 
+
+        else
         {
             if (selectedSubdivision == "<all>")
                 filteredContacts = contacts.Where(x => x.Street?.Trim() == selectedStreet).ToArray();
             else
                 filteredContacts = contacts.Where(x => x.Subdivision?.Trim() == selectedSubdivision && x.Street?.Trim() == selectedStreet).ToArray();
         }
-          
+
     }
 
-   
+
     void Change(string value, Contact spec)
     {
         spec.Status = Enum.Parse<ContactStatus> (value);
@@ -244,7 +244,7 @@
         StateHasChanged();
     }
 
-     void ChangeLawnEquipmentInterest(string value, Contact spec)
+    void ChangeLawnEquipmentInterest(string value, Contact spec)
     {
         spec.LawnEquipmentInterest = Enum.Parse<InterestLevel> (value);
 
@@ -253,15 +253,15 @@
 
     void EditRow(Contact contact)
     {
-        contactsGrid.EditRow(contact);
+        contactsGrid?.EditRow(contact);
         Reload();
     }
 
     async void OnUpdateRow(Contact contact)
     {
         var old = await controller.GetById(contact.Id);
-       
-        contact.HashedPassword = old.HashedPassword;
+
+        contact.HashedPassword = old?.HashedPassword ?? "";
 
         await controller.Patch (contact.Id, contact);
         Reload();
@@ -269,14 +269,14 @@
 
     void SaveRow(Contact contact)
     {
-        contactsGrid.UpdateRow(contact);
+        contactsGrid?.UpdateRow(contact);
         Reload();
     }
 
     void CancelEdit(Contact contact)
     {
-        contactsGrid.CancelEditRow(contact);
 
+        contactsGrid?.CancelEditRow(contact);
         // For production
         // var orderEntry = dbContext.Entry(order);
         // orderEntry.CurrentValues.SetValues(orderEntry.OriginalValues);
@@ -285,12 +285,12 @@
 
     async void InsertRow() {
         Contact spec = new Contact();
-       
+
 
         await controller.Put(spec);
 
         Reload();
-        contactsGrid.Reload();
+        await (contactsGrid?.Reload() ?? Task.CompletedTask);
 
     }
 
@@ -307,7 +307,7 @@
 
         Reload();
 
-        contactsGrid.Reload();
+        await (contactsGrid?.Reload() ?? Task.CompletedTask);
     }
 
 }

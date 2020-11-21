@@ -12,7 +12,7 @@
     <div class="row">
 
 
-        <RadzenDropDown TValue="string" Data="@specs.Keys" Style="width:30%" Change="@(args => Change(args.ToString()))" SelectedItem="selectedSpec" />
+        <RadzenDropDown TValue="string" Data="@specs.Keys" Style="width:30%" Change="@(args => Change(args?.ToString() ?? ""))" SelectedItem="selectedSpec" />
 
     </div>
 

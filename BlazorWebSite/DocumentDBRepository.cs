@@ -97,9 +97,9 @@ namespace CCWebSite.Controllers
 
         static internal DocumentCollection GetCollectionIfExists(DocumentClient client, string databaseName, string collectionName)
         {
-           
+
             return client.CreateDocumentCollectionQuery(UriFactory.CreateDatabaseUri(databaseName))
-                .Where(c => c.Id == collectionName).AsEnumerable().FirstOrDefault();
+                .Where(c => c.Id == collectionName).AsEnumerable().FirstOrDefault() ?? new DocumentCollection();
         }
 
         //public async void CreateItemsAsync(T[] item)

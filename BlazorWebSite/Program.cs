@@ -26,12 +26,12 @@ namespace BlazorWebSite
             builder.Services.AddSingleton<IDocumentDBRepository<Contact>>(new DocumentDBRepository<Contact>("contact"));
             builder.Services.AddSingleton<ContactController>();
 
-            builder.Services.AddOidcAuthentication(options =>
-            {
-                // Configure your authentication provider options here.
-                // For more information, see https://aka.ms/blazor-standalone-auth
-                builder.Configuration.Bind("Local", options.ProviderOptions);
-            });
+            //builder.Services.AddOidcAuthentication(options =>
+            //{
+            //    // Configure your authentication provider options here.
+            //    // For more information, see https://aka.ms/blazor-standalone-auth
+            //    builder.Configuration.Bind("Local", options.ProviderOptions);
+            //});
 
             await builder.Build().RunAsync();
         }
