@@ -7,12 +7,19 @@
 		  <Nullable>enable</Nullable>
       <SupportedPlatform>browser</SupportedPlatform>
 	  </PropertyGroup>
+      
+	  <ItemGroup>
+	    <Content Remove="Swagger.json" />
+	  </ItemGroup>
 
 	  <ItemGroup>
+		  <PackageReference Include="JsonSubTypes" Version="1.2.0" />
 		  <PackageReference Include="Microsoft.Azure.DocumentDB.Core" Version="2.12.0" />
+		  <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
 		  <PackageReference Include="Radzen.Blazor" Version="2.17.7" />
 		  <PackageReference Include="Microsoft.Azure.Cosmos" Version="3.15.2-preview" />
 		  <PackageReference Include="Microsoft.AspNetCore.JsonPatch" Version="5.0.0" />
+		  <PackageReference Include="RestSharp" Version="105.1.0" />
 		  <PackageReference Include="System.Net.Http.Json" Version="5.0.0" />
 		  <PackageReference Include="Microsoft.Extensions.Identity.Core" Version="5.0.0" />
 
@@ -35,6 +42,21 @@
 
   <ItemGroup>
     <Folder Include="Common\" />
+  </ItemGroup>  
+
+  <ItemGroup>
+    <None Include="Swagger.json">
+      <Generator>SwaggerCodeGenerator</Generator>
+      <LastGenOutput>Swagger.cs</LastGenOutput>
+    </None>
+  </ItemGroup>  
+
+  <ItemGroup>
+    <Compile Update="Swagger.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Swagger.json</DependentUpon>
+    </Compile>
   </ItemGroup>  
 
 </Project>
