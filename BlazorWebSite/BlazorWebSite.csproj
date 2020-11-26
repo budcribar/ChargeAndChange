@@ -48,10 +48,6 @@
   </ItemGroup>  
 
   <ItemGroup>
-    <Folder Include="Common\" />
-  </ItemGroup>  
-
-  <ItemGroup>
     <OpenApiReference Include="Swagger.json" CodeGenerator="NSwagCSharp">
       <Generator>SwaggerCodeGenerator</Generator>
       <LastGenOutput>Swagger.cs</LastGenOutput>
