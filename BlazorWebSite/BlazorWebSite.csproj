@@ -1,62 +1,42 @@
-﻿<!-- Make Comment for 2.1 -->
-<Project Sdk="Microsoft.NET.Sdk.Web">
-	
-  <PropertyGroup>
-	 
-    <TargetFramework>netstandard2.1</TargetFramework>
-	  <RazorLangVersion>3.0</RazorLangVersion>  
-     <Nullable>enable</Nullable>
-  </PropertyGroup>
-	
-  <ItemGroup>
-    <Compile Remove="Common\**" />
-    <Content Remove="Common\**" />
-    <EmbeddedResource Remove="Common\**" />
-    <None Remove="Common\**" />
-  </ItemGroup>
-	
-  <ItemGroup>
-    <Compile Remove="Data\BlogClient.cs" />
-  </ItemGroup>
+﻿
+    <Project Sdk="Microsoft.NET.Sdk.BlazorWebAssembly">
+      
+	  <PropertyGroup>
+		  <TargetFramework>net5</TargetFramework>
+		  <RazorLangVersion>3.0</RazorLangVersion>
+		  <Nullable>enable</Nullable>
+      <SupportedPlatform>browser</SupportedPlatform>
+	  </PropertyGroup>
+      
+	  <ItemGroup>
+	    <Content Remove="Swagger.json" />
+	  </ItemGroup>
 
-  <ItemGroup>
-    
-	  <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="3.2.1" />
-   <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Build" Version="3.2.1" PrivateAssets="all" />
-    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="3.2.1" PrivateAssets="all" />
-    <PackageReference Include="Microsoft.Authentication.WebAssembly.Msal" Version="3.2.1" />
-    <PackageReference Include="Microsoft.Azure.Cosmos" Version="3.14.0" />
-    <PackageReference Include="Microsoft.Azure.DocumentDB.Core" Version="2.12.0" />
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="3.1.9" />
-    <PackageReference Include="Microsoft.Extensions.Http" Version="3.1.9" />
-    <PackageReference Include="System.Net.Http.Json" Version="3.2.1" />
-    <PackageReference Include="Microsoft.Extensions.Identity.Core" Version="3.1.9" />
-    <!--
-    <PackageReference Include="Microsoft.AspNetCore.JsonPatch" Version="3.1.9" />
-    <PackageReference Include="System.Net.Http" Version="4.3.4" />
-    <PackageReference Include="Microsoft.Extensions.Caching.Abstractions" Version="3.1.9" />
-    
-    replaced with System.Net.Http.Json
-    <PackageReference Include="Microsoft.AspNetCore.Blazor.HttpClient" Version="3.2-preview3.20168.3" />
-   
-	  
-    -->
-   
-   
-	  
-   
-    
-	  <PackageReference Include="Radzen.Blazor" Version="2.16.1" />	 
-	  
+	  <ItemGroup>
+		  <PackageReference Include="JsonSubTypes" Version="1.8.0" />
+		  <PackageReference Include="Microsoft.Azure.DocumentDB.Core" Version="2.12.0" />
+		  <PackageReference Include="Microsoft.Extensions.ApiDescription.Client" Version="5.0.0">
+		    <PrivateAssets>all</PrivateAssets>
+		    <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		  </PackageReference>
+		  <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+		  <PackageReference Include="NSwag.ApiDescription.Client" Version="13.9.4">
+		    <PrivateAssets>all</PrivateAssets>
+		    <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		  </PackageReference>
+		  <PackageReference Include="Radzen.Blazor" Version="2.17.10" />
+		  <PackageReference Include="Microsoft.Azure.Cosmos" Version="3.15.2-preview" />
+		  <PackageReference Include="Microsoft.AspNetCore.JsonPatch" Version="5.0.0" />
+		  <PackageReference Include="System.Net.Http.Json" Version="5.0.0" />
+		  <PackageReference Include="Microsoft.Extensions.Identity.Core" Version="5.0.0" />
 
-
-   </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="Common\Common.csproj" />
-  </ItemGroup>
-     
-	  
+      <!--
+        <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Authentication" Version="5.0.0" />
+      -->
+		
+		  <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="5.0.0" PrivateAssets="all" />
+		  <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="5.0.0" />
+   </ItemGroup>  
 
   <ItemGroup>
     <Content Update="wwwroot\css\app.css">
@@ -65,6 +45,17 @@
     <Content Update="wwwroot\css\open-iconic\font\fonts\open-iconic.woff">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-  </ItemGroup>
+  </ItemGroup>  
+
+  <ItemGroup>
+    <Folder Include="Common\" />
+  </ItemGroup>  
+
+  <ItemGroup>
+    <OpenApiReference Include="Swagger.json" CodeGenerator="NSwagCSharp">
+      <Generator>SwaggerCodeGenerator</Generator>
+      <LastGenOutput>Swagger.cs</LastGenOutput>
+    </OpenApiReference>
+  </ItemGroup>  
 
 </Project>

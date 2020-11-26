@@ -1,9 +1,7 @@
 @page "/charts"
-@using CCWebSite.Controllers;
 @using System.Linq;
 
-@inject BEVController controller;
-
+@inject  SwaggerClient client
 <h1>EV Charts</h1>
 
 @if (selectedSpec.Length > 0)
@@ -11,7 +9,7 @@
     <div class="row">
 
 
-        <RadzenDropDown TValue="string" Data="@specs.Keys" Style="width:30%" Change="@(args => Change(args.ToString()))" SelectedItem="selectedSpec" />
+        <RadzenDropDown TValue="string" Data="@specs.Keys" Style="width:30%" Change="@(args => Change(args?.ToString() ?? ""))" SelectedItem="selectedSpec" />
 
     </div>
 
@@ -76,7 +74,7 @@ else
 
     protected override async Task OnInitializedAsync()
     {
-        evSpecs = (await controller.EVSpecs()).ToList().OrderBy(x => x.Manufacturer).ThenBy(x => x.Model).ToArray();
+        evSpecs = (await client.EVSpecsAsync()).ToList().OrderBy(x => x.Manufacturer).ThenBy(x => x.Model).ToArray();
         Change(specs.Keys.First());
     }
 

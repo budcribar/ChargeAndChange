@@ -1,18 +1,21 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Authentication;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Azure.Cosmos;
 
 namespace CCWebSite.Controllers
 {
     public class ChartData
     {
-        public string Name { get; set; } = "";
+        public string Name { get; set; }
         public double? Y { get; set; }
     }
 
-    
-    public class BEVController 
+    [Route("api/[controller]")]
+    public class BEVController : Controller
     {
         private readonly IDocumentDBRepository<EVSpecs> respository;
         public BEVController(IDocumentDBRepository<EVSpecs> Respository)
@@ -34,26 +37,30 @@ namespace CCWebSite.Controllers
         //    return View(item);
         //}
 
-       
-        public Task Delete(string id)
+        [HttpDelete("DeleteEVSpecs/{id}")]
+        public async void Delete(string id)
         {
-            return respository.DeleteItemAsync(id);
+            await respository.DeleteItemAsync(id);
         }
 
-        
-        public Task Patch(string id,EVSpecs bev)
+        [HttpPatch("PatchEVSpecs/{id}")]
+        public async void Patch(string id, [FromBody]EVSpecs bev)
         {
-            if (bev == null) return Task.CompletedTask;
+            if (bev == null) return;
             bev.Id = id;
-            return respository.UpdateItemAsync(id, bev);
+            await respository.UpdateItemAsync(id, bev);
         }
 
-        
-        public Task Post(EVSpecs bev)
+        [HttpPost("PostEVSpecs")]
+        public async void Post([FromBody]EVSpecs bev)
         {
-            if (bev == null) return Task.CompletedTask; 
+            var ss = await this.Request.BodyReader.ReadAsync();
+            
+            //var buffer = new byte[this.Request.Body.Length];
+            //var s = this.Request.Body.Read(buffer, 0, (int)Request.Body.Length);
+            if (bev == null) return;
             bev.Id = Guid.NewGuid().ToString();
-            return respository.CreateItemAsync(bev);
+            await respository.CreateItemAsync(bev);
         }
 
         private double? GetValue(EVSpecs evspec, string spec)
@@ -64,16 +71,16 @@ namespace CCWebSite.Controllers
             return ((IConvertible)o).ToDouble(null);
         }
 
-        
+        [HttpGet("GetSpecs/{spec}/{availableOnly}")]
         public IEnumerable<ChartData> Spec(string spec, Boolean availableOnly)
         {
             return respository.GetItemsAsync(x => true).Result.Where(y => !availableOnly || y.Available).Select(x => new ChartData { Name = x.Manufacturer + ' ' + x.Model, Y = GetValue(x, spec) }).Where(x => x.Y != null).OrderBy(x => x.Y);
         }
 
-       
-        public Task<IEnumerable<EVSpecs>> EVSpecs()
+        [HttpGet("[action]")]
+        public  IEnumerable<EVSpecs> EVSpecs()
         {
-            return respository.GetItemsAsync(x => true);
+            return respository.GetItemsAsync(x => true).Result;
         }
 
         

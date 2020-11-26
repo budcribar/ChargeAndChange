@@ -29,13 +29,13 @@ namespace CCWebSite.Controllers
         public DateTime DateUpdated { get; set; }
 
         [JsonConverter(typeof(StringEnumConverter))]
-        public InterestLevel? EVInterest { get; set; }
+        public InterestLevel EVInterest { get; set; } = InterestLevel.Unknown;
 
         [JsonConverter(typeof(StringEnumConverter))]
-        public InterestLevel? LawnEquipmentInterest { get; set; }
+        public InterestLevel LawnEquipmentInterest { get; set; } = InterestLevel.Unknown;
 
         [JsonConverter(typeof(StringEnumConverter))]
-        public ContactStatus? Status { get; set; }
+        public ContactStatus Status { get; set; } = ContactStatus.Uncontacted;
         public string FirstName { get; set; } = "";
         public string LastName { get; set; } = "";
         public string Subdivision { get; set; } = "";
@@ -57,7 +57,7 @@ namespace CCWebSite.Controllers
         }
     }
 
-    
+
 
     public class LarimerCountyRecord
     {
@@ -101,10 +101,10 @@ namespace CCWebSite.Controllers
             Contact c;
             try
             {
-                c =new Contact { DateUpdated = DateTime.Now, Id = Guid.NewGuid().ToString(), Status= ContactStatus.Uncontacted, City = FirstCharToUpper(locationcity), StreetNumber = int.Parse(locationaddress.Split(' ')[0]), Street = FirstCharToUpper(locationaddress.Substring(locationaddress.IndexOf(' '))).Trim(), State = "CO", ZipCode = zipcode, Subdivision = subdivision, FirstName = FirstCharToUpper(ownername1.Split(' ')[1]), LastName = FirstCharToUpper(ownername1.Split(' ')[0]) };
-
+                c = new Contact { DateUpdated = DateTime.Now, Id = Guid.NewGuid().ToString(), Status = ContactStatus.Uncontacted, City = FirstCharToUpper(locationcity), StreetNumber = int.Parse(locationaddress.Split(' ')[0]), Street = FirstCharToUpper(locationaddress.Substring(locationaddress.IndexOf(' '))).Trim(), State = "CO", ZipCode = zipcode, Subdivision = subdivision, FirstName = FirstCharToUpper(ownername1.Split(' ')[1]), LastName = FirstCharToUpper(ownername1.Split(' ')[0]) };
+                //c = new Contact();
             }
-            catch (Exception) { return new Contact();  }
+            catch (Exception) { return new Contact(); }
 
             return c;
         }

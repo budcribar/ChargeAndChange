@@ -20,8 +20,7 @@ namespace TeslaSuperchargers
         {
             HttpClientHandler handler = new HttpClientHandler
             {
-                // TODO
-                //AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate,
+                AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate,
             };
 
             using (var client = new HttpClient(handler))

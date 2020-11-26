@@ -1,13 +1,12 @@
 @page "/contacts"
-@using CCWebSite.Controllers;
 @using System.Linq;
 
-@inject ContactController controller;
+@inject SwaggerClient Client
 
 <h1>Contacts</h1>
-<Radzen.Blazor.RadzenButton Click="@InsertRow">Insert</Radzen.Blazor.RadzenButton> 
-<RadzenDropDown TValue="string" Data="@subdivisions" Style="width:20%" Change="@(args => ChangeSubdivision(args.ToString()))" SelectedItem="selectedSubdivision" />
-<RadzenDropDown TValue="string" Data="@streets" Style="width:20%" Change="@(args => ChangeStreet(args.ToString()))" SelectedItem="selectedStreet" />
+<Radzen.Blazor.RadzenButton Click="@InsertRow">Insert</Radzen.Blazor.RadzenButton>
+<RadzenDropDown TValue="string" Data="@subdivisions" Style="width:20%" Change="@(args => ChangeSubdivision(args?.ToString() ?? ""))" SelectedItem="selectedSubdivision" />
+<RadzenDropDown TValue="string" Data="@streets" Style="width:20%" Change="@(args => ChangeStreet(args?.ToString() ?? ""))" SelectedItem="selectedStreet" />
 
 <RadzenGrid @ref="contactsGrid" AllowFiltering="true" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" AllowPaging="true" PageSize="50" EditMode="DataGridEditMode.Single" RowUpdate="@OnUpdateRow"
             AllowSorting="true" Data="@filteredContacts" TItem="Contact" ColumnWidth="130px">
@@ -15,9 +14,9 @@
 
 
         <RadzenGridColumn TItem="Contact" Property="DateUpdated" Title="Date Updated">
-             <Template Context="contact">
-                    @String.Format("{0:d}", contact.DateUpdated)
-                </Template>
+            <Template Context="contact">
+                @String.Format("{0:d}", contact.DateUpdated)
+            </Template>
             <EditTemplate Context="contact">
                 <RadzenDatePicker @bind-Value="contact.DateUpdated" Style="width:100%" />
             </EditTemplate>
@@ -43,10 +42,10 @@
             </EditTemplate>
         </RadzenGridColumn>
 
-         <RadzenGridColumn TItem="Contact" Property="Subscriber" Title="Subscriber" Width="40%">
-              <Template Context="contact">
-                    @(contact.Subscriber ?? false)
-                </Template>
+        <RadzenGridColumn TItem="Contact" Property="Subscriber" Title="Subscriber" Width="40%">
+            <Template Context="contact">
+                @(contact.Subscriber ?? false)
+            </Template>
 
             <EditTemplate Context="contact">
                 <RadzenCheckBox @bind-Value="contact.Subscriber" Style="width:50%" />
@@ -55,11 +54,11 @@
 
 
         <RadzenGridColumn TItem="Contact" Property="Status" Title="Status">
-             <Template Context="contact">
-                    @contact.Status.ToString()
-                </Template>
+            <Template Context="contact">
+                @contact.Status.ToString()
+            </Template>
             <EditTemplate Context="contact">
-                <RadzenDropDown TValue="string" Data="@statusTypes" Style="width:100%" Change="@(args => Change(args.ToString(), contact))" SelectedItem="contact.Status.ToString()" />
+                <RadzenDropDown TValue="string" Data="@statusTypes" Style="width:100%" Change="@(args => Change(args?.ToString() ?? "", contact))" SelectedItem="contact.Status.ToString()" />
             </EditTemplate>
         </RadzenGridColumn>
 
@@ -69,41 +68,46 @@
             </EditTemplate>
         </RadzenGridColumn>
 
-         <RadzenGridColumn TItem="Contact" Property="StreetNumber" Title="Street Number" Width="50%">
+        <RadzenGridColumn TItem="Contact" Property="StreetNumber" Title="Street Number" Width="50%">
             <EditTemplate Context="contact">
                 <RadzenNumeric @bind-Value="contact.StreetNumber" Style="width:100%" />
             </EditTemplate>
         </RadzenGridColumn>
 
 
-         <RadzenGridColumn TItem="Contact" Property="Street" Title="Street">
+        <RadzenGridColumn TItem="Contact" Property="Street" Title="Street">
             <EditTemplate Context="contact">
                 <RadzenTextBox @bind-Value="contact.Street" Style="width:50%" />
             </EditTemplate>
         </RadzenGridColumn>
 
-        
-         <RadzenGridColumn TItem="Contact" Property="Phone" Title="Phone">
+
+        <RadzenGridColumn TItem="Contact" Property="Phone" Title="Phone">
             <EditTemplate Context="contact">
                 <RadzenNumeric @bind-Value="contact.Phone" Style="width:50%" />
             </EditTemplate>
         </RadzenGridColumn>
 
-         <RadzenGridColumn TItem="Contact" Property="EVInterest" Title="EV Interest">
-             <Template Context="contact">
-                    @contact.EVInterest.ToString()
-                </Template>
+        <RadzenGridColumn TItem="Contact" Property="EVInterest" Title="EV Interest">
+            <Template Context="contact">
+               
+                 @contact.EvInterest.ToString()
+                         
+
+            </Template>
             <EditTemplate Context="contact">
-                <RadzenDropDown TValue="string" Data="@interestTypes" Style="width:100%" Change="@(args => ChangeEVInterest(args.ToString(), contact))" SelectedItem="contact.EVInterest.ToString()" />
+                <RadzenDropDown TValue="string" Data="@interestTypes" Style="width:100%" Change="@(args => ChangeEVInterest(args?.ToString() ?? "", contact))" SelectedItem="contact.EvInterest.ToString()" />
             </EditTemplate>
         </RadzenGridColumn>
 
-         <RadzenGridColumn TItem="Contact" Property="LawnEquipmentInterest" Title="Lawn Equipment Interest">
-             <Template Context="contact">
-                    @contact.LawnEquipmentInterest.ToString()
-                </Template>
+        <RadzenGridColumn TItem="Contact" Property="LawnEquipmentInterest" Title="Lawn Equipment Interest">
+            <Template Context="contact">
+
+                           @contact.LawnEquipmentInterest.ToString()
+                   
+            </Template>
             <EditTemplate Context="contact">
-                <RadzenDropDown TValue="string" Data="@interestTypes" Style="width:100%" Change="@(args => ChangeLawnEquipmentInterest(args.ToString(), contact))" SelectedItem="contact.LawnEquipmentInterest.ToString()" />
+                <RadzenDropDown TValue="string" Data="@interestTypes" Style="width:100%" Change="@(args => ChangeLawnEquipmentInterest(args?.ToString() ?? "", contact))" SelectedItem="contact.LawnEquipmentInterest.ToString()" />
             </EditTemplate>
         </RadzenGridColumn>
 
@@ -147,13 +151,13 @@
 
 
 @code {
-    int powerMode = 1;
-    private RadzenGrid<Contact> contactsGrid;
+    //int powerMode = 1;
+    private RadzenGrid<Contact>? contactsGrid;
 
     private Contact[] contacts = Array.Empty<Contact>();
     private Contact[] filteredContacts = Array.Empty<Contact>();
-    private string[] subdivisions = Array.Empty<string>();
-    private string[] streets = Array.Empty<string>();
+    private string?[] subdivisions = Array.Empty<string?>();
+    private string?[] streets = Array.Empty<string>();
 
     private string selectedSubdivision = "";
     private string selectedStreet = "";
@@ -166,7 +170,7 @@
         selectedSubdivision = "<all>";
         selectedStreet = "<all>";
 
-        contacts = (await controller.Contacts()).ToList().OrderBy(x => x.Street).ThenBy(x => x.StreetNumber).ToArray();
+        contacts = (await Client.ContactsAsync()).OrderBy(x => x.Street).ThenBy(x => x.StreetNumber).ToArray();
         filteredContacts = contacts;
 
         BuildSelections();
@@ -174,14 +178,15 @@
         StateHasChanged();
     }
 
-    void BuildSelections() {
+    void BuildSelections()
+    {
         var temp = contacts.Select(x => x.Subdivision?.Trim()).Distinct().ToList();
-        temp.Insert(0,"<all>");
-        subdivisions = temp.ToArray();
+        temp.Insert(0, "<all>");
+        subdivisions = temp?.ToArray() ?? Array.Empty<string?>();
 
         temp = contacts.Select(x => x.Street?.Trim()).Distinct().ToList();
-        temp.Insert(0,"<all>");
-        streets = temp.ToArray();
+        temp.Insert(0, "<all>");
+        streets = temp?.ToArray() ?? Array.Empty<string?>();
     }
 
 
@@ -202,12 +207,13 @@
     {
         selectedStreet = value;
 
-         
+
         Reload();
         StateHasChanged();
     }
 
-    void Reload() {
+    void Reload()
+    {
         BuildSelections();
 
         if (selectedStreet == "<all>")
@@ -217,85 +223,88 @@
             else
                 filteredContacts = contacts.Where(x => x.Subdivision?.Trim() == selectedSubdivision).ToArray();
         }
-           
-        else 
+
+        else
         {
             if (selectedSubdivision == "<all>")
                 filteredContacts = contacts.Where(x => x.Street?.Trim() == selectedStreet).ToArray();
             else
                 filteredContacts = contacts.Where(x => x.Subdivision?.Trim() == selectedSubdivision && x.Street?.Trim() == selectedStreet).ToArray();
         }
-          
+
     }
 
-   
+
     void Change(string value, Contact spec)
     {
-        spec.Status = Enum.Parse<ContactStatus> (value);
+        spec.Status = Enum.Parse<ContactStatus>(value);
 
         StateHasChanged();
     }
 
     void ChangeEVInterest(string value, Contact spec)
     {
-        spec.EVInterest = Enum.Parse<InterestLevel> (value);
+        spec.EvInterest = Enum.Parse<InterestLevel>(value);
 
         StateHasChanged();
     }
 
-     void ChangeLawnEquipmentInterest(string value, Contact spec)
+    void ChangeLawnEquipmentInterest(string value, Contact spec)
     {
-        spec.LawnEquipmentInterest = Enum.Parse<InterestLevel> (value);
+        spec.LawnEquipmentInterest = Enum.Parse<InterestLevel>(value);
 
         StateHasChanged();
     }
 
     void EditRow(Contact contact)
     {
-        contactsGrid.EditRow(contact);
+        contactsGrid?.EditRow(contact);
         Reload();
     }
 
     async void OnUpdateRow(Contact contact)
     {
-        var old = await controller.GetById(contact.Id);
-       
-        contact.HashedPassword = old.HashedPassword;
+        
+        var old = await Client.GetContactByIdAsync(contact.Id);
 
-        await controller.Patch (contact.Id, contact);
+        contact.HashedPassword = old?.HashedPassword ?? "";
+
+        await Client.PatchContactAsync(contact.Id, contact);
+        
         Reload();
     }
 
     void SaveRow(Contact contact)
     {
-        contactsGrid.UpdateRow(contact);
+        contactsGrid?.UpdateRow(contact);
         Reload();
     }
 
     void CancelEdit(Contact contact)
     {
-        contactsGrid.CancelEditRow(contact);
 
+        contactsGrid?.CancelEditRow(contact);
         // For production
         // var orderEntry = dbContext.Entry(order);
         // orderEntry.CurrentValues.SetValues(orderEntry.OriginalValues);
         // orderEntry.State = EntityState.Unchanged;
     }
 
-    async void InsertRow() {
+    async void InsertRow()
+    {
         Contact spec = new Contact();
-       
 
-        await controller.Put(spec);
+
+        await Client.PutContactAsync(spec);
 
         Reload();
-        contactsGrid.Reload();
+        await (contactsGrid?.Reload() ?? Task.CompletedTask);
 
     }
 
     async void DeleteRow(Contact contact)
     {
-        await controller.Delete(contact.Id);
+        await Client.DeleteContactAsync(contact.Id);
 
 
         // For demo purposes only
@@ -306,7 +315,7 @@
 
         Reload();
 
-        contactsGrid.Reload();
+        await (contactsGrid?.Reload() ?? Task.CompletedTask);
     }
 
 }

@@ -7,9 +7,6 @@ using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using CCWebSite.Controllers;
-using Microsoft.Extensions.Http;
-using AzureBlazorCosmosWasm.Data;
 
 namespace BlazorWebSite
 {
@@ -20,45 +17,8 @@ namespace BlazorWebSite
             var builder = WebAssemblyHostBuilder.CreateDefault(args);
             builder.RootComponents.Add<App>("app");
 
-            static string functionEndpoint(WebAssemblyHostBuilder builder) =>
-                builder.Configuration
-                    .GetSection(nameof(TokenClient))
-                    .GetValue<string>(nameof(CosmosAuthorizationMessageHandler.Endpoint));
-
-            // sets up Azure Active Directory authentication and adds the 
-            // user_impersonation scope to access functions.
-            builder.Services.AddMsalAuthentication(options =>
-            {
-                options.ProviderOptions
-                .DefaultAccessTokenScopes.Add($"{functionEndpoint(builder)}user_impersonation");
-                builder.Configuration.Bind("AzureAd", options.ProviderOptions.Authentication);
-            });
-
-            // set up the authorization handler to inject tokens
-            builder.Services.AddTransient<CosmosAuthorizationMessageHandler>();
-
-            // configure the client to talk to the Azure Functions endpoint.
-            builder.Services.AddHttpClient(nameof(TokenClient),
-                client =>
-                {
-                    client.BaseAddress = new Uri(functionEndpoint(builder));
-                }).AddHttpMessageHandler<CosmosAuthorizationMessageHandler>();
-
-            // register the client to retrieve Cosmos DB tokens.
-
-            builder.Services.AddTransient<TokenClient>();
-
-            // not used
             //builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
-
-
-            builder.Services.AddSingleton<IDocumentDBRepository<EVSpecs>>(x => new DocumentDBRepository<EVSpecs>("bev", x.GetRequiredService<TokenClient>()));
-            builder.Services.AddSingleton<IDocumentDBRepository<Contact>>(x => new DocumentDBRepository<Contact>("contact", x.GetRequiredService<TokenClient>()));
-
-            //builder.Services.AddSingleton<IDocumentDBRepository<EVSpecs>>(new DocumentDBRepository<EVSpecs>("bev"));
-            builder.Services.AddSingleton<BEVController>();
-            //builder.Services.AddSingleton<IDocumentDBRepository<Contact>>(new DocumentDBRepository<Contact>("contact"));
-            builder.Services.AddSingleton<ContactController>();
+            builder.Services.AddSingleton(new SwaggerClient("http://localhost:5000", new HttpClient()));
 
             //builder.Services.AddOidcAuthentication(options =>
             //{

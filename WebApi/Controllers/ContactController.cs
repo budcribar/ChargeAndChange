@@ -3,19 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Authentication;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Identity;
-//using Microsoft.AspNetCore.Identity;
-//using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Azure.Cosmos;
 using Newtonsoft.Json;
 using TeslaSuperchargers;
-//using TeslaSuperchargers;
-//using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity;
 
 namespace CCWebSite.Controllers
 {
-    //[Route("api/[controller]")]
-    public class ContactController 
+    [Route("api/[controller]")]
+    public class ContactController : Controller
     {
         private readonly IDocumentDBRepository<Contact> repository;
         public ContactController(IDocumentDBRepository<Contact> Respository)
@@ -37,41 +34,41 @@ namespace CCWebSite.Controllers
         //    return View(item);
         //}
 
-        //[HttpGet("Contact/{email}")]
-
-        public Task<Contact?> GetById(string id)
-        {
-            return repository.GetItemAsync(x => x.Id == id);
-        }
-
-        public  Task<Contact?> Get(string email)
+        [HttpGet("GetContact/{email}")]
+        public  Task<Contact> Get(string email)
         {
             return repository.GetItemAsync(x => x.Email.ToLower() == email.ToLower());
         }
 
-        //[HttpDelete("Contacts/{id}")]
-        public Task Delete(string id)
+        [HttpGet("GetContactById/{id}")]
+        public Task<Contact> GetContactById(string id)
         {
-            return repository.DeleteItemAsync(id);
+            return repository.GetItemAsync(x => x.Id == id);
         }
 
-        //[HttpPatch("Contacts/{id}")]
-        public Task Patch(string id, Contact contact)
+        [HttpDelete("DeleteContact/{id}")]
+        public async void Delete(string id)
         {
-            //if (bev == null) return;
-            contact.Id = id;
+            await repository.DeleteItemAsync(id);
+        }
+
+        [HttpPatch("PatchContact/{id}")]
+        public async void Patch(string id, [FromBody]Contact bev)
+        {
+            if (bev == null) return;
+            bev.Id = id;
 
             // Don't overwrite hashed password
-            //var old = repository.GetItemAsync(x => x.Id == contact.Id).Result;
-            //contact.HashedPassword = old.HashedPassword;
+            var old = await repository.GetItemAsync(x => x.Id == bev.Id);
+            bev.HashedPassword = old.HashedPassword;
 
-            return repository.UpdateItemAsync(id, contact);
+            await repository.UpdateItemAsync(id, bev);
         }
 
-        //[HttpPut("Contacts")]
-        public Task Put(Contact contact)
+        [HttpPut("PutContact")]
+        public async void Put([FromBody]Contact contact)
         {
-            //if (contact == null) return null;
+            if (contact == null) return;
             contact.Id = Guid.NewGuid().ToString();
             if (contact.Password.Length > 0)
             {
@@ -81,15 +78,15 @@ namespace CCWebSite.Controllers
                 contact.DateUpdated = DateTime.Now;
             }
            
-            return repository.CreateItemAsync(contact);
+            await repository.CreateItemAsync(contact);
         }
 
-        //[HttpPost("login")]
-        public async Task<Contact?> Login(Contact bev)
+        [HttpPost("login")]
+        public async Task<Contact> Login([FromBody]Contact bev)
         {
             if (bev == null) return null;
 
-            Contact? c = await repository.GetItemAsync(x => x.Email.ToLower() == bev.Email.ToLower());
+            Contact c = await repository.GetItemAsync(x => x.Email.ToLower() == bev.Email.ToLower());
 
             if (c == null) return null;
 
@@ -103,13 +100,13 @@ namespace CCWebSite.Controllers
             return c;
         }
 
-        
-        public  Task<IEnumerable<Contact>> Contacts()
+        [HttpGet("[action]")]
+        public  IEnumerable<Contact> Contacts()
         {
-            return repository.GetItemsAsync(x => true);
+            return repository.GetItemsAsync(x => true).Result;
         }
 
-       
+        [HttpGet("ContactsInSubdivision/{subdivision}")]
         public IEnumerable<Contact> ContactsFrom(string subdivision)
         {
             var result = Download.DownloadJObject(@"https://apps.larimer.org/api/assessor/property/?prop=property&parcel=undefined&scheduleNumber=undefined&serialIdentification=undefined&name=&fromAddrNum=undefined&toAddrNum=undefined&address=&city=FORT%20COLLINS&subdivisionNumber=undefined&sales=any&subdivisionName=WILLOW%20SPRINGS%20PUD");
@@ -124,15 +121,7 @@ namespace CCWebSite.Controllers
 
             var results = records.Select(x => JsonConvert.DeserializeObject<LarimerCountyRecord>(x.ToString()).ToContact(subdivision)).Where(x => x != null).ToList();
 
-            List<Task<Microsoft.Azure.Documents.Document>> tasks = new List<Task<Microsoft.Azure.Documents.Document>>();
-            foreach (var r in results)
-            {
-                var t = repository.CreateItemAsync(r);
-                tasks.Add(t);
-            }
-
-            Task.WaitAll(tasks.ToArray());
-            //repository.CreateItemsAsync(results.ToArray());
+            repository.CreateItemsAsync(results.ToArray());
 
             return results;
         }
