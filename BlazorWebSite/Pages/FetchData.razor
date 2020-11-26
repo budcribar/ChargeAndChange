@@ -1,9 +1,7 @@
 @page "/fetchdata"
-@using CCWebSite.Controllers;
 @using System.Linq;
 
-@inject HttpClient Http
-@inject BEVController controller;
+@inject SwaggerClient Client
 
 <h1>EV Specs</h1>
 <Radzen.Blazor.RadzenButton Click="@InsertRow">Insert</Radzen.Blazor.RadzenButton>
@@ -208,7 +206,7 @@
 
     protected override async Task OnInitializedAsync()
     {
-        evSpecs = (await controller.EVSpecs()).ToList().OrderBy(x => x.Manufacturer).ThenBy(x => x.Model).ToArray();
+        evSpecs = (await Client.EVSpecsAsync()).ToList().OrderBy(x => x.Manufacturer).ThenBy(x => x.Model).ToArray();
     }
 
 
@@ -251,7 +249,7 @@
 
     async void OnUpdateRow(EVSpecs evSpecs)
     {
-        await controller.Patch (evSpecs.Id, evSpecs);
+        await Client.PatchEVSpecsAsync (evSpecs.Id, evSpecs);
 
     }
 
@@ -275,15 +273,15 @@
         spec.Model = "New model";
         spec.ModelYear = DateTime.Now.Year;
 
-        await controller.Post(spec);
+        await Client.PostEVSpecsAsync(spec);
 
-        evSpecs = (await controller.EVSpecs()).ToArray();
+        evSpecs = (await Client.EVSpecsAsync()).ToArray();
         await (evSpecsGrid?.Reload() ?? Task.CompletedTask);
     }
 
     async void DeleteRow(EVSpecs evSpec)
     {
-        await controller.Delete(evSpec.Id);
+        await Client.DeleteEVSpecsAsync(evSpec.Id);
 
 
         // For demo purposes only
@@ -292,7 +290,7 @@
         // For production
         //dbContext.SaveChanges();
 
-        evSpecs = (await controller.EVSpecs()).ToArray();
+        evSpecs = (await Client.EVSpecsAsync()).ToArray();
 
         await (evSpecsGrid?.Reload() ?? Task.CompletedTask);
     }

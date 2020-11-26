@@ -34,19 +34,25 @@ namespace CCWebSite.Controllers
         //    return View(item);
         //}
 
-        [HttpGet("Contact/{email}")]
+        [HttpGet("GetContact/{email}")]
         public  Task<Contact> Get(string email)
         {
             return repository.GetItemAsync(x => x.Email.ToLower() == email.ToLower());
         }
 
-        [HttpDelete("Contacts/{id}")]
+        [HttpGet("GetContactById/{id}")]
+        public Task<Contact> GetContactById(string id)
+        {
+            return repository.GetItemAsync(x => x.Id == id);
+        }
+
+        [HttpDelete("DeleteContact/{id}")]
         public async void Delete(string id)
         {
             await repository.DeleteItemAsync(id);
         }
 
-        [HttpPatch("Contacts/{id}")]
+        [HttpPatch("PatchContact/{id}")]
         public async void Patch(string id, [FromBody]Contact bev)
         {
             if (bev == null) return;
@@ -59,7 +65,7 @@ namespace CCWebSite.Controllers
             await repository.UpdateItemAsync(id, bev);
         }
 
-        [HttpPut("Contacts")]
+        [HttpPut("PutContact")]
         public async void Put([FromBody]Contact contact)
         {
             if (contact == null) return;
@@ -100,7 +106,7 @@ namespace CCWebSite.Controllers
             return repository.GetItemsAsync(x => true).Result;
         }
 
-        [HttpGet("ContactsFrom/{subdivision}")]
+        [HttpGet("ContactsInSubdivision/{subdivision}")]
         public IEnumerable<Contact> ContactsFrom(string subdivision)
         {
             var result = Download.DownloadJObject(@"https://apps.larimer.org/api/assessor/property/?prop=property&parcel=undefined&scheduleNumber=undefined&serialIdentification=undefined&name=&fromAddrNum=undefined&toAddrNum=undefined&address=&city=FORT%20COLLINS&subdivisionNumber=undefined&sales=any&subdivisionName=WILLOW%20SPRINGS%20PUD");

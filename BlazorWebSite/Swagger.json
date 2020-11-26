@@ -5,7 +5,7 @@
     "version": "1.0"
   },
   "paths": {
-    "/api/BEV/EVSpecs/{id}": {
+    "/api/BEV/DeleteEVSpecs/{id}": {
       "delete": {
         "tags": [
           "BEV"
@@ -26,7 +26,9 @@
             "description": "Success"
           }
         }
-      },
+      }
+    },
+    "/api/BEV/PatchEVSpecs/{id}": {
       "patch": {
         "tags": [
           "BEV"
@@ -68,7 +70,7 @@
         }
       }
     },
-    "/api/BEV/EVSpecs": {
+    "/api/BEV/PostEVSpecs": {
       "post": {
         "tags": [
           "BEV"
@@ -97,45 +99,9 @@
             "description": "Success"
           }
         }
-      },
-      "get": {
-        "tags": [
-          "BEV"
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/EVSpecs"
-                  }
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/EVSpecs"
-                  }
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/EVSpecs"
-                  }
-                }
-              }
-            }
-          }
-        }
       }
     },
-    "/api/BEV/Spec/{spec}/{availableOnly}": {
+    "/api/BEV/GetSpecs/{spec}/{availableOnly}": {
       "get": {
         "tags": [
           "BEV"
@@ -192,7 +158,45 @@
         }
       }
     },
-    "/api/Contact/Contact/{email}": {
+    "/api/BEV/EVSpecs": {
+      "get": {
+        "tags": [
+          "BEV"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/EVSpecs"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/EVSpecs"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/EVSpecs"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Contact/GetContact/{email}": {
       "get": {
         "tags": [
           "Contact"
@@ -232,7 +236,47 @@
         }
       }
     },
-    "/api/Contact/Contacts/{id}": {
+    "/api/Contact/GetContactById/{id}": {
+      "get": {
+        "tags": [
+          "Contact"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Contact"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Contact"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Contact"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Contact/DeleteContact/{id}": {
       "delete": {
         "tags": [
           "Contact"
@@ -253,7 +297,9 @@
             "description": "Success"
           }
         }
-      },
+      }
+    },
+    "/api/Contact/PatchContact/{id}": {
       "patch": {
         "tags": [
           "Contact"
@@ -295,7 +341,7 @@
         }
       }
     },
-    "/api/Contact/Contacts": {
+    "/api/Contact/PutContact": {
       "put": {
         "tags": [
           "Contact"
@@ -322,42 +368,6 @@
         "responses": {
           "200": {
             "description": "Success"
-          }
-        }
-      },
-      "get": {
-        "tags": [
-          "Contact"
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/Contact"
-                  }
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/Contact"
-                  }
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/Contact"
-                  }
-                }
-              }
-            }
           }
         }
       }
@@ -410,7 +420,45 @@
         }
       }
     },
-    "/api/Contact/ContactsFrom/{subdivision}": {
+    "/api/Contact/Contacts": {
+      "get": {
+        "tags": [
+          "Contact"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Contact"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Contact"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Contact"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Contact/ContactsInSubdivision/{subdivision}": {
       "get": {
         "tags": [
           "Contact"
@@ -473,7 +521,8 @@
           6,
           7,
           8,
-          9
+          9,
+          10
         ],
         "type": "integer",
         "format": "int32"
@@ -483,7 +532,8 @@
           0,
           1,
           2,
-          3
+          3,
+          4
         ],
         "type": "integer",
         "format": "int32"
@@ -500,7 +550,8 @@
         "enum": [
           0,
           1,
-          2
+          2,
+          3
         ],
         "type": "integer",
         "format": "int32"
@@ -636,6 +687,16 @@
         },
         "additionalProperties": false
       },
+      "InterestLevel": {
+        "enum": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "type": "integer",
+        "format": "int32"
+      },
       "ContactStatus": {
         "enum": [
           0,
@@ -668,6 +729,12 @@
           "dateUpdated": {
             "type": "string",
             "format": "date-time"
+          },
+          "evInterest": {
+            "$ref": "#/components/schemas/InterestLevel"
+          },
+          "lawnEquipmentInterest": {
+            "$ref": "#/components/schemas/InterestLevel"
           },
           "status": {
             "$ref": "#/components/schemas/ContactStatus"

@@ -14,7 +14,7 @@ namespace CCWebSite.Controllers
     using Microsoft.Azure.Documents;
     using Microsoft.Azure.Documents.Client;
     using Microsoft.Azure.Documents.Linq;
-
+    using Newtonsoft.Json;
 
     public class DocumentDBRepository<T> : IDocumentDBRepository<T> where T : class
     {
@@ -61,7 +61,7 @@ namespace CCWebSite.Controllers
         {
             IDocumentQuery<T> query = client.CreateDocumentQuery<T>(
                 UriFactory.CreateDocumentCollectionUri(DatabaseId, CollectionId),
-                new FeedOptions { MaxItemCount = -1, EnableCrossPartitionQuery = true })
+                new FeedOptions { MaxItemCount = -1, EnableCrossPartitionQuery = true, JsonSerializerSettings=new JsonSerializerSettings { NullValueHandling=NullValueHandling.Ignore } })
                 .Where(predicate)
                 .AsDocumentQuery();
 

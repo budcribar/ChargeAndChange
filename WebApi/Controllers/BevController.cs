@@ -37,13 +37,13 @@ namespace CCWebSite.Controllers
         //    return View(item);
         //}
 
-        [HttpDelete("EVSpecs/{id}")]
+        [HttpDelete("DeleteEVSpecs/{id}")]
         public async void Delete(string id)
         {
             await respository.DeleteItemAsync(id);
         }
 
-        [HttpPatch("EVSpecs/{id}")]
+        [HttpPatch("PatchEVSpecs/{id}")]
         public async void Patch(string id, [FromBody]EVSpecs bev)
         {
             if (bev == null) return;
@@ -51,7 +51,7 @@ namespace CCWebSite.Controllers
             await respository.UpdateItemAsync(id, bev);
         }
 
-        [HttpPost("EVSpecs")]
+        [HttpPost("PostEVSpecs")]
         public async void Post([FromBody]EVSpecs bev)
         {
             var ss = await this.Request.BodyReader.ReadAsync();
@@ -71,7 +71,7 @@ namespace CCWebSite.Controllers
             return ((IConvertible)o).ToDouble(null);
         }
 
-        [HttpGet("Spec/{spec}/{availableOnly}")]
+        [HttpGet("GetSpecs/{spec}/{availableOnly}")]
         public IEnumerable<ChartData> Spec(string spec, Boolean availableOnly)
         {
             return respository.GetItemsAsync(x => true).Result.Where(y => !availableOnly || y.Available).Select(x => new ChartData { Name = x.Manufacturer + ' ' + x.Model, Y = GetValue(x, spec) }).Where(x => x.Y != null).OrderBy(x => x.Y);

@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using CCWebSite.Controllers;
 
 namespace BlazorWebSite
 {
@@ -18,13 +17,8 @@ namespace BlazorWebSite
             var builder = WebAssemblyHostBuilder.CreateDefault(args);
             builder.RootComponents.Add<App>("app");
 
-            builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
-
-
-            builder.Services.AddSingleton<IDocumentDBRepository<EVSpecs>>(new DocumentDBRepository<EVSpecs>("bev"));
-            builder.Services.AddSingleton<BEVController>();
-            builder.Services.AddSingleton<IDocumentDBRepository<Contact>>(new DocumentDBRepository<Contact>("contact"));
-            builder.Services.AddSingleton<ContactController>();
+            //builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
+            builder.Services.AddSingleton(new SwaggerClient("http://localhost:5000", new HttpClient()));
 
             //builder.Services.AddOidcAuthentication(options =>
             //{

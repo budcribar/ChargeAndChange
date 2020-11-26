@@ -1,16 +1,9 @@
 using CCWebSite.Controllers;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace WebApi
 {
@@ -28,8 +21,8 @@ namespace WebApi
         {
             services.AddControllers();
             services.AddSwaggerGen(c => c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo { Title = "Database API", Version = "1.0" }));
-            services.AddSingleton<IDocumentDBRepository<EVSpecs>>(new DocumentDBRepository<EVSpecs>("bev"));
-            services.AddSingleton<IDocumentDBRepository<Contact>>(new DocumentDBRepository<Contact>("contact"));
+            services.AddSingleton<IDocumentDBRepository<CCWebSite.Controllers.EVSpecs>>(new DocumentDBRepository<CCWebSite.Controllers.EVSpecs>("bev"));
+            services.AddSingleton<IDocumentDBRepository<CCWebSite.Controllers.Contact>>(new DocumentDBRepository<CCWebSite.Controllers.Contact>("contact"));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -42,11 +35,13 @@ namespace WebApi
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("v1/swagger.json", "databaseAPI"));
             }
 
-            app.UseHttpsRedirection();
+            app.UseCors(policy =>
+            policy.AllowAnyOrigin());
+            //app.UseHttpsRedirection();
 
             app.UseRouting();
 
-            app.UseAuthorization();
+            //app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {

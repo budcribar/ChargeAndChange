@@ -7,9 +7,9 @@ using Newtonsoft.Json.Converters;
 
 namespace CCWebSite.Controllers
 {
-    public enum BodyStyle { SUV,Sedan, Crossover, Pickup, Coupe, Minivan, Van, Wagon, Hatchback, Convertible }
-    public enum DriveType {  AWD, FOURWD, FWD, RWD }
-    public enum ChargingConnector {  Chademo, CCS, Tesla }
+    public enum BodyStyle { SUV,Sedan, Crossover, Pickup, Coupe, Minivan, Van, Wagon, Hatchback, Convertible, Unknown }
+    public enum DriveType {  AWD, FOURWD, FWD, RWD, Unknown }
+    public enum ChargingConnector {  Chademo, CCS, Tesla, Unknown }
     public enum MotorPowerUnits {  kw, hp }
     public class EVSpecs
     {
@@ -21,7 +21,7 @@ namespace CCWebSite.Controllers
         public Boolean Available { get; set; }
         public string Model { get; set; }
         [JsonConverter(typeof(StringEnumConverter))]
-        public BodyStyle? BodyStyle { get; set; }
+        public BodyStyle BodyStyle { get; set; } = BodyStyle.Unknown;
         //public decimal? PriceMinusFederalTaxCredit
         //{
         //    get
@@ -33,8 +33,9 @@ namespace CCWebSite.Controllers
         //}
         public decimal? Price { get; set; }
         public decimal? FederalTaxCredit { get; set; }
+
         [JsonConverter(typeof(StringEnumConverter))]
-        public DriveType? DriveTrain {get;set; }
+        public DriveType DriveTrain { get; set; } = DriveType.Unknown;
         public int? CombinedRange { get; set; }
         public int? CityRange { get; set; }
         public int? HiwayRange { get; set; }
@@ -48,15 +49,15 @@ namespace CCWebSite.Controllers
 
         //    }
         //}
-
         [JsonConverter(typeof(StringEnumConverter))]
-        public MotorPowerUnits? MotorPowerUnits { get; set; }
+        public MotorPowerUnits MotorPowerUnits { get; set; } = Controllers.MotorPowerUnits.kw;
         //public decimal? PricePerMileOfRange { get; set;  }
         public int? Torque { get; set; }
 
         public double? BatteryCapacity { get; set;  }
+       
         [JsonConverter(typeof(StringEnumConverter))]
-        public ChargingConnector? ChargingConnector { get; set;  }
+        public ChargingConnector ChargingConnector { get; set;  }
         public int? Weight { get; set;  }
         public double? ZeroTo60mph { get; set; }
         public double? ZeroTo100kph { get; set; }
