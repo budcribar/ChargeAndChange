@@ -5,6 +5,10 @@ using System.Security.Authentication;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Azure.Cosmos;
+using Microsoft.AspNetCore.Http;
+using Microsoft.Azure.WebJobs;
+using Microsoft.Azure.WebJobs.Extensions.Http;
+using Newtonsoft.Json;
 
 namespace CCWebSite.Controllers
 {
@@ -15,7 +19,8 @@ namespace CCWebSite.Controllers
     }
 
     [Route("api/[controller]")]
-    public class BEVController : Controller
+    //WEBAPI public class BEVController : Controller
+    public class BEVController : ControllerBase
     {
         private readonly IDocumentDBRepository<EVSpecs> respository;
         public BEVController(IDocumentDBRepository<EVSpecs> Respository)
@@ -23,44 +28,41 @@ namespace CCWebSite.Controllers
             this.respository = Respository;
         }
 
-        //[HttpPost]
-        //[ActionName("Edit")]
-        //[ValidateAntiForgeryToken]
-        //public async Task<ActionResult> EditAsync([Bind("Id,Name,Description,Completed")] EVSpecs item)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        await respository.UpdateItemAsync(item.Id, item);
-        //        return RedirectToAction("Index");
-        //    }
-
-        //    return View(item);
-        //}
-
         [HttpDelete("DeleteEVSpecs/{id}")]
-        public async void Delete(string id)
+        [FunctionName(nameof(DeleteEVSpecs))]
+        ////WEBAPI public async void DeleteEVSpecs(string id)
+        public async Task<IActionResult> DeleteEVSpecs([HttpTrigger("delete", Route = "DeleteEVSpecs/{id}")] HttpRequest request, string id)
         {
+            // TODO cleanup
             await respository.DeleteItemAsync(id);
+            return Ok();
         }
 
         [HttpPatch("PatchEVSpecs/{id}")]
-        public async void Patch(string id, [FromBody]EVSpecs bev)
+        [FunctionName(nameof(PatchEVSpecs))]
+        //public async void PatchEVSpecs(string id, [FromBody]EVSpecs bev)
+        public async Task<IActionResult> PatchEVSpecs([HttpTrigger("patch", Route = "PatchEVSpecs/{id}")] HttpRequest request, string id)
         {
-            if (bev == null) return;
+            var body = await request.ReadAsStringAsync();
+            EVSpecs bev = JsonConvert.DeserializeObject<EVSpecs>(body);
+            if (bev == null) return NoContent();
             bev.Id = id;
             await respository.UpdateItemAsync(id, bev);
+            return Ok();
         }
 
         [HttpPost("PostEVSpecs")]
-        public async void Post([FromBody]EVSpecs bev)
+        [FunctionName(nameof(PostEVSpecs))]
+        //public async void PostEVSpecs([FromBody]EVSpecs bev)
+        public async Task<IActionResult> PostEVSpecs([HttpTrigger("post", Route = "PostEVSpecs")] HttpRequest request)
+
         {
-            var ss = await this.Request.BodyReader.ReadAsync();
-            
-            //var buffer = new byte[this.Request.Body.Length];
-            //var s = this.Request.Body.Read(buffer, 0, (int)Request.Body.Length);
-            if (bev == null) return;
+            var body = await request.ReadAsStringAsync();
+            EVSpecs bev = JsonConvert.DeserializeObject<EVSpecs>(body);          
+            if (bev == null) return NoContent();
             bev.Id = Guid.NewGuid().ToString();
             await respository.CreateItemAsync(bev);
+            return Ok();
         }
 
         private double? GetValue(EVSpecs evspec, string spec)
@@ -71,16 +73,20 @@ namespace CCWebSite.Controllers
             return ((IConvertible)o).ToDouble(null);
         }
 
+       
+     
         [HttpGet("GetSpecs/{spec}/{availableOnly}")]
-        public IEnumerable<ChartData> Spec(string spec, Boolean availableOnly)
+        [FunctionName(nameof(GetSpecs))]
+        public async Task<List<ChartData>> GetSpecs([HttpTrigger("get", Route = "GetSpecs/{spec}/{availableOnly}")] HttpRequest request, string spec, bool availableOnly)
         {
-            return respository.GetItemsAsync(x => true).Result.Where(y => !availableOnly || y.Available).Select(x => new ChartData { Name = x.Manufacturer + ' ' + x.Model, Y = GetValue(x, spec) }).Where(x => x.Y != null).OrderBy(x => x.Y);
+            return (await respository.GetItemsAsync(x => true)).Where(y => !availableOnly || y.Available).Select(x => new ChartData { Name = x.Manufacturer + ' ' + x.Model, Y = GetValue(x, spec) }).Where(x => x.Y != null).OrderBy(x => x.Y).ToList();
         }
 
         [HttpGet("[action]")]
-        public  IEnumerable<EVSpecs> EVSpecs()
+        [FunctionName(nameof(EVSpecs))]
+        public async Task<IEnumerable<EVSpecs>> EVSpecs([HttpTrigger("get", Route = "EVSpecs")] HttpRequest request)
         {
-            return respository.GetItemsAsync(x => true).Result;
+            return await respository.GetItemsAsync(x => true);
         }
 
         
