@@ -18,8 +18,8 @@ namespace BlazorWebSite
             builder.RootComponents.Add<App>("app");
 
             //builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
-            builder.Services.AddSingleton(new SwaggerClient("http://localhost:7071", new HttpClient()));
-
+            builder.Services.AddSingleton(new SwaggerClient("http://webapichargeandchange.azurewebsites.net/", new HttpClient()));
+        
             //builder.Services.AddOidcAuthentication(options =>
             //{
             //    // Configure your authentication provider options here.
