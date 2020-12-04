@@ -17,15 +17,9 @@ namespace BlazorWebSite
             var builder = WebAssemblyHostBuilder.CreateDefault(args);
             builder.RootComponents.Add<App>("app");
 
-            //builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
-            builder.Services.AddSingleton(new SwaggerClient("http://webapichargeandchange.azurewebsites.net/", new HttpClient()));
-        
-            //builder.Services.AddOidcAuthentication(options =>
-            //{
-            //    // Configure your authentication provider options here.
-            //    // For more information, see https://aka.ms/blazor-standalone-auth
-            //    builder.Configuration.Bind("Local", options.ProviderOptions);
-            //});
+            var baseAddress = builder.Configuration["BaseAddress"] ?? builder.HostEnvironment.BaseAddress;
+            var url = new Uri(builder.HostEnvironment.BaseAddress);
+            builder.Services.AddSingleton(new SwaggerClient(baseAddress, new HttpClient { BaseAddress=url }));
 
             await builder.Build().RunAsync();
         }
