@@ -20,8 +20,8 @@ namespace BlazorWebSite
             var baseAddress = builder.Configuration["BaseAddress"] ?? builder.HostEnvironment.BaseAddress;
             var url = new Uri(builder.HostEnvironment.BaseAddress);
             builder.Services.AddSingleton(new SwaggerClient(baseAddress, new HttpClient { BaseAddress=url }));
-
-            await builder.Build().RunAsync();
+            builder.Services.AddSingleton<AppVersionInfo>();
+           await builder.Build().RunAsync();
         }
     }
 }
