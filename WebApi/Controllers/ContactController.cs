@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Identity;
 
 namespace CCWebSite.Controllers
 {
+    // https://docs.microsoft.com/en-us/azure/azure-functions/functions-openapi-definition
     [Route("api/[controller]")]
     public class ContactController : Controller
     {

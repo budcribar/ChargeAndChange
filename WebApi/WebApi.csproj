@@ -8,12 +8,9 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-	  <Compile Remove="Controllers\ContactController.cs" />
-	</ItemGroup>
-
-	<ItemGroup>
 	  <None Remove="appsettings.json" />
 	  <None Remove="host.json" />
+	  <None Remove="local.settings.json" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -55,6 +52,7 @@
 
 	<ItemGroup>
 	  <Resource Include="appsettings.json" />
+	  <Content Include="local.settings.json" />
 	</ItemGroup>
   <ItemGroup>
     <Content Update="host.json">
