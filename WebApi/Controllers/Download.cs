@@ -14,7 +14,10 @@ namespace TeslaSuperchargers
         {
             return JObject.Parse(DownloadPageAsync(url).Result);
         }
-      
+        public async static Task<JObject> DownloadJObjectAsync(string url)
+        {
+            return JObject.Parse(await DownloadPageAsync(url));
+        }
 
         public async static Task<string> DownloadPageAsync(string url)
         {

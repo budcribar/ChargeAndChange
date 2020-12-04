@@ -4,16 +4,19 @@ using System.Linq;
 using System.Security.Authentication;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Azure.Cosmos;
+//using Microsoft.Azure.Cosmos;
 using Newtonsoft.Json;
 using TeslaSuperchargers;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.Azure.WebJobs;
+using Microsoft.Azure.WebJobs.Extensions.Http;
+using Microsoft.AspNetCore.Http;
 
 namespace CCWebSite.Controllers
 {
     // https://docs.microsoft.com/en-us/azure/azure-functions/functions-openapi-definition
     [Route("api/[controller]")]
-    public class ContactController : Controller
+    public class ContactController : ControllerBase
     {
         private readonly IDocumentDBRepository<Contact> repository;
         public ContactController(IDocumentDBRepository<Contact> Respository)
@@ -21,55 +24,56 @@ namespace CCWebSite.Controllers
             this.repository = Respository;
         }
 
-        //[HttpPost]
-        //[ActionName("Edit")]
-        //[ValidateAntiForgeryToken]
-        //public async Task<ActionResult> EditAsync([Bind("Id,Name,Description,Completed")] Contact item)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        await respository.UpdateItemAsync(item.Id, item);
-        //        return RedirectToAction("Index");
-        //    }
-
-        //    return View(item);
-        //}
-
         [HttpGet("GetContact/{email}")]
-        public  Task<Contact> Get(string email)
+        [FunctionName(nameof(GetContact))]
+        public async Task<Contact> GetContact([HttpTrigger("get", Route = "Contact/GetContact/{email}")] HttpRequest request, string email)    
         {
-            return repository.GetItemAsync(x => x.Email.ToLower() == email.ToLower());
+            return await repository.GetItemAsync(x => x.Email.ToLower() == email.ToLower());
         }
 
         [HttpGet("GetContactById/{id}")]
-        public Task<Contact> GetContactById(string id)
+        public async Task<Contact> GetContactById([HttpTrigger("get", Route = "Contact/GetContactById/{id}")] HttpRequest request, string id)
         {
-            return repository.GetItemAsync(x => x.Id == id);
+            return await repository.GetItemAsync(x => x.Id == id);
         }
 
         [HttpDelete("DeleteContact/{id}")]
-        public async void Delete(string id)
+        [FunctionName(nameof(DeleteContact))]
+        public async Task<IActionResult> DeleteContact([HttpTrigger("delete", Route = "Contact/DeleteContact/{id}")] HttpRequest request, string id)
         {
+            // Todo verify id
             await repository.DeleteItemAsync(id);
+            return Ok();
         }
 
         [HttpPatch("PatchContact/{id}")]
-        public async void Patch(string id, [FromBody]Contact bev)
+        [FunctionName(nameof(PatchContact))]
+       
+        public async Task<IActionResult> PatchContact([HttpTrigger("patch", Route = "Contact/PatchContact/{id}")] HttpRequest request, string id)
+
         {
-            if (bev == null) return;
-            bev.Id = id;
+            var body = await request.ReadAsStringAsync();
+            Contact contact = JsonConvert.DeserializeObject<Contact>(body);
+
+            if (contact == null) return NoContent(); ;
+            contact.Id = id;
 
             // Don't overwrite hashed password
-            var old = await repository.GetItemAsync(x => x.Id == bev.Id);
-            bev.HashedPassword = old.HashedPassword;
+            var old = await repository.GetItemAsync(x => x.Id == contact.Id);
+            contact.HashedPassword = old.HashedPassword;
 
-            await repository.UpdateItemAsync(id, bev);
+            await repository.UpdateItemAsync(id, contact);
+            return Ok();
         }
 
         [HttpPut("PutContact")]
-        public async void Put([FromBody]Contact contact)
+        [FunctionName(nameof(PutContact))]
+        public async Task<IActionResult> PutContact([HttpTrigger("put", Route = "Contact/PutContact")] HttpRequest request)
         {
-            if (contact == null) return;
+            var body = await request.ReadAsStringAsync();
+            Contact contact = JsonConvert.DeserializeObject<Contact>(body);
+
+            if (contact == null) return NoContent(); 
             contact.Id = Guid.NewGuid().ToString();
             if (contact.Password.Length > 0)
             {
@@ -80,19 +84,23 @@ namespace CCWebSite.Controllers
             }
            
             await repository.CreateItemAsync(contact);
+            return Ok();
         }
 
-        [HttpPost("login")]
-        public async Task<Contact> Login([FromBody]Contact bev)
+        [FunctionName(nameof(Login))]
+        public async Task<Contact?> Login([HttpTrigger("post", Route = "Contact/login")] HttpRequest request)
         {
-            if (bev == null) return null;
+            var body = await request.ReadAsStringAsync();
+            Contact contact = JsonConvert.DeserializeObject<Contact>(body);
 
-            Contact c = await repository.GetItemAsync(x => x.Email.ToLower() == bev.Email.ToLower());
+            if (contact == null) return null;
+
+            Contact c = await repository.GetItemAsync(x => x.Email.ToLower() == contact.Email.ToLower());
 
             if (c == null) return null;
 
             var h = new PasswordHasher<Contact>();
-            var pvr = h.VerifyHashedPassword(c, c.HashedPassword, bev.Password);
+            var pvr = h.VerifyHashedPassword(c, c.HashedPassword, contact.Password);
 
             var loggedin = pvr == PasswordVerificationResult.Success;
 
@@ -102,23 +110,18 @@ namespace CCWebSite.Controllers
         }
 
         [HttpGet("[action]")]
-        public  IEnumerable<Contact> Contacts()
+        [FunctionName(nameof(Contacts))]
+        public async Task<IEnumerable<Contact>> Contacts([HttpTrigger("get", Route = "Contact/contacts")] HttpRequest request)
         {
-            return repository.GetItemsAsync(x => true).Result;
+            return await repository.GetItemsAsync(x => true);
         }
 
-        [HttpGet("ContactsInSubdivision/{subdivision}")]
-        public IEnumerable<Contact> ContactsFrom(string subdivision)
+       
+        [FunctionName(nameof(ContactsInSubdivision))]
+        public async Task<IEnumerable<Contact>> ContactsInSubdivision([HttpTrigger("get", Route = "Contact/ContactsInSubdivision/{subdivision}")] HttpRequest request, string subdivision)
         {
-            var result = Download.DownloadJObject(@"https://apps.larimer.org/api/assessor/property/?prop=property&parcel=undefined&scheduleNumber=undefined&serialIdentification=undefined&name=&fromAddrNum=undefined&toAddrNum=undefined&address=&city=FORT%20COLLINS&subdivisionNumber=undefined&sales=any&subdivisionName=WILLOW%20SPRINGS%20PUD");
+            var result = await Download.DownloadJObjectAsync(@"https://apps.larimer.org/api/assessor/property/?prop=property&parcel=undefined&scheduleNumber=undefined&serialIdentification=undefined&name=&fromAddrNum=undefined&toAddrNum=undefined&address=&city=FORT%20COLLINS&subdivisionNumber=undefined&sales=any&subdivisionName=WILLOW%20SPRINGS%20PUD");
             var records = result["records"];
-
-            //foreach (var r in records)
-            //{
-            //    var s = r.ToString();
-            //    var lcr = JsonConvert.DeserializeObject<LarimerCountyRecord>(s);
-            //    var c = lcr.ToContact(subdivision);
-            //}
 
             var results = records.Select(x => JsonConvert.DeserializeObject<LarimerCountyRecord>(x.ToString()).ToContact(subdivision)).Where(x => x != null).ToList();
 
