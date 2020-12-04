@@ -108,7 +108,7 @@ namespace CCWebSite.Controllers
 
             return c;
         }
-
+       
         [HttpGet("[action]")]
         [FunctionName(nameof(Contacts))]
         public async Task<IEnumerable<Contact>> Contacts([HttpTrigger("get", Route = "Contact/contacts")] HttpRequest request)
@@ -116,7 +116,6 @@ namespace CCWebSite.Controllers
             return await repository.GetItemsAsync(x => true);
         }
 
-       
         [FunctionName(nameof(ContactsInSubdivision))]
         public async Task<IEnumerable<Contact>> ContactsInSubdivision([HttpTrigger("get", Route = "Contact/ContactsInSubdivision/{subdivision}")] HttpRequest request, string subdivision)
         {

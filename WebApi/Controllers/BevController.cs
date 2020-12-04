@@ -17,7 +17,7 @@ namespace CCWebSite.Controllers
         public string Name { get; set; }
         public double? Y { get; set; }
     }
-
+    
     [Route("api/[controller]")]
     //WEBAPI public class BEVController : Controller
     public class BEVController : ControllerBase
