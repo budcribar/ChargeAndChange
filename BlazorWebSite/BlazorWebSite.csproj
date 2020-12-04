@@ -22,9 +22,8 @@
 		    <PrivateAssets>all</PrivateAssets>
 		    <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		  </PackageReference>
-		  <PackageReference Include="Radzen.Blazor" Version="2.17.10" />
+		  <PackageReference Include="Radzen.Blazor" Version="2.18.2" />
 		  <PackageReference Include="Microsoft.AspNetCore.JsonPatch" Version="5.0.0" />
-		  <PackageReference Include="System.Net.Http.Json" Version="5.0.0" />
 		  <PackageReference Include="Microsoft.Extensions.Identity.Core" Version="5.0.0" />
 
       <!--
