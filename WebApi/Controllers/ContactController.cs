@@ -26,20 +26,20 @@ namespace CCWebSite.Controllers
 
         [HttpGet("GetContact/{email}")]
         [FunctionName(nameof(GetContact))]
-        public async Task<Contact> GetContact([HttpTrigger("get", Route = "Contact/GetContact/{email}")] HttpRequest request, string email)    
+        public async Task<Contact> GetContact([HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "Contact/GetContact/{email}")] HttpRequest request, string email)    
         {
             return await repository.GetItemAsync(x => x.Email.ToLower() == email.ToLower());
         }
 
         [HttpGet("GetContactById/{id}")]
-        public async Task<Contact> GetContactById([HttpTrigger("get", Route = "Contact/GetContactById/{id}")] HttpRequest request, string id)
+        public async Task<Contact> GetContactById([HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "Contact/GetContactById/{id}")] HttpRequest request, string id)
         {
             return await repository.GetItemAsync(x => x.Id == id);
         }
 
         [HttpDelete("DeleteContact/{id}")]
         [FunctionName(nameof(DeleteContact))]
-        public async Task<IActionResult> DeleteContact([HttpTrigger("delete", Route = "Contact/DeleteContact/{id}")] HttpRequest request, string id)
+        public async Task<IActionResult> DeleteContact([HttpTrigger(AuthorizationLevel.Anonymous, "delete", Route = "Contact/DeleteContact/{id}")] HttpRequest request, string id)
         {
             // Todo verify id
             await repository.DeleteItemAsync(id);
@@ -49,7 +49,7 @@ namespace CCWebSite.Controllers
         [HttpPatch("PatchContact/{id}")]
         [FunctionName(nameof(PatchContact))]
        
-        public async Task<IActionResult> PatchContact([HttpTrigger("patch", Route = "Contact/PatchContact/{id}")] HttpRequest request, string id)
+        public async Task<IActionResult> PatchContact([HttpTrigger(AuthorizationLevel.Anonymous, "patch", Route = "Contact/PatchContact/{id}")] HttpRequest request, string id)
 
         {
             var body = await request.ReadAsStringAsync();
@@ -68,7 +68,7 @@ namespace CCWebSite.Controllers
 
         [HttpPut("PutContact")]
         [FunctionName(nameof(PutContact))]
-        public async Task<IActionResult> PutContact([HttpTrigger("put", Route = "Contact/PutContact")] HttpRequest request)
+        public async Task<IActionResult> PutContact([HttpTrigger(AuthorizationLevel.Anonymous, "put", Route = "Contact/PutContact")] HttpRequest request)
         {
             var body = await request.ReadAsStringAsync();
             Contact contact = JsonConvert.DeserializeObject<Contact>(body);
@@ -88,7 +88,7 @@ namespace CCWebSite.Controllers
         }
 
         [FunctionName(nameof(Login))]
-        public async Task<Contact?> Login([HttpTrigger("post", Route = "Contact/login")] HttpRequest request)
+        public async Task<Contact?> Login([HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = "Contact/login")] HttpRequest request)
         {
             var body = await request.ReadAsStringAsync();
             Contact contact = JsonConvert.DeserializeObject<Contact>(body);
@@ -111,13 +111,13 @@ namespace CCWebSite.Controllers
        
         [HttpGet("[action]")]
         [FunctionName(nameof(Contacts))]
-        public async Task<IEnumerable<Contact>> Contacts([HttpTrigger("get", Route = "Contact/contacts")] HttpRequest request)
+        public async Task<IEnumerable<Contact>> Contacts([HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "Contact/contacts")] HttpRequest request)
         {
             return await repository.GetItemsAsync(x => true);
         }
 
         [FunctionName(nameof(ContactsInSubdivision))]
-        public async Task<IEnumerable<Contact>> ContactsInSubdivision([HttpTrigger("get", Route = "Contact/ContactsInSubdivision/{subdivision}")] HttpRequest request, string subdivision)
+        public async Task<IEnumerable<Contact>> ContactsInSubdivision([HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "Contact/ContactsInSubdivision/{subdivision}")] HttpRequest request, string subdivision)
         {
             var result = await Download.DownloadJObjectAsync(@"https://apps.larimer.org/api/assessor/property/?prop=property&parcel=undefined&scheduleNumber=undefined&serialIdentification=undefined&name=&fromAddrNum=undefined&toAddrNum=undefined&address=&city=FORT%20COLLINS&subdivisionNumber=undefined&sales=any&subdivisionName=WILLOW%20SPRINGS%20PUD");
             var records = result["records"];
