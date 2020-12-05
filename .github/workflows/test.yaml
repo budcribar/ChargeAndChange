@@ -24,9 +24,12 @@ jobs:
           echo "Try 2"
           echo ${{ format ('cat BlazorClient/AppVersionInfo.cs | sed ''s/_buildNumber = ""/_buildNumber = "{0}"/'' >temp.cs', github.run_id) }} >command 
           echo "Try 3"
-          echo format ('cat BlazorClient/AppVersionInfo.cs | sed ''s/_buildNumber = ""/_buildNumber = "{0}"/'' | sed ''s/_buildId = ""/_buildId = "{1}"/'' | sed ''s/_gitHash = ""/_gitHash = "{2}"/'' >temp.cs', $GITHUB_RUN_NUMBER,$GITHUB_RUN_ID,$GITHUB_SHA) >command 
+          echo ${{ format ('cat BlazorClient/AppVersionInfo.cs | sed ''s/_buildNumber = ""/_buildNumber = "{0}"/'' | sed ''s/_buildId = ""/_buildId = "{1}"/'' | sed ''s/_gitHash = ""/_gitHash = "{2}"/'' >temp.cs', $GITHUB_RUN_NUMBER,$GITHUB_RUN_ID,$GITHUB_SHA) }} >command 
+          echo "Try echo command"
           echo $(cat command)
+          echo "Try exec"
           echo $($cat command))
+          echo "done exec"
           cat temp.cs >BlazorClient/AppVersionInfo.cs
          
       - uses: pCYSl5EDgo/cat@master
