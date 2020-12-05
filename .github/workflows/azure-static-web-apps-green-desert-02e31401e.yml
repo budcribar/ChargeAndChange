@@ -21,9 +21,11 @@ jobs:
       - name: Define Build variables
         working-directory: '/home/runner/work/ChargeAndChange/ChargeAndChange'
         run: |
+          ls -la
+          echo workspace is ${{ github.workspace }}
           cat BlazorClient/AppVersionInfo.cs | sed 's/_buildNumber = \"\"/_buildNumber = \"$GITHUB_RUN_NUMBER\"/' >BlazorClient/AppVersionInfo.cs
           cat BlazorClient/AppVersionInfo.cs | sed 's/_buildId = \"\"/_buildId = \"$GITHUB_RUN_ID\"/' >BlazorClient/AppVersionInfo.cs
-          cat BlazorClient/AppVersionInfo.cs | sed 's/_githash = \"\"/_githash = \"$GITHUB_SHA\"/' >BlazorClient/AppVersionInfo.cs
+          cat BlazorClient/AppVersionInfo.cs | sed 's/_gitHash = \"\"/_gitHash = \"$GITHUB_SHA\"/' >BlazorClient/AppVersionInfo.cs
          
       - uses: pCYSl5EDgo/cat@master
         id: dump
