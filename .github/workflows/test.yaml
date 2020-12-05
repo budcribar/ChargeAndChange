@@ -33,6 +33,4 @@ jobs:
       - run: echo $TEXT
         env:
           TEXT: ${{ steps.dump.outputs.text }}
-        
-      -
   
