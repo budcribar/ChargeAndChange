@@ -27,6 +27,7 @@ jobs:
           echo "Dump command file"
           echo $(cat command.sh)
           echo "Run the command file"
+          chmod +x command.sh
           ./command.sh
           echo "Copy over the version file"
           cat temp.cs >BlazorClient/AppVersionInfo.cs
