@@ -1,0 +1,38 @@
+name: Test
+
+
+
+jobs:
+  build_and_deploy_job:
+    runs-on: ubuntu-latest
+    name: Build and Deploy Job
+    steps:
+     
+      - name: Define Build variables
+        run: |
+          ls -la
+          echo workspace is ${{ github.workspace }}
+          echo $GITHUB_RUN_NUMBER >GITHUB_RUN_NUMBER
+          echo $GITHUB_RUN_ID >GITHUB_RUN_ID
+          echo $GITHUB_SHA >GITHUB_SHA
+          echo $(cat GITHUB_RUN_NUMBER)
+          echo $(cat GITHUB_RUN_ID)
+          echo $(cat GITHUB_SHA)
+          echo $(cat BlazorClient/AppVersionInfo.cs)
+         
+          echo format ('cat BlazorClient/AppVersionInfo.cs | sed ''s/_buildNumber = ""/_buildNumber = "{0}"/'' | sed ''s/_buildId = ""/_buildId = "{1}"/'' | sed ''s/_gitHash = ""/_gitHash = "{2}"/'' >temp.cs', $GITHUB_RUN_NUMBER,$GITHUB_RUN_ID,GITHUB_SHA) >command 
+          echo $(cat command)
+          echo $($cat command))
+          cat temp.cs >BlazorClient/AppVersionInfo.cs
+         
+      - uses: pCYSl5EDgo/cat@master
+        id: dump
+        with:
+          path: /home/runner/work/ChargeAndChange/ChargeAndChange/BlazorClient/AppVersionInfo.cs
+
+      - run: echo $TEXT
+        env:
+          TEXT: ${{ steps.dump.outputs.text }}
+        
+      -
+  
