@@ -25,10 +25,10 @@ jobs:
           cat BlazorClient/AppVersionInfo.cs | sed 's/_buildId = \"\"/_buildId = \"$GITHUB_RUN_ID\"/' >BlazorClient/AppVersionInfo.cs
           cat BlazorClient/AppVersionInfo.cs | sed 's/_githash = \"\"/_githash = \"$GITHUB_SHA\"/' >BlazorClient/AppVersionInfo.cs
          
-      - uses: pCYSl5EDgo/cat@master 
+      - uses: pCYSl5EDgo/cat@master
         id: dump
         with:
-          path: '/home/runner/work/ChargeAndChange/ChargeAndChange/BlazorClient/AppVersionInfo.cs
+          path: /home/runner/work/ChargeAndChange/ChargeAndChange/BlazorClient/AppVersionInfo.cs
 
       - run: echo $TEXT
         env:
