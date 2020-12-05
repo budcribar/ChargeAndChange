@@ -30,8 +30,10 @@ jobs:
           echo $(cat GITHUB_RUN_ID)
           echo $(cat GITHUB_SHA)
           echo $(cat BlazorClient/AppVersionInfo.cs)
-          cat BlazorClient/AppVersionInfo.cs | sed 's/_buildNumber = \"\"/_buildNumber = \"$(cat GITHUB_RUN_NUMBER)\"/' | sed 's/_buildId = \"\"/_buildId = \"$(cat GITHUB_RUN_ID)\"/' | sed 's/_gitHash = \"\"/_gitHash = \"$(cat GITHUB_SHA)\"/' >temp.cs
-          echo $(cat temp.cs)
+         
+          echo format ('cat BlazorClient/AppVersionInfo.cs | sed \'s/_buildNumber = ""/_buildNumber = "{0}"/\' | sed \'s/_buildId = ""/_buildId = "{1}"/\' | sed \'s/_gitHash = ""/_gitHash = "$(cat GITHUB_SHA)"/\' >temp.cs', $GITHUB_RUN_NUMBER,$GITHUB_RUN_ID,GITHUB_SHA) >command 
+          echo $(cat command)
+          echo $($cat command))
           cat temp.cs >BlazorClient/AppVersionInfo.cs
          
       - uses: pCYSl5EDgo/cat@master
