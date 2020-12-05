@@ -31,7 +31,7 @@ jobs:
           echo $(cat GITHUB_SHA)
           echo $(cat BlazorClient/AppVersionInfo.cs)
          
-          echo format ('cat BlazorClient/AppVersionInfo.cs | sed \'s/_buildNumber = ""/_buildNumber = "{0}"/\' | sed \'s/_buildId = ""/_buildId = "{1}"/\' | sed \'s/_gitHash = ""/_gitHash = "$(cat GITHUB_SHA)"/\' >temp.cs', $GITHUB_RUN_NUMBER,$GITHUB_RUN_ID,GITHUB_SHA) >command 
+          echo format ('cat BlazorClient/AppVersionInfo.cs | sed ''s/_buildNumber = ""/_buildNumber = "{0}"/'' | sed ''s/_buildId = ""/_buildId = "{1}"/'' | sed ''s/_gitHash = ""/_gitHash = "{2}"/'' >temp.cs', $GITHUB_RUN_NUMBER,$GITHUB_RUN_ID,GITHUB_SHA) >command 
           echo $(cat command)
           echo $($cat command))
           cat temp.cs >BlazorClient/AppVersionInfo.cs
