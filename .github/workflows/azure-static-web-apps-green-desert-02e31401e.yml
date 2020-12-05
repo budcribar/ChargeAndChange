@@ -18,6 +18,11 @@ jobs:
       - uses: actions/checkout@v2
         with:
           submodules: true
+      - name: Define Build variables
+         run:|
+         cat BlazorClient/AppVersionInfo.cs | sed 's/_buildNumber = \"\"/_buildNumber = \"$GITHUB_RUN_NUMBER\"/' >BlazorClient/AppVersionInfo.cs
+         cat BlazorClient/AppVersionInfo.cs | sed 's/_buildId = \"\"/_buildId = \"$GITHUB_RUN_ID\"/' >BlazorClient/AppVersionInfo.cs
+         cat BlazorClient/AppVersionInfo.cs | sed 's/_githash = \"\"/_githash = \"$GITHUB_SHA\"/' >BlazorClient/AppVersionInfo.cs
       - name: Build And Deploy
         id: builddeploy
         uses: Azure/static-web-apps-deploy@v0.0.1-preview
