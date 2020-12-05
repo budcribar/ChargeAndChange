@@ -22,9 +22,9 @@ jobs:
           echo "Try 1"
           echo ${{ format ('cat BlazorClient/AppVersionInfo.cs >temp.cs') }} >command1
           echo "Try 2"
-          echo ${{ format ('cat BlazorClient/AppVersionInfo.cs | sed ''s/_buildNumber = ""/_buildNumber = "{0}"/'' >temp.cs', github.run_id) }} >command2
+          echo "${{ format ('cat BlazorClient/AppVersionInfo.cs | sed ''s/_buildNumber = ""/_buildNumber = "{0}"/'' >temp.cs', github.run_id) }}" >command2
           echo "Try 3"
-          echo ${{ format ('cat BlazorClient/AppVersionInfo.cs | sed ''s/_buildNumber = ""/_buildNumber = "{0}"/'' | sed ''s/_buildId = ""/_buildId = "{1}"/'' | sed ''s/_gitHash = ""/_gitHash = "{2}"/'' >temp.cs', github.run_number, github.run_id, github.sha) }} >command 
+          echo "${{ format ('cat BlazorClient/AppVersionInfo.cs | sed ''s/_buildNumber = ""/_buildNumber = "{0}"/'' | sed ''s/_buildId = ""/_buildId = "{1}"/'' | sed ''s/_gitHash = ""/_gitHash = "{2}"/'' >temp.cs', github.run_number, github.run_id, github.sha) }}" >command 
           echo "Try echo command1"
           echo $(cat command1)
           echo "Try echo command2"
