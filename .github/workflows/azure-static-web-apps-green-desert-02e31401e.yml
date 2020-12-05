@@ -31,9 +31,9 @@ jobs:
           echo $(cat GITHUB_RUN_ID)
           echo $(cat GITHUB_SHA)
           echo $(cat BlazorClient/AppVersionInfo.cs)
-          echo "${{ format ('cat BlazorClient/AppVersionInfo.cs | sed ''s/_buildNumber = \"\"/_buildNumber = \"{0}\"/'' | sed ''s/_buildId = \"\"/_buildId = \"{1}\"/'' | sed ''s/_gitHash = \"\"/_gitHash = \"{2}\"/'' >temp.cs', github.run_number, github.run_id, github.sha) }}" >command    
-          echo $(cat command)
-          echo $($(cat command))
+          echo "${{ format ('cat BlazorClient/AppVersionInfo.cs | sed ''s/_buildNumber = \"\"/_buildNumber = \"{0}\"/'' | sed ''s/_buildId = \"\"/_buildId = \"{1}\"/'' | sed ''s/_gitHash = \"\"/_gitHash = \"{2}\"/'' >temp.cs', github.run_number, github.run_id, github.sha) }}" >command.sh    
+          echo $(cat command.sh)
+          command.sh
           cat temp.cs >BlazorClient/AppVersionInfo.cs
       
          
