@@ -14,7 +14,7 @@ namespace CCWebSite.Controllers
 {
     public class ChartData
     {
-        public string Name { get; set; }
+        public string Name { get; set; } = "";
         public double? Y { get; set; }
     }
     
@@ -67,7 +67,7 @@ namespace CCWebSite.Controllers
 
         private double? GetValue(EVSpecs evspec, string spec)
         {
-            var o =  typeof(EVSpecs).GetProperty(spec).GetValue(evspec);
+            var o =  typeof(EVSpecs).GetProperty(spec)?.GetValue(evspec);
             if (o == null) return null;
 
             return ((IConvertible)o).ToDouble(null);

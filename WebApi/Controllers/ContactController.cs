@@ -26,13 +26,13 @@ namespace CCWebSite.Controllers
 
         [HttpGet("GetContact/{email}")]
         [FunctionName(nameof(GetContact))]
-        public async Task<Contact> GetContact([HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "Contact/GetContact/{email}")] HttpRequest request, string email)    
+        public async Task<Contact?> GetContact([HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "Contact/GetContact/{email}")] HttpRequest request, string email)    
         {
             return await repository.GetItemAsync(x => x.Email.ToLower() == email.ToLower());
         }
 
         [HttpGet("GetContactById/{id}")]
-        public async Task<Contact> GetContactById([HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "Contact/GetContactById/{id}")] HttpRequest request, string id)
+        public async Task<Contact?> GetContactById([HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "Contact/GetContactById/{id}")] HttpRequest request, string id)
         {
             return await repository.GetItemAsync(x => x.Id == id);
         }
@@ -60,7 +60,7 @@ namespace CCWebSite.Controllers
 
             // Don't overwrite hashed password
             var old = await repository.GetItemAsync(x => x.Id == contact.Id);
-            contact.HashedPassword = old.HashedPassword;
+            contact.HashedPassword = old?.HashedPassword ?? "";
 
             await repository.UpdateItemAsync(id, contact);
             return Ok();
@@ -95,7 +95,7 @@ namespace CCWebSite.Controllers
 
             if (contact == null) return null;
 
-            Contact c = await repository.GetItemAsync(x => x.Email.ToLower() == contact.Email.ToLower());
+            Contact? c = await repository.GetItemAsync(x => x.Email.ToLower() == contact.Email.ToLower());
 
             if (c == null) return null;
 

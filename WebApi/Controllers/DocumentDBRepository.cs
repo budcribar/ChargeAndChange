@@ -37,7 +37,7 @@ namespace CCWebSite.Controllers
             catch (Exception) { }
         }
 
-        public async Task<T> GetItemAsync(string id)
+        public async Task<T?> GetItemAsync(string id)
         {
             try
             {
@@ -74,7 +74,7 @@ namespace CCWebSite.Controllers
             return results;
         }
 
-        public async Task<T> GetItemAsync(Expression<Func<T, bool>> predicate)
+        public async Task<T?> GetItemAsync(Expression<Func<T, bool>> predicate)
         {
             IDocumentQuery<T> query = client.CreateDocumentQuery<T>(
                 UriFactory.CreateDocumentCollectionUri(DatabaseId, CollectionId),
@@ -120,7 +120,7 @@ namespace CCWebSite.Controllers
                 client.ConnectionPolicy.RetryOptions.MaxRetryWaitTimeInSeconds = 0;
                 client.ConnectionPolicy.RetryOptions.MaxRetryAttemptsOnThrottledRequests = 0;
 
-                BulkImportResponse bulkImportResponse = null;
+                BulkImportResponse? bulkImportResponse = null;
                 long totalNumberOfDocumentsInserted = 0;
                 double totalRequestUnitsConsumed = 0;
                 double totalTimeTakenSec = 0;
@@ -144,8 +144,14 @@ namespace CCWebSite.Controllers
                     Trace.TraceInformation(String.Format("Generating {0} documents to import for batch {1}", numberOfDocumentsPerBatch, i));
                     for (int j = 0; j < numberOfDocumentsPerBatch; j++)
                     {
-                        if (documentNumber < item.Length)
-                            documentsToImportInBatch.Add(item[documentNumber++].ToString());
+                        if (item != null && item[documentNumber] != null && documentNumber < item.Length)
+                        {
+                            T toAdd = item[documentNumber++];
+                            string? s = toAdd.ToString();
+                            if (s != null)
+                                documentsToImportInBatch.Add(s);
+                        }
+                            
                     }
 
                     // Invoke bulk import API.
@@ -179,8 +185,11 @@ namespace CCWebSite.Controllers
                                 }
                             } while (bulkImportResponse.NumberOfDocumentsImported < documentsToImportInBatch.Count);
 
-                            Trace.WriteLine(String.Format("\nSummary for batch {0}:", i));
+                            if (bulkImportResponse != null)
+                            {
+                                Trace.WriteLine(String.Format("\nSummary for batch {0}:", i));
                             Trace.WriteLine("--------------------------------------------------------------------- ");
+
                             Trace.WriteLine(String.Format("Inserted {0} docs @ {1} writes/s, {2} RU/s in {3} sec",
                                 bulkImportResponse.NumberOfDocumentsImported,
                                 Math.Round(bulkImportResponse.NumberOfDocumentsImported / bulkImportResponse.TotalTimeTaken.TotalSeconds),
@@ -190,9 +199,10 @@ namespace CCWebSite.Controllers
                                 (bulkImportResponse.TotalRequestUnitsConsumed / bulkImportResponse.NumberOfDocumentsImported)));
                             Trace.WriteLine("---------------------------------------------------------------------\n ");
 
-                            totalNumberOfDocumentsInserted += bulkImportResponse.NumberOfDocumentsImported;
-                            totalRequestUnitsConsumed += bulkImportResponse.TotalRequestUnitsConsumed;
-                            totalTimeTakenSec += bulkImportResponse.TotalTimeTaken.TotalSeconds;
+                                totalNumberOfDocumentsInserted += bulkImportResponse.NumberOfDocumentsImported;
+                                totalRequestUnitsConsumed += bulkImportResponse.TotalRequestUnitsConsumed;
+                                totalTimeTakenSec += bulkImportResponse.TotalTimeTaken.TotalSeconds;
+                            }                      
                         },
                     token)
                     };
