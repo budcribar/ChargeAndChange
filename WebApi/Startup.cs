@@ -24,13 +24,22 @@ namespace WebApi
             if (IsLocal)
             {
                 var builder = new ConfigurationBuilder();
-                builder.AddUserSecrets(this.GetType().Assembly);        
-                IConfigurationRoot  config = builder.Build();
+                builder.AddUserSecrets(this.GetType().Assembly);
+                IConfigurationRoot config = builder.Build();
                 string key = config.GetValue<string>("DatabaseKey");
                 secrets.Key = key;
-            }             
+            }
             else
-                secrets.Key = Environment.GetEnvironmentVariable("DatabaseKey", EnvironmentVariableTarget.Process) ?? "";
+            {
+                //try
+                //{
+                //    secrets.Key = Environment.GetEnvironmentVariable("DatabaseKey", EnvironmentVariableTarget.Process) ?? "";
+                //}
+                //catch (Exception) {
+                    secrets.Key = "hKi3EPRIufbRmIFk5ehkAsp6OXyfUdLvEoHRhrv0ADVxIJyoPS3RA3JgqWRBhAYLTjoXkL9aZAOfvmMNl64SDw==";
+                //};
+            }
+               
 
             services.AddSingleton(secrets);
             services.AddSingleton<IDocumentDBRepository<EVSpecs>>(new DocumentDBRepository<EVSpecs>("bev",secrets));
