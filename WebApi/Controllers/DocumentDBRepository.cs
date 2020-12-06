@@ -18,16 +18,16 @@ namespace WebApi.Controllers
 
     public class DocumentDBRepository<T> : IDocumentDBRepository<T> where T : class
     {
-        private readonly Secrets secrets;
+        public Secrets Secrets {get;}
         private readonly string Endpoint = "https://charge-and-change.documents.azure.com:443/";
-        private string Key => secrets.Key;
+        private string Key => Secrets.Key;
         private readonly string DatabaseId = "chargeAndChange";
         private readonly string CollectionId;// = "bev";
         private readonly DocumentClient client;
 
         public DocumentDBRepository(string collectionId, Secrets secrets)
         {
-            this.secrets = secrets;
+            this.Secrets = secrets;
             this.CollectionId = collectionId;
             this.client = new DocumentClient(new Uri(Endpoint), Key);
             try

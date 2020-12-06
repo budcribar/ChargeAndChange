@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Azure.WebJobs;
 using Microsoft.Azure.WebJobs.Extensions.Http;
 using Newtonsoft.Json;
+using Microsoft.Extensions.Logging;
 
 namespace WebApi.Controllers
 {
@@ -23,6 +24,7 @@ namespace WebApi.Controllers
     public class BEVController : ControllerBase
     {
         private readonly IDocumentDBRepository<EVSpecs> respository;
+        
         public BEVController(IDocumentDBRepository<EVSpecs> Respository)
         {
             this.respository = Respository;
@@ -72,17 +74,12 @@ namespace WebApi.Controllers
 
             return ((IConvertible)o).ToDouble(null);
         }
-
-       
-     
-        [HttpGet("GetSpecs/{spec}/{availableOnly}")]
         [FunctionName(nameof(GetSpecs))]
         public async Task<List<ChartData>> GetSpecs([HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "BEV/GetSpecs/{spec}/{availableOnly}")] HttpRequest request, string spec, bool availableOnly)
         {
             return (await respository.GetItemsAsync(x => true)).Where(y => !availableOnly || y.Available).Select(x => new ChartData { Name = x.Manufacturer + ' ' + x.Model, Y = GetValue(x, spec) }).Where(x => x.Y != null).OrderBy(x => x.Y).ToList();
         }
 
-        [HttpGet("[action]")]
         [FunctionName(nameof(EVSpecs))]
         public async Task<IEnumerable<EVSpecs>> EVSpecs([HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "BEV/EVSpecs")] HttpRequest request)
         {

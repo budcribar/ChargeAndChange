@@ -9,6 +9,7 @@ namespace WebApi.Controllers
 {
     public interface IDocumentDBRepository<T> where T : class
     {
+        Secrets Secrets { get; }
         Task<Document> CreateItemAsync(T item);
         Task DeleteItemAsync(string id);
         Task<T?> GetItemAsync(string id);

@@ -2,6 +2,7 @@ using Microsoft.Azure.WebJobs;
 using Microsoft.Azure.WebJobs.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using System;
 using WebApi.Controllers;
 
@@ -17,6 +18,7 @@ namespace WebApi
         {
             //services.AddControllers().AddJsonOptions(x => x.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter()));   
             //services.AddSwaggerGen(c => c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo { Title = "Database API", Version = "1.0" }));
+            //services.AddLogging(x => x.AddConfiguration())
 
             Secrets secrets = new Secrets();
             if (IsLocal)
@@ -37,6 +39,8 @@ namespace WebApi
 
         public void Configure(IWebJobsBuilder builder)
         {
+            
+            
             ConfigureServices(builder.Services);
         }
     }
