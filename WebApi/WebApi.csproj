@@ -5,7 +5,8 @@
     <AzureFunctionsVersion>v3</AzureFunctionsVersion>
     <LangVersion>latest</LangVersion>
     <Nullable>enable</Nullable>
-	</PropertyGroup>
+	  <UserSecretsId>314184a6-44fa-4fc2-8b46-d87d9a69ede9</UserSecretsId>
+  </PropertyGroup>
 
 	<ItemGroup>
 	  <None Remove="appsettings.json" />
@@ -32,6 +33,7 @@
     <PackageReference Include="Microsoft.NET.Sdk.Functions" Version="3.0.11" />  	
 		<PackageReference Include="Microsoft.Azure.CosmosDB.BulkExecutor" Version="2.4.1-preview" />		
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="3.1.10" />
     <!--      
 		<PackageReference Include="Microsoft.Extensions.ApiDescription.Client" Version="5.0.0">
 		  <PrivateAssets>all</PrivateAssets>

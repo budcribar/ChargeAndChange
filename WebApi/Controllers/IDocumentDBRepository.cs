@@ -5,7 +5,7 @@ using System.Linq.Expressions;
 using System.Threading.Tasks;
 using Microsoft.Azure.Documents;
 
-namespace CCWebSite.Controllers
+namespace WebApi.Controllers
 {
     public interface IDocumentDBRepository<T> where T : class
     {

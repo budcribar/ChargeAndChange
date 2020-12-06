@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
-namespace CCWebSite.Controllers
+namespace WebApi.Controllers
 {
     public enum ContactStatus { Uncontacted, Contacted, Member, Administrator }
 

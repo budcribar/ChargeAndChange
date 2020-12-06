@@ -1,5 +1,5 @@
 ﻿
-namespace CCWebSite.Controllers
+namespace WebApi.Controllers
 {
     using System;
     using System.Collections.Generic;
@@ -18,15 +18,16 @@ namespace CCWebSite.Controllers
 
     public class DocumentDBRepository<T> : IDocumentDBRepository<T> where T : class
     {
-
+        private readonly Secrets secrets;
         private readonly string Endpoint = "https://charge-and-change.documents.azure.com:443/";
-        private readonly string Key = "hKi3EPRIufbRmIFk5ehkAsp6OXyfUdLvEoHRhrv0ADVxIJyoPS3RA3JgqWRBhAYLTjoXkL9aZAOfvmMNl64SDw==";
+        private string Key => secrets.Key;
         private readonly string DatabaseId = "chargeAndChange";
         private readonly string CollectionId;// = "bev";
         private readonly DocumentClient client;
 
-        public DocumentDBRepository(string collectionId)
+        public DocumentDBRepository(string collectionId, Secrets secrets)
         {
+            this.secrets = secrets;
             this.CollectionId = collectionId;
             this.client = new DocumentClient(new Uri(Endpoint), Key);
             try

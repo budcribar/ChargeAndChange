@@ -10,7 +10,7 @@ using Microsoft.Azure.WebJobs;
 using Microsoft.Azure.WebJobs.Extensions.Http;
 using Newtonsoft.Json;
 
-namespace CCWebSite.Controllers
+namespace WebApi.Controllers
 {
     public class ChartData
     {
