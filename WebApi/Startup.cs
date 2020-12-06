@@ -31,13 +31,8 @@ namespace WebApi
             }
             else
             {
-                //try
-                //{
-                //    secrets.Key = Environment.GetEnvironmentVariable("DatabaseKey", EnvironmentVariableTarget.Process) ?? "";
-                //}
-                //catch (Exception) {
-                    secrets.Key = "hKi3EPRIufbRmIFk5ehkAsp6OXyfUdLvEoHRhrv0ADVxIJyoPS3RA3JgqWRBhAYLTjoXkL9aZAOfvmMNl64SDw==";
-                //};
+                //https://medium.com/statuscode/getting-key-vault-secrets-in-azure-functions-37620fd20a0b
+                secrets.Key = Environment.GetEnvironmentVariable("DatabaseKey", EnvironmentVariableTarget.Process) ?? "";             
             }
                
 

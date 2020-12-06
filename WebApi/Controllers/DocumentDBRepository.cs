@@ -9,8 +9,8 @@ namespace WebApi.Controllers
     using System.Linq.Expressions;
     using System.Threading;
     using System.Threading.Tasks;
-    //using Microsoft.Azure.CosmosDB.BulkExecutor;
-    //using Microsoft.Azure.CosmosDB.BulkExecutor.BulkImport;
+    using Microsoft.Azure.CosmosDB.BulkExecutor;
+    using Microsoft.Azure.CosmosDB.BulkExecutor.BulkImport;
     using Microsoft.Azure.Documents;
     using Microsoft.Azure.Documents.Client;
     using Microsoft.Azure.Documents.Linq;
@@ -99,123 +99,123 @@ namespace WebApi.Controllers
                 .Where(c => c.Id == collectionName).AsEnumerable().FirstOrDefault();
         }
 
-        //public async void CreateItemsAsync(T[] item)
-        //{
-        //    ConnectionPolicy ConnectionPolicy = new ConnectionPolicy
-        //    {
-        //        ConnectionMode = ConnectionMode.Direct,
-        //        ConnectionProtocol = Protocol.Tcp
-        //    };
+        public async void CreateItemsAsync(T[] item)
+        {
+            ConnectionPolicy ConnectionPolicy = new ConnectionPolicy
+            {
+                ConnectionMode = ConnectionMode.Direct,
+                ConnectionProtocol = Protocol.Tcp
+            };
 
-        //    using (var client = new DocumentClient(new Uri(Endpoint), Key, ConnectionPolicy))
-        //    {
-        //        // Set retry options high during initialization (default values).
-        //        client.ConnectionPolicy.RetryOptions.MaxRetryWaitTimeInSeconds = 30;
-        //        client.ConnectionPolicy.RetryOptions.MaxRetryAttemptsOnThrottledRequests = 9;
+            using (var client = new DocumentClient(new Uri(Endpoint), Key, ConnectionPolicy))
+            {
+                // Set retry options high during initialization (default values).
+                client.ConnectionPolicy.RetryOptions.MaxRetryWaitTimeInSeconds = 30;
+                client.ConnectionPolicy.RetryOptions.MaxRetryAttemptsOnThrottledRequests = 9;
 
-        //        DocumentCollection dataCollection = GetCollectionIfExists(client, DatabaseId, CollectionId);
-        //        IBulkExecutor bulkExecutor = new BulkExecutor(client, dataCollection);
-        //        await bulkExecutor.InitializeAsync();
+                DocumentCollection dataCollection = GetCollectionIfExists(client, DatabaseId, CollectionId);
+                IBulkExecutor bulkExecutor = new BulkExecutor(client, dataCollection);
+                await bulkExecutor.InitializeAsync();
 
-        //        // Set retries to 0 to pass complete control to bulk executor.
-        //        client.ConnectionPolicy.RetryOptions.MaxRetryWaitTimeInSeconds = 0;
-        //        client.ConnectionPolicy.RetryOptions.MaxRetryAttemptsOnThrottledRequests = 0;
+                // Set retries to 0 to pass complete control to bulk executor.
+                client.ConnectionPolicy.RetryOptions.MaxRetryWaitTimeInSeconds = 0;
+                client.ConnectionPolicy.RetryOptions.MaxRetryAttemptsOnThrottledRequests = 0;
 
-        //        BulkImportResponse? bulkImportResponse = null;
-        //        long totalNumberOfDocumentsInserted = 0;
-        //        double totalRequestUnitsConsumed = 0;
-        //        double totalTimeTakenSec = 0;
+                BulkImportResponse? bulkImportResponse = null;
+                long totalNumberOfDocumentsInserted = 0;
+                double totalRequestUnitsConsumed = 0;
+                double totalTimeTakenSec = 0;
 
-        //        long numberOfDocumentsToGenerate = item.Length;
-        //        long numberOfDocumentsPerBatch = 100;
-        //        int numberOfBatches = (int)Math.Ceiling(((double)numberOfDocumentsToGenerate) / numberOfDocumentsPerBatch);
-
-
-        //        var tokenSource = new CancellationTokenSource();
-        //        var token = tokenSource.Token;
-        //        var documentNumber = 0;
-
-        //        for (int i = 0; i < numberOfBatches; i++)
-        //        {
-        //            // Generate JSON-serialized documents to import.
-
-        //            List<string> documentsToImportInBatch = new List<string>();
-        //            long prefix = i * numberOfDocumentsPerBatch;
-
-        //            Trace.TraceInformation(String.Format("Generating {0} documents to import for batch {1}", numberOfDocumentsPerBatch, i));
-        //            for (int j = 0; j < numberOfDocumentsPerBatch; j++)
-        //            {
-        //                if (item != null && item[documentNumber] != null && documentNumber < item.Length)
-        //                {
-        //                    T toAdd = item[documentNumber++];
-        //                    string? s = toAdd.ToString();
-        //                    if (s != null)
-        //                        documentsToImportInBatch.Add(s);
-        //                }
-                            
-        //            }
-
-        //            // Invoke bulk import API.
-
-        //            var tasks = new List<Task>
-        //            {
-        //                Task.Run(async () =>
-        //                {
-        //                    Trace.TraceInformation(String.Format("Executing bulk import for batch {0}", i));
-        //                    do
-        //                    {
-        //                        try
-        //                        {
-        //                            bulkImportResponse = await bulkExecutor.BulkImportAsync(
-        //                                documents: documentsToImportInBatch,
-        //                                enableUpsert: false,
-        //                                disableAutomaticIdGeneration: true,
-        //                                maxConcurrencyPerPartitionKeyRange: null,
-        //                                maxInMemorySortingBatchSize: null,
-        //                                cancellationToken: token);
-        //                        }
-        //                        catch (DocumentClientException de)
-        //                        {
-        //                            Trace.TraceError("Document client exception: {0}", de);
-        //                            break;
-        //                        }
-        //                        catch (Exception e)
-        //                        {
-        //                            Trace.TraceError("Exception: {0}", e);
-        //                            break;
-        //                        }
-        //                    } while (bulkImportResponse.NumberOfDocumentsImported < documentsToImportInBatch.Count);
-
-        //                    if (bulkImportResponse != null)
-        //                    {
-        //                        Trace.WriteLine(String.Format("\nSummary for batch {0}:", i));
-        //                    Trace.WriteLine("--------------------------------------------------------------------- ");
-
-        //                    Trace.WriteLine(String.Format("Inserted {0} docs @ {1} writes/s, {2} RU/s in {3} sec",
-        //                        bulkImportResponse.NumberOfDocumentsImported,
-        //                        Math.Round(bulkImportResponse.NumberOfDocumentsImported / bulkImportResponse.TotalTimeTaken.TotalSeconds),
-        //                        Math.Round(bulkImportResponse.TotalRequestUnitsConsumed / bulkImportResponse.TotalTimeTaken.TotalSeconds),
-        //                        bulkImportResponse.TotalTimeTaken.TotalSeconds));
-        //                    Trace.WriteLine(String.Format("Average RU consumption per document: {0}",
-        //                        (bulkImportResponse.TotalRequestUnitsConsumed / bulkImportResponse.NumberOfDocumentsImported)));
-        //                    Trace.WriteLine("---------------------------------------------------------------------\n ");
-
-        //                        totalNumberOfDocumentsInserted += bulkImportResponse.NumberOfDocumentsImported;
-        //                        totalRequestUnitsConsumed += bulkImportResponse.TotalRequestUnitsConsumed;
-        //                        totalTimeTakenSec += bulkImportResponse.TotalTimeTaken.TotalSeconds;
-        //                    }                      
-        //                },
-        //            token)
-        //            };
-
-        //            await Task.WhenAll(tasks);
-        //        }
-
-                
-        //    }
+                long numberOfDocumentsToGenerate = item.Length;
+                long numberOfDocumentsPerBatch = 100;
+                int numberOfBatches = (int)Math.Ceiling(((double)numberOfDocumentsToGenerate) / numberOfDocumentsPerBatch);
 
 
-        //}
+                var tokenSource = new CancellationTokenSource();
+                var token = tokenSource.Token;
+                var documentNumber = 0;
+
+                for (int i = 0; i < numberOfBatches; i++)
+                {
+                    // Generate JSON-serialized documents to import.
+
+                    List<string> documentsToImportInBatch = new List<string>();
+                    long prefix = i * numberOfDocumentsPerBatch;
+
+                    Trace.TraceInformation(String.Format("Generating {0} documents to import for batch {1}", numberOfDocumentsPerBatch, i));
+                    for (int j = 0; j < numberOfDocumentsPerBatch; j++)
+                    {
+                        if (item != null && item[documentNumber] != null && documentNumber < item.Length)
+                        {
+                            T toAdd = item[documentNumber++];
+                            string? s = toAdd.ToString();
+                            if (s != null)
+                                documentsToImportInBatch.Add(s);
+                        }
+
+                    }
+
+                    // Invoke bulk import API.
+
+                    var tasks = new List<Task>
+                    {
+                        Task.Run(async () =>
+                        {
+                            Trace.TraceInformation(String.Format("Executing bulk import for batch {0}", i));
+                            do
+                            {
+                                try
+                                {
+                                    bulkImportResponse = await bulkExecutor.BulkImportAsync(
+                                        documents: documentsToImportInBatch,
+                                        enableUpsert: false,
+                                        disableAutomaticIdGeneration: true,
+                                        maxConcurrencyPerPartitionKeyRange: null,
+                                        maxInMemorySortingBatchSize: null,
+                                        cancellationToken: token);
+                                }
+                                catch (DocumentClientException de)
+                                {
+                                    Trace.TraceError("Document client exception: {0}", de);
+                                    break;
+                                }
+                                catch (Exception e)
+                                {
+                                    Trace.TraceError("Exception: {0}", e);
+                                    break;
+                                }
+                            } while (bulkImportResponse.NumberOfDocumentsImported < documentsToImportInBatch.Count);
+
+                            if (bulkImportResponse != null)
+                            {
+                                Trace.WriteLine(String.Format("\nSummary for batch {0}:", i));
+                            Trace.WriteLine("--------------------------------------------------------------------- ");
+
+                            Trace.WriteLine(String.Format("Inserted {0} docs @ {1} writes/s, {2} RU/s in {3} sec",
+                                bulkImportResponse.NumberOfDocumentsImported,
+                                Math.Round(bulkImportResponse.NumberOfDocumentsImported / bulkImportResponse.TotalTimeTaken.TotalSeconds),
+                                Math.Round(bulkImportResponse.TotalRequestUnitsConsumed / bulkImportResponse.TotalTimeTaken.TotalSeconds),
+                                bulkImportResponse.TotalTimeTaken.TotalSeconds));
+                            Trace.WriteLine(String.Format("Average RU consumption per document: {0}",
+                                (bulkImportResponse.TotalRequestUnitsConsumed / bulkImportResponse.NumberOfDocumentsImported)));
+                            Trace.WriteLine("---------------------------------------------------------------------\n ");
+
+                                totalNumberOfDocumentsInserted += bulkImportResponse.NumberOfDocumentsImported;
+                                totalRequestUnitsConsumed += bulkImportResponse.TotalRequestUnitsConsumed;
+                                totalTimeTakenSec += bulkImportResponse.TotalTimeTaken.TotalSeconds;
+                            }
+                        },
+                    token)
+                    };
+
+                    await Task.WhenAll(tasks);
+                }
+
+
+            }
+
+
+        }
         public async Task<Document> CreateItemAsync(T item)
         {
             return await client.CreateDocumentAsync(UriFactory.CreateDocumentCollectionUri(DatabaseId, CollectionId), item);

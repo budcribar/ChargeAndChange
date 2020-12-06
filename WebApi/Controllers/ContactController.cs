@@ -115,17 +115,17 @@ namespace WebApi.Controllers
             return await repository.GetItemsAsync(x => true);
         }
 
-        //[FunctionName(nameof(ContactsInSubdivision))]
-        //public async Task<IEnumerable<Contact>> ContactsInSubdivision([HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "Contact/ContactsInSubdivision/{subdivision}")] HttpRequest request, string subdivision)
-        //{
-        //    var result = await Download.DownloadJObjectAsync(@"https://apps.larimer.org/api/assessor/property/?prop=property&parcel=undefined&scheduleNumber=undefined&serialIdentification=undefined&name=&fromAddrNum=undefined&toAddrNum=undefined&address=&city=FORT%20COLLINS&subdivisionNumber=undefined&sales=any&subdivisionName=WILLOW%20SPRINGS%20PUD");
-        //    var records = result["records"];
+        [FunctionName(nameof(ContactsInSubdivision))]
+        public async Task<IEnumerable<Contact>> ContactsInSubdivision([HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "Contact/ContactsInSubdivision/{subdivision}")] HttpRequest request, string subdivision)
+        {
+            var result = await Download.DownloadJObjectAsync(@"https://apps.larimer.org/api/assessor/property/?prop=property&parcel=undefined&scheduleNumber=undefined&serialIdentification=undefined&name=&fromAddrNum=undefined&toAddrNum=undefined&address=&city=FORT%20COLLINS&subdivisionNumber=undefined&sales=any&subdivisionName=WILLOW%20SPRINGS%20PUD");
+            var records = result["records"];
 
-        //    var results = records.Select(x => JsonConvert.DeserializeObject<LarimerCountyRecord>(x.ToString()).ToContact(subdivision)).Where(x => x != null).ToList();
+            var results = records.Select(x => JsonConvert.DeserializeObject<LarimerCountyRecord>(x.ToString()).ToContact(subdivision)).Where(x => x != null).ToList();
 
-        //    repository.CreateItemsAsync(results.ToArray());
+            repository.CreateItemsAsync(results.ToArray());
 
-        //    return results;
-        //}
+            return results;
+        }
     }
 }
