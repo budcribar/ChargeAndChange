@@ -1,3 +1,4 @@
+using MatBlazor;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -17,7 +18,8 @@ namespace Client
             var url = new Uri(builder.HostEnvironment.BaseAddress);
             builder.Services.AddSingleton(new SwaggerClient(baseAddress, new HttpClient { BaseAddress=url }));
             builder.Services.AddSingleton<AppVersionInfo>();
-           await builder.Build().RunAsync();
+            builder.Services.AddMatBlazor();
+            await builder.Build().RunAsync();
         }
     }
 }
