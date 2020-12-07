@@ -4,153 +4,162 @@
 @inject SwaggerClient Client
 
 <h1>Contacts</h1>
-<Radzen.Blazor.RadzenButton Click="@InsertRow">Insert</Radzen.Blazor.RadzenButton>
-<RadzenDropDown TValue="string" Data="@subdivisions" Style="width:20%" Change="@(args => ChangeSubdivision(args?.ToString() ?? ""))" SelectedItem="selectedSubdivision" />
-<RadzenDropDown TValue="string" Data="@streets" Style="width:20%" Change="@(args => ChangeStreet(args?.ToString() ?? ""))" SelectedItem="selectedStreet" />
+<MediaQuery Media="@Breakpoints.SmallDown" @bind-Matches="isSmall" />
+@if (isSmall)
+{
+    <h2>Rotate to landscape to view chart</h2>
+    <img src="rotate.png">
+}
+else
+{
+    <Radzen.Blazor.RadzenButton Click="@InsertRow">Insert</Radzen.Blazor.RadzenButton>
+    <RadzenDropDown TValue="string" Data="@subdivisions" Style="width:20%" Change="@(args => ChangeSubdivision(args?.ToString() ?? ""))" SelectedItem="selectedSubdivision" />
+    <RadzenDropDown TValue="string" Data="@streets" Style="width:20%" Change="@(args => ChangeStreet(args?.ToString() ?? ""))" SelectedItem="selectedStreet" />
 
-<RadzenGrid @ref="contactsGrid" AllowFiltering="true" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" AllowPaging="true" PageSize="50" EditMode="DataGridEditMode.Single" RowUpdate="@OnUpdateRow"
-            AllowSorting="true" Data="@filteredContacts" TItem="Contact" ColumnWidth="130px">
-    <Columns>
-
-
-        <RadzenGridColumn TItem="Contact" Property="DateUpdated" Title="Date Updated">
-            <Template Context="contact">
-                @String.Format("{0:d}", contact.DateUpdated)
-            </Template>
-            <EditTemplate Context="contact">
-                <RadzenDatePicker @bind-Value="contact.DateUpdated" Style="width:100%" />
-            </EditTemplate>
-        </RadzenGridColumn>
-
-        <RadzenGridColumn TItem="Contact" Property="FirstName" Title="First Name">
-            <EditTemplate Context="contact">
-                <RadzenTextBox @bind-Value="contact.FirstName" Style="width:100%" />
-            </EditTemplate>
-        </RadzenGridColumn>
+    <RadzenGrid @ref="contactsGrid" AllowFiltering="true" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" AllowPaging="true" PageSize="50" EditMode="DataGridEditMode.Single" RowUpdate="@OnUpdateRow"
+                AllowSorting="true" Data="@filteredContacts" TItem="Contact" ColumnWidth="130px">
+        <Columns>
 
 
+            <RadzenGridColumn TItem="Contact" Property="DateUpdated" Title="Date Updated">
+                <Template Context="contact">
+                    @String.Format("{0:d}", contact.DateUpdated)
+                </Template>
+                <EditTemplate Context="contact">
+                    <RadzenDatePicker @bind-Value="contact.DateUpdated" Style="width:100%" />
+                </EditTemplate>
+            </RadzenGridColumn>
 
-        <RadzenGridColumn TItem="Contact" Property="LastName" Title="Last Name">
-            <EditTemplate Context="contact">
-                <RadzenTextBox @bind-Value="contact.LastName" Style="width:100%" />
-            </EditTemplate>
-        </RadzenGridColumn>
-
-        <RadzenGridColumn TItem="Contact" Property="Email" Title="Email" Width="200px">
-            <EditTemplate Context="contact">
-                <RadzenTextBox @bind-Value="contact.Email" Style="width:100%" />
-            </EditTemplate>
-        </RadzenGridColumn>
-
-        <RadzenGridColumn TItem="Contact" Property="Subscriber" Title="Subscriber" Width="40%">
-            <Template Context="contact">
-                @(contact.Subscriber ?? false)
-            </Template>
-
-            <EditTemplate Context="contact">
-                <RadzenCheckBox @bind-Value="contact.Subscriber" Style="width:50%" />
-            </EditTemplate>
-        </RadzenGridColumn>
-
-
-        <RadzenGridColumn TItem="Contact" Property="Status" Title="Status">
-            <Template Context="contact">
-                @contact.Status.ToString()
-            </Template>
-            <EditTemplate Context="contact">
-                <RadzenDropDown TValue="string" Data="@statusTypes" Style="width:100%" Change="@(args => Change(args?.ToString() ?? "", contact))" SelectedItem="contact.Status.ToString()" />
-            </EditTemplate>
-        </RadzenGridColumn>
-
-        <RadzenGridColumn TItem="Contact" Property="Subdivision" Title="Subdivision" Width="120%">
-            <EditTemplate Context="contact">
-                <RadzenTextBox @bind-Value="contact.Subdivision" Style="width:100%" />
-            </EditTemplate>
-        </RadzenGridColumn>
-
-        <RadzenGridColumn TItem="Contact" Property="StreetNumber" Title="Street Number" Width="50%">
-            <EditTemplate Context="contact">
-                <RadzenNumeric @bind-Value="contact.StreetNumber" Style="width:100%" />
-            </EditTemplate>
-        </RadzenGridColumn>
-
-
-        <RadzenGridColumn TItem="Contact" Property="Street" Title="Street">
-            <EditTemplate Context="contact">
-                <RadzenTextBox @bind-Value="contact.Street" Style="width:50%" />
-            </EditTemplate>
-        </RadzenGridColumn>
-
-
-        <RadzenGridColumn TItem="Contact" Property="Phone" Title="Phone">
-            <EditTemplate Context="contact">
-                <RadzenNumeric @bind-Value="contact.Phone" Style="width:50%" />
-            </EditTemplate>
-        </RadzenGridColumn>
-
-        <RadzenGridColumn TItem="Contact" Property="EVInterest" Title="EV Interest">
-            <Template Context="contact">
-               
-                 @contact.EvInterest.ToString()
-                         
-
-            </Template>
-            <EditTemplate Context="contact">
-                <RadzenDropDown TValue="string" Data="@interestTypes" Style="width:100%" Change="@(args => ChangeEVInterest(args?.ToString() ?? "", contact))" SelectedItem="contact.EvInterest.ToString()" />
-            </EditTemplate>
-        </RadzenGridColumn>
-
-        <RadzenGridColumn TItem="Contact" Property="LawnEquipmentInterest" Title="Lawn Equipment Interest">
-            <Template Context="contact">
-
-                           @contact.LawnEquipmentInterest.ToString()
-                   
-            </Template>
-            <EditTemplate Context="contact">
-                <RadzenDropDown TValue="string" Data="@interestTypes" Style="width:100%" Change="@(args => ChangeLawnEquipmentInterest(args?.ToString() ?? "", contact))" SelectedItem="contact.LawnEquipmentInterest.ToString()" />
-            </EditTemplate>
-        </RadzenGridColumn>
+            <RadzenGridColumn TItem="Contact" Property="FirstName" Title="First Name">
+                <EditTemplate Context="contact">
+                    <RadzenTextBox @bind-Value="contact.FirstName" Style="width:100%" />
+                </EditTemplate>
+            </RadzenGridColumn>
 
 
 
-        <RadzenGridColumn TItem="Contact" Property="Notes" Title="Notes">
-            <EditTemplate Context="contact">
-                <RadzenTextBox @bind-Value="contact.Notes" Style="width:50%" />
-            </EditTemplate>
-        </RadzenGridColumn>
+            <RadzenGridColumn TItem="Contact" Property="LastName" Title="Last Name">
+                <EditTemplate Context="contact">
+                    <RadzenTextBox @bind-Value="contact.LastName" Style="width:100%" />
+                </EditTemplate>
+            </RadzenGridColumn>
+
+            <RadzenGridColumn TItem="Contact" Property="Email" Title="Email" Width="200px">
+                <EditTemplate Context="contact">
+                    <RadzenTextBox @bind-Value="contact.Email" Style="width:100%" />
+                </EditTemplate>
+            </RadzenGridColumn>
+
+            <RadzenGridColumn TItem="Contact" Property="Subscriber" Title="Subscriber" Width="40%">
+                <Template Context="contact">
+                    @(contact.Subscriber ?? false)
+                </Template>
+
+                <EditTemplate Context="contact">
+                    <RadzenCheckBox @bind-Value="contact.Subscriber" Style="width:50%" />
+                </EditTemplate>
+            </RadzenGridColumn>
 
 
-        <RadzenGridColumn TItem="Contact" Context="contact" Bubble="false" Filterable="false" Sortable="false" TextAlign="TextAlign.Center" Width="100px">
-            <Template Context="contact">
-                <RadzenButton Icon="edit" Size="ButtonSize.Small" Click="@(args => EditRow(contact))">
-                </RadzenButton>
-            </Template>
-            <EditTemplate Context="contact">
-                <RadzenButton Icon="save" Size="ButtonSize.Small" Click="@((args) => SaveRow(contact))">
-                </RadzenButton>
-                <RadzenButton Icon="cancel" Size="ButtonSize.Small" ButtonStyle="ButtonStyle.Secondary" Click="@((args) => CancelEdit(contact))">
-                </RadzenButton>
-            </EditTemplate>
-        </RadzenGridColumn>
-        <RadzenGridColumn TItem="Contact" Context="contact" Bubble="false" Filterable="false" Sortable="false" TextAlign="TextAlign.Center" Width="70px">
-            <Template Context="contact">
-                <RadzenButton ButtonStyle="ButtonStyle.Danger" Icon="close" Size="ButtonSize.Small" Click="@(args => DeleteRow(contact))">
-                </RadzenButton>
-            </Template>
-            <EditTemplate Context="contact">
-                <RadzenButton ButtonStyle="ButtonStyle.Danger" Icon="close" Size="ButtonSize.Small" Click="@(args => DeleteRow(contact))">
-                </RadzenButton>
-            </EditTemplate>
-        </RadzenGridColumn>
+            <RadzenGridColumn TItem="Contact" Property="Status" Title="Status">
+                <Template Context="contact">
+                    @contact.Status.ToString()
+                </Template>
+                <EditTemplate Context="contact">
+                    <RadzenDropDown TValue="string" Data="@statusTypes" Style="width:100%" Change="@(args => Change(args?.ToString() ?? "", contact))" SelectedItem="contact.Status.ToString()" />
+                </EditTemplate>
+            </RadzenGridColumn>
 
-    </Columns>
-</RadzenGrid>
+            <RadzenGridColumn TItem="Contact" Property="Subdivision" Title="Subdivision" Width="120%">
+                <EditTemplate Context="contact">
+                    <RadzenTextBox @bind-Value="contact.Subdivision" Style="width:100%" />
+                </EditTemplate>
+            </RadzenGridColumn>
+
+            <RadzenGridColumn TItem="Contact" Property="StreetNumber" Title="Street Number" Width="50%">
+                <EditTemplate Context="contact">
+                    <RadzenNumeric @bind-Value="contact.StreetNumber" Style="width:100%" />
+                </EditTemplate>
+            </RadzenGridColumn>
 
 
+            <RadzenGridColumn TItem="Contact" Property="Street" Title="Street">
+                <EditTemplate Context="contact">
+                    <RadzenTextBox @bind-Value="contact.Street" Style="width:50%" />
+                </EditTemplate>
+            </RadzenGridColumn>
+
+
+            <RadzenGridColumn TItem="Contact" Property="Phone" Title="Phone">
+                <EditTemplate Context="contact">
+                    <RadzenNumeric @bind-Value="contact.Phone" Style="width:50%" />
+                </EditTemplate>
+            </RadzenGridColumn>
+
+            <RadzenGridColumn TItem="Contact" Property="EVInterest" Title="EV Interest">
+                <Template Context="contact">
+
+                    @contact.EvInterest.ToString()
+
+
+                </Template>
+                <EditTemplate Context="contact">
+                    <RadzenDropDown TValue="string" Data="@interestTypes" Style="width:100%" Change="@(args => ChangeEVInterest(args?.ToString() ?? "", contact))" SelectedItem="contact.EvInterest.ToString()" />
+                </EditTemplate>
+            </RadzenGridColumn>
+
+            <RadzenGridColumn TItem="Contact" Property="LawnEquipmentInterest" Title="Lawn Equipment Interest">
+                <Template Context="contact">
+
+                    @contact.LawnEquipmentInterest.ToString()
+
+                </Template>
+                <EditTemplate Context="contact">
+                    <RadzenDropDown TValue="string" Data="@interestTypes" Style="width:100%" Change="@(args => ChangeLawnEquipmentInterest(args?.ToString() ?? "", contact))" SelectedItem="contact.LawnEquipmentInterest.ToString()" />
+                </EditTemplate>
+            </RadzenGridColumn>
+
+
+
+            <RadzenGridColumn TItem="Contact" Property="Notes" Title="Notes">
+                <EditTemplate Context="contact">
+                    <RadzenTextBox @bind-Value="contact.Notes" Style="width:50%" />
+                </EditTemplate>
+            </RadzenGridColumn>
+
+
+            <RadzenGridColumn TItem="Contact" Context="contact" Bubble="false" Filterable="false" Sortable="false" TextAlign="TextAlign.Center" Width="100px">
+                <Template Context="contact">
+                    <RadzenButton Icon="edit" Size="ButtonSize.Small" Click="@(args => EditRow(contact))">
+                    </RadzenButton>
+                </Template>
+                <EditTemplate Context="contact">
+                    <RadzenButton Icon="save" Size="ButtonSize.Small" Click="@((args) => SaveRow(contact))">
+                    </RadzenButton>
+                    <RadzenButton Icon="cancel" Size="ButtonSize.Small" ButtonStyle="ButtonStyle.Secondary" Click="@((args) => CancelEdit(contact))">
+                    </RadzenButton>
+                </EditTemplate>
+            </RadzenGridColumn>
+            <RadzenGridColumn TItem="Contact" Context="contact" Bubble="false" Filterable="false" Sortable="false" TextAlign="TextAlign.Center" Width="70px">
+                <Template Context="contact">
+                    <RadzenButton ButtonStyle="ButtonStyle.Danger" Icon="close" Size="ButtonSize.Small" Click="@(args => DeleteRow(contact))">
+                    </RadzenButton>
+                </Template>
+                <EditTemplate Context="contact">
+                    <RadzenButton ButtonStyle="ButtonStyle.Danger" Icon="close" Size="ButtonSize.Small" Click="@(args => DeleteRow(contact))">
+                    </RadzenButton>
+                </EditTemplate>
+            </RadzenGridColumn>
+
+        </Columns>
+    </RadzenGrid>
+
+}
 
 
 
 @code {
+    bool isSmall = false;
     //int powerMode = 1;
     private RadzenGrid<Contact>? contactsGrid;
 
@@ -264,13 +273,13 @@
 
     async void OnUpdateRow(Contact contact)
     {
-        
+
         var old = await Client.GetContactByIdAsync(contact.Id);
 
         contact.HashedPassword = old?.HashedPassword ?? "";
 
         await Client.PatchContactAsync(contact.Id, contact);
-        
+
         Reload();
     }
 
