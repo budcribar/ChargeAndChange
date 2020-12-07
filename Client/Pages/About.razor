@@ -1,10 +1,24 @@
 ﻿@page "/about"
 @inject AppVersionInfo VersionInfo
 
-<h3>About page</h3>
-<h2>BuildNumber: @(VersionInfo.BuildNumber)</h2>
-<h2>BuildId: <a href="https://github.com/budcribar/ChargeAndChange/_build/results?buildId=@(VersionInfo.BuildId)&view=results">@(VersionInfo.BuildId)</a> </h2>
-<h2>GitHash:<a href="https://github.com/budcribar/ChargeAndChange/commit/@(VersionInfo.GitHash)">@(VersionInfo.ShortGitHash)</a></h2>
+<h1 class="Heading">About Charge and Change Nonprofit </h1>
+<p>
+    The Charge and Change Nonprofit is a 501(c)(3) organizaton founded in 2019. Charge and Change works to improve air quaility and reduce global warming emissions through education and community involvement. We are working hard to provide future generations a cleaner and healthier planet.
+</p>
+
+<p>
+    Support Charge and Change Nonprofit with your
+    <a href="/donate" class="ml-md-auto">contribution</a> today!
+</p>
+
+<h1 class="Heading">Mission </h1>
+
+
+<p>Our Mission is to accelerate the adoption of clean and renewable energy through education and community involvement.</p>
+<div style="position:fixed;bottom:0;left:90%;width:10%">
+    BuildNumber: @(VersionInfo.BuildNumber)
+</div>
+
 @code {
 
 }
