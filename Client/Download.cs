@@ -7,9 +7,9 @@ namespace Client
 {
     public class Download
     {
-        public static JObject DownloadJObject(string url)
+        public async static Task<JObject> DownloadJObject(string url)
         {
-            return JObject.Parse(DownloadPageAsync(url).Result);
+            return  JObject.Parse(await DownloadPageAsync(url));
         }
       
 
