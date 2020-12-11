@@ -13,8 +13,8 @@
 else
 {
     <Radzen.Blazor.RadzenButton Click="@InsertRow">Insert</Radzen.Blazor.RadzenButton>
-    <RadzenDropDown TValue="string" Data="@subdivisions" Style="width:20%" Change="@(args => ChangeSubdivision(args?.ToString() ?? ""))" SelectedItem="selectedSubdivision" />
-    <RadzenDropDown TValue="string" Data="@streets" Style="width:20%" Change="@(args => ChangeStreet(args?.ToString() ?? ""))" SelectedItem="selectedStreet" />
+    <RadzenDropDown Placeholder="Select by subdivision" TValue="string" Data="@subdivisions" Style="width:20%" Change="@(args => ChangeSubdivision(args?.ToString() ?? ""))" SelectedItem="selectedSubdivision" />
+    <RadzenDropDown Placeholder="Select by street" TValue="string" Data="@streets" Style="width:20%" Change="@(args => ChangeStreet(args?.ToString() ?? ""))" SelectedItem="selectedStreet" />
 
     <RadzenGrid @ref="contactsGrid" AllowFiltering="true" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" AllowPaging="true" PageSize="50" EditMode="DataGridEditMode.Single" RowUpdate="@OnUpdateRow"
                 AllowSorting="true" Data="@filteredContacts" TItem="Contact" ColumnWidth="130px">
@@ -157,7 +157,6 @@ else
 }
 
 
-
 @code {
     bool isSmall = false;
     //int powerMode = 1;
@@ -183,6 +182,9 @@ else
         filteredContacts = contacts;
 
         BuildSelections();
+
+        selectedSubdivision = "<all>";
+        selectedStreet = "<all>";
 
         StateHasChanged();
     }
@@ -273,7 +275,6 @@ else
 
     async Task OnUpdateRow(Contact contact)
     {
-
         var old = await Client.GetContactByIdAsync(contact.Id);
 
         contact.HashedPassword = old?.HashedPassword ?? "";
@@ -291,36 +292,22 @@ else
 
     void CancelEdit(Contact contact)
     {
-
         contactsGrid?.CancelEditRow(contact);
-        // For production
-        // var orderEntry = dbContext.Entry(order);
-        // orderEntry.CurrentValues.SetValues(orderEntry.OriginalValues);
-        // orderEntry.State = EntityState.Unchanged;
     }
 
     async Task InsertRow()
     {
         Contact spec = new Contact();
 
-
         await Client.PutContactAsync(spec);
 
         Reload();
         await (contactsGrid?.Reload() ?? Task.CompletedTask);
-
     }
 
     async Task DeleteRow(Contact contact)
     {
         await Client.DeleteContactAsync(contact.Id);
-
-
-        // For demo purposes only
-        //orders.Remove(order);
-
-        // For production
-        //dbContext.SaveChanges();
 
         Reload();
 
