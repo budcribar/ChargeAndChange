@@ -14,15 +14,11 @@ else
     @if (selectedSpec.Length > 0)
     {
         <div class="row">
-
-
             <RadzenDropDown TValue="string" Data="@specs.Keys" Style="width:30%" Change="@(args => Change(args?.ToString() ?? ""))" SelectedItem="selectedSpec" />
 
         </div>
 
         <div style="height:600px">
-
-
 
             <RadzenChart Style="width:100%;height:100%">
                 <RadzenBarSeries Data="@filteredSpecs" CategoryProperty="Model" Title="@selectedSpec" LineType="LineType.Solid" ValueProperty="Value" />
@@ -48,7 +44,6 @@ else
     {
         selectedSpec = spec;
         filteredSpecs = evSpecs.Where(x => specs[selectedSpec].Item2.Invoke(x) != null).OrderBy(x => specs[selectedSpec].Item2.Invoke(x)).Select(x => new DataItem { Model = x.Model, Value = specs[selectedSpec].Item2.Invoke(x) }).ToArray();
-
     }
 
     private EVSpecs[] evSpecs = Array.Empty<EVSpecs>();
@@ -57,7 +52,6 @@ else
         public string Model { get; set; } = "";
         public double? Value { get; set; }
     }
-
 
     private DataItem[] filteredSpecs = Array.Empty<DataItem>();
 
@@ -76,9 +70,6 @@ else
             {  "SafetyRating",  ("Safety Rating", (e) => (double?) e.SafetyRating)  }};
 
     string selectedSpec = "";
-
-
-
 
     protected override async Task OnInitializedAsync()
     {

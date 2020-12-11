@@ -271,7 +271,7 @@ else
         Reload();
     }
 
-    async void OnUpdateRow(Contact contact)
+    async Task OnUpdateRow(Contact contact)
     {
 
         var old = await Client.GetContactByIdAsync(contact.Id);
@@ -299,7 +299,7 @@ else
         // orderEntry.State = EntityState.Unchanged;
     }
 
-    async void InsertRow()
+    async Task InsertRow()
     {
         Contact spec = new Contact();
 
@@ -311,7 +311,7 @@ else
 
     }
 
-    async void DeleteRow(Contact contact)
+    async Task DeleteRow(Contact contact)
     {
         await Client.DeleteContactAsync(contact.Id);
 

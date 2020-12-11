@@ -1,22 +1,22 @@
 @page "/bevdata"
 @using System.Linq;
+@using System.ComponentModel; 
 
-@inject SwaggerClient Client
-
+@inject IBEVViewModel ViewModel
+ 
 <h1>BEV Specs</h1>
-<MediaQuery Media="@Breakpoints.SmallDown" @bind-Matches="isSmall" />
-@if (isSmall)
+<MediaQuery Media="@Breakpoints.SmallDown" @bind-Matches="ViewModel.IsSmallDisplay" />
+@if (ViewModel.IsSmallDisplay)
 {
     <h2>Rotate to landscape to view chart</h2>
     <img src="rotate.png">
 }
 else
 {
+    <Radzen.Blazor.RadzenButton Click="@ViewModel.InsertRow">Insert</Radzen.Blazor.RadzenButton>
 
-    <Radzen.Blazor.RadzenButton Click="@InsertRow">Insert</Radzen.Blazor.RadzenButton>
-
-    <RadzenGrid @ref="evSpecsGrid" AllowFiltering="true" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" AllowPaging="true" PageSize="50" EditMode="DataGridEditMode.Single" RowUpdate="@OnUpdateRow"
-                AllowSorting="true" Data="@evSpecs" TItem="EVSpecs" ColumnWidth="130px">
+    <RadzenGrid @ref="evSpecsGrid" AllowFiltering="true" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" AllowPaging="true" PageSize="50" EditMode="DataGridEditMode.Single" RowUpdate="@ViewModel.UpdateRow"
+                AllowSorting="true" Data="@ViewModel.BevSpecs" TItem="EVSpecs" ColumnWidth="130px">
         <Columns>
 
 
@@ -49,7 +49,7 @@ else
 
             <RadzenGridColumn TItem="EVSpecs" Property="BodyStyle" Title="Body Style">
                 <EditTemplate Context="evSpec">
-                    <RadzenDropDown TValue="string" Data="@bodyStyles" Style="width:100%" Change="@(args => Change(args?.ToString() ?? "", evSpec))" SelectedItem="evSpec.BodyStyle.ToString()" />
+                    <RadzenDropDown TValue="string" Data="@ViewModel.BodyStyles" Style="width:100%" Change="@(args => ViewModel.ChangeBodyStyle(args?.ToString() ?? "", evSpec))" SelectedItem="evSpec.BodyStyle.ToString()" />
                 </EditTemplate>
             </RadzenGridColumn>
 
@@ -78,7 +78,7 @@ else
             <RadzenGridColumn TItem="EVSpecs" Property="DriveTrain" Title="Drive Train">
 
                 <EditTemplate Context="evSpec">
-                    <RadzenDropDown TValue="string" Data="@driveTypes" Style="width:100%" Change="@(args => ChangeDriveType(args?.ToString() ?? "", evSpec))" SelectedItem="evSpec.DriveTrain.ToString()" />
+                    <RadzenDropDown TValue="string" Data="@ViewModel.DriveTypes" Style="width:100%" Change="@(args => ViewModel.ChangeDriveType(args?.ToString() ?? "", evSpec))" SelectedItem="evSpec.DriveTrain.ToString()" />
                 </EditTemplate>
             </RadzenGridColumn>
 
@@ -103,13 +103,16 @@ else
 
 
             <RadzenGridColumn TItem="EVSpecs" Property="MotorPowerKw" Title="Motor Power Kw">
+                <Template Context="evSpec">
+                    @ViewModel.GetMotorPower(evSpec)
+                </Template>
                 <EditTemplate Context="evSpec">
-                    <RadzenNumeric TValue="int?" Change="@(args => ChangeMotorPower(args, evSpec))" @bind-Value="evSpec.MotorPowerKw" Style="width:100%" />
-                    <RadzenRadioButtonList @bind-Value="powerMode" TValue="int">
+
+                    <RadzenNumeric TValue="int?" Change="@(args => ViewModel.ChangeMotorPower(args, evSpec))" @bind-value="evSpec.MotorPowerKw" Style="width:100%" />
+                    <RadzenRadioButtonList @bind-Value="ViewModel.PowerMode" TValue="int">
                         <Items>
                             <RadzenRadioButtonListItem Text="kw" Value="1" />
                             <RadzenRadioButtonListItem Text="hp" Value="2" />
-
                         </Items>
                     </RadzenRadioButtonList>
 
@@ -131,7 +134,7 @@ else
 
             <RadzenGridColumn TItem="EVSpecs" Property="ChargingConnector" Title="Charging Connector">
                 <EditTemplate Context="evSpec">
-                    <RadzenDropDown TValue="string" Data="@connectorTypes" Style="width:100%" Change="@(args => ChangeConnectorType(args?.ToString() ?? "", evSpec))" SelectedItem="evSpec.ChargingConnector.ToString()" />
+                    <RadzenDropDown TValue="string" Data="@ViewModel.ConnectorTypes" Style="width:100%" Change="@(args => ViewModel.ChangeConnectorType(args?.ToString() ?? "", evSpec))" SelectedItem="evSpec.ChargingConnector.ToString()" />
                 </EditTemplate>
             </RadzenGridColumn>
 
@@ -176,23 +179,23 @@ else
 
             <RadzenGridColumn TItem="EVSpecs" Context="evSpec" Bubble="false" Filterable="false" Sortable="false" TextAlign="TextAlign.Center" Width="100px">
                 <Template Context="evSpec">
-                    <RadzenButton Icon="edit" Size="ButtonSize.Small" Click="@(args => EditRow(evSpec))">
+                    <RadzenButton Icon="edit" Size="ButtonSize.Small" Click="@(args => { evSpecsGrid?.EditRow(evSpec); })">
                     </RadzenButton>
                 </Template>
                 <EditTemplate Context="evSpec">
-                    <RadzenButton Icon="save" Size="ButtonSize.Small" Click="@((args) => SaveRow(evSpec))">
+                    <RadzenButton Icon="save" Size="ButtonSize.Small" Click="@(args => {evSpecsGrid?.UpdateRow(evSpec); })">
                     </RadzenButton>
-                    <RadzenButton Icon="cancel" Size="ButtonSize.Small" ButtonStyle="ButtonStyle.Secondary" Click="@((args) => CancelEdit(evSpec))">
+                    <RadzenButton Icon="cancel" Size="ButtonSize.Small" ButtonStyle="ButtonStyle.Secondary" Click="@(args => { evSpecsGrid?.CancelEditRow(evSpec); })">
                     </RadzenButton>
                 </EditTemplate>
             </RadzenGridColumn>
             <RadzenGridColumn TItem="EVSpecs" Context="evSpec" Bubble="false" Filterable="false" Sortable="false" TextAlign="TextAlign.Center" Width="70px">
                 <Template Context="evSpec">
-                    <RadzenButton ButtonStyle="ButtonStyle.Danger" Icon="close" Size="ButtonSize.Small" Click="@(args => DeleteRow(evSpec))">
+                    <RadzenButton ButtonStyle="ButtonStyle.Danger" Icon="close" Size="ButtonSize.Small" Click="@(args => ViewModel.DeleteRow(evSpec.Id))">
                     </RadzenButton>
                 </Template>
                 <EditTemplate Context="evSpec">
-                    <RadzenButton ButtonStyle="ButtonStyle.Danger" Icon="close" Size="ButtonSize.Small" Click="@(args => DeleteRow(evSpec))">
+                    <RadzenButton ButtonStyle="ButtonStyle.Danger" Icon="close" Size="ButtonSize.Small" Click="@(args => ViewModel.DeleteRow(evSpec.Id))">
                     </RadzenButton>
                 </EditTemplate>
             </RadzenGridColumn>
@@ -203,105 +206,31 @@ else
 
 
 @code {
-    bool isSmall = false;
-    int powerMode = 1;
-    private RadzenGrid<EVSpecs>? evSpecsGrid;
 
-    private EVSpecs[] evSpecs = Array.Empty<EVSpecs>();
-    string[] bodyStyles = Enum.GetNames(typeof(BodyStyle));
-    string[] driveTypes = Enum.GetNames(typeof(DriveType));
-    string[] connectorTypes = Enum.GetNames(typeof(ChargingConnector));
+    private RadzenGrid<EVSpecs>? evSpecsGrid;
 
     protected override async Task OnInitializedAsync()
     {
-        evSpecs = (await Client.EVSpecsAsync()).ToList().OrderBy(x => x.Manufacturer).ThenBy(x => x.Model).ToArray();
+        ViewModel.PropertyChanged += BEVViewModel_PropertyChanged;
+        await ViewModel.OnInit();
+
+        await base.OnInitializedAsync();
     }
 
-
-    void ChangeMotorPower(int? value, EVSpecs spec)
+    public void Dispose()
     {
-        if (value == null) return;
-        int v = value == null ? 0 : (int)value;
-        bool isKw = powerMode == 1;
-        spec.MotorPowerKw = isKw ? value : (int)Math.Round(v * .7457);
-
-        StateHasChanged();
+        ViewModel.PropertyChanged -= BEVViewModel_PropertyChanged;
     }
 
-
-    void Change(string value, EVSpecs spec)
+    private async void BEVViewModel_PropertyChanged(object? sender, PropertyChangedEventArgs e)
     {
-        spec.BodyStyle = Enum.Parse<BodyStyle>(value);
-
-        StateHasChanged();
+        await InvokeAsync(() => { evSpecsGrid?.Reload(); StateHasChanged(); });
     }
 
-    void ChangeDriveType(string value, EVSpecs spec)
-    {
-        spec.DriveTrain = Enum.Parse<DriveType>(value);
 
-        StateHasChanged();
-    }
-
-    void ChangeConnectorType(string value, EVSpecs spec)
-    {
-        spec.ChargingConnector = Enum.Parse<ChargingConnector>(value);
-
-        StateHasChanged();
-    }
-
-    void EditRow(EVSpecs evSpec)
-    {
-        evSpecsGrid?.EditRow(evSpec);
-    }
-
-    async void OnUpdateRow(EVSpecs evSpecs)
-    {
-        await Client.PatchEVSpecsAsync(evSpecs.Id, evSpecs);
+    //void CancelEdit(EVSpecs evSpecs)
+    //{
+    //    evSpecsGrid?.CancelEditRow(evSpecs);
+    //}
 
     }
-
-    void SaveRow(EVSpecs evSpecs)
-    {
-        evSpecsGrid?.UpdateRow(evSpecs);
-    }
-
-    void CancelEdit(EVSpecs evSpecs)
-    {
-        evSpecsGrid?.CancelEditRow(evSpecs);
-
-        // For production
-        // var orderEntry = dbContext.Entry(order);
-        // orderEntry.CurrentValues.SetValues(orderEntry.OriginalValues);
-        // orderEntry.State = EntityState.Unchanged;
-    }
-
-    async void InsertRow()
-    {
-        EVSpecs spec = new EVSpecs();
-        spec.Model = "New model";
-        spec.ModelYear = DateTime.Now.Year;
-
-        await Client.PostEVSpecsAsync(spec);
-
-        evSpecs = (await Client.EVSpecsAsync()).ToArray();
-        await (evSpecsGrid?.Reload() ?? Task.CompletedTask);
-    }
-
-    async void DeleteRow(EVSpecs evSpec)
-    {
-        await Client.DeleteEVSpecsAsync(evSpec.Id);
-
-
-        // For demo purposes only
-        //orders.Remove(order);
-
-        // For production
-        //dbContext.SaveChanges();
-
-        evSpecs = (await Client.EVSpecsAsync()).ToArray();
-
-        await (evSpecsGrid?.Reload() ?? Task.CompletedTask);
-    }
-
-}
