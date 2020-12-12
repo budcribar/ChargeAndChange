@@ -1,9 +1,9 @@
 @page "/bevdata"
 
-@using System.ComponentModel; 
+@using System.ComponentModel;
 
 @inject IBEVViewModel ViewModel
- 
+
 <h1>BEV Specs</h1>
 <MediaQuery Media="@Breakpoints.XSmallDown" @bind-Matches="ViewModel.IsSmallDisplay" />
 @if (ViewModel.IsSmallDisplay)
@@ -13,195 +13,202 @@
 }
 else
 {
-    <Radzen.Blazor.RadzenButton Click="@ViewModel.InsertRow">Insert</Radzen.Blazor.RadzenButton>
+    if (ViewModel.BevSpecs.Count > 0)
+    {
+        <Radzen.Blazor.RadzenButton Click="@ViewModel.InsertRow">Insert</Radzen.Blazor.RadzenButton>
 
-    <RadzenGrid @ref="evSpecsGrid" AllowFiltering="true" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" AllowPaging="true" PageSize="50" EditMode="DataGridEditMode.Single" RowUpdate="@ViewModel.UpdateRow"
-                AllowSorting="true" Data="@ViewModel.BevSpecs" TItem="EVSpecs" ColumnWidth="130px">
-        <Columns>
-
-
-            <RadzenGridColumn TItem="EVSpecs" Property="ModelYear" Title="Model Year">
-                <EditTemplate Context="evSpec">
-                    <RadzenNumeric @bind-Value="evSpec.ModelYear" Style="width:100%" />
-                </EditTemplate>
-            </RadzenGridColumn>
-
-            <RadzenGridColumn TItem="EVSpecs" Property="Manufacturer" Title="Manufacturer">
-                <EditTemplate Context="evSpec">
-                    <RadzenTextBox @bind-Value="evSpec.Manufacturer" Style="width:100%" />
-                </EditTemplate>
-            </RadzenGridColumn>
+        <RadzenGrid @ref="evSpecsGrid" AllowFiltering="true" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" AllowPaging="true" PageSize="50" EditMode="DataGridEditMode.Single" RowUpdate="@ViewModel.UpdateRow"
+                    AllowSorting="true" Data="@ViewModel.BevSpecs" TItem="EVSpecs" ColumnWidth="130px">
+            <Columns>
 
 
+                <RadzenGridColumn TItem="EVSpecs" Property="ModelYear" Title="Model Year">
+                    <EditTemplate Context="evSpec">
+                        <RadzenNumeric @bind-Value="evSpec.ModelYear" Style="width:100%" />
+                    </EditTemplate>
+                </RadzenGridColumn>
 
-            <RadzenGridColumn TItem="EVSpecs" Property="Available" Title="Available">
-                <EditTemplate Context="evSpec">
-                    <RadzenCheckBox @bind-Value="evSpec.Available" Style="width:50%" />
-                </EditTemplate>
-            </RadzenGridColumn>
-
-            <RadzenGridColumn TItem="EVSpecs" Property="Model" Title="Model" Width="150px">
-                <EditTemplate Context="evSpec">
-                    <RadzenTextBox @bind-Value="evSpec.Model" Style="width:100%" />
-                </EditTemplate>
-            </RadzenGridColumn>
-
-
-            <RadzenGridColumn TItem="EVSpecs" Property="BodyStyle" Title="Body Style">
-                <EditTemplate Context="evSpec">
-                    <RadzenDropDown TValue="string" Data="@ViewModel.BodyStyles" Style="width:100%" Change="@(args => ViewModel.ChangeBodyStyle(args?.ToString() ?? "", evSpec))" SelectedItem="evSpec.BodyStyle.ToString()" />
-                </EditTemplate>
-            </RadzenGridColumn>
+                <RadzenGridColumn TItem="EVSpecs" Property="Manufacturer" Title="Manufacturer">
+                    <EditTemplate Context="evSpec">
+                        <RadzenTextBox @bind-Value="evSpec.Manufacturer" Style="width:100%" />
+                    </EditTemplate>
+                </RadzenGridColumn>
 
 
-            <RadzenGridColumn TItem="EVSpecs" Property="Price" Title="Price">
-                <Template Context="data">
-                    @String.Format("{0:C}", data.Price)
-                </Template>
 
-                <EditTemplate Context="evSpec">
-                    <RadzenNumeric @bind-Value="evSpec.Price" Style="width:100%" />
-                </EditTemplate>
+                <RadzenGridColumn TItem="EVSpecs" Property="Available" Title="Available">
+                    <EditTemplate Context="evSpec">
+                        <RadzenCheckBox @bind-Value="evSpec.Available" Style="width:50%" />
+                    </EditTemplate>
+                </RadzenGridColumn>
 
-            </RadzenGridColumn>
-
-            <RadzenGridColumn TItem="EVSpecs" Property="FederalTaxCredit" Title="Federal Tax Credit">
-                <Template Context="data">
-                    @String.Format("{0:C}", data.FederalTaxCredit)
-                </Template>
-                <EditTemplate Context="evSpec">
-                    <RadzenNumeric @bind-Value="evSpec.FederalTaxCredit" Style="width:100%" />
-                </EditTemplate>
-            </RadzenGridColumn>
+                <RadzenGridColumn TItem="EVSpecs" Property="Model" Title="Model" Width="150px">
+                    <EditTemplate Context="evSpec">
+                        <RadzenTextBox @bind-Value="evSpec.Model" Style="width:100%" />
+                    </EditTemplate>
+                </RadzenGridColumn>
 
 
-            <RadzenGridColumn TItem="EVSpecs" Property="DriveTrain" Title="Drive Train">
-
-                <EditTemplate Context="evSpec">
-                    <RadzenDropDown TValue="string" Data="@ViewModel.DriveTypes" Style="width:100%" Change="@(args => ViewModel.ChangeDriveType(args?.ToString() ?? "", evSpec))" SelectedItem="evSpec.DriveTrain.ToString()" />
-                </EditTemplate>
-            </RadzenGridColumn>
-
-            <RadzenGridColumn TItem="EVSpecs" Property="CombinedRange" Title="Combined Range">
-                <EditTemplate Context="evSpec">
-                    <RadzenNumeric @bind-Value="evSpec.CombinedRange" Style="width:100%" />
-                </EditTemplate>
-            </RadzenGridColumn>
-
-            <RadzenGridColumn TItem="EVSpecs" Property="CityRange" Title="City Range">
-                <EditTemplate Context="evSpec">
-                    <RadzenNumeric @bind-Value="evSpec.CityRange" Style="width:100%" />
-                </EditTemplate>
-            </RadzenGridColumn>
+                <RadzenGridColumn TItem="EVSpecs" Property="BodyStyle" Title="Body Style">
+                    <EditTemplate Context="evSpec">
+                        <RadzenDropDown TValue="string" Data="@ViewModel.BodyStyles" Style="width:100%" Change="@(args => ViewModel.ChangeBodyStyle(args?.ToString() ?? "", evSpec))" SelectedItem="evSpec.BodyStyle.ToString()" />
+                    </EditTemplate>
+                </RadzenGridColumn>
 
 
-            <RadzenGridColumn TItem="EVSpecs" Property="HiwayRange" Title="Hiway Range">
-                <EditTemplate Context="evSpec">
-                    <RadzenNumeric @bind-Value="evSpec.HiwayRange" Style="width:100%" />
-                </EditTemplate>
-            </RadzenGridColumn>
+                <RadzenGridColumn TItem="EVSpecs" Property="Price" Title="Price">
+                    <Template Context="data">
+                        @String.Format("{0:C}", data.Price)
+                    </Template>
+
+                    <EditTemplate Context="evSpec">
+                        <RadzenNumeric @bind-Value="evSpec.Price" Style="width:100%" />
+                    </EditTemplate>
+
+                </RadzenGridColumn>
+
+                <RadzenGridColumn TItem="EVSpecs" Property="FederalTaxCredit" Title="Federal Tax Credit">
+                    <Template Context="data">
+                        @String.Format("{0:C}", data.FederalTaxCredit)
+                    </Template>
+                    <EditTemplate Context="evSpec">
+                        <RadzenNumeric @bind-Value="evSpec.FederalTaxCredit" Style="width:100%" />
+                    </EditTemplate>
+                </RadzenGridColumn>
 
 
-            <RadzenGridColumn TItem="EVSpecs" Property="MotorPowerKw" Title="Motor Power Kw">
-                <Template Context="evSpec">
-                    @ViewModel.GetMotorPower(evSpec)
-                </Template>
-                <EditTemplate Context="evSpec">
+                <RadzenGridColumn TItem="EVSpecs" Property="DriveTrain" Title="Drive Train">
 
-                    <RadzenNumeric TValue="int?" Change="@(args => ViewModel.ChangeMotorPower(args, evSpec))" @bind-value="evSpec.MotorPowerKw" Style="width:100%" />
-                    <RadzenRadioButtonList @bind-Value="ViewModel.PowerMode" TValue="int">
-                        <Items>
-                            <RadzenRadioButtonListItem Text="kw" Value="1" />
-                            <RadzenRadioButtonListItem Text="hp" Value="2" />
-                        </Items>
-                    </RadzenRadioButtonList>
+                    <EditTemplate Context="evSpec">
+                        <RadzenDropDown TValue="string" Data="@ViewModel.DriveTypes" Style="width:100%" Change="@(args => ViewModel.ChangeDriveType(args?.ToString() ?? "", evSpec))" SelectedItem="evSpec.DriveTrain.ToString()" />
+                    </EditTemplate>
+                </RadzenGridColumn>
 
-                </EditTemplate>
-            </RadzenGridColumn>
+                <RadzenGridColumn TItem="EVSpecs" Property="CombinedRange" Title="Combined Range">
+                    <EditTemplate Context="evSpec">
+                        <RadzenNumeric @bind-Value="evSpec.CombinedRange" Style="width:100%" />
+                    </EditTemplate>
+                </RadzenGridColumn>
 
-            <RadzenGridColumn TItem="EVSpecs" Property="Torque" Title="Torque">
-                <EditTemplate Context="evSpec">
-                    <RadzenNumeric @bind-Value="evSpec.Torque" Style="width:100%" />
-                </EditTemplate>
-            </RadzenGridColumn>
-
-            <RadzenGridColumn TItem="EVSpecs" Property="BatteryCapacity" Title="Battery Capacity">
-                <EditTemplate Context="evSpec">
-                    <RadzenNumeric @bind-Value="evSpec.BatteryCapacity" Style="width:100%" />
-                </EditTemplate>
-            </RadzenGridColumn>
+                <RadzenGridColumn TItem="EVSpecs" Property="CityRange" Title="City Range">
+                    <EditTemplate Context="evSpec">
+                        <RadzenNumeric @bind-Value="evSpec.CityRange" Style="width:100%" />
+                    </EditTemplate>
+                </RadzenGridColumn>
 
 
-            <RadzenGridColumn TItem="EVSpecs" Property="ChargingConnector" Title="Charging Connector">
-                <EditTemplate Context="evSpec">
-                    <RadzenDropDown TValue="string" Data="@ViewModel.ConnectorTypes" Style="width:100%" Change="@(args => ViewModel.ChangeConnectorType(args?.ToString() ?? "", evSpec))" SelectedItem="evSpec.ChargingConnector.ToString()" />
-                </EditTemplate>
-            </RadzenGridColumn>
-
-            <RadzenGridColumn TItem="EVSpecs" Property="Weight" Title="Weight">
-                <EditTemplate Context="evSpec">
-                    <RadzenNumeric @bind-Value="evSpec.Weight" Style="width:100%" />
-                </EditTemplate>
-            </RadzenGridColumn>
-
-            <RadzenGridColumn TItem="EVSpecs" Property="ZeroTo60mph" Title="0-60mph">
-                <EditTemplate Context="evSpec">
-                    <RadzenNumeric @bind-Value="evSpec.ZeroTo60mph" Style="width:100%" />
-                </EditTemplate>
-            </RadzenGridColumn>
-
-            <RadzenGridColumn TItem="EVSpecs" Property="ZeroTo100kph" Title="0-100kph">
-                <EditTemplate Context="evSpec">
-                    <RadzenNumeric @bind-Value="evSpec.ZeroTo100kph" Style="width:100%" />
-                </EditTemplate>
-            </RadzenGridColumn>
+                <RadzenGridColumn TItem="EVSpecs" Property="HiwayRange" Title="Hiway Range">
+                    <EditTemplate Context="evSpec">
+                        <RadzenNumeric @bind-Value="evSpec.HiwayRange" Style="width:100%" />
+                    </EditTemplate>
+                </RadzenGridColumn>
 
 
-            <RadzenGridColumn TItem="EVSpecs" Property="MaxChargePower" Title="Max Charge Power">
-                <EditTemplate Context="evSpec">
-                    <RadzenNumeric @bind-Value="evSpec.MaxChargePower" Style="width:100%" />
-                </EditTemplate>
-            </RadzenGridColumn>
+                <RadzenGridColumn TItem="EVSpecs" Property="MotorPowerKw" Title="Motor Power Kw">
+                    <Template Context="evSpec">
+                        @ViewModel.GetMotorPower(evSpec)
+                    </Template>
+                    <EditTemplate Context="evSpec">
+
+                        <RadzenNumeric TValue="int?" Change="@(args => ViewModel.ChangeMotorPower(args, evSpec))" @bind-value="evSpec.MotorPowerKw" Style="width:100%" />
+                        <RadzenRadioButtonList @bind-Value="ViewModel.PowerMode" TValue="int">
+                            <Items>
+                                <RadzenRadioButtonListItem Text="kw" Value="1" />
+                                <RadzenRadioButtonListItem Text="hp" Value="2" />
+                            </Items>
+                        </RadzenRadioButtonList>
+
+                    </EditTemplate>
+                </RadzenGridColumn>
+
+                <RadzenGridColumn TItem="EVSpecs" Property="Torque" Title="Torque">
+                    <EditTemplate Context="evSpec">
+                        <RadzenNumeric @bind-Value="evSpec.Torque" Style="width:100%" />
+                    </EditTemplate>
+                </RadzenGridColumn>
+
+                <RadzenGridColumn TItem="EVSpecs" Property="BatteryCapacity" Title="Battery Capacity">
+                    <EditTemplate Context="evSpec">
+                        <RadzenNumeric @bind-Value="evSpec.BatteryCapacity" Style="width:100%" />
+                    </EditTemplate>
+                </RadzenGridColumn>
 
 
-            <RadzenGridColumn TItem="EVSpecs" Property="MinutesTo80PercentCharge" Title="Minutes To 80% Charge">
-                <EditTemplate Context="evSpec">
-                    <RadzenNumeric @bind-Value="evSpec.MinutesTo80PercentCharge" Style="width:100%" />
-                </EditTemplate>
-            </RadzenGridColumn>
+                <RadzenGridColumn TItem="EVSpecs" Property="ChargingConnector" Title="Charging Connector">
+                    <EditTemplate Context="evSpec">
+                        <RadzenDropDown TValue="string" Data="@ViewModel.ConnectorTypes" Style="width:100%" Change="@(args => ViewModel.ChangeConnectorType(args?.ToString() ?? "", evSpec))" SelectedItem="evSpec.ChargingConnector.ToString()" />
+                    </EditTemplate>
+                </RadzenGridColumn>
+
+                <RadzenGridColumn TItem="EVSpecs" Property="Weight" Title="Weight">
+                    <EditTemplate Context="evSpec">
+                        <RadzenNumeric @bind-Value="evSpec.Weight" Style="width:100%" />
+                    </EditTemplate>
+                </RadzenGridColumn>
+
+                <RadzenGridColumn TItem="EVSpecs" Property="ZeroTo60mph" Title="0-60mph">
+                    <EditTemplate Context="evSpec">
+                        <RadzenNumeric @bind-Value="evSpec.ZeroTo60mph" Style="width:100%" />
+                    </EditTemplate>
+                </RadzenGridColumn>
+
+                <RadzenGridColumn TItem="EVSpecs" Property="ZeroTo100kph" Title="0-100kph">
+                    <EditTemplate Context="evSpec">
+                        <RadzenNumeric @bind-Value="evSpec.ZeroTo100kph" Style="width:100%" />
+                    </EditTemplate>
+                </RadzenGridColumn>
 
 
-            <RadzenGridColumn TItem="EVSpecs" Property="SafetyRating" Title="Safety Rating">
-                <EditTemplate Context="evSpec">
-                    <RadzenNumeric @bind-Value="evSpec.SafetyRating" Style="width:100%" />
-                </EditTemplate>
-            </RadzenGridColumn>
+                <RadzenGridColumn TItem="EVSpecs" Property="MaxChargePower" Title="Max Charge Power">
+                    <EditTemplate Context="evSpec">
+                        <RadzenNumeric @bind-Value="evSpec.MaxChargePower" Style="width:100%" />
+                    </EditTemplate>
+                </RadzenGridColumn>
 
-            <RadzenGridColumn TItem="EVSpecs" Context="evSpec" Bubble="false" Filterable="false" Sortable="false" TextAlign="TextAlign.Center" Width="100px">
-                <Template Context="evSpec">
-                    <RadzenButton Icon="edit" Size="ButtonSize.Small" Click="@(args => { evSpecsGrid?.EditRow(evSpec); })">
-                    </RadzenButton>
-                </Template>
-                <EditTemplate Context="evSpec">
-                    <RadzenButton Icon="save" Size="ButtonSize.Small" Click="@(args => {evSpecsGrid?.UpdateRow(evSpec); })">
-                    </RadzenButton>
-                    <RadzenButton Icon="cancel" Size="ButtonSize.Small" ButtonStyle="ButtonStyle.Secondary" Click="@(args => { evSpecsGrid?.CancelEditRow(evSpec); })">
-                    </RadzenButton>
-                </EditTemplate>
-            </RadzenGridColumn>
-            <RadzenGridColumn TItem="EVSpecs" Context="evSpec" Bubble="false" Filterable="false" Sortable="false" TextAlign="TextAlign.Center" Width="70px">
-                <Template Context="evSpec">
-                    <RadzenButton ButtonStyle="ButtonStyle.Danger" Icon="close" Size="ButtonSize.Small" Click="@(args => ViewModel.DeleteRow(evSpec.Id))">
-                    </RadzenButton>
-                </Template>
-                <EditTemplate Context="evSpec">
-                    <RadzenButton ButtonStyle="ButtonStyle.Danger" Icon="close" Size="ButtonSize.Small" Click="@(args => ViewModel.DeleteRow(evSpec.Id))">
-                    </RadzenButton>
-                </EditTemplate>
-            </RadzenGridColumn>
 
-        </Columns>
-    </RadzenGrid>
+                <RadzenGridColumn TItem="EVSpecs" Property="MinutesTo80PercentCharge" Title="Minutes To 80% Charge">
+                    <EditTemplate Context="evSpec">
+                        <RadzenNumeric @bind-Value="evSpec.MinutesTo80PercentCharge" Style="width:100%" />
+                    </EditTemplate>
+                </RadzenGridColumn>
+
+
+                <RadzenGridColumn TItem="EVSpecs" Property="SafetyRating" Title="Safety Rating">
+                    <EditTemplate Context="evSpec">
+                        <RadzenNumeric @bind-Value="evSpec.SafetyRating" Style="width:100%" />
+                    </EditTemplate>
+                </RadzenGridColumn>
+
+                <RadzenGridColumn TItem="EVSpecs" Context="evSpec" Bubble="false" Filterable="false" Sortable="false" TextAlign="TextAlign.Center" Width="100px">
+                    <Template Context="evSpec">
+                        <RadzenButton Icon="edit" Size="ButtonSize.Small" Click="@(args => { evSpecsGrid?.EditRow(evSpec); })">
+                        </RadzenButton>
+                    </Template>
+                    <EditTemplate Context="evSpec">
+                        <RadzenButton Icon="save" Size="ButtonSize.Small" Click="@(args => { evSpecsGrid?.UpdateRow(evSpec); })">
+                        </RadzenButton>
+                        <RadzenButton Icon="cancel" Size="ButtonSize.Small" ButtonStyle="ButtonStyle.Secondary" Click="@(args => { evSpecsGrid?.CancelEditRow(evSpec); })">
+                        </RadzenButton>
+                    </EditTemplate>
+                </RadzenGridColumn>
+                <RadzenGridColumn TItem="EVSpecs" Context="evSpec" Bubble="false" Filterable="false" Sortable="false" TextAlign="TextAlign.Center" Width="70px">
+                    <Template Context="evSpec">
+                        <RadzenButton ButtonStyle="ButtonStyle.Danger" Icon="close" Size="ButtonSize.Small" Click="@(args => ViewModel.DeleteRow(evSpec.Id))">
+                        </RadzenButton>
+                    </Template>
+                    <EditTemplate Context="evSpec">
+                        <RadzenButton ButtonStyle="ButtonStyle.Danger" Icon="close" Size="ButtonSize.Small" Click="@(args => ViewModel.DeleteRow(evSpec.Id))">
+                        </RadzenButton>
+                    </EditTemplate>
+                </RadzenGridColumn>
+
+            </Columns>
+        </RadzenGrid>
+    }
+    else
+    {
+        <img src="assets/images/spinner.gif" style="height:64px;" />
+    }
 }
 
 
@@ -227,4 +234,4 @@ else
         await InvokeAsync(() => { evSpecsGrid?.Reload(); StateHasChanged(); });
     }
 
-    }
+}

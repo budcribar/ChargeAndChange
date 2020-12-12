@@ -23,8 +23,8 @@ namespace Client.ViewModels
 
         public bool IsSmallDisplay { get; set; }
 
-        private IEnumerable<EVSpecs> bevSpecs = new List<EVSpecs>();
-        public IEnumerable<EVSpecs> BevSpecs
+        private List<EVSpecs> bevSpecs = new List<EVSpecs>();
+        public List<EVSpecs> BevSpecs
         {
             get => bevSpecs;
             set
@@ -73,7 +73,7 @@ namespace Client.ViewModels
 
         private async Task LoadSpecs()
         {
-            BevSpecs = (await client.EVSpecsAsync()).ToList().OrderBy(x => x.Manufacturer).ThenBy(x => x.Model).ToArray();
+            BevSpecs = (await client.EVSpecsAsync()).ToList().OrderBy(x => x.Manufacturer).ThenBy(x => x.Model).ToList();
         }
 
         public async Task OnInit()

@@ -12,7 +12,7 @@ namespace Client.ViewModels
         string[] DriveTypes { get; }
         string[] BodyStyles { get; }
         string[] ConnectorTypes { get; }
-        IEnumerable<EVSpecs> BevSpecs { get; }
+        List<EVSpecs> BevSpecs { get; }
         Task OnInit();
         Task DeleteRow(string id);
         Task InsertRow();
