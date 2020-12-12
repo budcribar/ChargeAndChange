@@ -1,10 +1,12 @@
 @page "/charts"
 @using System.Linq;
 
+@inject IBEVViewModel ViewModel
+
 @inject SwaggerClient client
 <h1>BEV Charts</h1>
-<MediaQuery Media="@Breakpoints.XSmallDown" @bind-Matches="isSmall" />
-@if (isSmall)
+<MediaQuery Media="@Breakpoints.XSmallDown" @bind-Matches="ViewModel.IsSmallDisplay" />
+@if (ViewModel.IsSmallDisplay)
 {
     <h2>Rotate to landscape to view chart</h2>
     <img src="rotate.png">
@@ -35,7 +37,7 @@ else
 }
 
 @code {
-    bool isSmall = false;
+   
     void Change(String spec)
     {
         selectedSpec = spec;

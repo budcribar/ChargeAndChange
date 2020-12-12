@@ -4,7 +4,7 @@
 @inject SwaggerClient Client
 
 <h1>Contacts</h1>
-<MediaQuery  Media="@Orientation..XSmallDown" @bind-Matches="isSmall" />
+<MediaQuery  Media="@Breakpoints.XSmallDown" @bind-Matches="isSmall" />
 @if (isSmall)
 {
     <h2>Rotate to landscape to view chart</h2>

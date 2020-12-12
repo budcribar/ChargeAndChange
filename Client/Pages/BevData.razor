@@ -1,5 +1,5 @@
 @page "/bevdata"
-@using System.Linq;
+
 @using System.ComponentModel; 
 
 @inject IBEVViewModel ViewModel
@@ -226,11 +226,5 @@ else
     {
         await InvokeAsync(() => { evSpecsGrid?.Reload(); StateHasChanged(); });
     }
-
-
-    //void CancelEdit(EVSpecs evSpecs)
-    //{
-    //    evSpecsGrid?.CancelEditRow(evSpecs);
-    //}
 
     }
