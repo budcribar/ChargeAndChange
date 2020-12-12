@@ -5,7 +5,7 @@
 @inject IBEVViewModel ViewModel
  
 <h1>BEV Specs</h1>
-<MediaQuery Media="@Breakpoints.SmallDown" @bind-Matches="ViewModel.IsSmallDisplay" />
+<MediaQuery Media="@Breakpoints.XSmallDown" @bind-Matches="ViewModel.IsSmallDisplay" />
 @if (ViewModel.IsSmallDisplay)
 {
     <h2>Rotate to landscape to view chart</h2>
