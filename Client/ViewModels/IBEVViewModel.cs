@@ -13,7 +13,7 @@ namespace Client.ViewModels
         string[] BodyStyles { get; }
         string[] ConnectorTypes { get; }
         List<EVSpecs> BevSpecs { get; }
-        Task OnInit();
+        Task OnInitialized ();
         Task DeleteRow(string id);
         Task InsertRow();
         Task UpdateRow(EVSpecs specs);

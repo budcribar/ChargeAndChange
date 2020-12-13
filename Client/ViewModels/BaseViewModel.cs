@@ -18,6 +18,7 @@ namespace Client.ViewModels
                 SetValue(ref isBusy, value);
             }
         }
+        public abstract Task OnInitialized();
 
         public event PropertyChangedEventHandler? PropertyChanged;
 

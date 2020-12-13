@@ -219,7 +219,7 @@ else
     protected override async Task OnInitializedAsync()
     {
         ViewModel.PropertyChanged += BEVViewModel_PropertyChanged;
-        await ViewModel.OnInit();
+        await ViewModel.OnInitialized();
 
         await base.OnInitializedAsync();
     }

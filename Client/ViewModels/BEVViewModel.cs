@@ -76,11 +76,7 @@ namespace Client.ViewModels
             BevSpecs = (await client.EVSpecsAsync()).ToList().OrderBy(x => x.Manufacturer).ThenBy(x => x.Model).ToList();
         }
 
-        public async Task OnInit()
-        {
-            await LoadSpecs();
-        }
-
+        
         public async Task UpdateRow(EVSpecs evSpecs)
         {
             await client.PatchEVSpecsAsync(evSpecs.Id, evSpecs);        
@@ -102,5 +98,11 @@ namespace Client.ViewModels
 
             await LoadSpecs();
         }
+
+        public override async Task OnInitialized()
+        {
+            await LoadSpecs();
+        }
+
     }
 }

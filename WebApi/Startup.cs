@@ -35,16 +35,13 @@ namespace WebApi
                 secrets.Key = Environment.GetEnvironmentVariable("DatabaseKey", EnvironmentVariableTarget.Process) ?? "";             
             }
                
-
             services.AddSingleton(secrets);
             services.AddSingleton<IDocumentDBRepository<EVSpecs>>(new DocumentDBRepository<EVSpecs>("bev",secrets));
             services.AddSingleton<IDocumentDBRepository<Contact>>(new DocumentDBRepository<Contact>("contact",secrets));
         }
 
         public void Configure(IWebJobsBuilder builder)
-        {
-            
-            
+        {           
             ConfigureServices(builder.Services);
         }
     }

@@ -20,6 +20,7 @@ namespace Client
             builder.Services.AddSingleton(new SwaggerClient(baseAddress, new HttpClient { BaseAddress=url }));
             builder.Services.AddSingleton<AppVersionInfo>();
             builder.Services.AddSingleton<IBEVViewModel,BEVViewModel>();
+            builder.Services.AddSingleton<IContactViewModel, ContactViewModel>();
             builder.Services.AddMatBlazor();
             await builder.Build().RunAsync();
         }
