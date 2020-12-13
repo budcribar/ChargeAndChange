@@ -16,13 +16,13 @@ else
     @if (ViewModel.SelectedSpec.Length > 0)
     {
         <div class="row">
-            <div class="col-sm">
+            <div class="col-md">
                 <RadzenDropDown Placeholder="Select spec" TValue="string" Data="@ViewModel.Specs.Select(x => new {Text=x.Text, Value=x.Value})" TextProperty="Text" ValueProperty="Value" Style="width:30%" @bind-Value="ViewModel.SelectedSpec" />
             </div>
-            <div class="col-sm">
+            <div class="col-md">
                 <RadzenDropDown Placeholder="Select manufacturer" TValue="string" Data="ViewModel.ManufacturerSelections" Style="width:30%" @bind-Value="ViewModel.SelectedManufacturer" />
             </div>
-            <div class="col-sm">
+            <div class="col-md">
                 <RadzenDropDown Placeholder="Select body style" TValue="string" Data="ViewModel.BodyStyles" Style="width:30%" @bind-Value="ViewModel.SelectedBodyStyle" />
             </div>
         </div>
