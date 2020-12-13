@@ -11,8 +11,15 @@ namespace Client.ViewModels
         int PowerMode { get; set; } 
         string[] DriveTypes { get; }
         string[] BodyStyles { get; }
+        string[] BodyStyleSelections { get; }
+        string[] ManufacturerSelections { get; }
         string[] ConnectorTypes { get; }
         List<EVSpecs> BevSpecs { get; }
+        DataItem[] FilteredSpecs { get; }
+        public IEnumerable<(string Value, string Text)> Specs { get; }
+        string SelectedSpec { get; set; }
+        string SelectedBodyStyle { get; set; }
+        string SelectedManufacturer { get; set; }
         Task OnInitialized ();
         Task DeleteRow(string id);
         Task InsertRow();

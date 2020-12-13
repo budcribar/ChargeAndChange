@@ -7,9 +7,10 @@ using System.Threading.Tasks;
 
 namespace Client.ViewModels
 {
-   
-    public class BEVViewModel : BaseViewModel, IBEVViewModel
+
+    public partial class BEVViewModel : BaseViewModel, IBEVViewModel
     {
+        private const string ALL = "<all>";
         private SwaggerClient client;
 
         public BEVViewModel(SwaggerClient client)
@@ -17,6 +18,9 @@ namespace Client.ViewModels
             this.client = client;
         }
 
+        public string[] DriveTypeSelections => new List<string> { ALL }.Concat(Enum.GetNames(typeof(DriveType))).ToArray(); 
+        public string[] BodyStyleSelections => new List<string> { ALL }.Concat(Enum.GetNames(typeof(BodyStyle))).ToArray();
+        public string[] ManufacturerSelections => new List<string> { ALL }.Concat(BevSpecs.Select(x => x.Manufacturer).Distinct()).ToArray();
         public string[] DriveTypes => Enum.GetNames(typeof(DriveType));
         public string[] BodyStyles => Enum.GetNames(typeof(BodyStyle));
         public string[] ConnectorTypes => Enum.GetNames(typeof(ChargingConnector));
@@ -32,6 +36,72 @@ namespace Client.ViewModels
                 SetValue(ref bevSpecs, value);
             }
         }
+
+
+
+        Dictionary<string, (string, Func<EVSpecs, double?>)> specs = new Dictionary<string, (string, Func<EVSpecs, double?>)> {
+            {"Price", ("Price", (e) => (double?) e.Price)   },
+
+            {  "PriceMinusFederalTaxCredit",  ("Price After Tax Credit", (e) => (double?) (e.Price - e.FederalTaxCredit) )  },
+            {  "CombinedRange",  ("Range", (e) => (double?) e.CombinedRange)  },
+            {  "MotorPowerHp",  ("Motor (hp)", (e) => (double?) (e.MotorPowerKw * 1.34102))  },
+            {  "Torque", ( "Torque", (e) => (double?) e.Torque)  },
+            {  "BatteryCapacity",  ("Batery Capacity (kwh)", (e) => (double?) e.BatteryCapacity)  },
+            {  "Weight",  ("Weight (lbs)", (e) => (double?) e.Weight)  },
+            {  "ZeroTo60mph",  ("Zero To 60 mph", (e) => (double?) e.ZeroTo60mph)  },
+            {  "MaxChargePower",  ("Max Charge Power (kw)", (e) => (double?) e.MaxChargePower)  },
+            {  "MinutesTo80PercentCharge",  ("Minutes To 80% Charge", (e) => (double?) e.MinutesTo80PercentCharge)  },
+            {  "SafetyRating",  ("Safety Rating", (e) => (double?) e.SafetyRating)  }};
+
+        public IEnumerable<(string Value, string Text)> Specs => specs.Keys.Select(x => (x, specs[x].Item1));
+
+        public string selectedSpec = "";
+        public string SelectedSpec
+        {
+            get => selectedSpec;
+            set
+            {
+                SetValue(ref selectedSpec, value);
+                FilterSpecs();
+            }
+        }
+
+        public string selectedBodyStyle = ALL;
+        public string SelectedBodyStyle
+        {
+            get => selectedBodyStyle;
+            set
+            {
+                SetValue(ref selectedBodyStyle, value);
+                FilterSpecs();
+            }
+        }
+        
+        public string selectedManufacturer = ALL;
+        public string SelectedManufacturer
+        {
+            get => selectedManufacturer;
+            set
+            {
+                SetValue(ref selectedManufacturer, value);
+                FilterSpecs();
+            }
+        }
+
+        private void FilterSpecs()
+        {
+            var allSpecs = BevSpecs.ToList();
+
+            if (selectedManufacturer != ALL)
+                allSpecs = allSpecs.Where(x => x.Manufacturer == selectedManufacturer).ToList();
+
+            if (selectedBodyStyle != ALL)
+                allSpecs = allSpecs.Where(x => x.BodyStyle.ToString() == selectedBodyStyle).ToList();
+
+            FilteredSpecs = allSpecs.Where(x => specs[selectedSpec].Item2.Invoke(x) != null).OrderBy(x => specs[selectedSpec].Item2.Invoke(x)).Select(x => new DataItem { Name = x.Model, Value = specs[selectedSpec].Item2.Invoke(x) }).ToArray();      
+        }
+
+        public DataItem[] FilteredSpecs { get; private set; } = Array.Empty<DataItem>();
 
         public int PowerMode { get; set; } = 1;
 
@@ -102,6 +172,7 @@ namespace Client.ViewModels
         public override async Task OnInitialized()
         {
             await LoadSpecs();
+            SelectedSpec = specs.Keys.First();
         }
 
     }
