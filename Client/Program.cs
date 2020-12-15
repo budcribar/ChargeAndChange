@@ -1,6 +1,7 @@
 using MatBlazor;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -21,6 +22,10 @@ namespace Client
             builder.Services.AddSingleton<AppVersionInfo>();
             builder.Services.AddSingleton<IBEVViewModel,BEVViewModel>();
             builder.Services.AddSingleton<IContactViewModel, ContactViewModel>();
+            builder.Services.AddMsalAuthentication(options =>
+            {
+                builder.Configuration.Bind("AzureAdB2C", options.ProviderOptions.Authentication);
+            });
             builder.Services.AddMatBlazor();
             await builder.Build().RunAsync();
         }

@@ -1,15 +1,14 @@
 ﻿@inherits LayoutComponentBase
-<MediaQueryList>
+@using Client.Shared
+
+<div class="page">
     <div class="sidebar">
         <NavMenu />
     </div>
 
     <div class="main">
         <div class="top-row px-4 auth">
-            <!--
-                <LoginDisplay />
-            -->
-
+            <LoginDisplay />
             <a href="/about" class="ml-md-auto">About</a>
         </div>
 
@@ -17,4 +16,4 @@
             @Body
         </div>
     </div>
-</MediaQueryList>
+</div>
