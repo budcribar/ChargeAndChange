@@ -26,7 +26,8 @@ namespace Client
             {
                 builder.Configuration.Bind("AzureAdB2C", options.ProviderOptions.Authentication);
                 options.ProviderOptions.DefaultAccessTokenScopes.Add("openid");
-                options.ProviderOptions.DefaultAccessTokenScopes.Add("offline_access");             
+                options.ProviderOptions.DefaultAccessTokenScopes.Add("offline_access");
+                options.ProviderOptions.LoginMode = "redirect";
             });
             builder.Services.AddMatBlazor();
             await builder.Build().RunAsync();
