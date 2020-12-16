@@ -3,7 +3,7 @@
       
 	  <PropertyGroup>
 		  <TargetFramework>net5.0</TargetFramework>
-		  <RazorLangVersion>3.0</RazorLangVersion>
+		 
 		  <Nullable>enable</Nullable>
       <SupportedPlatform>browser</SupportedPlatform>
 	  </PropertyGroup>
