@@ -2,7 +2,7 @@
     <Project Sdk="Microsoft.NET.Sdk.BlazorWebAssembly">
       
 	  <PropertyGroup>
-		  <TargetFramework>net5</TargetFramework>
+		  <TargetFramework>net5.0</TargetFramework>
 		  <RazorLangVersion>3.0</RazorLangVersion>
 		  <Nullable>enable</Nullable>
       <SupportedPlatform>browser</SupportedPlatform>
@@ -24,25 +24,13 @@
 		    <PrivateAssets>all</PrivateAssets>
 		    <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		  </PackageReference>
-		  <PackageReference Include="Radzen.Blazor" Version="2.18.4" />
+		  <PackageReference Include="Radzen.Blazor" Version="2.18.6" />
 		  <PackageReference Include="Microsoft.AspNetCore.JsonPatch" Version="5.0.1" />
 		  <PackageReference Include="Microsoft.Extensions.Identity.Core" Version="5.0.1" />
 		  <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="5.0.1" PrivateAssets="all" />
       <PackageReference Include="Microsoft.Authentication.WebAssembly.Msal" Version="5.0.1" />
 		  <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="5.0.1" />
    </ItemGroup>  
-
-  <ItemGroup>
-    <Content Update="Shared\LoginDisplay.razor">
-      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-    </Content>
-    <Content Update="wwwroot\css\app.css">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Update="wwwroot\css\open-iconic\font\fonts\open-iconic.woff">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>  
 
   <ItemGroup>
     <OpenApiReference Include="Swagger.json" CodeGenerator="NSwagCSharp">
