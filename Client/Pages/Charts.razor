@@ -43,7 +43,7 @@ else
 }
 
 @code {
-    string ChartStyle() => $"height:{ViewModel.FilteredSpecs.Length * 40}px";
+    string ChartStyle() => $"height:{100 + ViewModel.FilteredSpecs.Length * 40}px";
 
     void Change(String spec)
     {
