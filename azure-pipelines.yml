@@ -25,7 +25,7 @@ steps:
   inputs:
     command: 'publish'
     publishWebProjects: true
-    arguments: '--runtime win-x64 -p:PublishSingleFile=true --self-contained true /p:SourceRevisionId=$(Build.SourceVersion) /p:BuildId=$(Build.BuildId) /p:BuildNumber=$(Build.BuildNumber)'
+    arguments: '--runtime win-x64  /p:SourceRevisionId=$(Build.SourceVersion) /p:BuildId=$(Build.BuildId) /p:BuildNumber=$(Build.BuildNumber)'
     zipAfterPublish: true
     modifyOutputPath: false
 
