@@ -1,5 +1,7 @@
-﻿<div class="top-row pl-4 navbar navbar-dark">
-    <a class="navbar-brand" href="">Charge & Change</a>
+﻿<MediaQuery Media="@Breakpoints.XSmallDown" @bind-Matches="isSmallDisplay" />
+
+<div class="top-row pl-4 navbar navbar-dark">
+    <a class="navbar-brand" href="">@(isSmallDisplay ? "Charge & Change":"")</a>
     <button class="navbar-toggler" @onclick="ToggleNavMenu">
         <span class="navbar-toggler-icon"></span>
     </button>
@@ -63,6 +65,7 @@
 </div>
 
 @code {
+    private bool isSmallDisplay;
     private bool collapseNavMenu = true;
 
     private string? NavMenuCssClass => collapseNavMenu ? "collapse" : null;
