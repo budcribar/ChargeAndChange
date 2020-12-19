@@ -32,6 +32,6 @@ steps:
 
 - task: PublishBuildArtifacts@1
   inputs:
-    PathtoPublish: '$(build.artifactStagingDirectory)\WebApp.zip'
+    PathtoPublish: Client\bin\Debug\net5.0\publish\
     ArtifactName: 'dropApp'
     publishLocation: 'Container'
