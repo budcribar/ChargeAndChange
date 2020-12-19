@@ -3,8 +3,6 @@ using System.Reflection;
 
 namespace Client
 {
-
-
     public class AppVersionInfo
     {
         private string _buildNumber = "";
