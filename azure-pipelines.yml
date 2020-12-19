@@ -26,7 +26,7 @@ steps:
     command: 'publish'
     publishWebProjects: true
     arguments: '--runtime win-x64  --output $(Build.ArtifactStagingDirectory) /p:PublishProfile=$(buildConfiguration) /p:SourceRevisionId=$(Build.SourceVersion) /p:BuildId=$(Build.BuildId) /p:BuildNumber=$(Build.BuildNumber) /p:WebPublishMethod=Package'
-    zipAfterPublish: false
+    zipAfterPublish: true
 
 
 - task: PublishBuildArtifacts@1
