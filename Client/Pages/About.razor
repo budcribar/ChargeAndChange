@@ -15,9 +15,14 @@
 
 
 <p>Our Mission is to accelerate the adoption of clean and renewable energy through education and community involvement.</p>
-<div style="position:fixed;bottom:0;left:90%;width:10%">
-    BuildNumber: @(VersionInfo.BuildNumber)
-</div>
+
+@if (!VersionInfo.BuildNumber.Contains("build"))
+{
+    <div style="position:fixed;bottom:0;left:90%;width:10%">
+        BuildNumber: @(VersionInfo.BuildNumber)
+    </div>
+
+}
 
 @code {
 
