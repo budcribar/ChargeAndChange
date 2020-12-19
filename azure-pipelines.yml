@@ -21,20 +21,6 @@ steps:
   inputs:
     restoreSolution: '$(solution)'
     
-- task: CmdLine@2
-  inputs:
-   script: |
-          echo "Create command file"
-          echo format ('cat Client/AppVersionInfo.cs | sed ''s/_buildNumber = \"\"/_buildNumber = \"{0}\"/'' | sed ''s/_buildId = \"\"/_buildId = \"{1}\"/'' | sed ''s/_gitHash = \"\"/_gitHash = \"{2}\"/'' >temp.cs', $(Build.BuildNumber), $(Build.BuildId), $(Build.SourceVersion) ) >command.sh  
-          echo "Dump command file"
-          echo $(cat command.sh)
-          echo "Run the command file"
-          chmod +x command.sh
-          ./command.sh
-          echo "Copy over the version file"
-          cat temp.cs >Client/AppVersionInfo.cs
-          echo "Done"
-   workingDirectory: Client
 - task: DotNetCoreCLI@2
   inputs:
     command: 'publish'
