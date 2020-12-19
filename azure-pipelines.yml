@@ -25,13 +25,9 @@ steps:
   inputs:
     command: 'publish'
     publishWebProjects: true
-    arguments: '--runtime win-x64  /p:PublishProfile=$(buildConfiguration) /p:SourceRevisionId=$(Build.SourceVersion) /p:BuildId=$(Build.BuildId) /p:BuildNumber=$(Build.BuildNumber) /p:WebPublishMethod=Package'
+    arguments: '--runtime win-x64  --output $(Build.ArtifactStagingDirectory) /p:PublishProfile=$(buildConfiguration) /p:SourceRevisionId=$(Build.SourceVersion) /p:BuildId=$(Build.BuildId) /p:BuildNumber=$(Build.BuildNumber) /p:WebPublishMethod=Package'
     zipAfterPublish: true
-    modifyOutputPath: false
 
 
 - task: PublishBuildArtifacts@1
-  inputs:
-    PathtoPublish: Client\bin\Debug\net5.0\Client.zip
-    ArtifactName: 'dropApp'
-    publishLocation: 'Container'
+  displayName: 'Publishing Build Artifacts...'
