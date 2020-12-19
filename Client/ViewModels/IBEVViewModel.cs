@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Threading.Tasks;
 
@@ -31,5 +32,6 @@ namespace Client.ViewModels
         void ChangeDriveType(string value, EVSpecs spec);
         void ChangeConnectorType(string value, EVSpecs spec);
         event PropertyChangedEventHandler? PropertyChanged;
+        Func<object, string> SpecFormat { get; }
     }
 }

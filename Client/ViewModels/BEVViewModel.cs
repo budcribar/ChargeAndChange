@@ -39,19 +39,19 @@ namespace Client.ViewModels
 
 
 
-        Dictionary<string, (string, Func<EVSpecs, double?>)> specs = new Dictionary<string, (string, Func<EVSpecs, double?>)> {
-            {"Price", ("Price", (e) => (double?) e.Price)   },
+        Dictionary<string, (string, Func<EVSpecs, double?>, Func<object, string>)> specs = new Dictionary<string, (string, Func<EVSpecs, double?>, Func<object, string>)> {
+            {"Price", ("Price", (e) => (double?) e.Price, (e) => ((double)e).ToString("C0") )  },
 
-            {  "PriceMinusFederalTaxCredit",  ("Price After Tax Credit", (e) => (double?) (e.Price - e.FederalTaxCredit) )  },
-            {  "CombinedRange",  ("Range", (e) => (double?) e.CombinedRange)  },
-            {  "MotorPowerHp",  ("Motor (hp)", (e) => (double?) (e.MotorPowerKw * 1.34102))  },
-            {  "Torque", ( "Torque", (e) => (double?) e.Torque)  },
-            {  "BatteryCapacity",  ("Batery Capacity (kwh)", (e) => (double?) e.BatteryCapacity)  },
-            {  "Weight",  ("Weight (lbs)", (e) => (double?) e.Weight)  },
-            {  "ZeroTo60mph",  ("Zero To 60 mph", (e) => (double?) e.ZeroTo60mph)  },
-            {  "MaxChargePower",  ("Max Charge Power (kw)", (e) => (double?) e.MaxChargePower)  },
-            {  "MinutesTo80PercentCharge",  ("Minutes To 80% Charge", (e) => (double?) e.MinutesTo80PercentCharge)  },
-            {  "SafetyRating",  ("Safety Rating", (e) => (double?) e.SafetyRating)  }};
+            {  "PriceMinusFederalTaxCredit",  ("Price After Tax Credit", (e) => (double?) (e.Price - e.FederalTaxCredit), (e) => ((double)e).ToString("C0") )  },
+            {  "CombinedRange",  ("Range", (e) => (double?) e.CombinedRange, (e) => $"{((double)e)} mi" ) },
+            {  "MotorPowerHp",  ("Motor (hp)", (e) => (double?) (e.MotorPowerKw * 1.34102), (e) => $"{((double)e)} hp")  },
+            {  "Torque", ( "Torque", (e) => (double?) e.Torque, (e) => $"{((double)e)} ft-lbs") },
+            {  "BatteryCapacity",  ("Batery Capacity (kwh)", (e) => (double?) e.BatteryCapacity, (e) => $"{((double)e)} kwh") },
+            {  "Weight",  ("Weight (lbs)", (e) => (double?) e.Weight, (e) => $"{((double)e)} lbs") },
+            {  "ZeroTo60mph",  ("Zero To 60 mph", (e) => (double?) e.ZeroTo60mph, (e) => $"{((double)e)} sec") },
+            {  "MaxChargePower",  ("Max Charge Power (kw)", (e) => (double?) e.MaxChargePower, (e) => $"{((double)e)} kw") },
+            {  "MinutesTo80PercentCharge",  ("Minutes To 80% Charge", (e) => (double?) e.MinutesTo80PercentCharge, (e) => $"{((double)e)} min") },
+            {  "SafetyRating",  ("Safety Rating", (e) => (double?) e.SafetyRating, (e) => $"{((double)e)} stars") } };
 
         public IEnumerable<(string Value, string Text)> Specs => specs.Keys.Select(x => (x, specs[x].Item1));
 
@@ -100,6 +100,8 @@ namespace Client.ViewModels
 
             FilteredSpecs = allSpecs.Where(x => specs[selectedSpec].Item2.Invoke(x) != null).OrderBy(x => specs[selectedSpec].Item2.Invoke(x)).Select(x => new DataItem { Name = x.Model, Value = specs[selectedSpec].Item2.Invoke(x) }).ToArray();      
         }
+
+        public Func<object, string> SpecFormat => specs[selectedSpec].Item3;
 
         public DataItem[] FilteredSpecs { get; private set; } = Array.Empty<DataItem>();
 
