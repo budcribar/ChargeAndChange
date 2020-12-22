@@ -51,6 +51,8 @@ namespace Client.ViewModels
             {  "ZeroTo60mph",  ("Zero To 60 mph", (e) => (double?) e.ZeroTo60mph, (e) => $"{((double)e)} sec") },
             {  "MaxChargePower",  ("Max Charge Power (kw)", (e) => (double?) e.MaxChargePower, (e) => $"{((double)e)} kw") },
             {  "MinutesTo80PercentCharge",  ("Minutes To 80% Charge", (e) => (double?) e.MinutesTo80PercentCharge, (e) => $"{((double)e)} min") },
+            {  "PricePerMiRange",  ("Price Per Mile of Range", (e) => (double?) (e.Price / e.CombinedRange), (e) => ((double)e).ToString("C0") )  },
+            {  "Efficiency",  ("wh Per Mile", (e) => (double?) (e.BatteryCapacity * 1000.0 / e.CombinedRange), (e) => $"{(Math.Round((double)e))} wh/mi") },
             {  "SafetyRating",  ("Safety Rating", (e) => (double?) e.SafetyRating, (e) => $"{((double)e)} stars") } };
 
         public IEnumerable<(string Value, string Text)> Specs => specs.Keys.Select(x => (x, specs[x].Item1));
