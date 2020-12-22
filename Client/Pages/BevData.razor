@@ -19,7 +19,7 @@ else
         <Radzen.Blazor.RadzenButton Click="@ViewModel.InsertRow">Insert</Radzen.Blazor.RadzenButton>
 
         <RadzenGrid @ref="evSpecsGrid" AllowFiltering="true" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" AllowPaging="true" PageSize="50" EditMode="DataGridEditMode.Single" RowUpdate="@ViewModel.UpdateRow"
-                    AllowSorting="true" Data="@ViewModel.BevSpecs" TItem="EVSpecs" ColumnWidth="130px">
+                    AllowSorting="true" Data="@ViewModel.BevSpecs" TItem="EVSpecs" style="height: 600px" ColumnWidth="130px">
             <Columns>
 
 
@@ -52,7 +52,7 @@ else
 
                 <RadzenGridColumn TItem="EVSpecs" Property="BodyStyle" Title="Body Style">
                     <EditTemplate Context="evSpec">
-                        <RadzenDropDown TValue="string" Data="@ViewModel.BodyStyles" Style="width:100%" Change="@(args => ViewModel.ChangeBodyStyle(args?.ToString() ?? "", evSpec))" SelectedItem="evSpec.BodyStyle.ToString()" />
+                        <RadzenDropDown TValue="string" Data="@ViewModel.BodyStyles" Style="width:100%" Change="@(args => ViewModel.ChangeBodyStyle(args?.ToString() ?? "", evSpec))" Value="evSpec.BodyStyle.ToString()" />
                     </EditTemplate>
                 </RadzenGridColumn>
 
@@ -81,7 +81,7 @@ else
                 <RadzenGridColumn TItem="EVSpecs" Property="DriveTrain" Title="Drive Train">
 
                     <EditTemplate Context="evSpec">
-                        <RadzenDropDown TValue="string" Data="@ViewModel.DriveTypes" Style="width:100%" Change="@(args => ViewModel.ChangeDriveType(args?.ToString() ?? "", evSpec))" SelectedItem="evSpec.DriveTrain.ToString()" />
+                        <RadzenDropDown TValue="string" Data="@ViewModel.DriveTypes" Style="width:100%" Change="@(args => ViewModel.ChangeDriveType(args?.ToString() ?? "", evSpec))" Value="evSpec.DriveTrain.ToString()" />
                     </EditTemplate>
                 </RadzenGridColumn>
 
@@ -111,7 +111,7 @@ else
                     </Template>
                     <EditTemplate Context="evSpec">
 
-                        <RadzenNumeric TValue="int?" Change="@(args => ViewModel.ChangeMotorPower(args, evSpec))" @bind-value="evSpec.MotorPowerKw" Style="width:100%" />
+                        <RadzenNumeric TValue="int?" Change="@(args => ViewModel.ChangeMotorPower(args, evSpec))"  Value="@ViewModel.GetMotorPower(evSpec)" Style="width:100%" />
                         <RadzenRadioButtonList @bind-Value="ViewModel.PowerMode" TValue="int">
                             <Items>
                                 <RadzenRadioButtonListItem Text="kw" Value="1" />
@@ -137,7 +137,7 @@ else
 
                 <RadzenGridColumn TItem="EVSpecs" Property="ChargingConnector" Title="Charging Connector">
                     <EditTemplate Context="evSpec">
-                        <RadzenDropDown TValue="string" Data="@ViewModel.ConnectorTypes" Style="width:100%" Change="@(args => ViewModel.ChangeConnectorType(args?.ToString() ?? "", evSpec))" SelectedItem="evSpec.ChargingConnector.ToString()" />
+                        <RadzenDropDown TValue="string" Data="@ViewModel.ConnectorTypes" Style="width:100%" Change="@(args => ViewModel.ChangeConnectorType(args?.ToString() ?? "", evSpec))" Value="evSpec.ChargingConnector.ToString()" />
                     </EditTemplate>
                 </RadzenGridColumn>
 
