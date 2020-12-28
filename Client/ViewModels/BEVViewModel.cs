@@ -90,6 +90,17 @@ namespace Client.ViewModels
             }
         }
 
+        public string selectedDriveType = ALL;
+        public string SelectedDriveType
+        {
+            get => selectedDriveType;
+            set
+            {
+                SetValue(ref selectedDriveType, value);
+                FilterSpecs();
+            }
+        }
+
         private void FilterSpecs()
         {
             var allSpecs = BevSpecs.ToList();
@@ -100,14 +111,70 @@ namespace Client.ViewModels
             if (selectedBodyStyle != ALL)
                 allSpecs = allSpecs.Where(x => x.BodyStyle.ToString() == selectedBodyStyle).ToList();
 
+            if (selectedDriveType != ALL)
+                allSpecs = allSpecs.Where(x => x.DriveTrain.ToString() == selectedDriveType).ToList();
+
             FilteredSpecs = allSpecs.Where(x => specs[selectedSpec].Item2.Invoke(x) != null).OrderBy(x => specs[selectedSpec].Item2.Invoke(x)).Select(x => new DataItem { Name = x.Model, Value = specs[selectedSpec].Item2.Invoke(x) }).ToArray();      
         }
 
         public Func<object, string> SpecFormat => specs[selectedSpec].Item3;
 
         public DataItem[] FilteredSpecs { get; private set; } = Array.Empty<DataItem>();
+        public EVSpecs[] SortedSpecs { get {
+                var allSpecs = BevSpecs.ToList();
+
+                if (selectedManufacturer != ALL)
+                    allSpecs = allSpecs.Where(x => x.Manufacturer == selectedManufacturer).ToList();
+
+                if (selectedBodyStyle != ALL)
+                    allSpecs = allSpecs.Where(x => x.BodyStyle.ToString() == selectedBodyStyle).ToList();
+
+                if (selectedDriveType != ALL)
+                    allSpecs = allSpecs.Where(x => x.DriveTrain.ToString() == selectedDriveType).ToList();
+
+                allSpecs = allSpecs.Where(x => x.Available && x.CombinedRange != null && x.Price != null && x.MaxChargePower != null).ToList();
+
+                var sortedRange = allSpecs.Select(x => x.CombinedRange).OrderBy(x => x).ToList(); // higher has higher index
+                var sortedPrice = allSpecs.Select(x => x.Price).OrderByDescending(x => x).ToList(); // lower has higher index
+                var sortedCharge = allSpecs.Select(x => x.MaxChargePower).OrderBy(x => x).ToList(); // higher has higher index
+
+                return allSpecs.OrderByDescending(x => sortedRange.IndexOf(x.CombinedRange) * RangeWeighting + sortedPrice.IndexOf(x.Price) * PriceWeighting + sortedCharge.IndexOf(x.MaxChargePower) * ChargeWeighting).ToArray();
+            
+            } }
 
         public int PowerMode { get; set; } = 1;
+
+
+        public int priceWeighting = 0;
+        public int PriceWeighting
+        {
+            get => priceWeighting;
+            set
+            {
+                SetValue(ref priceWeighting, value);
+                FilterSpecs();
+            }
+        }
+        public int rangeWeighting = 0;
+        public int RangeWeighting
+        {
+            get => rangeWeighting;
+            set
+            {
+                SetValue(ref rangeWeighting, value);
+                FilterSpecs();
+            }
+        }
+        public int chargeWeighting = 0;
+        public int ChargeWeighting
+        {
+            get => chargeWeighting;
+            set
+            {
+                SetValue(ref chargeWeighting, value);
+                FilterSpecs();
+            }
+        }
 
         public int? GetMotorPower(EVSpecs spec)
         {
@@ -177,6 +244,9 @@ namespace Client.ViewModels
         {
             await LoadSpecs();
             SelectedSpec = specs.Keys.First();
+            selectedBodyStyle = ALL;
+            selectedDriveType = ALL;
+            selectedManufacturer = ALL;
         }
 
     }

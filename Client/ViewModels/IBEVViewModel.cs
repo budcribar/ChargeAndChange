@@ -10,17 +10,23 @@ namespace Client.ViewModels
         bool IsBusy { get; set; }
         bool IsSmallDisplay { get; set; }
         int PowerMode { get; set; } 
+        int PriceWeighting { get; set; }
+        int RangeWeighting { get; set; }
+        int ChargeWeighting { get; set; }
         string[] DriveTypes { get; }
         string[] BodyStyles { get; }
         string[] BodyStyleSelections { get; }
+        string[] DriveTypeSelections { get; }
         string[] ManufacturerSelections { get; }
         string[] ConnectorTypes { get; }
         List<EVSpecs> BevSpecs { get; }
+        EVSpecs[] SortedSpecs { get; }
         DataItem[] FilteredSpecs { get; }
         public IEnumerable<(string Value, string Text)> Specs { get; }
         string SelectedSpec { get; set; }
         string SelectedBodyStyle { get; set; }
         string SelectedManufacturer { get; set; }
+        string SelectedDriveType { get; set; }
         Task OnInitialized ();
         Task DeleteRow(string id);
         Task InsertRow();

@@ -1,0 +1,73 @@
+﻿@page "/search"
+
+@inject IBEVViewModel ViewModel
+
+<div class="col-sm">
+    Body Style:
+    <RadzenDropDown Placeholder="Select body style" TValue="string" Data="ViewModel.BodyStyleSelections" @bind-Value="ViewModel.SelectedBodyStyle" />
+</div>
+
+<div class="col-sm">
+    Drivetrain:
+    <RadzenDropDown Placeholder="Select drive train" TValue="string" Data="ViewModel.DriveTypeSelections" @bind-Value="ViewModel.SelectedDriveType" />
+</div>
+
+Price:
+<RadzenSlider Name="PriceSlider" TValue="int" @bind-Value="ViewModel.PriceWeighting">
+</RadzenSlider>
+
+Range:
+<RadzenSlider Name="RangeSlider" TValue="int" @bind-Value="ViewModel.RangeWeighting">
+</RadzenSlider>
+
+Charge Rate:
+<RadzenSlider Name="ChargeSlider" TValue="int" @bind-Value="ViewModel.ChargeWeighting">
+</RadzenSlider>
+
+@foreach (var spec in ViewModel.SortedSpecs)
+{
+    <RadzenCard Style="width:600px; margin-bottom: 20px; height:500px;">
+        <div class="row">
+            <div class="col-md-6">
+                <div>Company:</div>
+                <b>@spec.Manufacturer</b>
+               
+               
+            </div>
+            <div class="col-md-6">
+
+                <b>@spec.Model</b>
+                <div style="margin-top:20px"></div>
+                <b>@String.Format(new System.Globalization.CultureInfo("en-US"), "{0:C}", spec.Price)</b>
+                <div style="margin-top:20px">Range:</div>
+                <b>@spec.CombinedRange</b>
+                <div style="margin-top:20px">Max Charge:</div>
+                <b>@spec.MaxChargePower</b>
+            </div>
+        </div>
+    </RadzenCard>
+}
+
+
+@code {
+
+
+    protected override async Task OnInitializedAsync()
+    {
+        await ViewModel.OnInitialized();
+        ViewModel.PropertyChanged += ViewModel_PropertyChanged;
+        await base.OnInitializedAsync();
+    }
+    
+
+    public void Dispose()
+    {
+        ViewModel.PropertyChanged -= ViewModel_PropertyChanged;
+    }
+
+    private async void ViewModel_PropertyChanged(object? sender, PropertyChangedEventArgs e)
+    {
+        await InvokeAsync(() => { StateHasChanged(); });
+    }
+
+}
