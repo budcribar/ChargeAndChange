@@ -1,45 +1,66 @@
 ﻿@page "/search"
 
 @inject IBEVViewModel ViewModel
+    <div class="row">
+        <div class="col-sm-2">
+            Body Style:
+        </div>
+        <div class="col-md-4">
+            <RadzenDropDown Placeholder="Select body style" TValue="string" Data="ViewModel.BodyStyleSelections" @bind-Value="ViewModel.SelectedBodyStyle" />
+        </div>
 
-<div class="col-sm">
-    Body Style:
-    <RadzenDropDown Placeholder="Select body style" TValue="string" Data="ViewModel.BodyStyleSelections" @bind-Value="ViewModel.SelectedBodyStyle" />
-</div>
+        <div class="col-sm-2">
+            Drivetrain:
+        </div>
+        <div class="col-md-4">
+            <RadzenDropDown Placeholder="Select drive train" TValue="string" Data="ViewModel.DriveTypeSelections" @bind-Value="ViewModel.SelectedDriveType" />
+        </div>
+    </div>
+    <div class="row" style="margin-top:10px">
+        <div class="col-sm-1">
+            Price:
+        </div>
+        <div class="col-md-2">
 
-<div class="col-sm">
-    Drivetrain:
-    <RadzenDropDown Placeholder="Select drive train" TValue="string" Data="ViewModel.DriveTypeSelections" @bind-Value="ViewModel.SelectedDriveType" />
-</div>
-<div class="row">
-    Price:
-    <RadzenSlider Name="PriceSlider" TValue="int" @bind-Value="ViewModel.PriceWeighting">
-    </RadzenSlider>
-</div>
-<div class="row">
-    Range:
-    <RadzenSlider Name="RangeSlider" TValue="int" @bind-Value="ViewModel.RangeWeighting">
-    </RadzenSlider>
-</div>
-<div class="row">
-    Charge Rate:
-    <RadzenSlider Name="ChargeSlider" TValue="int" @bind-Value="ViewModel.ChargeWeighting">
+            <RadzenSlider Name="PriceSlider" TValue="int" @bind-Value="ViewModel.PriceWeighting">
+            </RadzenSlider>
+        </div>
 
-    </RadzenSlider>
-</div>
-<div class="row">
-    Performance:
-    <RadzenSlider Name="PerformanceSlider" TValue="int" @bind-Value="ViewModel.PerformanceWeighting">
 
-    </RadzenSlider>
-</div>
+        <div class="col-sm-1">
+            Range:
+        </div>
+        <div class="col-md-2">
+            <RadzenSlider Name="RangeSlider" TValue="int" @bind-Value="ViewModel.RangeWeighting">
+            </RadzenSlider>
+        </div>
+
+        <div class="col-sm-1">
+            Charge Rate:
+        </div>
+        <div class="col-md-2">
+            <RadzenSlider Name="ChargeSlider" TValue="int" @bind-Value="ViewModel.ChargeWeighting">
+
+            </RadzenSlider>
+        </div>
+
+        <div class="col-sm-1">
+            Performance:
+        </div>
+        <div class="col-md-2">
+            <RadzenSlider Name="PerformanceSlider" TValue="int" @bind-Value="ViewModel.PerformanceWeighting">
+
+            </RadzenSlider>
+        </div>
+    </div>
+
     @foreach (var spec in ViewModel.SortedSpecs)
     {
         <RadzenCard Style="width:600px; margin-bottom: 20px; height:500px;">
             <div class="row">
                 <div class="col-md-6">
-                   
-                    
+
+
                     <RadzenImage Path=@("assets/images/brands/" + spec.Manufacturer + "-Logo.jpg") Style="width:100px;" />
 
                 </div>

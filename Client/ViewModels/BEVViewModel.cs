@@ -136,6 +136,9 @@ namespace Client.ViewModels
 
                 allSpecs = allSpecs.Where(x => x.Available && x.CombinedRange != null && x.Price != null && x.MaxChargePower != null && x.ZeroTo60mph != null).ToList();
 
+                if (RangeWeighting < 5 && PriceWeighting < 5 && ChargeWeighting < 5 && PerformanceWeighting < 5)
+                    return allSpecs.OrderBy(x => x.Manufacturer).ToArray();
+
                 var sortedRange = allSpecs.Select(x => x.CombinedRange).OrderBy(x => x).ToList(); // higher has higher index
                 var sortedPrice = allSpecs.Select(x => x.Price).OrderByDescending(x => x).ToList(); // lower has higher index
                 var sortedCharge = allSpecs.Select(x => x.MaxChargePower).OrderBy(x => x).ToList(); // higher has higher index

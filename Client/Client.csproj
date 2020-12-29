@@ -11,10 +11,6 @@
 	  <ItemGroup>
 	    <Content Remove="Swagger.json" />
 	  </ItemGroup>
-      
-	  <ItemGroup>
-	    <Content Include="wwwroot\.well-known\microsoft-identity-association.json" />
-	  </ItemGroup>
 
 	  <ItemGroup>
 		  <PackageReference Include="JsonSubTypes" Version="1.8.0" />
