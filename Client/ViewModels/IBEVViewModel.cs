@@ -13,6 +13,7 @@ namespace Client.ViewModels
         int PriceWeighting { get; set; }
         int RangeWeighting { get; set; }
         int ChargeWeighting { get; set; }
+        int PerformanceWeighting { get; set; }
         string[] DriveTypes { get; }
         string[] BodyStyles { get; }
         string[] BodyStyleSelections { get; }

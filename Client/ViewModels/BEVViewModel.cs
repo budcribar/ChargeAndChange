@@ -19,7 +19,9 @@ namespace Client.ViewModels
         }
 
         public string[] DriveTypeSelections => new List<string> { ALL }.Concat(Enum.GetNames(typeof(DriveType))).ToArray(); 
-        public string[] BodyStyleSelections => new List<string> { ALL }.Concat(Enum.GetNames(typeof(BodyStyle))).ToArray();
+
+        private string[] bodyStyleSelections = new List<string> { ALL }.Concat(Enum.GetNames(typeof(BodyStyle))).ToArray();
+        public string[] BodyStyleSelections => bodyStyleSelections;
         public string[] ManufacturerSelections => new List<string> { ALL }.Concat(BevSpecs.Select(x => x.Manufacturer).Distinct()).ToArray();
         public string[] DriveTypes => Enum.GetNames(typeof(DriveType));
         public string[] BodyStyles => Enum.GetNames(typeof(BodyStyle));
@@ -132,19 +134,32 @@ namespace Client.ViewModels
                 if (selectedDriveType != ALL)
                     allSpecs = allSpecs.Where(x => x.DriveTrain.ToString() == selectedDriveType).ToList();
 
-                allSpecs = allSpecs.Where(x => x.Available && x.CombinedRange != null && x.Price != null && x.MaxChargePower != null).ToList();
+                allSpecs = allSpecs.Where(x => x.Available && x.CombinedRange != null && x.Price != null && x.MaxChargePower != null && x.ZeroTo60mph != null).ToList();
 
                 var sortedRange = allSpecs.Select(x => x.CombinedRange).OrderBy(x => x).ToList(); // higher has higher index
                 var sortedPrice = allSpecs.Select(x => x.Price).OrderByDescending(x => x).ToList(); // lower has higher index
                 var sortedCharge = allSpecs.Select(x => x.MaxChargePower).OrderBy(x => x).ToList(); // higher has higher index
-
-                return allSpecs.OrderByDescending(x => sortedRange.IndexOf(x.CombinedRange) * RangeWeighting + sortedPrice.IndexOf(x.Price) * PriceWeighting + sortedCharge.IndexOf(x.MaxChargePower) * ChargeWeighting).ToArray();
+                var sortedPerformance = allSpecs.Select(x => x.ZeroTo60mph).OrderByDescending(x => x).ToList(); // lower has higher index
+                var rangeInc = (3 * RangeWeighting) / 100.0;
+                var priceInc = (3 * PriceWeighting) / 100.0;  
+                var chargeInc = (3 * ChargeWeighting) / 100.0;  
+                var performanceInc = (3 * PerformanceWeighting) / 100.0;
+                return allSpecs.OrderByDescending(x => sortedRange.IndexOf(x.CombinedRange) * rangeInc + sortedPrice.IndexOf(x.Price) * priceInc + sortedCharge.IndexOf(x.MaxChargePower) * chargeInc + sortedPerformance.IndexOf(x.ZeroTo60mph) * performanceInc).ToArray();
             
             } }
 
         public int PowerMode { get; set; } = 1;
 
-
+        public int performanceWeighting = 0;
+        public int PerformanceWeighting
+        {
+            get => performanceWeighting;
+            set
+            {
+                SetValue(ref performanceWeighting, value);
+                FilterSpecs();
+            }
+        }
         public int priceWeighting = 0;
         public int PriceWeighting
         {
@@ -243,10 +258,15 @@ namespace Client.ViewModels
         public override async Task OnInitialized()
         {
             await LoadSpecs();
+            bodyStyleSelections = new List<string> { ALL }.Concat(BevSpecs.Select(x => x.BodyStyle.ToString()).Distinct()).ToArray();
             SelectedSpec = specs.Keys.First();
             selectedBodyStyle = ALL;
             selectedDriveType = ALL;
             selectedManufacturer = ALL;
+            PerformanceWeighting = 0;
+            PriceWeighting = 0;
+            RangeWeighting = 0;
+            ChargeWeighting = 0;
         }
 
     }

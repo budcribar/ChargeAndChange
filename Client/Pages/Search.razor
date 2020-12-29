@@ -11,63 +11,74 @@
     Drivetrain:
     <RadzenDropDown Placeholder="Select drive train" TValue="string" Data="ViewModel.DriveTypeSelections" @bind-Value="ViewModel.SelectedDriveType" />
 </div>
+<div class="row">
+    Price:
+    <RadzenSlider Name="PriceSlider" TValue="int" @bind-Value="ViewModel.PriceWeighting">
+    </RadzenSlider>
+</div>
+<div class="row">
+    Range:
+    <RadzenSlider Name="RangeSlider" TValue="int" @bind-Value="ViewModel.RangeWeighting">
+    </RadzenSlider>
+</div>
+<div class="row">
+    Charge Rate:
+    <RadzenSlider Name="ChargeSlider" TValue="int" @bind-Value="ViewModel.ChargeWeighting">
 
-Price:
-<RadzenSlider Name="PriceSlider" TValue="int" @bind-Value="ViewModel.PriceWeighting">
-</RadzenSlider>
+    </RadzenSlider>
+</div>
+<div class="row">
+    Performance:
+    <RadzenSlider Name="PerformanceSlider" TValue="int" @bind-Value="ViewModel.PerformanceWeighting">
 
-Range:
-<RadzenSlider Name="RangeSlider" TValue="int" @bind-Value="ViewModel.RangeWeighting">
-</RadzenSlider>
+    </RadzenSlider>
+</div>
+    @foreach (var spec in ViewModel.SortedSpecs)
+    {
+        <RadzenCard Style="width:600px; margin-bottom: 20px; height:500px;">
+            <div class="row">
+                <div class="col-md-6">
+                   
+                    
+                    <RadzenImage Path=@("assets/images/brands/" + spec.Manufacturer + "-Logo.jpg") Style="width:100px;" />
 
-Charge Rate:
-<RadzenSlider Name="ChargeSlider" TValue="int" @bind-Value="ViewModel.ChargeWeighting">
-</RadzenSlider>
-
-@foreach (var spec in ViewModel.SortedSpecs)
-{
-    <RadzenCard Style="width:600px; margin-bottom: 20px; height:500px;">
-        <div class="row">
-            <div class="col-md-6">
-                <div>Company:</div>
-                <b>@spec.Manufacturer</b>
-               
-               
+                </div>
+                <div class="col-md-6">
+                    <b>@spec.Manufacturer</b>
+                    <b>@spec.Model</b>
+                    <div style="margin-top:20px">Price:</div>
+                    <b>@String.Format(new System.Globalization.CultureInfo("en-US"), "{0:C0}", spec.Price)</b>
+                    <div style="margin-top:20px">Range:</div>
+                    <b>@spec.CombinedRange mi</b>
+                    <div style="margin-top:20px">Max Charge:</div>
+                    <b>@spec.MaxChargePower kw</b>
+                    <div style="margin-top:20px">0-60mph Time:</div>
+                    <b>@spec.ZeroTo60mph sec</b>
+                </div>
             </div>
-            <div class="col-md-6">
-
-                <b>@spec.Model</b>
-                <div style="margin-top:20px"></div>
-                <b>@String.Format(new System.Globalization.CultureInfo("en-US"), "{0:C}", spec.Price)</b>
-                <div style="margin-top:20px">Range:</div>
-                <b>@spec.CombinedRange</b>
-                <div style="margin-top:20px">Max Charge:</div>
-                <b>@spec.MaxChargePower</b>
-            </div>
-        </div>
-    </RadzenCard>
-}
-
-
-@code {
-
-
-    protected override async Task OnInitializedAsync()
-    {
-        await ViewModel.OnInitialized();
-        ViewModel.PropertyChanged += ViewModel_PropertyChanged;
-        await base.OnInitializedAsync();
-    }
-    
-
-    public void Dispose()
-    {
-        ViewModel.PropertyChanged -= ViewModel_PropertyChanged;
+        </RadzenCard>
     }
 
-    private async void ViewModel_PropertyChanged(object? sender, PropertyChangedEventArgs e)
-    {
-        await InvokeAsync(() => { StateHasChanged(); });
-    }
 
-}
+    @code {
+
+
+        protected override async Task OnInitializedAsync()
+        {
+            await ViewModel.OnInitialized();
+            ViewModel.PropertyChanged += ViewModel_PropertyChanged;
+            await base.OnInitializedAsync();
+        }
+
+
+        public void Dispose()
+        {
+            ViewModel.PropertyChanged -= ViewModel_PropertyChanged;
+        }
+
+        private async void ViewModel_PropertyChanged(object? sender, PropertyChangedEventArgs e)
+        {
+            await InvokeAsync(() => { StateHasChanged(); });
+        }
+
+    }
