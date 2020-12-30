@@ -41,7 +41,7 @@ namespace Client.ViewModels
 
 
 
-        Dictionary<string, (string, Func<EVSpecs, double?>, Func<object, string>)> specs = new Dictionary<string, (string, Func<EVSpecs, double?>, Func<object, string>)> {
+        Dictionary<string, (string Name, Func<EVSpecs, double?>, Func<object, string>)> specs = new Dictionary<string, (string, Func<EVSpecs, double?>, Func<object, string>)> {
             {"Price", ("Price", (e) => (double?) e.Price, (e) => ((double)e).ToString("C0") )  },
 
             {  "PriceMinusFederalTaxCredit",  ("Price After Tax Credit", (e) => (double?) (e.Price - e.FederalTaxCredit), (e) => ((double)e).ToString("C0") )  },
@@ -58,6 +58,8 @@ namespace Client.ViewModels
             {  "SafetyRating",  ("Safety Rating", (e) => (double?) e.SafetyRating, (e) => $"{((double)e)} stars") } };
 
         public IEnumerable<(string Value, string Text)> Specs => specs.Keys.Select(x => (x, specs[x].Item1));
+
+        public string SelectedSpecName => specs[SelectedSpec].Name;
 
         public string selectedSpec = "";
         public string SelectedSpec

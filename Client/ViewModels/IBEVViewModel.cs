@@ -25,6 +25,7 @@ namespace Client.ViewModels
         DataItem[] FilteredSpecs { get; }
         public IEnumerable<(string Value, string Text)> Specs { get; }
         string SelectedSpec { get; set; }
+        string SelectedSpecName { get; }
         string SelectedBodyStyle { get; set; }
         string SelectedManufacturer { get; set; }
         string SelectedDriveType { get; set; }

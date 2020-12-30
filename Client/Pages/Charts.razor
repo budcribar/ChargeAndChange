@@ -28,7 +28,7 @@ else
         </div>
         <div style="@ChartStyle()">
             <RadzenChart Style="width:100%;height:100%">
-                <RadzenBarSeries Data="@ViewModel.FilteredSpecs" CategoryProperty="Name" LineType="LineType.Solid" ValueProperty="Value" />
+                <RadzenBarSeries Data="@ViewModel.FilteredSpecs" CategoryProperty="Name" LineType="LineType.Solid" ValueProperty="Value" Title="@ViewModel.SelectedSpecName"  />
                 <RadzenValueAxis Formatter="@ViewModel.SpecFormat">
                     <RadzenGridLines Visible="true" />
                 </RadzenValueAxis>
