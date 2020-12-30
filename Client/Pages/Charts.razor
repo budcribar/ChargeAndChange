@@ -28,13 +28,21 @@ else
         </div>
         <div style="@ChartStyle()">
             <RadzenChart Style="width:100%;height:100%">
-                <RadzenBarSeries Data="@ViewModel.FilteredSpecs" CategoryProperty="Name" LineType="LineType.Solid" ValueProperty="Value" Title="@ViewModel.SelectedSpecName"  />
-                <RadzenValueAxis Formatter="@ViewModel.SpecFormat">
-                    <RadzenGridLines Visible="true" />
-                </RadzenValueAxis>
-                <RadzenBarOptions Radius="5" />
-                <RadzenLegend Visible="false" />
-            </RadzenChart>
+                <RadzenBarSeries Data="@ViewModel.FilteredSpecs" CategoryProperty="Name" LineType="LineType.Solid" ValueProperty="Value" Title="@ViewModel.SelectedSpecName">
+                    <TooltipTemplate Context="data">
+                        <div>
+                            <RadzenImage Path=@("assets/images/brands/" + data.Manufacturer + "-Logo.jpg") Style="width:25px;margin-right:5px" />@data.Name
+                            <br />
+                            @(ViewModel.SelectedSpecName):<strong>@ViewModel.SpecFormat(data.Value ?? 0)</strong>
+                        </div>
+                    </TooltipTemplate>
+                    </RadzenBarSeries>
+                    <RadzenValueAxis Formatter="@ViewModel.SpecFormat">
+                        <RadzenGridLines Visible="true" />
+                    </RadzenValueAxis>
+                    <RadzenBarOptions Radius="5" />
+                    <RadzenLegend Visible="false" />
+</RadzenChart>
         </div>
     }
     else

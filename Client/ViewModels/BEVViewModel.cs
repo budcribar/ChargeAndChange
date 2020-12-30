@@ -118,7 +118,7 @@ namespace Client.ViewModels
             if (selectedDriveType != ALL)
                 allSpecs = allSpecs.Where(x => x.DriveTrain.ToString() == selectedDriveType).ToList();
 
-            FilteredSpecs = allSpecs.Where(x => specs[selectedSpec].Item2.Invoke(x) != null).OrderBy(x => specs[selectedSpec].Item2.Invoke(x)).Select(x => new DataItem { Name = x.Model, Value = specs[selectedSpec].Item2.Invoke(x) }).ToArray();      
+            FilteredSpecs = allSpecs.Where(x => specs[selectedSpec].Item2.Invoke(x) != null).OrderBy(x => specs[selectedSpec].Item2.Invoke(x)).Select(x => new DataItem { Name = x.Model, Value = specs[selectedSpec].Item2.Invoke(x), Manufacturer=x.Manufacturer }).ToArray();      
         }
 
         public Func<object, string> SpecFormat => specs[selectedSpec].Item3;
