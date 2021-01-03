@@ -17,8 +17,8 @@ namespace Client.ViewModels
         {
             this.client = client;
         }
-
-        public string[] DriveTypeSelections => new List<string> { ALL }.Concat(Enum.GetNames(typeof(DriveType))).ToArray(); 
+        private string[] driveTypeSelections = new List<string> { ALL }.Concat(Enum.GetNames(typeof(DriveType))).ToArray();
+        public string[] DriveTypeSelections => driveTypeSelections;
 
         private string[] bodyStyleSelections = new List<string> { ALL }.Concat(Enum.GetNames(typeof(BodyStyle))).ToArray();
         public string[] BodyStyleSelections => bodyStyleSelections;
@@ -264,6 +264,7 @@ namespace Client.ViewModels
         {
             await LoadSpecs();
             bodyStyleSelections = new List<string> { ALL }.Concat(BevSpecs.Select(x => x.BodyStyle.ToString()).Distinct()).ToArray();
+            driveTypeSelections = new List<string> { ALL }.Concat(BevSpecs.Select(x => x.DriveTrain.ToString()).Distinct()).ToArray();
             SelectedSpec = specs.Keys.First();
             selectedBodyStyle = ALL;
             selectedDriveType = ALL;

@@ -31,7 +31,7 @@ else
                 <RadzenBarSeries Data="@ViewModel.FilteredSpecs" CategoryProperty="Name" LineType="LineType.Solid" ValueProperty="Value" Title="@ViewModel.SelectedSpecName">
                     <TooltipTemplate Context="data">
                         <div>
-                            <RadzenImage Path=@("assets/images/brands/" + data.Manufacturer + "-Logo.jpg") Style="width:25px;margin-right:5px" />@data.Name
+                            <RadzenImage Path=@("assets/images/brands/" + data.Manufacturer + "-Logo.jpg") Style="width:25px;margin-right:5px" />@data.Manufacturer  @data.Name
                             <br />
                             @(ViewModel.SelectedSpecName):<strong>@ViewModel.SpecFormat(data.Value ?? 0)</strong>
                         </div>
