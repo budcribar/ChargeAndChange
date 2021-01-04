@@ -6,6 +6,7 @@ using System;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Client.ViewModels;
+using Radzen;
 
 namespace Client
 {
@@ -22,6 +23,7 @@ namespace Client
             builder.Services.AddSingleton<AppVersionInfo>();
             builder.Services.AddSingleton<IBEVViewModel,BEVViewModel>();
             builder.Services.AddSingleton<IContactViewModel, ContactViewModel>();
+            builder.Services.AddScoped<DialogService>();
             builder.Services.AddMsalAuthentication(options =>
             {
                 builder.Configuration.Bind("AzureAdB2C", options.ProviderOptions.Authentication);

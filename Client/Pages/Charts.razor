@@ -17,13 +17,13 @@ else
     {
         <div class="row">
             <div class="col-sm">
-                <RadzenDropDown Placeholder="Select spec" TValue="string" Data="@ViewModel.Specs.Select(x => new {Text=x.Text, Value=x.Value})" TextProperty="Text" ValueProperty="Value"  @bind-Value="ViewModel.SelectedSpec" />
+                <RadzenDropDown Placeholder="Select spec" TValue="string" Data="@ViewModel.Specs.Select(x => new {Text=x.Text, Value=x.Value})" TextProperty="Text" ValueProperty="Value" @bind-Value="ViewModel.SelectedSpec" />
             </div>
             <div class="col-md">
-                <RadzenDropDown Placeholder="Select manufacturer" TValue="string" Data="ViewModel.ManufacturerSelections"  @bind-Value="ViewModel.SelectedManufacturer" />
+                <RadzenDropDown Placeholder="Select manufacturer" TValue="string" Data="ViewModel.ManufacturerSelections" @bind-Value="ViewModel.SelectedManufacturer" />
             </div>
             <div class="col-sm">
-                <RadzenDropDown Placeholder="Select body style" TValue="string" Data="ViewModel.BodyStyleSelections"  @bind-Value="ViewModel.SelectedBodyStyle" />
+                <RadzenDropDown Placeholder="Select body style" TValue="string" Data="ViewModel.BodyStyleSelections" @bind-Value="ViewModel.SelectedBodyStyle" />
             </div>
         </div>
         <div style="@ChartStyle()">
@@ -36,18 +36,18 @@ else
                             @(ViewModel.SelectedSpecName):<strong>@ViewModel.SpecFormat(data.Value ?? 0)</strong>
                         </div>
                     </TooltipTemplate>
-                    </RadzenBarSeries>
-                    <RadzenValueAxis Formatter="@ViewModel.SpecFormat">
-                        <RadzenGridLines Visible="true" />
-                    </RadzenValueAxis>
-                    <RadzenBarOptions Radius="5" />
-                    <RadzenLegend Visible="false" />
-</RadzenChart>
+                </RadzenBarSeries>
+                <RadzenValueAxis Formatter="@ViewModel.SpecFormat">
+                    <RadzenGridLines Visible="true" />
+                </RadzenValueAxis>
+                <RadzenBarOptions Radius="5" />
+                <RadzenLegend Visible="false" />
+            </RadzenChart>
         </div>
     }
     else
     {
-        <img src="assets/images/spinner.gif" style="height:64px;" />
+        <img src="assets/images/spinner.gif" style="display:block;width:50%;margin-left:auto;margin-right:auto;margin-top:200px" />
     }
 }
 

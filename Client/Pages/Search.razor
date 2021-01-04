@@ -1,59 +1,61 @@
 ﻿@page "/search"
 
 @inject IBEVViewModel ViewModel
-    <div class="row">
-        <div class="col-sm-2">
-            Body Style:
-        </div>
-        <div class="col-md-4">
-            <RadzenDropDown Placeholder="Select body style" TValue="string" Data="ViewModel.BodyStyleSelections" @bind-Value="ViewModel.SelectedBodyStyle" />
-        </div>
-
-        <div class="col-sm-2">
-            Drivetrain:
-        </div>
-        <div class="col-md-4">
-            <RadzenDropDown Placeholder="Select drive train" TValue="string" Data="ViewModel.DriveTypeSelections" @bind-Value="ViewModel.SelectedDriveType" />
-        </div>
+<div class="row">
+    <div class="col-sm-2">
+        Body Style:
     </div>
-    <div class="row" style="margin-top:10px">
-        <div class="col-sm-1">
-            Price:
-        </div>
-        <div class="col-md-2">
-
-            <RadzenSlider Name="PriceSlider" TValue="int" @bind-Value="ViewModel.PriceWeighting">
-            </RadzenSlider>
-        </div>
-
-
-        <div class="col-sm-1">
-            Range:
-        </div>
-        <div class="col-md-2">
-            <RadzenSlider Name="RangeSlider" TValue="int" @bind-Value="ViewModel.RangeWeighting">
-            </RadzenSlider>
-        </div>
-
-        <div class="col-sm-1">
-            Charge Rate:
-        </div>
-        <div class="col-md-2">
-            <RadzenSlider Name="ChargeSlider" TValue="int" @bind-Value="ViewModel.ChargeWeighting">
-
-            </RadzenSlider>
-        </div>
-
-        <div class="col-sm-1">
-            Performance:
-        </div>
-        <div class="col-md-2">
-            <RadzenSlider Name="PerformanceSlider" TValue="int" @bind-Value="ViewModel.PerformanceWeighting">
-
-            </RadzenSlider>
-        </div>
+    <div class="col-md-4">
+        <RadzenDropDown Placeholder="Select body style" TValue="string" Data="ViewModel.BodyStyleSelections" @bind-Value="ViewModel.SelectedBodyStyle" />
     </div>
 
+    <div class="col-sm-2">
+        Drivetrain:
+    </div>
+    <div class="col-md-4">
+        <RadzenDropDown Placeholder="Select drive train" TValue="string" Data="ViewModel.DriveTypeSelections" @bind-Value="ViewModel.SelectedDriveType" />
+    </div>
+</div>
+<div class="row" style="margin-top:10px">
+    <div class="col-sm-1">
+        Price:
+    </div>
+    <div class="col-md-2">
+
+        <RadzenSlider Name="PriceSlider" TValue="int" @bind-Value="ViewModel.PriceWeighting">
+        </RadzenSlider>
+    </div>
+
+
+    <div class="col-sm-1">
+        Range:
+    </div>
+    <div class="col-md-2">
+        <RadzenSlider Name="RangeSlider" TValue="int" @bind-Value="ViewModel.RangeWeighting">
+        </RadzenSlider>
+    </div>
+
+    <div class="col-sm-1">
+        Charge Rate:
+    </div>
+    <div class="col-md-2">
+        <RadzenSlider Name="ChargeSlider" TValue="int" @bind-Value="ViewModel.ChargeWeighting">
+
+        </RadzenSlider>
+    </div>
+
+    <div class="col-sm-1">
+        Performance:
+    </div>
+    <div class="col-md-2">
+        <RadzenSlider Name="PerformanceSlider" TValue="int" @bind-Value="ViewModel.PerformanceWeighting">
+
+        </RadzenSlider>
+    </div>
+</div>
+
+@if (ViewModel.SortedSpecs.Length > 0)
+{
     @foreach (var spec in ViewModel.SortedSpecs)
     {
         <RadzenCard Style="width:600px; margin-bottom: 20px; height:500px;">
@@ -79,27 +81,31 @@
             </div>
         </RadzenCard>
     }
+}
+else
+{
+    <img src="assets/images/spinner.gif" style="display:block;width:50%;margin-left:auto;margin-right:auto;margin-top:200px" />
+}
+
+@code {
 
 
-    @code {
-
-
-        protected override async Task OnInitializedAsync()
-        {
-            await ViewModel.OnInitialized();
-            ViewModel.PropertyChanged += ViewModel_PropertyChanged;
-            await base.OnInitializedAsync();
-        }
-
-
-        public void Dispose()
-        {
-            ViewModel.PropertyChanged -= ViewModel_PropertyChanged;
-        }
-
-        private async void ViewModel_PropertyChanged(object? sender, PropertyChangedEventArgs e)
-        {
-            await InvokeAsync(() => { StateHasChanged(); });
-        }
-
+    protected override async Task OnInitializedAsync()
+    {
+        await ViewModel.OnInitialized();
+        ViewModel.PropertyChanged += ViewModel_PropertyChanged;
+        await base.OnInitializedAsync();
     }
+
+
+    public void Dispose()
+    {
+        ViewModel.PropertyChanged -= ViewModel_PropertyChanged;
+    }
+
+    private async void ViewModel_PropertyChanged(object? sender, PropertyChangedEventArgs e)
+    {
+        await InvokeAsync(() => { StateHasChanged(); });
+    }
+
+}

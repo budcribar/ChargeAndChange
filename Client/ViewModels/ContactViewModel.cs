@@ -40,7 +40,17 @@ namespace Client.ViewModels
         }
 
         private Contact[] contacts = Array.Empty<Contact>();
-        public Contact[] FilteredContacts { get; private set; } = Array.Empty<Contact>();
+
+        private Contact[] filteredContacts = Array.Empty<Contact>();
+        public Contact[] FilteredContacts
+        {
+            get => filteredContacts;
+            private set
+            {
+                SetValue(ref filteredContacts, value);
+            }
+        }
+
         public string?[] Subdivisions { get; set; } = Array.Empty<string?>();
         public string?[] Streets { get; set; } = Array.Empty<string>();
 

@@ -4,6 +4,7 @@
 @using System.ComponentModel;
 
 @inject IBEVViewModel ViewModel
+@inject DialogService DialogService
 
 <h1>BEV Specs</h1>
 <MediaQuery Media="@Breakpoints.XSmallDown" @bind-Matches="ViewModel.IsSmallDisplay" />
@@ -19,7 +20,7 @@ else
         <Radzen.Blazor.RadzenButton Click="@ViewModel.InsertRow">Insert</Radzen.Blazor.RadzenButton>
 
         <RadzenGrid @ref="evSpecsGrid" AllowFiltering="true" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" AllowPaging="true" PageSize="50" EditMode="DataGridEditMode.Single" RowUpdate="@ViewModel.UpdateRow"
-                    AllowSorting="true" Data="@ViewModel.BevSpecs" TItem="EVSpecs" style="height: 600px" ColumnWidth="130px">
+                    AllowSorting="true" Data="@ViewModel.BevSpecs" TItem="EVSpecs" style="height: 800px" ColumnWidth="130px">
             <Columns>
 
 
@@ -111,7 +112,7 @@ else
                     </Template>
                     <EditTemplate Context="evSpec">
 
-                        <RadzenNumeric TValue="int?" Change="@(args => ViewModel.ChangeMotorPower(args, evSpec))"  Value="@ViewModel.GetMotorPower(evSpec)" Style="width:100%" />
+                        <RadzenNumeric TValue="int?" Change="@(args => ViewModel.ChangeMotorPower(args, evSpec))" Value="@ViewModel.GetMotorPower(evSpec)" Style="width:100%" />
                         <RadzenRadioButtonList @bind-Value="ViewModel.PowerMode" TValue="int">
                             <Items>
                                 <RadzenRadioButtonListItem Text="kw" Value="1" />
@@ -194,11 +195,11 @@ else
                 </RadzenGridColumn>
                 <RadzenGridColumn TItem="EVSpecs" Context="evSpec" Bubble="false" Filterable="false" Sortable="false" TextAlign="TextAlign.Center" Width="70px">
                     <Template Context="evSpec">
-                        <RadzenButton ButtonStyle="ButtonStyle.Danger" Icon="close" Size="ButtonSize.Small" Click="@(args => ViewModel.DeleteRow(evSpec.Id))">
+                        <RadzenButton ButtonStyle="ButtonStyle.Danger" Icon="close" Size="ButtonSize.Small" Click="@(args => ConfirmDelete(evSpec))">
                         </RadzenButton>
                     </Template>
                     <EditTemplate Context="evSpec">
-                        <RadzenButton ButtonStyle="ButtonStyle.Danger" Icon="close" Size="ButtonSize.Small" Click="@(args => ViewModel.DeleteRow(evSpec.Id))">
+                        <RadzenButton ButtonStyle="ButtonStyle.Danger" Icon="close" Size="ButtonSize.Small" Click="@(args => ConfirmDelete(evSpec))">
                         </RadzenButton>
                     </EditTemplate>
                 </RadzenGridColumn>
@@ -208,12 +209,21 @@ else
     }
     else
     {
-        <img src="assets/images/spinner.gif" style="height:64px;" />
+        <img src="assets/images/spinner.gif" style="display:block;width:50%;margin-left:auto;margin-right:auto;margin-top:200px" />
     }
 }
 
 
 @code {
+
+    async void ConfirmDelete(EVSpecs spec)
+    {
+        var result = await DialogService.Confirm("Are you sure?", $"Delete {spec.ModelYear} {spec.Manufacturer} {spec.Model}", new ConfirmOptions() { OkButtonText = "Yes", CancelButtonText = "No" });
+
+        if (result.HasValue && result.Value)
+            await ViewModel.DeleteRow(spec.Id);
+    }
+
 
     private RadzenGrid<EVSpecs>? evSpecsGrid;
 

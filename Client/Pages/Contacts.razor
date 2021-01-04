@@ -5,6 +5,7 @@
 
 @attribute [Authorize]
 @inject IContactViewModel ViewModel
+@inject DialogService DialogService
 
 <h1>Contacts</h1>
 <MediaQuery Media="@Breakpoints.XSmallDown" @bind-Matches="isSmall" />
@@ -131,11 +132,11 @@ else
             </RadzenGridColumn>
             <RadzenGridColumn TItem="Contact" Context="contact" Bubble="false" Filterable="false" Sortable="false" TextAlign="TextAlign.Center" Width="70px">
                 <Template Context="contact">
-                    <RadzenButton ButtonStyle="ButtonStyle.Danger" Icon="close" Size="ButtonSize.Small" Click="@(args => ViewModel.DeleteRow(contact))">
+                    <RadzenButton ButtonStyle="ButtonStyle.Danger" Icon="close" Size="ButtonSize.Small" Click="@(args => ConfirmDelete(contact))">
                     </RadzenButton>
                 </Template>
                 <EditTemplate Context="contact">
-                    <RadzenButton ButtonStyle="ButtonStyle.Danger" Icon="close" Size="ButtonSize.Small" Click="@(args => ViewModel.DeleteRow(contact))">
+                    <RadzenButton ButtonStyle="ButtonStyle.Danger" Icon="close" Size="ButtonSize.Small" Click="@(args => ConfirmDelete(contact))">
                     </RadzenButton>
                 </EditTemplate>
             </RadzenGridColumn>
@@ -144,6 +145,14 @@ else
 }
 
 @code {
+    async void ConfirmDelete(Contact contact)
+    {
+        var result = await DialogService.Confirm("Are you sure?", $"Delete {contact.FirstName} {contact.LastName}", new ConfirmOptions() { OkButtonText = "Yes", CancelButtonText = "No" });
+
+        if (result.HasValue && result.Value)
+            await ViewModel.DeleteRow(contact);
+    }
+
     bool isSmall = false;
 
     private RadzenGrid<Contact>? contactsGrid;
