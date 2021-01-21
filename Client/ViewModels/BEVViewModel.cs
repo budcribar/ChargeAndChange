@@ -61,7 +61,7 @@ namespace Client.ViewModels
 
         public string SelectedSpecName => specs[SelectedSpec].Name;
 
-        public string selectedSpec = "";
+        private string selectedSpec = "";
         public string SelectedSpec
         {
             get => selectedSpec;
@@ -72,7 +72,7 @@ namespace Client.ViewModels
             }
         }
 
-        public string selectedBodyStyle = ALL;
+        private string selectedBodyStyle = ALL;
         public string SelectedBodyStyle
         {
             get => selectedBodyStyle;
@@ -83,7 +83,7 @@ namespace Client.ViewModels
             }
         }
         
-        public string selectedManufacturer = ALL;
+        private string selectedManufacturer = ALL;
         public string SelectedManufacturer
         {
             get => selectedManufacturer;
@@ -94,7 +94,7 @@ namespace Client.ViewModels
             }
         }
 
-        public string selectedDriveType = ALL;
+        private string selectedDriveType = ALL;
         public string SelectedDriveType
         {
             get => selectedDriveType;
@@ -155,7 +155,7 @@ namespace Client.ViewModels
 
         public int PowerMode { get; set; } = 1;
 
-        public int performanceWeighting = 0;
+        private int performanceWeighting = 0;
         public int PerformanceWeighting
         {
             get => performanceWeighting;
@@ -165,7 +165,7 @@ namespace Client.ViewModels
                 FilterSpecs();
             }
         }
-        public int priceWeighting = 0;
+        private int priceWeighting = 0;
         public int PriceWeighting
         {
             get => priceWeighting;
@@ -175,7 +175,7 @@ namespace Client.ViewModels
                 FilterSpecs();
             }
         }
-        public int rangeWeighting = 0;
+        private int rangeWeighting = 0;
         public int RangeWeighting
         {
             get => rangeWeighting;
@@ -185,7 +185,7 @@ namespace Client.ViewModels
                 FilterSpecs();
             }
         }
-        public int chargeWeighting = 0;
+        private int chargeWeighting = 0;
         public int ChargeWeighting
         {
             get => chargeWeighting;
