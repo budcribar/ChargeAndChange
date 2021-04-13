@@ -22,12 +22,12 @@ namespace Client.ViewModels
 
         public event PropertyChangedEventHandler? PropertyChanged;
 
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = "")
         {
 
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
-        protected void SetValue<T>(ref T backingFiled, T value, [CallerMemberName] string propertyName = null)
+        protected void SetValue<T>(ref T backingFiled, T value, [CallerMemberName] string propertyName = "")
         {
             if (EqualityComparer<T>.Default.Equals(backingFiled, value)) return;
             backingFiled = value;
