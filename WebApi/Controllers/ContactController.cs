@@ -52,7 +52,7 @@ namespace WebApi.Controllers
 
         {
             var body = await request.ReadAsStringAsync();
-            Contact contact = JsonConvert.DeserializeObject<Contact>(body);
+            Contact? contact = JsonConvert.DeserializeObject<Contact>(body);
 
             if (contact == null) return NoContent(); ;
             contact.Id = id;
@@ -70,7 +70,7 @@ namespace WebApi.Controllers
         public async Task<IActionResult> PutContact([HttpTrigger(AuthorizationLevel.Anonymous, "put", Route = "Contact/PutContact")] HttpRequest request)
         {
             var body = await request.ReadAsStringAsync();
-            Contact contact = JsonConvert.DeserializeObject<Contact>(body);
+            Contact? contact = JsonConvert.DeserializeObject<Contact>(body);
 
             if (contact == null) return NoContent(); 
             contact.Id = Guid.NewGuid().ToString();
@@ -90,7 +90,7 @@ namespace WebApi.Controllers
         public async Task<Contact?> Login([HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = "Contact/login")] HttpRequest request)
         {
             var body = await request.ReadAsStringAsync();
-            Contact contact = JsonConvert.DeserializeObject<Contact>(body);
+            Contact? contact = JsonConvert.DeserializeObject<Contact>(body);
 
             if (contact == null) return null;
 
@@ -121,7 +121,7 @@ namespace WebApi.Controllers
             var result = await Download.DownloadJObjectAsync(@"https://apps.larimer.org/api/assessor/property/?prop=property&parcel=undefined&scheduleNumber=undefined&serialIdentification=undefined&name=&fromAddrNum=undefined&toAddrNum=undefined&address=&city=FORT%20COLLINS&subdivisionNumber=undefined&sales=any&subdivisionName=WILLOW%20SPRINGS%20PUD");
             var records = result["records"];
 
-            var results = records.Select(x => JsonConvert.DeserializeObject<LarimerCountyRecord>(x.ToString()).ToContact(subdivision)).Where(x => x != null).ToList();
+            List<Contact> results = records.Select(x => JsonConvert.DeserializeObject<LarimerCountyRecord>(x.ToString())?.ToContact(subdivision))?.Where(x => x != null)?.ToList() ?? new();
 
             repository.CreateItemsAsync(results.ToArray());
 

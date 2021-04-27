@@ -46,7 +46,7 @@ namespace WebApi.Controllers
         public async Task<IActionResult> PatchEVSpecs([HttpTrigger(AuthorizationLevel.Anonymous, "patch", Route = "BEV/PatchEVSpecs/{id}")] HttpRequest request, string id)
         {
             var body = await request.ReadAsStringAsync();
-            EVSpecs bev = JsonConvert.DeserializeObject<EVSpecs>(body);
+            EVSpecs? bev = JsonConvert.DeserializeObject<EVSpecs>(body);
             if (bev == null) return NoContent();
             bev.Id = id;
             await respository.UpdateItemAsync(id, bev);
@@ -60,7 +60,7 @@ namespace WebApi.Controllers
 
         {
             var body = await request.ReadAsStringAsync();
-            EVSpecs bev = JsonConvert.DeserializeObject<EVSpecs>(body);          
+            EVSpecs? bev = JsonConvert.DeserializeObject<EVSpecs>(body);          
             if (bev == null) return NoContent();
             bev.Id = Guid.NewGuid().ToString();
             await respository.CreateItemAsync(bev);
