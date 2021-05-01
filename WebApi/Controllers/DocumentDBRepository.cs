@@ -94,9 +94,9 @@ namespace WebApi.Controllers
 
         static internal DocumentCollection GetCollectionIfExists(DocumentClient client, string databaseName, string collectionName)
         {
-           
-            return client.CreateDocumentCollectionQuery(UriFactory.CreateDatabaseUri(databaseName))
-                .Where(c => c.Id == collectionName).AsEnumerable().FirstOrDefault();
+
+            return client?.CreateDocumentCollectionQuery(UriFactory.CreateDatabaseUri(databaseName))
+                .Where(c => c.Id == collectionName).AsEnumerable().FirstOrDefault() ?? new();
         }
 
         public async void CreateItemsAsync(T[] item)
