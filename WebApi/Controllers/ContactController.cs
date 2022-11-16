@@ -121,7 +121,7 @@ namespace WebApi.Controllers
             var result = await Download.DownloadJObjectAsync(@"https://apps.larimer.org/api/assessor/property/?prop=property&parcel=undefined&scheduleNumber=undefined&serialIdentification=undefined&name=&fromAddrNum=undefined&toAddrNum=undefined&address=&city=FORT%20COLLINS&subdivisionNumber=undefined&sales=any&subdivisionName=WILLOW%20SPRINGS%20PUD");
             var records = result["records"];
 
-            List<Contact> results = records?.Select(x => JsonConvert.DeserializeObject<LarimerCountyRecord>(x.ToString())?.ToContact(subdivision))?.Where(x => x != null)?.ToList() ?? new();
+            List<Contact> results = records?.Select(x => JsonConvert.DeserializeObject<LarimerCountyRecord>(x.ToString())?.ToContact(subdivision)!)?.Where(x => x != null)?.ToList() ?? new();
 
             repository.CreateItemsAsync(results.ToArray());
 
