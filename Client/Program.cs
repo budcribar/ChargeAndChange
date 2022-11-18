@@ -7,6 +7,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using Client.ViewModels;
 using Radzen;
+using BlazorPro.BlazorSize;
 
 namespace Client
 {
@@ -32,6 +33,7 @@ namespace Client
                 options.ProviderOptions.LoginMode = "redirect";
             });
             builder.Services.AddMatBlazor();
+            builder.Services.AddMediaQueryService();
             await builder.Build().RunAsync();
         }
     }
