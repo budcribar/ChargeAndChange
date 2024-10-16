@@ -18,8 +18,7 @@ namespace WebApi
         {
             //services.AddControllers().AddJsonOptions(x => x.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter()));   
             //services.AddSwaggerGen(c => c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo { Title = "Database API", Version = "1.0" }));
-            //services.AddLogging(x => x.AddConfiguration())
-
+        
             Secrets secrets = new Secrets();
             if (IsLocal)
             {
