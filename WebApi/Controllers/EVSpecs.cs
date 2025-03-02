@@ -22,15 +22,6 @@ namespace WebApi.Controllers
         public string Model { get; set; } = "";
         [JsonConverter(typeof(StringEnumConverter))]
         public BodyStyle BodyStyle { get; set; } = BodyStyle.Unknown;
-        //public decimal? PriceMinusFederalTaxCredit
-        //{
-        //    get
-        //    {
-        //        if (Price == null || FederalTaxCredit == null) return null;
-        //        return Price - FederalTaxCredit;
-
-        //    }
-        //}
         public decimal? Price { get; set; }
         public decimal? FederalTaxCredit { get; set; }
 
@@ -40,18 +31,10 @@ namespace WebApi.Controllers
         public int? CityRange { get; set; }
         public int? HiwayRange { get; set; }
         public int? MotorPowerKw { get; set; }
-        //public int? MotorPowerHp
-        //{
-        //    get
-        //    {
-        //        if (MotorPowerKw == null) return null;
-        //        return (int)Math.Round((double)MotorPowerKw * 1.34102);
-
-        //    }
-        //}
+        
         [JsonConverter(typeof(StringEnumConverter))]
         public MotorPowerUnits MotorPowerUnits { get; set; } = Controllers.MotorPowerUnits.kw;
-        //public decimal? PricePerMileOfRange { get; set;  }
+       
         public int? Torque { get; set; }
 
         public double? BatteryCapacity { get; set;  }
