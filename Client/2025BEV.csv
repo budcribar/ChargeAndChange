@@ -1,0 +1,173 @@
+Id,DateUpdated,ModelYear,Manufacturer,Available,Model,BodyStyle,Price,FederalTaxCredit,DriveTrain,CombinedRange,CityRange,HiwayRange,MotorPowerKw,MotorPowerUnits,Torque,BatteryCapacity,ChargingConnector,Weight,ZeroTo60mph,ZeroTo100kph,MaxChargePower,MinutesTo80PercentCharge,SafetyRating,Notes
+Acura_ZDX_A-Spec,2025-03-02,2024,Acura,true,ZDX A-Spec,SUV,64500,0,AWD,-1,-1,-1,-1,kw,-1,102.0,CCS,-1,-1,-1,190,-1,n/a,n/a
+Acura_ZDX_Type_S,2025-03-02,2024,Acura,true,ZDX Type S,SUV,73500,0,AWD,-1,-1,-1,-1,kw,-1,102.0,CCS,-1,-1,-1,190,-1,n/a,n/a
+Audi_e-tron_GT,2025-03-02,2024,Audi,true,e-tron GT,Sedan,106500,0,RWD,-1,-1,-1,-1,kw,-1,93.4,CCS,-1,-1,-1,270,-1,n/a,n/a
+Audi_RS_e-tron_GT,2025-03-02,2024,Audi,true,RS e-tron GT,Sedan,147100,0,RWD,-1,-1,-1,-1,kw,-1,93.4,CCS,-1,-1,-1,270,-1,n/a,n/a
+Audi_Q4_40_e-tron,2025-03-02,2024,Audi,true,Q4 40 e-tron,SUV,49800,0,RWD,-1,-1,-1,-1,kw,-1,82.0,CCS,-1,-1,-1,150,-1,n/a,n/a
+Audi_Q4_50_e-tron_quattro,2025-03-02,2024,Audi,true,Q4 50 e-tron quattro,SUV,55200,0,AWD,-1,-1,-1,-1,kw,-1,82.0,CCS,-1,-1,-1,150,-1,n/a,n/a
+Audi_Q4_Sportback_50_e-tron_quattro,2025-03-02,2024,Audi,true,Q4 Sportback 50 e-tron quattro,SUV,58200,0,AWD,-1,-1,-1,-1,kw,-1,82.0,CCS,-1,-1,-1,150,-1,n/a,n/a
+Audi_Q8_e-tron,2025-03-02,2024,Audi,true,Q8 e-tron,SUV,74400,0,RWD,-1,-1,-1,-1,kw,-1,114.0,CCS,-1,-1,-1,170,-1,n/a,n/a
+Audi_Q8_e-tron_Sportback,2025-03-02,2024,Audi,true,Q8 e-tron Sportback,SUV,77800,0,RWD,-1,-1,-1,-1,kw,-1,114.0,CCS,-1,-1,-1,170,-1,n/a,n/a
+Audi_SQ8_e-tron,2025-03-02,2024,Audi,true,SQ8 e-tron,SUV,89800,0,RWD,-1,-1,-1,-1,kw,-1,114.0,CCS,-1,-1,-1,170,-1,n/a,n/a
+Audi_SQ8_Sportback_e-tron,2025-03-02,2024,Audi,true,SQ8 Sportback e-tron,SUV,92600,0,RWD,-1,-1,-1,-1,kw,-1,114.0,CCS,-1,-1,-1,170,-1,n/a,n/a
+BMW_i4_eDrive35,2025-03-02,2024,BMW,true,i4 eDrive35,Sedan,52200,0,n/a,-1,-1,-1,-1,kw,-1,-1.0,CCS,-1,-1,-1,195,-1,n/a,n/a
+BMW_i4_eDrive40,2025-03-02,2024,BMW,true,i4 eDrive40,Sedan,57300,0,n/a,-1,-1,-1,-1,kw,-1,-1.0,CCS,-1,-1,-1,195,-1,n/a,n/a
+BMW_i4_xDrive40,2025-03-02,2024,BMW,true,i4 xDrive40,Sedan,61600,0,n/a,-1,-1,-1,-1,kw,-1,-1.0,CCS,-1,-1,-1,195,-1,n/a,n/a
+BMW_i4_M50,2025-03-02,2024,BMW,true,i4 M50,Sedan,69700,0,n/a,-1,-1,-1,-1,kw,-1,-1.0,CCS,-1,-1,-1,195,-1,n/a,n/a
+BMW_i5_eDrive40,2025-03-02,2024,BMW,true,i5 eDrive40,Sedan,66800,0,n/a,-1,-1,-1,-1,kw,-1,84.0,CCS,-1,-1,-1,195,-1,n/a,n/a
+BMW_i5_xDrive40,2025-03-02,2025,BMW,false,i5 xDrive40,Sedan,70100,0,n/a,-1,-1,-1,-1,kw,-1,84.3,CCS,-1,-1,-1,195,-1,n/a,n/a
+BMW_i5_M60,2025-03-02,2024,BMW,true,i5 M60,Sedan,84100,0,n/a,-1,-1,-1,-1,kw,-1,81.2,CCS,-1,-1,-1,195,-1,n/a,n/a
+BMW_i7_eDrive50,2025-03-02,2024,BMW,true,i7 eDrive50,Sedan,105700,0,n/a,-1,-1,-1,-1,kw,-1,105.6,CCS,-1,-1,-1,195,-1,n/a,n/a
+BMW_i7_xDrive60,2025-03-02,2024,BMW,true,i7 xDrive60,Sedan,124200,0,n/a,-1,-1,-1,-1,kw,-1,105.6,CCS,-1,-1,-1,195,-1,n/a,n/a
+BMW_i7_M70,2025-03-02,2024,BMW,true,i7 M70,Sedan,168500,0,n/a,-1,-1,-1,-1,kw,-1,105.6,CCS,-1,-1,-1,195,-1,n/a,n/a
+BMW_iX_xDrive50,2025-03-02,2024,BMW,true,iX xDrive50,SUV,87100,0,n/a,-1,-1,-1,-1,kw,-1,111.5,CCS,-1,-1,-1,195,-1,n/a,n/a
+BMW_iX_M60,2025-03-02,2024,BMW,true,iX M60,SUV,111500,0,n/a,-1,-1,-1,-1,kw,-1,111.5,CCS,-1,-1,-1,195,-1,n/a,n/a
+Cadillac_Celestiq,2025-03-02,2024,Cadillac,true,Celestiq,Sedan,340000,0,n/a,-1,-1,-1,-1,kw,-1,111.0,CCS,-1,-1,-1,200,-1,n/a,n/a
+Cadillac_Escalade_IQ,2025-03-02,2025,Cadillac,false,Escalade IQ,SUV,130000,0,n/a,-1,-1,-1,-1,kw,-1,200.0,CCS,-1,-1,-1,350,-1,n/a,n/a
+Cadillac_Lyriq_Tech,2025-03-02,2024,Cadillac,true,Lyriq Tech,SUV,57195,0,n/a,-1,-1,-1,-1,kw,-1,102.0,CCS,-1,-1,-1,190,-1,n/a,n/a
+Chevrolet_Blazer_EV_LT_eAWD,2025-03-02,2024,Chevrolet,true,Blazer EV LT eAWD,SUV,55320,0,AWD,-1,-1,-1,-1,kw,-1,85.0,CCS,-1,-1,-1,150,-1,n/a,n/a
+Chevrolet_Blazer_EV_RS_eAWD,2025-03-02,2024,Chevrolet,true,Blazer EV RS eAWD,SUV,58820,0,AWD,-1,-1,-1,-1,kw,-1,85.0,CCS,-1,-1,-1,150,-1,n/a,n/a
+Chevrolet_Blazer_EV_RS,2025-03-02,2024,Chevrolet,true,Blazer EV RS,SUV,60395,0,RWD,-1,-1,-1,-1,kw,-1,102.0,CCS,-1,-1,-1,150,-1,n/a,n/a
+Chevrolet_Bolt_EV_1LT,2025-03-02,2023,Chevrolet,true,Bolt EV 1LT,Hatchback,26500,7500,FWD,-1,-1,-1,-1,kw,-1,65.0,CCS,-1,-1,-1,55,-1,5,n/a
+Chevrolet_Bolt_EUV_LT,2025-03-02,2023,Chevrolet,true,Bolt EUV LT,SUV,27800,7500,FWD,-1,-1,-1,-1,kw,-1,65.0,CCS,-1,-1,-1,55,-1,5,n/a
+Chevrolet_Equinox_EV_LE,2025-03-02,2024,Chevrolet,false,Equinox EV LE,SUV,48995,0,FWD,-1,-1,-1,-1,kw,-1,-1.0,CCS,-1,-1,-1,150,-1,n/a,n/a
+Chevrolet_Equinox_EV_1LT,2025-03-02,2024,Chevrolet,false,Equinox EV 1LT,SUV,34995,0,FWD,-1,-1,-1,-1,kw,-1,-1.0,CCS,-1,-1,-1,150,-1,n/a,n/a
+Chevrolet_Equinox_EV_2RS_eAWD,2025-03-02,2024,Chevrolet,false,Equinox EV 2RS eAWD,SUV,52395,0,AWD,-1,-1,-1,-1,kw,-1,-1.0,CCS,-1,-1,-1,150,-1,n/a,n/a
+Chevrolet_Silverado_EV_3WT,2025-03-02,2024,Chevrolet,true,Silverado EV 3WT,Pickup,72905,0,AWD,-1,-1,-1,-1,kw,-1,-1.0,CCS,-1,-1,-1,350,-1,n/a,n/a
+Chevrolet_Silverado_EV_4WT,2025-03-02,2024,Chevrolet,true,Silverado EV 4WT,Pickup,77905,0,AWD,-1,-1,-1,-1,kw,-1,-1.0,CCS,-1,-1,-1,350,-1,n/a,n/a
+Chevrolet_Silverado_EV_RST,2025-03-02,2024,Chevrolet,true,Silverado EV RST,Pickup,105000,0,AWD,-1,-1,-1,-1,kw,-1,-1.0,CCS,-1,-1,-1,350,-1,n/a,n/a
+Fiat_500e_RED,2025-03-02,2024,Fiat,true,500e RED,Hatchback,32500,0,FWD,-1,-1,-1,-1,kw,-1,42.0,CCS,-1,-1,-1,50,-1,n/a,n/a
+Fisker_Ocean_Sport,2025-03-02,2023,Fisker,true,Ocean Sport,SUV,38999,0,FWD,-1,-1,-1,-1,kw,-1,-1.0,CCS,-1,-1,-1,150,-1,n/a,n/a
+Fisker_Ocean_Ultra,2025-03-02,2023,Fisker,true,Ocean Ultra,SUV,52999,0,AWD,-1,-1,-1,-1,kw,-1,-1.0,CCS,-1,-1,-1,150,-1,n/a,n/a
+Fisker_Ocean_Extreme,2025-03-02,2023,Fisker,true,Ocean Extreme,SUV,61499,0,AWD,-1,-1,-1,-1,kw,-1,113.0,CCS,-1,-1,-1,150,-1,n/a,n/a
+Ford_F-150_Lightning_Pro_SR,2025-03-02,2024,Ford,true,F-150 Lightning Pro SR,Pickup,54995,7500,AWD,-1,-1,-1,-1,kw,-1,98.0,CCS,-1,-1,-1,155,-1,5,n/a
+Ford_F-150_Lightning_XLT_SR,2025-03-02,2024,Ford,true,F-150 Lightning XLT SR,Pickup,64995,7500,AWD,-1,-1,-1,-1,kw,-1,98.0,CCS,-1,-1,-1,155,-1,5,n/a
+Ford_F-150_Lightning_Flash_ER,2025-03-02,2024,Ford,true,F-150 Lightning Flash ER,Pickup,73495,7500,AWD,-1,-1,-1,-1,kw,-1,131.0,CCS,-1,-1,-1,155,-1,5,n/a
+Ford_F-150_Lightning_Lariat_ER,2025-03-02,2024,Ford,true,F-150 Lightning Lariat ER,Pickup,79495,7500,AWD,-1,-1,-1,-1,kw,-1,131.0,CCS,-1,-1,-1,155,-1,5,n/a
+Ford_F-150_Lightning_Platinum_ER,2025-03-02,2024,Ford,true,F-150 Lightning Platinum ER,Pickup,84995,0,AWD,-1,-1,-1,-1,kw,-1,131.0,CCS,-1,-1,-1,155,-1,5,n/a
+Ford_F-150_Lightning_Platinum_B._ER,2025-03-02,2024,Ford,true,F-150 Lightning Platinum B. ER,Pickup,92995,0,AWD,-1,-1,-1,-1,kw,-1,131.0,CCS,-1,-1,-1,155,-1,5,n/a
+Ford_Mustang_Mach-E_Select_Standard_Range,2025-03-02,2023,Ford,true,Mustang Mach-E Select Standard Range,SUV,42995,0,RWD,-1,-1,-1,-1,kw,-1,72.0,CCS,-1,-1,-1,150,-1,n/a,n/a
+Ford_Mustang_Mach-E_Premium_Standard_Range,2025-03-02,2023,Ford,true,Mustang Mach-E Premium Standard Range,SUV,46995,0,RWD,-1,-1,-1,-1,kw,-1,72.0,CCS,-1,-1,-1,150,-1,n/a,n/a
+Ford_Mustang_Mach-E_Premium_Extended_Range,2025-03-02,2023,Ford,true,Mustang Mach-E Premium Extended Range,SUV,53995,0,RWD,-1,-1,-1,-1,kw,-1,91.0,CCS,-1,-1,-1,150,-1,n/a,n/a
+Ford_Mustang_Mach-E_Route_1_Extended_Range,2025-03-02,2023,Ford,true,Mustang Mach-E Route 1 Extended Range,SUV,56995,0,AWD,-1,-1,-1,-1,kw,-1,91.0,CCS,-1,-1,-1,150,-1,n/a,n/a
+Ford_Mustang_Mach-E_GT_Extended_Range,2025-03-02,2023,Ford,true,Mustang Mach-E GT Extended Range,SUV,59995,0,AWD,-1,-1,-1,-1,kw,-1,91.0,CCS,-1,-1,-1,150,-1,n/a,n/a
+Ford_Mustang_Mach-E_GT_Performance_Extended_Range,2025-03-02,2023,Ford,true,Mustang Mach-E GT Performance Extended Range,SUV,64995,0,AWD,-1,-1,-1,-1,kw,-1,91.0,CCS,-1,-1,-1,150,-1,n/a,n/a
+Genesis_Electrified_G80,2025-03-02,2024,Genesis,true,Electrified G80,Sedan,74375,0,AWD,-1,-1,-1,-1,kw,-1,87.2,CCS,-1,-1,-1,150,-1,n/a,n/a
+Genesis_GV60_Standard,2025-03-02,2024,Genesis,true,GV60 Standard,SUV,52000,0,RWD,-1,-1,-1,-1,kw,-1,77.4,CCS,-1,-1,-1,235,-1,n/a,n/a
+Genesis_GV60_Advanced,2025-03-02,2024,Genesis,true,GV60 Advanced,SUV,60550,0,AWD,-1,-1,-1,-1,kw,-1,77.4,CCS,-1,-1,-1,235,-1,n/a,n/a
+Genesis_GV60_Performance,2025-03-02,2024,Genesis,true,GV60 Performance,SUV,69550,0,AWD,-1,-1,-1,-1,kw,-1,77.4,CCS,-1,-1,-1,235,-1,n/a,n/a
+Genesis_Electrified_GV70_Adv,2025-03-02,2024,Genesis,true,Electrified GV70 Adv,SUV,66450,0,AWD,-1,-1,-1,-1,kw,-1,77.4,CCS,-1,-1,-1,235,-1,n/a,n/a
+GMC_Hummer_EV_Pickup_3X,2025-03-02,2024,GMC,true,Hummer EV Pickup 3X,Pickup,104650,0,AWD,-1,-1,-1,-1,kw,-1,-1.0,CCS,-1,-1,-1,350,-1,n/a,n/a
+GMC_Hummer_EV_Pickup_2X,2025-03-02,2024,GMC,true,Hummer EV Pickup 2X,Pickup,96550,0,AWD,-1,-1,-1,-1,kw,-1,-1.0,CCS,-1,-1,-1,350,-1,n/a,n/a
+GMC_Hummer_EV_SUV_3X,2025-03-02,2024,GMC,true,Hummer EV SUV 3X,SUV,104650,0,AWD,-1,-1,-1,-1,kw,-1,-1.0,CCS,-1,-1,-1,350,-1,n/a,n/a
+GMC_Hummer_EV_SUV_2X,2025-03-02,2024,GMC,true,Hummer EV SUV 2X,SUV,96550,0,AWD,-1,-1,-1,-1,kw,-1,-1.0,CCS,-1,-1,-1,350,-1,n/a,n/a
+GMC_Sierra_EV_Denali_Edition_1,2025-03-02,2024,GMC,true,Sierra EV Denali Edition 1,Pickup,107000,0,AWD,-1,-1,-1,-1,kw,-1,0.0,CCS,-1,-1,-1,350,-1,n/a,n/a
+Honda_Prologue_EX,2025-03-02,2024,Honda,true,Prologue EX,SUV,47400,0,FWD,-1,-1,-1,-1,kw,-1,85.0,CCS,-1,-1,-1,190,-1,n/a,n/a
+Honda_Prologue_Touring,2025-03-02,2024,Honda,true,Prologue Touring,SUV,51700,0,FWD,-1,-1,-1,-1,kw,-1,85.0,CCS,-1,-1,-1,190,-1,n/a,n/a
+Honda_Prologue_Elite,2025-03-02,2024,Honda,true,Prologue Elite,SUV,57900,0,AWD,-1,-1,-1,-1,kw,-1,85.0,CCS,-1,-1,-1,190,-1,n/a,n/a
+Hyundai_Ioniq_5_SE_SR,2025-03-02,2024,Hyundai,true,Ioniq 5 SE SR,SUV,41800,0,RWD,-1,-1,-1,-1,kw,-1,58.2,CCS,-1,-1,-1,235,-1,n/a,n/a
+Hyundai_Ioniq_5_SE,2025-03-02,2024,Hyundai,true,Ioniq 5 SE,SUV,45850,0,RWD,-1,-1,-1,-1,kw,-1,77.4,CCS,-1,-1,-1,235,-1,n/a,n/a
+Hyundai_Ioniq_5_SEL,2025-03-02,2024,Hyundai,true,Ioniq 5 SEL,SUV,47400,0,RWD,-1,-1,-1,-1,kw,-1,77.4,CCS,-1,-1,-1,235,-1,n/a,n/a
+Hyundai_Ioniq_5_Limited,2025-03-02,2024,Hyundai,true,Ioniq 5 Limited,SUV,53500,0,RWD,-1,-1,-1,-1,kw,-1,77.4,CCS,-1,-1,-1,235,-1,n/a,n/a
+Hyundai_Ioniq_6_SE,2025-03-02,2024,Hyundai,true,Ioniq 6 SE,Sedan,42450,0,RWD,-1,-1,-1,-1,kw,-1,77.4,CCS,-1,-1,-1,235,-1,n/a,n/a
+Hyundai_Ioniq_6_SEL,2025-03-02,2024,Hyundai,true,Ioniq 6 SEL,Sedan,45250,0,RWD,-1,-1,-1,-1,kw,-1,77.4,CCS,-1,-1,-1,235,-1,n/a,n/a
+Hyundai_Ioniq_6_Limited,2025-03-02,2024,Hyundai,true,Ioniq 6 Limited,Sedan,50150,0,RWD,-1,-1,-1,-1,kw,-1,77.4,CCS,-1,-1,-1,235,-1,n/a,n/a
+Hyundai_Kona_Electric_SE,2025-03-02,2024,Hyundai,true,Kona Electric SE,SUV,32675,0,FWD,-1,-1,-1,-1,kw,-1,48.6,CCS,-1,-1,-1,100,-1,n/a,n/a
+Hyundai_Kona_Electric_SEL,2025-03-02,2024,Hyundai,true,Kona Electric SEL,SUV,36675,0,FWD,-1,-1,-1,-1,kw,-1,64.8,CCS,-1,-1,-1,100,-1,n/a,n/a
+Hyundai_Kona_Electric_Limited,2025-03-02,2024,Hyundai,true,Kona Electric Limited,SUV,41045,0,FWD,-1,-1,-1,-1,kw,-1,64.8,CCS,-1,-1,-1,100,-1,n/a,n/a
+Jaguar_I-Pace_EV400,2025-03-02,2024,Jaguar,true,I-Pace EV400,SUV,72000,0,AWD,-1,-1,-1,-1,kw,-1,90.0,CCS,-1,-1,-1,100,-1,n/a,n/a
+Kia_EV6_Light_SR,2025-03-02,2024,Kia,true,EV6 Light SR,SUV,42600,0,RWD,-1,-1,-1,-1,kw,-1,58.0,CCS,-1,-1,-1,235,-1,n/a,n/a
+Kia_EV6_Light_LR,2025-03-02,2024,Kia,true,EV6 Light LR,SUV,45950,0,RWD,-1,-1,-1,-1,kw,-1,77.4,CCS,-1,-1,-1,235,-1,n/a,n/a
+Kia_EV6_Wind_LR,2025-03-02,2024,Kia,true,EV6 Wind LR,SUV,48700,0,RWD,-1,-1,-1,-1,kw,-1,77.4,CCS,-1,-1,-1,235,-1,n/a,n/a
+Kia_EV6_GT-Line_LR,2025-03-02,2024,Kia,true,EV6 GT-Line LR,SUV,52900,0,RWD,-1,-1,-1,-1,kw,-1,77.4,CCS,-1,-1,-1,235,-1,n/a,n/a
+Kia_EV6_GT_AWD_LR,2025-03-02,2024,Kia,true,EV6 GT AWD LR,SUV,61600,0,AWD,-1,-1,-1,-1,kw,-1,77.4,CCS,-1,-1,-1,235,-1,n/a,n/a
+Kia_EV9_Light_Standard,2025-03-02,2024,Kia,true,EV9 Light Standard,SV,54900,0,RWD,-1,-1,-1,-1,kw,-1,76.1,CCS,-1,-1,-1,200,-1,n/a,n/a
+Kia_EV9_Light_Long_Range,2025-03-02,2024,Kia,true,EV9 Light Long Range,SUV,59200,0,RWD,-1,-1,-1,-1,kw,-1,99.8,CCS,-1,-1,-1,200,-1,n/a,n/a
+Kia_EV9_Wind,2025-03-02,2024,Kia,true,EV9 Wind,SUV,63900,0,AWD,-1,-1,-1,-1,kw,-1,99.8,CCS,-1,-1,-1,200,-1,n/a,n/a
+Kia_EV9_Land,2025-03-02,2024,Kia,true,EV9 Land,SUV,69900,0,AWD,-1,-1,-1,-1,kw,-1,99.8,CCS,-1,-1,-1,200,-1,n/a,n/a
+Kia_EV9_GT-Line,2025-03-02,2024,Kia,true,EV9 GT-Line,SUV,73900,0,AWD,-1,-1,-1,-1,kw,-1,99.8,CCS,-1,-1,-1,200,-1,n/a,n/a
+Kia_Niro_EV,2025-03-02,2024,Kia,true,Niro EV,SUV,39600,0,FWD,-1,-1,-1,-1,kw,-1,64.8,CCS,-1,-1,-1,100,-1,n/a,n/a
+Lexus_RZ_300e_Premium,2025-03-02,2024,Lexus,true,RZ 300e Premium,SUV,54000,0,FWD,-1,-1,-1,-1,kw,-1,72.8,CCS,-1,-1,-1,100,-1,n/a,n/a
+Lexus_RZ_300e_Luxury,2025-03-02,2024,Lexus,true,RZ 300e Luxury,SUV,59730,0,FWD,-1,-1,-1,-1,kw,-1,72.8,CCS,-1,-1,-1,100,-1,n/a,n/a
+Lexus_RZ_450e_Premium,2025-03-02,2024,Lexus,true,RZ 450e Premium,SUV,58700,0,AWD,-1,-1,-1,-1,kw,-1,71.4,CCS,-1,-1,-1,100,-1,n/a,n/a
+Lexus_RZ_450e_Luxury,2025-03-02,2024,Lexus,true,RZ 450e Luxury,SUV,64430,0,AWD,-1,-1,-1,-1,kw,-1,71.4,CCS,-1,-1,-1,100,-1,n/a,n/a
+Lucid_Air_Pure_RWD,2025-03-02,2024,Lucid,true,Air Pure RWD,Sedan,77400,0,RWD,-1,-1,-1,-1,kw,-1,88.0,CCS,-1,-1,-1,300,-1,n/a,n/a
+Lucid_Air_Pure_AWD,2025-03-02,2023,Lucid,true,Air Pure AWD,Sedan,82400,0,AWD,-1,-1,-1,-1,kw,-1,92.0,CCS,-1,-1,-1,300,-1,n/a,n/a
+Lucid_Air_Touring,2025-03-02,2024,Lucid,true,Air Touring,Sedan,85900,0,AWD,-1,-1,-1,-1,kw,-1,92.0,CCS,-1,-1,-1,300,-1,n/a,n/a
+Lucid_Air_Grand_Touring,2025-03-02,2024,Lucid,true,Air Grand Touring,Sedan,114900,0,AWD,-1,-1,-1,-1,kw,-1,112.0,CCS,-1,-1,-1,300,-1,n/a,n/a
+Lucid_Air_Sapphire,2025-03-02,2024,Lucid,true,Air Sapphire,Sedan,249000,0,AWD,-1,-1,-1,-1,kw,-1,118.0,CCS,-1,-1,-1,300,-1,n/a,n/a
+Mercedes_EQB_250+,2025-03-02,2023,Mercedes,true,EQB 250+,SUV,52750,0,AWD,-1,-1,-1,-1,kw,-1,70.5,CCS,-1,-1,-1,100,-1,n/a,n/a
+Mercedes_EQB_300,2025-03-02,2023,Mercedes,true,EQB 300,SUV,56900,0,AWD,-1,-1,-1,-1,kw,-1,70.5,CCS,-1,-1,-1,100,-1,n/a,n/a
+Mercedes_EQB_350,2025-03-02,2023,Mercedes,true,EQB 350,SUV,60550,0,AWD,-1,-1,-1,-1,kw,-1,70.5,CCS,-1,-1,-1,100,-1,n/a,n/a
+Mercedes_EQE_350+,2025-03-02,2023,Mercedes,true,EQE 350+,Sedan,74900,0,RWD,-1,-1,-1,-1,kw,-1,90.6,CCS,-1,-1,-1,170,-1,n/a,n/a
+Mercedes_EQE_350,2025-03-02,2023,Mercedes,true,EQE 350,Sedan,77900,0,AWD,-1,-1,-1,-1,kw,-1,90.6,CCS,-1,-1,-1,170,-1,n/a,n/a
+Mercedes_EQE_500,2025-03-02,2023,Mercedes,true,EQE 500,Sedan,85900,0,AWD,-1,-1,-1,-1,kw,-1,90.6,CCS,-1,-1,-1,170,-1,n/a,n/a
+Mercedes_AMG_EQE,2025-03-02,2023,Mercedes,true,AMG EQE,Sedan,106900,0,AWD,-1,-1,-1,-1,kw,-1,90.6,CCS,-1,-1,-1,170,-1,n/a,n/a
+Mercedes_EQE_350+_SUV,2025-03-02,2023,Mercedes,true,EQE 350+ SUV,SUV,77900,0,RWD,-1,-1,-1,-1,kw,-1,90.6,CCS,-1,-1,-1,170,-1,n/a,n/a
+Mercedes_EQE_350_SUV,2025-03-02,2023,Mercedes,true,EQE 350 SUV,SUV,77900,0,AWD,-1,-1,-1,-1,kw,-1,90.6,CCS,-1,-1,-1,170,-1,n/a,n/a
+Mercedes_EQE_500_SUV,2025-03-02,2023,Mercedes,true,EQE 500 SUV,SUV,89500,0,AWD,-1,-1,-1,-1,kw,-1,90.6,CCS,-1,-1,-1,170,-1,n/a,n/a
+Mercedes_AMG_EQE_SUV,2025-03-02,2024,Mercedes,true,AMG EQE SUV,SUV,109300,0,AWD,-1,-1,-1,-1,kw,-1,90.6,CCS,-1,-1,-1,170,-1,n/a,n/a
+Mercedes_EQS_450+,2025-03-02,2023,Mercedes,true,EQS 450+,Sedan,104400,0,RWD,-1,-1,-1,-1,kw,-1,108.4,CCS,-1,-1,-1,200,-1,n/a,n/a
+Mercedes_EQS_450_4Matic,2025-03-02,2023,Mercedes,true,EQS 450 4Matic,Sedan,107400,0,AWD,-1,-1,-1,-1,kw,-1,108.4,CCS,-1,-1,-1,200,-1,n/a,n/a
+Mercedes_EQS_580_4Matic,2025-03-02,2023,Mercedes,true,EQS 580 4Matic,Sedan,125950,0,AWD,-1,-1,-1,-1,kw,-1,108.4,CCS,-1,-1,-1,200,-1,n/a,n/a
+Mercedes_AMG_EQS_4Matic+,2025-03-02,2023,Mercedes,true,AMG EQS 4Matic+,Sedan,147550,0,AWD,-1,-1,-1,-1,kw,-1,108.4,CCS,-1,-1,-1,200,-1,n/a,n/a
+Mercedes_EQS_450+_SUV,2025-03-02,2023,Mercedes,true,EQS 450+ SUV,SUV,104400,0,RWD,-1,-1,-1,-1,kw,-1,108.4,CCS,-1,-1,-1,200,-1,n/a,n/a
+Mercedes_EQS_450_4Matic_SUV,2025-03-02,2023,Mercedes,true,EQS 450 4Matic SUV,SUV,107400,0,AWD,-1,-1,-1,-1,kw,-1,108.4,CCS,-1,-1,-1,200,-1,n/a,n/a
+Mercedes_EQS_580_4Matic_SUV,2025-03-02,2023,Mercedes,true,EQS 580 4Matic SUV,SUV,125950,0,AWD,-1,-1,-1,-1,kw,-1,108.4,CCS,-1,-1,-1,200,-1,n/a,n/a
+Mercedes-Maybach_EQS_680_4M_SUV,2025-03-02,2024,Mercedes,false,Maybach EQS 680 4M SUV,SUV,179900,0,AWD,-1,-1,-1,-1,kw,-1,108.4,CCS,-1,-1,-1,200,-1,n/a,n/a
+MINI_Cooper_SE_Hardtop_2_door,2025-03-02,2024,MINI,true,Cooper SE Hardtop 2 door,Hatchback,30900,0,FWD,-1,-1,-1,-1,kw,-1,32.6,CCS,-1,-1,-1,50,-1,n/a,n/a
+Nissan_Ariya_Engage,2025-03-02,2023,Nissan,true,Ariya Engage,SUV,43190,0,FWD,-1,-1,-1,-1,kw,-1,66.0,CCS,-1,-1,-1,130,-1,n/a,n/a
+Nissan_Ariya_Venture+,2025-03-02,2023,Nissan,true,Ariya Venture+,SUV,47190,0,FWD,-1,-1,-1,-1,kw,-1,91.0,CCS,-1,-1,-1,130,-1,n/a,n/a
+Nissan_Ariya_Evolve+,2025-03-02,2023,Nissan,true,Ariya Evolve+,SUV,50190,0,FWD,-1,-1,-1,-1,kw,-1,91.0,CCS,-1,-1,-1,130,-1,n/a,n/a
+Nissan_Ariya_Empower+,2025-03-02,2023,Nissan,true,Ariya Empower+,SUV,53690,0,FWD,-1,-1,-1,-1,kw,-1,91.0,CCS,-1,-1,-1,130,-1,n/a,n/a
+Nissan_Ariya_Engage+_e-4ORCE,2025-03-02,2023,Nissan,true,Ariya Engage+ e-4ORCE,SUV,51190,0,AWD,-1,-1,-1,-1,kw,-1,91.0,CCS,-1,-1,-1,130,-1,n/a,n/a
+Nissan_Ariya_Platinum+_e-4ORCE,2025-03-02,2023,Nissan,true,Ariya Platinum+ e-4ORCE,SUV,60190,0,AWD,-1,-1,-1,-1,kw,-1,91.0,CCS,-1,-1,-1,130,-1,n/a,n/a
+Nissan_Leaf_S,2025-03-02,2024,Nissan,true,Leaf S,Hatchback,28140,0,FWD,-1,-1,-1,-1,kw,-1,40.0,CHAdeMO,-1,-1,-1,50,-1,n/a,n/a
+Nissan_Leaf_SV_Plus,2025-03-02,2024,Nissan,true,Leaf SV Plus,Hatchback,36190,0,FWD,-1,-1,-1,-1,kw,-1,60.0,CHAdeMO,-1,-1,-1,50,-1,n/a,n/a
+Polestar_2_LR_Single_Motor,2025-03-02,2024,Polestar,true,2 LR Single Motor,Sedan,0,0,RWD,-1,-1,-1,-1,kw,-1,82.0,CCS,-1,-1,-1,205,-1,n/a,n/a
+Polestar_2_LR_Dual_Motor,2025-03-02,2024,Polestar,true,2 LR Dual Motor,Sedan,0,0,AWD,-1,-1,-1,-1,kw,-1,78.0,CCS,-1,-1,-1,155,-1,n/a,n/a
+Polestar_3_LR_Dual_Motor,2025-03-02,2024,Polestar,true,3 LR Dual Motor,SUV,0,0,AWD,-1,-1,-1,-1,kw,-1,111.0,CCS,-1,-1,-1,250,-1,n/a,n/a
+Porsche_Taycan,2025-03-02,2023,Porsche,true,Taycan,Sedan,104,0,RWD,-1,-1,-1,-1,kw,-1,93.4,CCS,-1,-1,-1,270,-1,n/a,n/a
+Porsche_Taycan_4S,2025-03-02,2023,Porsche,true,Taycan 4S,Sedan,107,0,AWD,-1,-1,-1,-1,kw,-1,93.4,CCS,-1,-1,-1,270,-1,n/a,n/a
+Porsche_Taycan_GTS,2025-03-02,2023,Porsche,true,Taycan GTS,Sedan,110,0,AWD,-1,-1,-1,-1,kw,-1,93.4,CCS,-1,-1,-1,270,-1,n/a,n/a
+Porsche_Taycan_Turbo,2025-03-02,2023,Porsche,true,Taycan Turbo,Sedan,125,0,AWD,-1,-1,-1,-1,kw,-1,93.4,CCS,-1,-1,-1,270,-1,n/a,n/a
+Rivian_R1T_Quad_Motor,2025-03-02,2023,Rivian,true,R1T Quad Motor,Pickup,89500,0,AWD,-1,-1,-1,-1,kw,-1,135.0,CCS,-1,-1,-1,220,-1,5,n/a
+Rolls-Royce_Spectre,2025-03-02,2024,Rolls-Royce,true,Spectre,Coupe,420000,0,AWD,-1,-1,-1,-1,kw,-1,105.7,CCS,-1,-1,-1,195,-1,n/a,n/a
+Rolls-Royce_Spectre_Black_Badge,2025-03-02,2024,Rolls-Royce,true,Spectre Black Badge,Coupe,420000,0,AWD,-1,-1,-1,-1,kw,-1,105.7,CCS,-1,-1,-1,195,-1,n/a,n/a
+Subaru_Solterra_Premium,2025-03-02,2024,Subaru,true,Solterra Premium,SUV,44995,0,AWD,-1,-1,-1,-1,kw,-1,72.8,CCS,-1,-1,-1,100,-1,n/a,n/a
+Subaru_Solterra_Limited,2025-03-02,2024,Subaru,true,Solterra Limited,SUV,48495,0,AWD,-1,-1,-1,-1,kw,-1,72.8,CCS,-1,-1,-1,100,-1,n/a,n/a
+Subaru_Solterra_Touring,2025-03-02,2024,Subaru,true,Solterra Touring,SUV,51995,0,AWD,-1,-1,-1,-1,kw,-1,72.8,CCS,-1,-1,-1,100,-1,n/a,n/a
+Tesla_Cybertruck_RWD,2025-03-02,2025,Tesla,false,Cybertruck RWD,Pickup,60990,0,RWD,-1,-1,-1,-1,kw,-1,-1.0,Tesla,-1,-1,-1,250,-1,5,n/a
+Tesla_Cybertruck_AWD,2025-03-02,2024,Tesla,false,Cybertruck AWD,Pickup,79990,0,AWD,-1,-1,-1,-1,kw,-1,-1.0,Tesla,-1,-1,-1,250,-1,5,n/a
+Tesla_Cybertruck_Cyberbeast,2025-03-02,2024,Tesla,false,Cybertruck Cyberbeast,Pickup,99990,0,AWD,-1,-1,-1,-1,kw,-1,-1.0,Tesla,-1,-1,-1,250,-1,5,n/a
+Tesla_Model_3,2025-03-02,2024,Tesla,true,Model 3,Sedan,38990,0,RWD,-1,-1,-1,-1,kw,-1,60.0,Tesla,-1,-1,-1,250,-1,5,n/a
+Tesla_Model_3_Long_Range,2025-03-02,2024,Tesla,true,Model 3 Long Range,Sedan,46990,0,AWD,-1,-1,-1,-1,kw,-1,82.0,Tesla,-1,-1,-1,250,-1,5,n/a
+Tesla_Model_S_LR,2025-03-02,2024,Tesla,true,Model S LR,Sedan,74990,0,AWD,-1,-1,-1,-1,kw,-1,100.0,Tesla,-1,-1,-1,250,-1,5,n/a
+Tesla_Model_S_Plaid,2025-03-02,2024,Tesla,true,Model S Plaid,Sedan,89990,0,AWD,-1,-1,-1,-1,kw,-1,100.0,Tesla,-1,-1,-1,250,-1,5,n/a
+Tesla_Model_X_LR,2025-03-02,2024,Tesla,true,Model X LR,SUV,79990,7500,AWD,-1,-1,-1,-1,kw,-1,100.0,Tesla,-1,-1,-1,250,-1,5,n/a
+Tesla_Model_X_Plaid,2025-03-02,2024,Tesla,true,Model X Plaid,SUV,94990,0,AWD,-1,-1,-1,-1,kw,-1,100.0,Tesla,-1,-1,-1,250,-1,5,n/a
+Tesla_Model_Y_RWD,2025-03-02,2024,Tesla,true,Model Y RWD,SUV,43990,7500,RWD,-1,-1,-1,-1,kw,-1,60.0,Tesla,-1,-1,-1,250,-1,5,n/a
+Tesla_Model_Y_Long_Range,2025-03-02,2024,Tesla,true,Model Y Long Range,SUV,48990,7500,AWD,-1,-1,-1,-1,kw,-1,82.0,Tesla,-1,-1,-1,250,-1,5,n/a
+Tesla_Model_Y_Performance_LR,2025-03-02,2024,Tesla,true,Model Y Performance LR,SUV,52490,7500,AWD,-1,-1,-1,-1,kw,-1,82.0,Tesla,-1,-1,-1,250,-1,5,n/a
+Toyota_bZ4X_XLE,2025-03-02,2024,Toyota,true,bZ4X XLE,SUV,43070,0,FWD,-1,-1,-1,-1,kw,-1,71.4,CCS,-1,-1,-1,100,-1,n/a,n/a
+Toyota_bZ4X_Limited,2025-03-02,2024,Toyota,true,bZ4X Limited,SUV,47180,0,FWD,-1,-1,-1,-1,kw,-1,71.4,CCS,-1,-1,-1,100,-1,n/a,n/a
+Toyota_bZ4X_XLE_AWD,2025-03-02,2024,Toyota,true,bZ4X XLE AWD,SUV,45150,0,AWD,-1,-1,-1,-1,kw,-1,72.8,CCS,-1,-1,-1,100,-1,n/a,n/a
+Toyota_bZ4X_Limited_AWD,2025-03-02,2024,Toyota,true,bZ4X Limited AWD,SUV,49260,0,AWD,-1,-1,-1,-1,kw,-1,72.8,CCS,-1,-1,-1,100,-1,n/a,n/a
+VinFast_VF_8_Standard_Edition_Eco,2025-03-02,2023,VinFast,true,VF 8 Standard Edition Eco,SUV,46000,0,AWD,-1,-1,-1,-1,kw,-1,87.7,CCS,-1,-1,-1,200,-1,n/a,n/a
+VinFast_VF_8_Standard_Edition_Plus,2025-03-02,2023,VinFast,true,VF 8 Standard Edition Plus,SUV,51800,0,AWD,-1,-1,-1,-1,kw,-1,87.7,CCS,-1,-1,-1,200,-1,n/a,n/a
+VinFast_VF_9_Eco,2025-03-02,2024,VinFast,false,VF 9 Eco,SUV,79800,0,AWD,-1,-1,-1,-1,kw,-1,123.0,CCS,-1,-1,-1,200,-1,n/a,n/a
+VinFast_VF_9_Plus,2025-03-02,2024,VinFast,false,VF 9 Plus,SUV,85800,0,AWD,-1,-1,-1,-1,kw,-1,123.0,CCS,-1,-1,-1,200,-1,n/a,n/a
+Volkswagen_ID.4_Standard,2025-03-02,2023,Volkswagen,true,ID.4 Standard,SUV,38995,7500,RWD,-1,-1,-1,-1,kw,-1,62.0,CCS,-1,-1,-1,125,-1,n/a,n/a
+Volkswagen_ID.4_Pro,2025-03-02,2023,Volkswagen,true,ID.4 Pro,SUV,43995,7500,RWD,-1,-1,-1,-1,kw,-1,82.0,CCS,-1,-1,-1,125,-1,n/a,n/a
+Volkswagen_ID.4_S,2025-03-02,2023,Volkswagen,true,ID.4 S,SUV,43995,7500,RWD,-1,-1,-1,-1,kw,-1,62.0,CCS,-1,-1,-1,125,-1,n/a,n/a
+Volkswagen_ID.4_Pro_S,2025-03-02,2023,Volkswagen,true,ID.4 Pro S,SUV,48995,7500,RWD,-1,-1,-1,-1,kw,-1,82.0,CCS,-1,-1,-1,125,-1,n/a,n/a
+Volkswagen_ID.4_AWD_Pro,2025-03-02,2023,Volkswagen,true,ID.4 AWD Pro,SUV,47795,7500,AWD,-1,-1,-1,-1,kw,-1,82.0,CCS,-1,-1,-1,125,-1,n/a,n/a
+Volkswagen_ID.4_AWD_Pro_S,2025-03-02,2023,Volkswagen,true,ID.4 AWD Pro S,SUV,52795,7500,AWD,-1,-1,-1,-1,kw,-1,82.0,CCS,-1,-1,-1,125,-1,n/a,n/a
+Volvo_C40_Recharge,2025-03-02,2024,Volvo,true,C40 Recharge,SUV,53600,0,RWD,-1,-1,-1,-1,kw,-1,82.0,CCS,-1,-1,-1,150,-1,n/a,n/a
+Volvo_EX30_Single_Motor_Core,2025-03-02,2025,Volvo,false,EX30 Single Motor Core,SUV,34950,0,RWD,-1,-1,-1,-1,kw,-1,69.0,CCS,-1,-1,-1,150,-1,n/a,n/a
+Volvo_EX30_Twin_Motor_Plus,2025-03-02,2025,Volvo,false,EX30 Twin Motor Plus,SUV,44900,0,AWD,-1,-1,-1,-1,kw,-1,69.0,CCS,-1,-1,-1,150,-1,n/a,n/a
+Volvo_EX90_TM_Plus,2025-03-02,2025,Volvo,false,EX90 TM Plus,SUV,76695,0,AWD,-1,-1,-1,-1,kw,-1,111.0,CCS,-1,-1,-1,150,-1,n/a,n/a
+Volvo_EX90_TM_Ultra,2025-03-02,2025,Volvo,false,EX90 TM Ultra,SUV,81045,0,AWD,-1,-1,-1,-1,kw,-1,111.0,CCS,-1,-1,-1,150,-1,n/a,n/a
+Volvo_EX90_TM_Performance_Plus,2025-03-02,2025,Volvo,false,EX90 TM Performance Plus,SUV,81695,0,AWD,-1,-1,-1,-1,kw,-1,111.0,CCS,-1,-1,-1,150,-1,n/a,n/a
+Volvo_EX90_TM_Performance_Ultra,2025-03-02,2025,Volvo,false,EX90 TM Performance Ultra,SUV,86045,0,AWD,-1,-1,-1,-1,kw,-1,111.0,CCS,-1,-1,-1,150,-1,n/a,n/a
+Volvo_XC40_Recharge,2025-03-02,2024,Volvo,true,XC40 Recharge,SUV,52450,0,RWD,-1,-1,-1,-1,kw,-1,82.0,CCS,-1,-1,-1,150,-1,n/a,n/a
